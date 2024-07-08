@@ -1,7 +1,38 @@
+/*font face*/
+@font-face {
+  font-family: "pretendardR";
+  src: url("./assests/fonts/Pretendard-Regular.woff");
+}
+
+@font-face {
+  font-family: "pretendardM";
+  src: url("./assests/fonts/Pretendard-Medium.woff");
+}
+
+@font-face {
+  font-family: "pretendardB";
+  src: url("./assests/fonts/Pretendard-SemiBold.woff");
+}
+
 :root {
-  font-family: Inter, system-ui, Arial, sans-serif;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /*key color*/
+  --sub-color: #edeaf9;
+  --key-color: #472fd2;
+  --hover-color: #1d00c8;
+
+  /*point color*/
+  --point-color: #ff6347;
+  --point-color2: #ffbe17;
+
+  /*gray scale*/
+  --fill-color: #cccccc;
+  --text-color: #666666;
+  --text-color2: #333333;
+}
+
+/*default setting*/
+body {
+  font-size: 20px;
+  font-family: "pretendardB";
+  color: var(--text-color2);
 }
