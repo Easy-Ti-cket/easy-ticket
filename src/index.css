@@ -36,3 +36,20 @@ body {
   font-family: "pretendardB";
   color: var(--text-color2);
 }
+input {
+  /*border 초기 설정*/
+  border: 1px solid var(--fill-color);
+  border-radius: 8px;
+
+  /*padding - placeholder 위치 설정*/
+  padding: 0 20px;
+
+  /*focus 시 테두리 안보이게*/
+  &:focus {
+    outline: none;
+  }
+  /*focus시 placeholder 사라지게*/
+  &:focus::placeholder {
+    color: transparent;
+  }
+}
