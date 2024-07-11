@@ -24,7 +24,7 @@ const StepNumber = styled.div`
   height: 30px;
   border-radius: 50%;
   background-color: ${(props) =>
-    props.active ? "var(--key-color)" : "var(--fill-color)"};
+    props.$active ? "var(--key-color)" : "var(--fill-color)"};
   color: #ffff;
   margin-bottom: 10px;
   font-family: "pretendardB";
@@ -33,7 +33,7 @@ const StepLine = styled.div`
   width: 100%;
   height: 13px;
   background-color: ${(props) =>
-    props.active ? "var(--key-color)" : "var(--fill-color)"};
+    props.$active ? "var(--key-color)" : "var(--fill-color)"};
   margin-bottom: 10px;
 
   &.rounded-start {
@@ -47,7 +47,7 @@ const StepLine = styled.div`
 const StepLabel = styled.div`
   font-size: 20px;
   color: ${(props) =>
-    props.active ? "var(--key-color)" : "var(--text-color)"};
+    props.$active ? "var(--key-color)" : "var(--text-color)"};
   text-align: center;
   font-family: "pretendardB";
   white-space: nowrap;
@@ -65,15 +65,17 @@ const ProgressBar = ({ currentStep }) => {
   return (
     <ProgressBarContainer>
       {steps.map((stepName, index) => (
-        <ProgressStep key={index} active={currentStep >= index + 1}>
-          <StepNumber active={currentStep == index + 1}>{index + 1}</StepNumber>
+        <ProgressStep key={index} $active={currentStep >= index + 1}>
+          <StepNumber $active={currentStep == index + 1}>
+            {index + 1}
+          </StepNumber>
           <StepLine
             className={
               index == 0 ? "rounded-start" : index == 4 ? "rounded-end" : ""
             }
-            active={currentStep >= index + 1}
+            $active={currentStep >= index + 1}
           />
-          <StepLabel active={currentStep == index + 1}>{stepName}</StepLabel>
+          <StepLabel $active={currentStep == index + 1}>{stepName}</StepLabel>
         </ProgressStep>
       ))}
     </ProgressBarContainer>
