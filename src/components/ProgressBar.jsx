@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
-//width 80% , layout page에서 중앙배치
 const ProgressBarContainer = styled.div`
   display: flex;
-  width: 80%;
+  width: 100%;
+  max-width: 1121px;
+  height: 105px;
   justify-content: center;
-  height: 135px;
   align-items: center;
 `;
 
@@ -13,7 +13,6 @@ const ProgressStep = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  flex: 1;
 `;
 
 const StepNumber = styled.div`
@@ -30,7 +29,7 @@ const StepNumber = styled.div`
   font-family: "pretendardB";
 `;
 const StepLine = styled.div`
-  width: 100%;
+  width: 211px;
   height: 13px;
   background-color: ${(props) =>
     props.$active ? "var(--key-color)" : "var(--fill-color)"};
