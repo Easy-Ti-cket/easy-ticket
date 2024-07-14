@@ -21,8 +21,8 @@ const LogoContainer = styled.div`
 const Header = () => {
   return (
     <HeaderContainer>
-      <Nav />
       <LogoContainer />
+      <Nav />
     </HeaderContainer>
   );
 };
