@@ -1,0 +1,67 @@
+/* 디폴트(이전, 다음 단계) */
+.button {
+  display: flex;
+  width: 180px;
+  height: 45px;
+  padding: 10px 10px;
+  margin: 5px;
+  border: none;
+  border-radius: 4px;
+  justify-content: center;
+  align-items: center;
+  font-family: pretendardR;
+  font-size: 16px;
+  font-style: normal;
+  background-color: var(--key-color);
+  color: #fff;
+  cursor: pointer;
+}
+.button:hover {
+  background-color: var(--hover-color);
+  transition: 0.8s ease;
+}
+
+/* 좌석 선택 */
+.button--select-seat {
+  width: 285px;
+  height: 53px;
+}
+
+/* 아웃라인 */
+.button--outline {
+  border: 2px solid var(--key-color);
+  background-color: transparent;
+  color: var(--key-color);
+}
+.button--outline:hover {
+  background-color: var(--sub-color);
+}
+
+/* 도움말 */
+.button--help {
+  background-color: var(--point-color2);
+  color: var(--text-color2, #333333);
+}
+.button--help:hover {
+  background-color: var(--point-hover-color2);
+}
+
+/* 모드 선택 */
+.button--mode {
+  flex-direction: column;
+  width: 201px;
+  height: 268px;
+  font-size: 20px;
+  background-color: var(--sub-color);
+  color: var(--key-color);
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+}
+.button--mode:hover {
+  background-color: var(--key-color);
+  color: #fff;
+}
+.icon {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+}
