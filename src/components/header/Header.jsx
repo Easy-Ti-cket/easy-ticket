@@ -1,13 +1,6 @@
 import styled from "styled-components";
 import Nav from "./nav/Nav";
 
-/*wrap : 전체 너비 설정, 중앙정렬 */
-const HeaderWrap = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: center;
-`;
-
 /*헤더 Container*/
 const HeaderContainer = styled.div`
   width: 1320px;
@@ -27,12 +20,10 @@ const LogoContainer = styled.div`
 `;
 const Header = () => {
   return (
-    <HeaderWrap>
-      <HeaderContainer>
-        <Nav />
-        <LogoContainer />
-      </HeaderContainer>
-    </HeaderWrap>
+    <HeaderContainer>
+      <Nav />
+      <LogoContainer />
+    </HeaderContainer>
   );
 };
 

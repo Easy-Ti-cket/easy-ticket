@@ -30,10 +30,10 @@ const SubNavContent = styled.li`
   }
 `;
 
-const SubNav = ({ hoveredItem }) => {
+const SubNav = ({ hovereditem }) => {
   return (
     <>
-      {hoveredItem === "연습모드" && (
+      {hovereditem === "연습모드" && (
         <SubNavWrap>
           <SubNavContainer>
             <SubNavContent>초급</SubNavContent>
@@ -43,7 +43,7 @@ const SubNav = ({ hoveredItem }) => {
         </SubNavWrap>
       )}
 
-      {hoveredItem === "실전모드" && (
+      {hovereditem === "실전모드" && (
         <SubNavWrap>
           <SubNavContainer>
             <SubNavContent>인터파크 티켓</SubNavContent>
@@ -53,7 +53,7 @@ const SubNav = ({ hoveredItem }) => {
           </SubNavContainer>
         </SubNavWrap>
       )}
-      {hoveredItem === null && null}
+      {hovereditem === null && null}
     </>
   );
 };
