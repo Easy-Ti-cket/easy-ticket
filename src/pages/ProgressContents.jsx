@@ -24,7 +24,8 @@ const ContentsBox = styled.div`
   border: 1px solid #000000;
 `;
 
-//난이도별 contents를 children으로 받아서 ProgressBar와 함께 렌더링
+/*난이도별 contents를 children으로 받아서 ProgressBar와 함께 렌더링
+Outlet으로 대체 예정*/
 const ProgressContents = ({ children }) => {
   return (
     <ProgressContentsContainer>

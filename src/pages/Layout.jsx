@@ -8,7 +8,8 @@ const LayoutPage = styled.div`
   align-items: center;
 `;
 
-//Header고정, children으로 받은 컴포넌트 렌더링
+/*Header고정, children으로 받은 컴포넌트 렌더링
+ Outlet으로 대체 예정*/
 const Layout = ({ children }) => {
   return (
     <LayoutPage>
