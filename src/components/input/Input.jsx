@@ -2,7 +2,7 @@ import styled, { css, keyframes } from "styled-components";
 import InputRadio from "./InputRadio";
 import InputText from "./InputText";
 
-/*border 애니메이션 - 깜빡임*/
+/*border blink 애니메이션*/
 const blink = keyframes`
     0%{
         border-color: transparent;

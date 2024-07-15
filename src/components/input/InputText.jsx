@@ -4,7 +4,6 @@ const InputContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
-  justify-content: space-between;
   max-width: 260px;
 `;
 /*레이블*/

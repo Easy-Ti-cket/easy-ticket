@@ -3,7 +3,6 @@ import styled from "styled-components";
 const InputContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
   gap: 5px;
   max-width: 100px;
 `;
