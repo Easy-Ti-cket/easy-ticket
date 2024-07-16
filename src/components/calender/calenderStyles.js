@@ -8,10 +8,12 @@ export const StyledCalendarWrapper = styled.div`
   color: var(--text-color2);
 
   .react-calendar {
-    margin-top: 20px;
+    //삭제 예정, 화면 끝에서 떨어뜨려서 보기 위함
+    margin: 20px;
+
     width: 450px;
     height: 500px;
-    border: none;
+    border: 0.5px solid var(--fill-color);
     border-radius: 8px;
     box-shadow: 4px 2px 10px 0px rgba(0, 0, 0, 0.13);
     background-color: white;
