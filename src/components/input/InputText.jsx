@@ -8,7 +8,7 @@ const InputContainer = styled.div`
 /*레이블*/
 const Label = styled.span`
   font-size: 16px;
-  min-width: 90px;
+  min-width: 100px;
   width: auto;
   text-align: left;
 `;
