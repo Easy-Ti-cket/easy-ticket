@@ -1,4 +1,11 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
+# ESLint를 사용하여 전체 코드베이스에 대해 자동 수정
+npx eslint . --fix
+
+# lint-staged를 실행하여 추가적인 린팅 수행
+npx lint-staged
+
+# 전체 린팅 검사
 npm run lint
