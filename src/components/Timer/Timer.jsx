@@ -1,4 +1,3 @@
-// 상태관리 라이브러리 사용 시 전체적으로 수정 필요!
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import timerIcon from "../../assests/images/icons/timer.svg";
@@ -26,28 +25,31 @@ const StyledCountdownText = styled.div`
   letter-spacing: -1.5px;
 `;
 
-const Timer = () => {
-  const [count, setCount] = useState(30); // 30초로 초기화
+// props로 second 받기
+const Timer = ({ second }) => {
+  const [count, setCount] = useState(second);
 
   useEffect(() => {
     const countdown = setInterval(() => {
-      setCount((count) => count - 1);
+      setCount((prevCount) => {
+        if (prevCount <= 1) {
+          clearInterval(countdown);
+          return 0;
+        }
+        return prevCount - 1;
+      });
     }, 1000);
-    if (count == 0) {
-      clearInterval(countdown);
-    }
+
     return () => clearInterval(countdown);
-  }, [count]); // 의존성 배열에 추가
+  }, []);
 
   return (
-    <>
-      <TimerContainer>
-        <StyledIcon src={timerIcon} alt="timer"></StyledIcon>
-        <StyledCountdownText>
-          남은 시간 <span style={{ color: "var(--key-color)" }}>{count}</span>초
-        </StyledCountdownText>
-      </TimerContainer>
-    </>
+    <TimerContainer>
+      <StyledIcon src={timerIcon} alt="timer" />
+      <StyledCountdownText>
+        남은 시간 <span style={{ color: "var(--key-color)" }}>{count}</span>초
+      </StyledCountdownText>
+    </TimerContainer>
   );
 };
 
