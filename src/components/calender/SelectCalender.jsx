@@ -3,7 +3,7 @@ import { StyledCalendar, StyledCalendarWrapper } from "./calenderStyles";
 
 export function SelectCalender() {
   const [selectedDate, setSelectedDate] = useState(new Date());
-  console.log(selectedDate); //date 받아옴, 삭제 예정
+  // console.log(selectedDate); //date 받아옴, 삭제 예정
 
   return (
     <StyledCalendarWrapper>
