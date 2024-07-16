@@ -20,12 +20,12 @@ export function SelectCalender() {
         formatDay={(_, date) =>
           //xx일 -> xx 으로 format 변경
           new Date(date).toLocaleDateString("en-us", {
-            day: "2-digit",
+            day: "2-digit"
           })
         }
         formatMonthYear={(_, date) =>
           new Date(date).toLocaleDateString("en-us", {
-            month: "numeric",
+            month: "numeric"
           }) + "월"
         }
       />

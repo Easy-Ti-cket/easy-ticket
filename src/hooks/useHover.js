@@ -24,7 +24,7 @@ const useHover = () => {
     hovereditem,
     handleHoveredItemEnter,
     handleMouseLeave,
-    handleMouseEnter,
+    handleMouseEnter
   };
 };
 export default useHover;

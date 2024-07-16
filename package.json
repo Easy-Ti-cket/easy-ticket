@@ -8,7 +8,7 @@
     "build": "vite build",
     "lint": "eslint --cache .",
     "preview": "vite preview",
-    "format": "prettier  --write .",
+    "format": "prettier --write .",
     "postinstall": "husky install"
   },
   "dependencies": {
@@ -36,9 +36,18 @@
     "vite": "^5.3.1"
   },
   "lint-staged": {
-    "*.{js,jsx,mjs,cjs}": [
+    "**/*.{js,jsx,ts,tsx}": [
       "eslint --fix",
       "prettier --write"
+    ],
+    "**/*.{json,css,scss,md}": [
+      "prettier --write"
     ]
+  },
+  "prettier": {
+    "printWidth": 80,
+    "tabWidth": 2,
+    "singleQuote": false,
+    "trailingComma": "none"
   }
 }

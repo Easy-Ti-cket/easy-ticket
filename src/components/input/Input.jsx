@@ -6,7 +6,7 @@ const Input = ({
   type = "text",
   text = "add text",
   onChange = null,
-  focus = false,
+  focus = false
 }) => {
   return (
     <AnimationArea $focus={focus}>

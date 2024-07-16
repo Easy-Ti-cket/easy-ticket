@@ -58,7 +58,7 @@ const ProgressBar = ({ currentStep }) => {
     "좌석 선택",
     "예매 정보 확인",
     "결제",
-    "예매완료",
+    "예매완료"
   ];
 
   return (

@@ -15,8 +15,8 @@ export default {
     {
       files: "*.json",
       options: {
-        printWidth: 200,
-      },
-    },
-  ],
+        printWidth: 200
+      }
+    }
+  ]
 };
