@@ -11,8 +11,8 @@ export const StyledCalendarWrapper = styled.div`
     //삭제 예정, 화면 끝에서 떨어뜨려서 보기 위함
     margin: 20px;
 
-    width: 450px;
-    height: 500px;
+    min-width: 300px;
+    min-height: 300px;
     border: 0.5px solid var(--fill-color);
     border-radius: 8px;
     box-shadow: 4px 2px 10px 0px rgba(0, 0, 0, 0.13);
@@ -53,34 +53,36 @@ export const StyledCalendarWrapper = styled.div`
   }
   /* 네비게이션 글씨 설정 */
   .react-calendar__navigation__label > span {
-    font-size: 25px;
+    font-size: 20px;
     cursor: default;
   }
   /*요일 전체 */
   .react-calendar__month-view__weekdays {
     border-bottom: 1px solid var(--fill-color);
-    height: 50px;
+    height: 35px;
   }
   /* 요일 밑줄 제거 */
   .react-calendar__month-view__weekdays abbr {
     text-decoration: none;
     font-family: "pretendardR";
-    font-size: 20px;
+    font-size: 18px;
     color: var(--text-color);
   }
   .react-calendar__month-view {
-    width: 400px;
-    height: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 10px;
+    min-width: 280px;
+    min-height: 280px;
   }
   /* 일 날짜 간격 */
   .react-calendar__tile {
-    height: 55px;
+    padding: 11px;
+    //삭제 예정
     position: relative;
     font-family: "pretendardM";
-    font-size: 22px;
+    font-size: 18px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
