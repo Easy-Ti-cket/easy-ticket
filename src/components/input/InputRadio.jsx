@@ -4,7 +4,6 @@ const InputContainer = styled.div`
   display: flex;
   align-items: center;
   gap: 5px;
-  max-width: 100px;
 `;
 /*레이블*/
 const Label = styled.span`
