@@ -8,8 +8,9 @@ const InputContainer = styled.div`
 /*레이블*/
 const Label = styled.span`
   font-size: 16px;
-  min-width: 100px;
-  text-align: right;
+  min-width: 90px;
+  width: auto;
+  text-align: left;
 `;
 /*input 필드*/
 const InputField = styled.input`
