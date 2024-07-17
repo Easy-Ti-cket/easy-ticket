@@ -2,7 +2,7 @@ export default {
   printWidth: 80,
   tabWidth: 2,
   singleQuote: false,
-  trailingComma: "es5",
+  trailingComma: "none",
   useTabs: false,
   endOfLine: "auto",
   semi: true,
@@ -15,8 +15,8 @@ export default {
     {
       files: "*.json",
       options: {
-        printWidth: 200,
-      },
-    },
-  ],
+        printWidth: 200
+      }
+    }
+  ]
 };

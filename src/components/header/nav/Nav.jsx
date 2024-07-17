@@ -68,7 +68,7 @@ const Nav = () => {
     ishovered,
     handleHoveredItemEnter,
     handleMouseLeave,
-    handleMouseEnter,
+    handleMouseEnter
   } = useHover();
 
   return (
