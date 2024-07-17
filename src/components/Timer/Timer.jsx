@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import timerIcon from "../../assests/images/icons/timer.svg";
-
+import { useAtom } from "jotai";
+import { timerAtom, advancedTimerAtom } from "../../atom";
 // 타이머 요소 전체를 묶는 컨테이너
 const TimerContainer = styled.div`
   display: flex;
@@ -27,9 +28,11 @@ const StyledCountdownText = styled.div`
 
 // props로 second 받기
 const Timer = ({ second }) => {
-  const [count, setCount] = useState(second);
+  const [count, setCount] = useAtom(timerAtom);
+  const [{ minutes, seconds }] = useAtom(advancedTimerAtom);
 
   useEffect(() => {
+    setCount(second);
     const countdown = setInterval(() => {
       setCount((prevCount) => {
         if (prevCount <= 1) {
@@ -46,9 +49,16 @@ const Timer = ({ second }) => {
   return (
     <TimerContainer>
       <StyledIcon src={timerIcon} alt="timer" />
-      <StyledCountdownText>
-        남은 시간 <span style={{ color: "var(--key-color)" }}>{count}</span>초
-      </StyledCountdownText>
+      {second < 60 ? (
+        <StyledCountdownText>
+          남은 시간 <span style={{ color: "var(--key-color)" }}>{count}</span>초
+        </StyledCountdownText>
+      ) : (
+        <StyledCountdownText>
+          <span>{`${minutes < 10 ? "0" + minutes : minutes}
+          :${seconds < 10 ? "0" + seconds : seconds}`}</span>
+        </StyledCountdownText>
+      )}
     </TimerContainer>
   );
 };
