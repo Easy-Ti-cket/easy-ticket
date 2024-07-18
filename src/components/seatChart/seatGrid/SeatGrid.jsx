@@ -1,20 +1,33 @@
 import styled from "styled-components";
 import Seat from "./Seat";
+import { atom, useAtom, useAtomValue } from "jotai";
+import { allowedSeatAtom } from "../../../store/atom.js";
+import { useEffect } from "react";
 
 const GridContainer = styled.div`
   display: grid;
   grid-template-rows: ${(props) => `repeat(${props.rows}, 25px)`};
   grid-template-columns: ${(props) => `repeat(${props.columns}, 25px)`};
   place-items: center;
+  padding: 0;
 `;
 
-// SeatGrid 컴포넌트, 기본 5x5 격자로 구성
-const SeatGrid = ({ rows = 5, columns = 5 }) => {
+const SeatGrid = ({ rows = 5, columns = 5, gridIndex }) => {
+  const allowedSeat = useAtomValue(allowedSeatAtom);
+
   const renderSeats = () => {
     let seats = [];
     for (let row = 0; row < rows; row++) {
       for (let col = 0; col < columns; col++) {
-        seats.push(<Seat key={`${row}-${col}`} />);
+        let isallowed =
+          allowedSeat.gridIndex === gridIndex &&
+          allowedSeat.row === row &&
+          allowedSeat.col === col;
+        if (isallowed) {
+          seats.push(<Seat key={`${row}-${col}`} isallowed={true} />);
+          continue;
+        }
+        seats.push(<Seat key={`${row}-${col}`} isallowed={false} />);
       }
     }
     return seats;

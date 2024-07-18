@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import SeatGrid from "./seatGrid/SeatGrid";
-
+import { useAtom, useAtomValue } from "jotai";
+import { allowedSeatAtom } from "../../store/atom.js";
+import { useEffect } from "react";
 //SeatChart 전체 컨테이너
 const SeatChartContainer = styled.div`
   display: flex;
@@ -36,10 +38,9 @@ const SeatChart = () => {
     <SeatChartContainer>
       <Stage>스테이지</Stage>
       <SeatGridContainer>
-        <SeatGrid />
-        <SeatGrid />
-        <SeatGrid />
-        <SeatGrid />
+        {[0, 1, 2, 3].map((gridIndex) => (
+          <SeatGrid key={gridIndex} gridIndex={gridIndex} />
+        ))}
       </SeatGridContainer>
     </SeatChartContainer>
   );
