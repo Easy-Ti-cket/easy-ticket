@@ -1,3 +1,5 @@
+// 툴팁 컴포넌트
+
 import React from "react";
 import styled from "styled-components";
 import { Tooltip as ReactTooltip } from "react-tooltip";
