@@ -13,3 +13,9 @@ export const readMinuteCount = atom((get) => get(minuteCountAtom));
 export const writeMinuteCount = atom(null, (get, set, update) =>
   set(minuteCountAtom, update(get(minuteCountAtom)))
 );
+
+//난이도 상태 (low, middle, high)
+export const levelAtom = atom("low");
+
+//단계 별 상태 (0,1,2,3,4,5)
+export const progressAtom = atom(0);
