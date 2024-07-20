@@ -1,3 +1,5 @@
+// 타이머 컴포넌트
+
 import React, { useEffect } from "react";
 import { useAtom } from "jotai";
 import styled from "styled-components";

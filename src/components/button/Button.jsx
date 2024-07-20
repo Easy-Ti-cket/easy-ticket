@@ -5,7 +5,6 @@ const Button = (props) => {
   const { text, onClick, type, icon, ...rest } = props;
 
   return (
-    /* props: 텍스트, 모듈 css 타입, 온클릭 함수, 아이콘 src */
     <button
       className={`${styles.button} ${type ? styles[`button--${type}`] : ""}`}
       onClick={onClick}
