@@ -3,6 +3,7 @@ import Button from "./button/Button";
 import AnimationArea from "./Animation";
 import { useAtomValue } from "jotai";
 import { isSeatSelectedAtom, allowedSeatAtom } from "../store/atom";
+
 const SeatInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -51,9 +52,7 @@ const SelectedSeatsInfo = styled.div`
   display: grid;
   grid-template-columns: 1fr 2fr;
 `;
-const SeatsList = styled.div`
-  padding: 8px 0;
-`;
+
 const SeatGrade = styled.span`
   font-family: "pretendardM";
   font-size: 14px;
