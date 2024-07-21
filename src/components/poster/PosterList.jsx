@@ -81,20 +81,15 @@ const PosterInfo = styled.div`
   width: 100%;
 `;
 
-const PosterList = () => {
+const PosterList = ({ onPosterClick }) => {
   const [posters] = useAtom(postersAtom);
-
-  const handlePosterClick = (poster) => {
-    // 나중에 구현
-    alert("클릭");
-  };
 
   return (
     <PosterListContainer>
       {posters.map((poster, index) => (
         <PosterContainer
           key={poster.id}
-          onClick={() => handlePosterClick(poster)}
+          onClick={() => onPosterClick(poster.id)}
         >
           <Poster id={index} />
           <PosterInfo>
