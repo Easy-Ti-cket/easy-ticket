@@ -23,3 +23,6 @@ export const progressAtom = atom(0);
 
 // 포스터 json 데이터
 export const postersAtom = atom(posters);
+
+// 선택된 포스터의 id 상태(고급, 실전만 해당)
+export const selectedPosterAtom = atom(0);
