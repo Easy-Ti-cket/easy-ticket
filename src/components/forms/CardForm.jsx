@@ -11,7 +11,6 @@ const CardForm = () => {
   const answer = [];
   const onChange = (e) => {
     answer.push(e.target.value);
-    console.log(answer);
   };
   return (
     <FormWrap>
