@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import useRandomNum from "./settings/useRandomNum"; // randomNum 훅 사용
+import useRandomNum from "../../hooks/useRandomNum"; // randomNum 훅 사용
 import HorizonFront from "./settings/horizontal/HorizonFront";
 import HorizonBack from "./settings/horizontal/HorizonBack";
 import VerticalFront from "./settings/vertical/VerticalFront";

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useAtom } from "jotai";
-import { cardAnswerAtom } from "../../../store/atom";
+import { cardAnswerAtom } from "../store/atom";
 
 /*랜덤한 4자리 숫자 4개 생성 */
 const useRandomNum = () => {
