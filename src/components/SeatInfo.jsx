@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import Button from "./button/Button";
+import AnimationArea from "./Animation";
+import { useAtomValue } from "jotai";
+import { isSeatSelectedAtom } from "../store/atom";
 const SeatInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -44,28 +47,37 @@ const SelectedSeatsHeader = styled.span`
   font-size: 14px;
   align-items: end;
 `;
-const SelectedSeatsInfo = styled.div``;
+const SelectedSeatsInfo = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+`;
 const SeatsList = styled.div`
   padding: 8px 0;
 `;
 const SeatGrade = styled.span`
   font-family: "pretendardM";
   font-size: 14px;
-  margin-right: 24px;
+  margin: 0 24px 8px 0;
 `;
 const SeatPrice = styled.span`
   font-family: "pretendardM";
   font-size: 14px;
 `;
-
+const ButtonAnimationArea = styled(AnimationArea)`
+  padding: 5px;
+`;
 const SeatInfo = () => {
+  const isSeatSelected = useAtomValue(isSeatSelectedAtom);
   const seats = [
     { grade: "1구역 0석", price: 99000 },
     { grade: "2구역 1석", price: 99000 },
     { grade: "3구역 0석", price: 49900 },
     { grade: "4구역 0석", price: 49900 }
   ];
-
+  let isFocus = false;
+  if (isSeatSelected) {
+    isFocus = true;
+  }
   return (
     <SeatInfoContainer>
       <Header>좌석등급 / 잔여석</Header>
@@ -79,16 +91,29 @@ const SeatInfo = () => {
       </SeatTableContainer>
       <Header>
         선택좌석
-        <SelectedSeatsHeader>총 0석 선택되었습니다.</SelectedSeatsHeader>
+        <SelectedSeatsHeader>
+          총{" "}
+          <span style={{ color: "var(--point-color)" }}>
+            {isSeatSelected ? "1" : "0"}
+          </span>
+          석 선택되었습니다.
+        </SelectedSeatsHeader>
       </Header>
       <SelectedSeats>
         <SelectedSeatsInfo>
           <SeatGrade>좌석등급</SeatGrade>
           <SeatPrice>좌석정보</SeatPrice>
-          <SeatsList></SeatsList>
+          {isSeatSelected && (
+            <>
+              <SeatGrade>전석</SeatGrade>
+              <SeatPrice>좌석정보</SeatPrice>
+            </>
+          )}
         </SelectedSeatsInfo>
       </SelectedSeats>
-      <Button text={"좌석선택완료"} type={"select-seat"}></Button>
+      <ButtonAnimationArea $focus={isFocus}>
+        <Button text={"좌석선택완료"} type={"select-seat"}></Button>
+      </ButtonAnimationArea>
     </SeatInfoContainer>
   );
 };
