@@ -19,3 +19,6 @@ export const levelAtom = atom("low");
 
 //단계 별 상태 (0,1,2,3,4,5)
 export const progressAtom = atom(0);
+
+//카드번호 정답
+export const cardAnswerAtom = atom([]);
