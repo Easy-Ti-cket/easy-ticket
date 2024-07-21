@@ -22,7 +22,7 @@ const Seat = ({ isallowed }) => {
     }
   };
   let focus = false;
-  if (level == "easy" && isallowed && isSeatSelected == false) {
+  if (level == "low" && isallowed && isSeatSelected == false) {
     focus = true;
   }
   return (
