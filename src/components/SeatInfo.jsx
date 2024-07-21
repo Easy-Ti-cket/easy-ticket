@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Button from "./button/Button";
 import AnimationArea from "./Animation";
 import { useAtomValue } from "jotai";
-import { isSeatSelectedAtom } from "../store/atom";
+import { isSeatSelectedAtom, allowedSeatAtom } from "../store/atom";
 const SeatInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -68,6 +68,8 @@ const ButtonAnimationArea = styled(AnimationArea)`
 `;
 const SeatInfo = () => {
   const isSeatSelected = useAtomValue(isSeatSelectedAtom);
+  const allowedSeat = useAtomValue(allowedSeatAtom);
+  //구역 컴포넌트 만들고 수정 예정
   const seats = [
     { grade: "1구역 0석", price: 99000 },
     { grade: "2구역 1석", price: 99000 },
@@ -92,7 +94,7 @@ const SeatInfo = () => {
       <Header>
         선택좌석
         <SelectedSeatsHeader>
-          총{" "}
+          총
           <span style={{ color: "var(--point-color)" }}>
             {isSeatSelected ? "1" : "0"}
           </span>
@@ -106,7 +108,7 @@ const SeatInfo = () => {
           {isSeatSelected && (
             <>
               <SeatGrade>전석</SeatGrade>
-              <SeatPrice>좌석정보</SeatPrice>
+              <SeatPrice>{`${allowedSeat.row + 1}열-${allowedSeat.col + 1}`}</SeatPrice>
             </>
           )}
         </SelectedSeatsInfo>
