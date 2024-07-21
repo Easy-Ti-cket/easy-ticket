@@ -1,8 +1,7 @@
 import styled from "styled-components";
 import Seat from "./Seat";
-import { atom, useAtom, useAtomValue } from "jotai";
+import { useAtomValue } from "jotai";
 import { allowedSeatAtom } from "../../../store/atom.js";
-import { useEffect } from "react";
 
 const GridContainer = styled.div`
   display: grid;
