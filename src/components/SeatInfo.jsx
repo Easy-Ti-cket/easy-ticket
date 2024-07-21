@@ -2,7 +2,7 @@ import styled from "styled-components";
 import Button from "./button/Button";
 import AnimationArea from "./Animation";
 import { useAtomValue } from "jotai";
-import { isSeatSelectedAtom, allowedSeatAtom } from "../store/atom";
+import { isSeatSelectedAtom, allowedSeatAtom, levelAtom } from "../store/atom";
 
 const SeatInfoContainer = styled.div`
   display: flex;
@@ -68,6 +68,7 @@ const ButtonAnimationArea = styled(AnimationArea)`
 const SeatInfo = () => {
   const isSeatSelected = useAtomValue(isSeatSelectedAtom);
   const allowedSeat = useAtomValue(allowedSeatAtom);
+  const level = useAtomValue(levelAtom);
   //구역 컴포넌트 만들고 수정 예정
   const seats = [
     { grade: "1구역 0석", price: 99000 },
@@ -76,7 +77,7 @@ const SeatInfo = () => {
     { grade: "4구역 0석", price: 49900 }
   ];
   let isFocus = false;
-  if (isSeatSelected) {
+  if (isSeatSelected && level == "low") {
     isFocus = true;
   }
   return (
