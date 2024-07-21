@@ -22,3 +22,6 @@ export const allowedSeatAtom = atom({
   row: getRandomInt(0, 4),
   col: getRandomInt(0, 4)
 });
+
+//좌석 선택 여부 상태
+export const isSeatSelectedAtom = atom(false);
