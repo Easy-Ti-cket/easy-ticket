@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { useAtomValue } from "jotai";
-import { difficultyAtom } from "../../../store/atom";
+import { useAtom, useAtomValue } from "jotai";
+import { difficultyAtom, isSeatSelectedAtom } from "../../../store/atom";
 import AnimationArea from "../../Animation";
 const SeatDiv = styled.div`
   width: 20px;
@@ -15,13 +15,19 @@ const SeatAnimationArea = styled(AnimationArea)`
 `;
 const Seat = ({ isallowed }) => {
   const difficulty = useAtomValue(difficultyAtom);
+  const [isSeatSelected, setIsSeatSelected] = useAtom(isSeatSelectedAtom);
+  const handleClick = () => {
+    if (isallowed && isSeatSelected == false) {
+      setIsSeatSelected(true);
+    }
+  };
   let focus = false;
-  if (difficulty == "easy" && isallowed) {
+  if (difficulty == "easy" && isallowed && isSeatSelected == false) {
     focus = true;
   }
   return (
     <SeatAnimationArea $focus={focus}>
-      <SeatDiv $isallowed={isallowed} />
+      <SeatDiv $isallowed={isallowed} onClick={handleClick} />
     </SeatAnimationArea>
   );
 };
