@@ -6,9 +6,8 @@ const SeatDiv = styled.div`
   width: 20px;
   height: 20px;
   border: 1px solid var(--key-color);
-  background-color: ${(props) =>
-    props.$isallowed ? "var(--key-color)" : "null"};
-  cursor: ${(props) => (props.$isallowed ? "pointer" : "null")};
+  background-color: ${(props) => props.$isallowed && "var(--key-color)"};
+  cursor: ${(props) => props.$isallowed && "pointer"};
 `;
 const SeatAnimationArea = styled(AnimationArea)`
   padding: 5px;
@@ -17,12 +16,12 @@ const Seat = ({ isallowed }) => {
   const level = useAtomValue(levelAtom);
   const [isSeatSelected, setIsSeatSelected] = useAtom(isSeatSelectedAtom);
   const handleClick = () => {
-    if (isallowed && isSeatSelected == false) {
+    if (isallowed && !isSeatSelected) {
       setIsSeatSelected(true);
     }
   };
   let focus = false;
-  if (level == "low" && isallowed && isSeatSelected == false) {
+  if (level == "low" && isallowed && !isSeatSelected) {
     focus = true;
   }
   return (
