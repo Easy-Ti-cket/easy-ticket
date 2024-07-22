@@ -15,14 +15,14 @@ const CardForm = ({ focusNum }) => {
       <AnimationArea $focus={focusNum == 0}>
         <InputContainer>
           <Label>카드 번호</Label>
-          <CardInputFied onChange={onChange} />-
-          <CardInputFied onChange={onChange} />-
-          <CardInputFied onChange={onChange} />-
-          <CardInputFied onChange={onChange} />
+          <CardInputFied />-
+          <CardInputFied />-
+          <CardInputFied />-
+          <CardInputFied />
         </InputContainer>
       </AnimationArea>
-      <Input $focus={focusNum == 1} text="카드 비밀번호" onChange={onChange} />
-      <Input $focus={focusNum == 2} text="cvc 번호" onChange={onChange} />
+      <Input $focus={focusNum == 1} text="카드 비밀번호" />
+      <Input $focus={focusNum == 2} text="cvc 번호" />
     </FormWrap>
   );
 };
