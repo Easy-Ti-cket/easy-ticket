@@ -33,7 +33,7 @@ const SeatSection = () => {
       <Stage>스테이지</Stage>
       <Sections>
         {[1, 2, 3, 4].map((num) => (
-          <Section num={num}></Section>
+          <Section key={num} num={num}></Section>
         ))}
       </Sections>
     </SeatSectionContainer>
