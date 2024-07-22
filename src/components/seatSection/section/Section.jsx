@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import AnimationArea from "../../Animation";
 import { useAtomValue } from "jotai";
-import { allowedSectionAtom } from "../../../store/atom";
+import { allowedSectionAtom, levelAtom } from "../../../store/atom";
 
 const SectionDiv = styled.div`
   border: 1px solid var(--key-color);
@@ -12,8 +12,9 @@ const SectionDiv = styled.div`
 `;
 const Section = ({ num }) => {
   const allowedSection = useAtomValue(allowedSectionAtom);
+  const level = useAtomValue(levelAtom);
   let isfocus = false;
-  if (num == allowedSection) {
+  if (num == allowedSection && level == "low") {
     isfocus = true;
   }
   return (
