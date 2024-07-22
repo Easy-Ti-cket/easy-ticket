@@ -6,10 +6,16 @@ const RadioContainer = styled(InputContainer)`
 `;
 
 /*props별 기본값 설정*/
-const InputRadio = ({ text = "add text", onChange = null }) => {
+const InputRadio = ({ value, name, text = "add text", onChange = null }) => {
   return (
     <RadioContainer>
-      <input id="radioInput" type="radio" onChange={onChange} />
+      <input
+        id="radioInput"
+        type="radio"
+        name={name}
+        value={value}
+        onChange={onChange}
+      />
       <Label htmlFor="radioInput">{text}</Label>
     </RadioContainer>
   );

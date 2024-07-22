@@ -5,13 +5,17 @@ import InputText from "./InputText";
 const Input = ({
   type = "text",
   text = "add text",
+  value,
+  name,
   onChange = null,
   focus = false
 }) => {
   return (
     <AnimationArea $focus={focus}>
       {type === "text" && <InputText text={text} onChange={onChange} />}
-      {type === "radio" && <InputRadio text={text} onChange={onChange} />}
+      {type === "radio" && (
+        <InputRadio name={name} value={value} text={text} onChange={onChange} />
+      )}
     </AnimationArea>
   );
 };
