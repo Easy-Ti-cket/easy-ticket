@@ -2,7 +2,12 @@ import styled from "styled-components";
 import Button from "./button/Button";
 import AnimationArea from "./Animation";
 import { useAtomValue } from "jotai";
-import { isSeatSelectedAtom, allowedSeatAtom, levelAtom } from "../store/atom";
+import {
+  isSeatSelectedAtom,
+  allowedSeatAtom,
+  levelAtom,
+  allowedSectionAtom
+} from "../store/atom";
 
 const SeatInfoContainer = styled.div`
   display: flex;
@@ -67,15 +72,22 @@ const ButtonAnimationArea = styled(AnimationArea)`
 `;
 const SeatInfo = () => {
   const isSeatSelected = useAtomValue(isSeatSelectedAtom);
+  const allowedSection = useAtomValue(allowedSectionAtom);
   const allowedSeat = useAtomValue(allowedSeatAtom);
   const level = useAtomValue(levelAtom);
-  //구역 컴포넌트 만들고 수정 예정
+
   const seats = [
     { grade: "1구역 0석", price: 99000 },
-    { grade: "2구역 1석", price: 99000 },
+    { grade: "2구역 0석", price: 99000 },
     { grade: "3구역 0석", price: 49900 },
     { grade: "4구역 0석", price: 49900 }
   ];
+
+  //allowedSection이 유효한지 확인, 유효하다면 해당 구역의 좌석을 1석으로 변경
+  if (allowedSection > 0 && allowedSection <= seats.length) {
+    seats[allowedSection - 1].grade = `${allowedSection}구역 1석`;
+  }
+
   let isFocus = false;
   if (isSeatSelected && level == "low") {
     isFocus = true;

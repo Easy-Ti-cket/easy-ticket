@@ -20,7 +20,7 @@ export const levelAtom = atom("low");
 //단계 별 상태 (0,1,2,3,4,5)
 export const progressAtom = atom(0);
 
-export const allowedSectionAtom = atom(getRandomInt(0, 3));
+export const allowedSectionAtom = atom(getRandomInt(1, 4));
 //보라색 좌석 위치 상태
 export const allowedSeatAtom = atom({
   gridIndex: getRandomInt(0, 3),

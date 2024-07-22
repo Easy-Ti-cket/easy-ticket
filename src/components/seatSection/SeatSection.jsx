@@ -9,6 +9,7 @@ const SeatSectionContainer = styled.div`
   gap: 20px;
   margin-top: 20px;
   width: 500px;
+  height: 500px;
 `;
 const Stage = styled.div`
   width: 400px;
@@ -23,6 +24,7 @@ const Sections = styled.div`
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
+  justify-content: center;
 `;
 
 const SeatSection = () => {

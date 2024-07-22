@@ -8,6 +8,7 @@ const SectionDiv = styled.div`
   width: 200px;
   height: 150px;
   cursor: ${(props) => props.$cursor && "pointer"};
+  margin: ${(props) => !props.$cursor && "3px"};
 `;
 const Section = ({ num }) => {
   const allowedSection = useAtomValue(allowedSectionAtom);
