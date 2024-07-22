@@ -1,23 +1,17 @@
 import styled from "styled-components";
+import { InputContainer, Label } from "./InputStyle";
 
-const InputContainer = styled.div`
-  display: flex;
-  align-items: center;
+const RadioContainer = styled(InputContainer)`
   gap: 5px;
-`;
-/*레이블*/
-const Label = styled.span`
-  font-size: 16px;
-  min-width: 100px;
 `;
 
 /*props별 기본값 설정*/
 const InputRadio = ({ text = "add text", onChange = null }) => {
   return (
-    <InputContainer>
+    <RadioContainer>
       <input id="radioInput" type="radio" onChange={onChange} />
       <Label htmlFor="radioInput">{text}</Label>
-    </InputContainer>
+    </RadioContainer>
   );
 };
 export default InputRadio;

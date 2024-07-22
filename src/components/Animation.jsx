@@ -16,8 +16,7 @@ const AnimationArea = styled.div`
   display: inline-block;
   padding: 10px;
   /*애니메이션을 show 할 것인지 안 할 것인지*/
-  border: ${(props) =>
-    props.$focus ? "3px dashed var(--point-color)" : "none"};
+  border: ${(props) => props.$focus && "3px dashed var(--point-color)"};
   ${(props) =>
     props.$focus &&
     css`
