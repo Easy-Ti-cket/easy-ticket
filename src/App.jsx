@@ -1,13 +1,8 @@
 import React from "react";
-import Layout from "./pages/Layout";
-import ProgressContents from "./pages/ProgressContents";
+import SeatChart from "./components/seatChart/SeatChart";
 
 function App() {
-  return (
-    <Layout>
-      <ProgressContents></ProgressContents>
-    </Layout>
-  );
+  return <SeatChart />;
 }
 
 export default App;
