@@ -1,5 +1,6 @@
 import styled from "styled-components";
-
+import { useAtomValue } from "jotai";
+import { progressAtom } from "../store/atom";
 const ProgressBarContainer = styled.div`
   display: flex;
   width: 100%;
@@ -52,7 +53,8 @@ const StepLabel = styled.div`
   white-space: nowrap;
 `;
 
-const ProgressBar = ({ currentStep }) => {
+const ProgressBar = () => {
+  const progress = useAtomValue(progressAtom);
   const steps = [
     "공연 및 회차선택",
     "좌석 선택",
@@ -64,17 +66,15 @@ const ProgressBar = ({ currentStep }) => {
   return (
     <ProgressBarContainer>
       {steps.map((stepName, index) => (
-        <ProgressStep key={index} $active={currentStep >= index + 1}>
-          <StepNumber $active={currentStep == index + 1}>
-            {index + 1}
-          </StepNumber>
+        <ProgressStep key={index} $active={progress >= index + 1}>
+          <StepNumber $active={progress == index + 1}>{index + 1}</StepNumber>
           <StepLine
             className={
               index == 0 ? "rounded-start" : index == 4 ? "rounded-end" : ""
             }
-            $active={currentStep >= index + 1}
+            $active={progress >= index + 1}
           />
-          <StepLabel $active={currentStep == index + 1}>{stepName}</StepLabel>
+          <StepLabel $active={progress == index + 1}>{stepName}</StepLabel>
         </ProgressStep>
       ))}
     </ProgressBarContainer>

@@ -1,8 +1,8 @@
 import React from "react";
-import SeatSection from "./components/seatSection/SeatSection";
+import SeatChart from "./components/SeatChart";
 
 function App() {
-  return <SeatSection />;
+  return <SeatChart />;
 }
 
 export default App;

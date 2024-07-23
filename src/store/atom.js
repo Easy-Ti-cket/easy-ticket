@@ -1,5 +1,6 @@
 import { atom } from "jotai";
 import getRandomInt from "../util/getRandomInt";
+
 // 초 단위 타이머 상태
 export const secondCountAtom = atom(0);
 export const readSecondCount = atom((get) => get(secondCountAtom));
