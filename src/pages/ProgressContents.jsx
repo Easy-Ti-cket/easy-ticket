@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import ProgressBar from "../components/ProgressBar";
-
+import Timer from "../components/timer/Timer";
 //ProgressBar+ContentsBox Container
 const ProgressContentsContainer = styled.div`
   display: flex;
@@ -13,6 +13,13 @@ const ProgressBarBox = styled.div`
   min-height: 145px;
 `;
 
+const TextBox = styled.div`
+  width: 1320px;
+  min-height: 122px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 //화면 높이에 따라 줄어드는 contentsBox, min-height: 500px
 const ContentsBox = styled.div`
   width: 1320px;
@@ -26,12 +33,14 @@ const ContentsBox = styled.div`
 
 /*난이도별 contents를 children으로 받아서 ProgressBar와 함께 렌더링
 Outlet으로 대체 예정*/
-const ProgressContents = ({ children }) => {
+const ProgressContents = ({ text, children }) => {
   return (
     <ProgressContentsContainer>
       <ProgressBarBox>
-        <ProgressBar currentStep={2} />
+        <ProgressBar />
       </ProgressBarBox>
+      <Timer type={"minute"} second={1000}></Timer>
+      <TextBox>{text}</TextBox>
       <ContentsBox>{children}</ContentsBox>
     </ProgressContentsContainer>
   );
