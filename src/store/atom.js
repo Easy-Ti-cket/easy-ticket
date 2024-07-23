@@ -1,5 +1,7 @@
 import { atom } from "jotai";
 import posters from "../components/poster/poster.json";
+import getRandomInt from "../util/getRandomInt";
+
 
 // 초 단위 타이머 상태
 export const secondCountAtom = atom(0);
@@ -26,3 +28,6 @@ export const postersAtom = atom(posters);
 
 // 선택된 포스터의 id 상태(고급, 실전만 해당)
 export const selectedPosterAtom = atom(0);
+
+//카드번호 정답
+export const cardAnswerAtom = atom([]);
