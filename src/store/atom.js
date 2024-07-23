@@ -1,5 +1,5 @@
 import { atom } from "jotai";
-import getRandomInt from "../util/getRandomInt.js";
+import getRandomInt from "../util/getRandomInt";
 
 // 초 단위 타이머 상태
 export const secondCountAtom = atom(0);
@@ -29,4 +29,4 @@ export const allowedSeatAtom = atom({
 });
 
 //좌석 선택 여부 상태
-export const isSeatSelectedAtom = atom(false);
+export const isSeatSelectedAtom = atom(true);
