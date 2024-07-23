@@ -21,12 +21,6 @@ export const levelAtom = atom("low");
 //단계 별 상태 (0,1,2,3,4,5)
 export const progressAtom = atom(0);
 
-//보라색 좌석 위치 상태
-export const allowedSeatAtom = atom({
-  gridIndex: getRandomInt(0, 3),
-  row: getRandomInt(0, 4),
-  col: getRandomInt(0, 4)
-});
+//카드번호 정답
+export const cardAnswerAtom = atom([]);
 
-//좌석 선택 여부 상태
-export const isSeatSelectedAtom = atom(true);
