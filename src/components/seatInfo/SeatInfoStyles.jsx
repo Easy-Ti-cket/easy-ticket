@@ -8,6 +8,7 @@ export const SeatInfoContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   border: 1px solid var(--key-color);
+  border-radius: 8px;
   padding: 8px;
   width: 300px;
   height: 480px;
@@ -24,6 +25,7 @@ export const Header = styled.span`
 
 export const SeatTableContainer = styled.div`
   border: 1px solid var(--key-color);
+  border-radius: 8px;
   padding: 16px 8px;
   width: 265px;
   height: 110px;
@@ -39,6 +41,7 @@ export const SeatTableDiv = styled.div`
 
 export const SelectedSeats = styled.div`
   border: 1px solid var(--key-color);
+  border-radius: 8px;
   padding: 8px;
   width: 265px;
   height: 140px;
