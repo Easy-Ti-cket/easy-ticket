@@ -8,7 +8,6 @@ const HeaderContainer = styled.div`
   display: flex;
   justify-content: left;
   position: relative;
-  flex-shrink: 1;
 `;
 
 //로고로 대치 예정

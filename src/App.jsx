@@ -2,7 +2,7 @@ import React from "react";
 import SeatChart from "./components/SeatChart";
 
 function App() {
-  <SeatChart />;
+  return <SeatChart />;
 }
 
 export default App;
