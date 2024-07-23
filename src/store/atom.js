@@ -1,4 +1,5 @@
 import { atom } from "jotai";
+import getRandomInt from "../util/getRandomInt";
 
 // 초 단위 타이머 상태
 export const secondCountAtom = atom(0);
@@ -22,3 +23,4 @@ export const progressAtom = atom(0);
 
 //카드번호 정답
 export const cardAnswerAtom = atom([]);
+
