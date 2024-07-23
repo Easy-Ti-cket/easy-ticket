@@ -5,6 +5,7 @@ import { allowedSectionAtom, levelAtom } from "../../../store/atom";
 
 const SectionDiv = styled.div`
   border: 1px solid var(--key-color);
+  border-radius: 4px;
   width: 200px;
   height: 150px;
   cursor: ${(props) => props.$cursor && "pointer"};
