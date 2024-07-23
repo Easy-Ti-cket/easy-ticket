@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 const SubNavWrap = styled.div`
   width: 1320px;
-  height: 40px;
+  height: 50px;
   background-color: var(--sub-color);
   display: flex;
   justify-content: center;
@@ -16,9 +16,9 @@ const SubNavContainer = styled.ul`
 `;
 /*서브네비게이터 Contents - 서브네비게이터 내용*/
 const SubNavContent = styled.li`
-  font-size: 12px;
+  font-size: 16px;
   color: var(--text-color);
-  width: 90px;
+  width: 120px;
   height: 40px;
   display: flex;
   align-items: center;
