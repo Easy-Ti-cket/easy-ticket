@@ -13,7 +13,7 @@ const ProgressBarBox = styled.div`
   min-height: 145px;
 `;
 
-const TextBot = styled.div`
+const TextBox = styled.div`
   width: 1320px;
   min-height: 122px;
   display: flex;
@@ -40,7 +40,7 @@ const ProgressContents = ({ text, children }) => {
         <ProgressBar />
       </ProgressBarBox>
       <Timer type={"minute"} second={1000}></Timer>
-      <TextBot>{text}</TextBot>
+      <TextBox>{text}</TextBox>
       <ContentsBox>{children}</ContentsBox>
     </ProgressContentsContainer>
   );
