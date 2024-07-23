@@ -33,15 +33,14 @@ const ContentsBox = styled.div`
 
 /*난이도별 contents를 children으로 받아서 ProgressBar와 함께 렌더링
 Outlet으로 대체 예정*/
-const ProgressContents = ({ children }) => {
+const ProgressContents = ({ text, children }) => {
   return (
     <ProgressContentsContainer>
       <ProgressBarBox>
         <ProgressBar />
       </ProgressBarBox>
-      <Timer></Timer>
-      {/* FIX: textcomponent 받아서 렌더링 */}
-      <TextBot>예매하려는 공연의 포스터를 선택해주세요</TextBot>
+      <Timer type={"minute"} second={1000}></Timer>
+      <TextBot>{text}</TextBot>
       <ContentsBox>{children}</ContentsBox>
     </ProgressContentsContainer>
   );
