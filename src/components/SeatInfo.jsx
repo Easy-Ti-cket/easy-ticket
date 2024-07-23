@@ -10,6 +10,7 @@ const SeatInfoContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   border: 1px solid var(--key-color);
+  border-radius: 8px;
   padding: 8px;
   width: 300px;
   height: 480px;
@@ -26,6 +27,7 @@ const Header = styled.span`
 
 const SeatTableContainer = styled.div`
   border: 1px solid var(--key-color);
+  border-radius: 8px;
   padding: 16px 8px;
   width: 265px;
   height: 110px;
@@ -39,6 +41,7 @@ const SeatTableDiv = styled.div`
 `;
 const SelectedSeats = styled.div`
   border: 1px solid var(--key-color);
+  border-radius: 8px;
   padding: 8px;
   width: 265px;
   height: 140px;
