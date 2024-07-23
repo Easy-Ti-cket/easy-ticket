@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import ProgressBar from "../components/ProgressBar";
 import Timer from "../components/timer/Timer";
+import { Outlet } from "react-router-dom";
 //ProgressBar+ContentsBox Container
 const ProgressContentsContainer = styled.div`
   display: flex;
@@ -33,7 +34,7 @@ const ContentsBox = styled.div`
 
 /*난이도별 contents를 children으로 받아서 ProgressBar와 함께 렌더링
 Outlet으로 대체 예정*/
-const ProgressContents = ({ text, children }) => {
+const ProgressContents = ({ text }) => {
   return (
     <ProgressContentsContainer>
       <ProgressBarBox>
@@ -41,7 +42,9 @@ const ProgressContents = ({ text, children }) => {
       </ProgressBarBox>
       <Timer type={"minute"} second={1000}></Timer>
       <TextBox>{text}</TextBox>
-      <ContentsBox>{children}</ContentsBox>
+      <ContentsBox>
+        <Outlet></Outlet>
+      </ContentsBox>
     </ProgressContentsContainer>
   );
 };

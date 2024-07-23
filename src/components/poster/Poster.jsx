@@ -14,6 +14,7 @@ const PosterImage = styled.img`
 const Poster = ({ id }) => {
   const [posters] = useAtom(postersAtom);
   const poster = posters[id]; // 배열 인덱스로 접근 (id = array index)
+  console.log(poster.src);
   return <PosterImage src={poster.src} alt={poster.title_ko} />;
 };
 

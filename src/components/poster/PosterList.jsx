@@ -42,7 +42,7 @@ const PosterTime = styled.div`
 // 포스터 전체를 담는 컨테이너
 const PosterListContainer = styled.div`
   width: 1320px;
-  height: 620px;
+  // height: 620px;
   display: flex;
   gap: 50px;
   justify-content: center;
@@ -83,7 +83,7 @@ const PosterInfo = styled.div`
 
 const PosterList = ({ onPosterClick }) => {
   const [posters] = useAtom(postersAtom);
-
+  console.log(posters);
   return (
     <PosterListContainer>
       {posters.map((poster, index) => (
