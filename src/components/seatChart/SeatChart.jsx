@@ -17,6 +17,7 @@ const Stage = styled.div`
   width: 400px;
   min-height: 70px;
   border: 1px solid var(--key-color);
+  border-radius: 4px;
   margin: 5px;
   align-items: center;
   justify-content: center;

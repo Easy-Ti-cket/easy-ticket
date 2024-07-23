@@ -6,6 +6,7 @@ const SeatDiv = styled.div`
   width: 20px;
   height: 20px;
   border: 1px solid var(--key-color);
+  border-radius: 4px;
   background-color: ${(props) => props.$isallowed && "var(--key-color)"};
   cursor: ${(props) => props.$isallowed && "pointer"};
 `;
