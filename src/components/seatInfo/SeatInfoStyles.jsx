@@ -1,4 +1,3 @@
-// src/components/SeatInfoStyles.js
 import styled from "styled-components";
 import AnimationArea from "../Animation";
 
