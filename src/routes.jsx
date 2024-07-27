@@ -4,12 +4,14 @@ import Layout from "./pages/Layout";
 import SelectPerformance from "./pages/step1/SelectPerformance";
 import SelectRound from "./pages/step1/SelectRound";
 import ProgressContents from "./pages/ProgressContents";
+import Main from "./pages/main/Main";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout></Layout>,
+    element: <Layout />,
     children: [
+      { path: "main", element: <Main /> },
       {
         path: "progress",
         element: <ProgressContents />,
