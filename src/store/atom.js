@@ -30,3 +30,6 @@ export const selectedPosterAtom = atom(0);
 
 //카드번호 정답
 export const cardAnswerAtom = atom([]);
+
+//사용자 이름
+export const userNameAtom = atom("");
