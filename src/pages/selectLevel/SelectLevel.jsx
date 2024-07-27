@@ -1,6 +1,7 @@
 import Button from "../../components/button/Button";
 import styled from "styled-components";
 import Tooltip from "../../components/tooltip/Tooltip";
+import AnimationArea from "../../components/Animation";
 const SelectLevelContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -24,6 +25,11 @@ const ButtonBox = styled.div`
 `;
 
 const SelectLevel = () => {
+  const levels = [
+    { text: "초급", tooltip: "이 단계를 추천해요!", focus: true },
+    { text: "중급", focus: false },
+    { text: "고급", focus: false }
+  ];
   return (
     <SelectLevelContainer>
       <Instructions>
@@ -31,17 +37,21 @@ const SelectLevel = () => {
         선택해주세요
       </Instructions>
       <ButtonContainer>
-        <ButtonBox>
-          <Tooltip text="이 단계를 추천해요!">
-            <Button type="mode" text="초급"></Button>
-          </Tooltip>
-        </ButtonBox>
-        <ButtonBox>
-          <Button type="mode" text="중급"></Button>
-        </ButtonBox>
-        <ButtonBox>
-          <Button type="mode" text="고급"></Button>
-        </ButtonBox>
+        {levels.map(({ text, tooltip, focus }) => (
+          <ButtonBox key={text}>
+            {tooltip ? (
+              <Tooltip text={tooltip}>
+                <AnimationArea $focus={focus}>
+                  <Button type="mode" text={text}></Button>
+                </AnimationArea>
+              </Tooltip>
+            ) : (
+              <AnimationArea $focus={focus}>
+                <Button type="mode" text={text}></Button>
+              </AnimationArea>
+            )}
+          </ButtonBox>
+        ))}
       </ButtonContainer>
     </SelectLevelContainer>
   );
