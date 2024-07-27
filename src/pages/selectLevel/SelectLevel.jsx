@@ -2,6 +2,10 @@ import Button from "../../components/button/Button";
 import styled from "styled-components";
 import Tooltip from "../../components/tooltip/Tooltip";
 import AnimationArea from "../../components/Animation";
+import { useAtom } from "jotai";
+import { levelAtom } from "../../store/atom";
+import { useNavigate } from "react-router-dom";
+
 const SelectLevelContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -25,11 +29,24 @@ const ButtonBox = styled.div`
 `;
 
 const SelectLevel = () => {
+  const [level, setLevel] = useAtom(levelAtom);
+
   const levels = [
     { text: "초급", tooltip: "이 단계를 추천해요!", focus: true },
     { text: "중급", focus: false },
     { text: "고급", focus: false }
   ];
+  const nav = useNavigate();
+  const handleClick = (e) => {
+    setLevel(
+      e.target.innerText === "초급"
+        ? "low"
+        : e.target.innerText === "중급"
+          ? "middle"
+          : "high"
+    );
+    nav("/progress/step0");
+  };
   return (
     <SelectLevelContainer>
       <Instructions>
@@ -42,12 +59,16 @@ const SelectLevel = () => {
             {tooltip ? (
               <Tooltip text={tooltip}>
                 <AnimationArea $focus={focus}>
-                  <Button type="mode" text={text}></Button>
+                  <Button
+                    type="mode"
+                    text={text}
+                    onClick={handleClick}
+                  ></Button>
                 </AnimationArea>
               </Tooltip>
             ) : (
               <AnimationArea $focus={focus}>
-                <Button type="mode" text={text}></Button>
+                <Button type="mode" text={text} onClick={handleClick}></Button>
               </AnimationArea>
             )}
           </ButtonBox>
