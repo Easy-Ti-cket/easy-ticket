@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import { FormWrap } from "../FormStyle";
 import { InputContainer, Label } from "../../input/InputStyle";
+import { useForm } from "../../../hooks/useForm";
+import { useAtomValue } from "jotai";
+import { levelAtom } from "../../../store/atom";
 
 const BuyerWrap = styled.div`
   display: flex;
@@ -23,10 +26,15 @@ const InfoBox = styled.div`
   align-items: center;
 `;
 
+//생년월일 input
+const InfoInput = styled(InfoBox).attrs({ as: "input" })`
+  box-sizing: border-box;
+`;
+
 // mock buyer data
 const data_essential = [
   { label: "이름", value: "홍길동" },
-  { label: "생년월일", value: "2001년 02월 02일" },
+  { label: "생년월일", value: "010110" },
   { label: "연락처", value: "010-1234-5678" },
   { label: "이메일", value: "abcd@gmai.com" }
 ];
@@ -38,6 +46,11 @@ const data_delivery = [
 ];
 
 const TicketBuyer = ({ option }) => {
+  //난이도 - 생년월일 입력 구현
+  const level = useAtomValue(levelAtom);
+  const { handleChange, answer } = useForm();
+  //삭제 예정 ) 정답 확인
+  console.log(answer);
   return (
     <BuyerWrap>
       {(option === "현장수령" || option === "배송") && (
@@ -45,7 +58,11 @@ const TicketBuyer = ({ option }) => {
           {data_essential.map((item, index) => (
             <InputContainer key={index}>
               <Label>{item.label}</Label>
-              <InfoBox>{item.value}</InfoBox>
+              {level === "high" && item.label === "생년월일" ? (
+                <InfoInput name="birth" onChange={handleChange}></InfoInput>
+              ) : (
+                <InfoBox>{item.value}</InfoBox>
+              )}
             </InputContainer>
           ))}
         </BuyerContainer>

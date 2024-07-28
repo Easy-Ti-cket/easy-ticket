@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { FormWrap } from "../FormStyle";
 import Input from "../../input/Input";
+import { useForm } from "../../../hooks/useForm";
 
 const DropDown = styled.select`
   width: 230px;
@@ -35,10 +36,9 @@ const optionArr = [
   "롯데카드"
 ];
 const DetailPayForm = () => {
-  //radio로 선택한 값 콘솔에 찍도록 설정
-  const handleValue = (e) => {
-    console.log(e.target.value);
-  };
+  const { handleChange, answer } = useForm();
+  //삭제 예정 ) 정답 확인
+  console.log(answer);
   return (
     <>
       <FormWrap>
@@ -49,11 +49,11 @@ const DetailPayForm = () => {
             type="radio"
             value={payItem}
             text={payItem}
-            onChange={handleValue}
+            onChange={handleChange}
           />
         ))}
       </FormWrap>
-      <DropDown onChange={handleValue}>
+      <DropDown name="CardTypes" onChange={handleChange}>
         {/*드롭다운의 placeholder역할 */}
         <option value="" disabled>
           카드 종류를 선택해 주세요

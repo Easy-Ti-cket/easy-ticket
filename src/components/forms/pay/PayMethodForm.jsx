@@ -1,5 +1,6 @@
 import { FormWrap } from "../FormStyle";
 import Input from "../../input/Input";
+import { useForm } from "../../../hooks/useForm";
 
 const textArr = [
   "신용카드",
@@ -10,10 +11,9 @@ const textArr = [
 ];
 
 const PayMethodForm = () => {
-  //radio로 선택한 값 콘솔에 찍도록 설정
-  const handleValue = (e) => {
-    console.log(e.target.value);
-  };
+  const { handleChange, answer } = useForm();
+  //삭제 예정 ) 정답 확인
+  console.log(answer);
   return (
     <FormWrap>
       {textArr.map((methodItem, index) => (
@@ -23,7 +23,7 @@ const PayMethodForm = () => {
           type="radio"
           value={methodItem}
           text={methodItem}
-          onChange={handleValue}
+          onChange={handleChange}
         />
       ))}
     </FormWrap>
