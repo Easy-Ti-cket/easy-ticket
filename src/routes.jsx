@@ -5,6 +5,7 @@ import SelectPerformance from "./pages/step1/SelectPerformance";
 import SelectRound from "./pages/step1/SelectRound";
 import ProgressContents from "./pages/ProgressContents";
 import SelectPayMethod from "./pages/step4/SelectPayMethod";
+import CardPay from "./pages/step4/CardPay";
 
 const router = createBrowserRouter([
   {
@@ -25,7 +26,13 @@ const router = createBrowserRouter([
           },
           {
             path: "step4-1",
-            element: <SelectPayMethod />
+            element: <SelectPayMethod />,
+            label: "결제방식 / 수단 선택"
+          },
+          {
+            path: "step4-2",
+            element: <CardPay />,
+            label: "카드 결제창"
           }
         ]
       }

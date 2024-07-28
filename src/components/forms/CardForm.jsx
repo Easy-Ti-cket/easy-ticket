@@ -8,10 +8,7 @@ import { useForm } from "../../hooks/useForm";
 const CardInputFied = styled(InputField)`
   width: 40px;
 `;
-const CardForm = ({ focusNum }) => {
-  const { handleChange, answer } = useForm();
-  //삭제예정 ) 정답 확인
-  console.log(answer);
+const CardForm = ({ focusNum, handleChange }) => {
   return (
     <FormWrap>
       {/*카드 번호 */}

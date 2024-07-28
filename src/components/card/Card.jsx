@@ -5,6 +5,8 @@ import HorizonFront from "./settings/horizontal/HorizonFront";
 import HorizonBack from "./settings/horizontal/HorizonBack";
 import VerticalFront from "./settings/vertical/VerticalFront";
 import VerticalBack from "./settings/vertical/VerticalBack";
+import { useAtomValue, useSetAtom } from "jotai";
+import { cardAnswerAtom } from "../../store/atom";
 
 const Wrap = styled.div`
   display: flex;
@@ -20,14 +22,14 @@ const Card = () => {
       {cardType === 1 ? (
         <>
           <HorizonFront numbers={cardNumbers.slice(0, 4)} />
-          <HorizonBack cvc={cardNumbers.slice(4)} />
+          <HorizonBack cvc={cardNumbers.slice(5)} />
         </>
       ) : (
         <>
           <VerticalFront />
           <VerticalBack
             numbers={cardNumbers.slice(0, 4)}
-            cvc={cardNumbers.slice(4)}
+            cvc={cardNumbers.slice(5)}
           />
         </>
       )}

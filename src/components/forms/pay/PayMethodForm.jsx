@@ -1,6 +1,5 @@
 import { FormWrap } from "../FormStyle";
 import Input from "../../input/Input";
-import { useForm } from "../../../hooks/useForm";
 
 const textArr = [
   "신용카드",
@@ -10,10 +9,7 @@ const textArr = [
   "네이버 페이"
 ];
 
-const PayMethodForm = () => {
-  const { handleChange, answer } = useForm();
-  //삭제 예정 ) 정답 확인
-  console.log(answer);
+const PayMethodForm = ({ handleChange }) => {
   return (
     <FormWrap>
       {textArr.map((methodItem, index) => (

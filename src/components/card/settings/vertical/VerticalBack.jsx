@@ -18,7 +18,7 @@ export const CvcWrap = styled.div`
   right: 20px;
 `;
 const VerticalBack = ({ cvc, numbers }) => {
-  const [cardNum1, cardNum2, cardNum3, cardNum4] = numbers;
+  const [cardNum1, cardNum2, cardNum3, cardNum4, cardNum5] = numbers;
   return (
     <CardWrap>
       {/*카드 번호 */}
