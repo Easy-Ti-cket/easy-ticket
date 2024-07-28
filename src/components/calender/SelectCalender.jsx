@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { StyledCalendar, StyledCalendarWrapper } from "./calenderStyles";
 
-export function SelectCalender() {
+const SelectCalender = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   // console.log(selectedDate); //date 받아옴, 삭제 예정
 
@@ -31,4 +31,5 @@ export function SelectCalender() {
       />
     </StyledCalendarWrapper>
   );
-}
+};
+export default SelectCalender;
