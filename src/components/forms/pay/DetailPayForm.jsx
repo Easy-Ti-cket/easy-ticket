@@ -2,7 +2,9 @@ import styled from "styled-components";
 import { FormWrap } from "../FormStyle";
 import Input from "../../input/Input";
 import { useForm } from "../../../hooks/useForm";
-
+const DetailPayFormWrap = styled(FormWrap)`
+  flex-direction: row;
+`;
 const DropDown = styled.select`
   width: 230px;
   height: 35px;
@@ -40,7 +42,7 @@ const DetailPayForm = () => {
   //삭제 예정 ) 정답 확인
   console.log(answer);
   return (
-    <>
+    <DetailPayFormWrap>
       <FormWrap>
         {textArr.map((payItem) => (
           <Input
@@ -64,7 +66,7 @@ const DetailPayForm = () => {
           </option>
         ))}
       </DropDown>
-    </>
+    </DetailPayFormWrap>
   );
 };
 
