@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useAtom } from "jotai";
 import { levelAtom, progressAtom } from "../../store/atom";
 import Button from "../../components/button/Button";
+import AnimationArea from "../../components/Animation";
 import IntroMessage from "./IntroMessage";
 
 const IntroContainer = styled.div`
@@ -31,7 +32,9 @@ const Intro = () => {
   return (
     <IntroContainer>
       <IntroMessage />
-      <Button text="시작하기" onClick={handleClick} />
+      <AnimationArea $focus={level === "low"}>
+        <Button text="시작하기" onClick={handleClick} />
+      </AnimationArea>
     </IntroContainer>
   );
 };
