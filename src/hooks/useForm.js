@@ -4,7 +4,6 @@ import { cardAnswerAtom } from "../store/atom";
 
 export const useForm = (correctNum) => {
   const cardAnswer = useAtomValue(cardAnswerAtom);
-  console.log(cardAnswer);
 
   const answerList = {
     PayMethodForm: "신용카드",
@@ -18,7 +17,7 @@ export const useForm = (correctNum) => {
     cvc: cardAnswer[5]
   };
   // 사용자가 입력한 답
-  const [response, setResponse] = useState({});
+  const [, setResponse] = useState({});
   const [correctList, setCorrectList] = useState({});
 
   const handleChange = (e) => {

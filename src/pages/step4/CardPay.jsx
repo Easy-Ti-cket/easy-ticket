@@ -5,7 +5,6 @@ import { useForm } from "../../hooks/useForm";
 import Button from "../../components/button/Button";
 import { useAtomValue } from "jotai";
 import { cardAnswerAtom } from "../../store/atom";
-import { useEffect, useState } from "react";
 import { Step4Container } from "./SelectPayMethod";
 
 const CardPayWrap = styled(Step4Container)`
@@ -27,11 +26,9 @@ const Highlight = styled.span`
 
 const CardPay = () => {
   //useForm 훅에 정답 개수 전달, correctList가 정답 개수에 다다를 경우 isAnswer true
-  const { handleChange, correctList, isAnswer } = useForm(6);
+  const { handleChange, isAnswer } = useForm(6);
   const cardAnswer = useAtomValue(cardAnswerAtom);
 
-  //확인용
-  console.log(`정답 key값: ${JSON.stringify(correctList, null, 2)}`);
   return (
     <CardPayWrap>
       <Card />
