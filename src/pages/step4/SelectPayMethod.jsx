@@ -45,13 +45,20 @@ const SelectPayMethod = () => {
       {/*결제 방식 선택 */}
       <Step4Container>
         <SubTtitle>결제 방식 선택</SubTtitle>
-        <PayMethodForm handleChange={handleChange} />
+        <PayMethodForm
+          isSelected={isPayMethodCorrect}
+          handleChange={handleChange}
+        />
       </Step4Container>
       {/*결제 수단 선택 */}
       {isPayMethodCorrect && (
         <Step4Container>
           <SubTtitle>결제 수단 선택</SubTtitle>
-          <DetailPayForm handleChange={handleChange} />
+          <DetailPayForm
+            isSelected={correctList["DetailPayForm"]}
+            isAnswer={isAnswer}
+            handleChange={handleChange}
+          />
         </Step4Container>
       )}
       {/*다음 단계 버튼 */}

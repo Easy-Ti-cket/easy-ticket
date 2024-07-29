@@ -8,10 +8,10 @@ const Input = ({
   value,
   name,
   onChange = null,
-  focus = false
+  $focus = false
 }) => {
   return (
-    <AnimationArea $focus={focus}>
+    <AnimationArea $focus={$focus}>
       {type === "text" && (
         <InputText name={name} value={value} text={text} onChange={onChange} />
       )}

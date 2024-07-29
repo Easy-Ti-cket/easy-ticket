@@ -26,8 +26,20 @@ const Highlight = styled.span`
 
 const CardPay = () => {
   //useForm 훅에 정답 개수 전달, correctList가 정답 개수에 다다를 경우 isAnswer true
-  const { handleChange, isAnswer } = useForm(6);
+  const { handleChange, correctList, isAnswer } = useForm(6);
   const cardAnswer = useAtomValue(cardAnswerAtom);
+  //focusNum 설정 - 애니메이션이 작동할 부분 설정
+  const cardKeys = ["cardNum1", "cardNum2", "cardNum3", "cardNum4"];
+  //cardNum을 다 맞혔을 경우
+  const allCardKeysPresent = cardKeys.every((key) => correctList[key]);
+  //cardNum만 - 0, cardNum + cardPassword - 1, 전부 - 2
+  const focusNum = allCardKeysPresent
+    ? correctList["cardPassword"]
+      ? correctList["cvc"]
+        ? null
+        : 2
+      : 1
+    : 0;
 
   return (
     <CardPayWrap>
@@ -36,7 +48,7 @@ const CardPay = () => {
         카드 비밀번호는 <Highlight>{cardAnswer[4]}</Highlight> 입니다
       </span>
       <CardFormContainer>
-        <CardForm handleChange={handleChange} />
+        <CardForm focusNum={focusNum} handleChange={handleChange} />
       </CardFormContainer>
       {/*다음단계 버튼을 누르면 step5로 이동 */}
       {isAnswer && <Button text="다음 단계" />}
