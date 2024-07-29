@@ -36,4 +36,4 @@ export const cardAnswerAtom = atom([]);
 export const userNameAtom = atom("");
 
 //연습모드 완료 횟수
-export const practiceCountAtom = atomWithStorage("practiceCount", 8);
+export const practiceCountAtom = atomWithStorage("practiceCount", 0);
