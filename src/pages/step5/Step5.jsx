@@ -36,6 +36,11 @@ const PracticeMessage = styled.p`
   margin-bottom: 40px;
 `;
 
+const ButtonWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+`;
+
 const Step5 = () => {
   const [, setLevel] = useAtom(levelAtom);
   const [, setProgress] = useAtom(progressAtom);
@@ -59,12 +64,14 @@ const Step5 = () => {
     <Step5Container>
       <SuccessMessage>예매 성공!</SuccessMessage>
       <PracticeMessage>다시 연습하시겠습니까?</PracticeMessage>
-      <Button text="다시 연습하기" onClick={handlePracticeModeClick} />
-      <Button
-        text="실전모드 도전하기"
-        type="outline"
-        onClick={handleChallengeModeClick}
-      />
+      <ButtonWrapper>
+        <Button text="다시 연습하기" onClick={handlePracticeModeClick} />
+        <Button
+          text="실전모드 도전하기"
+          type="outline"
+          onClick={handleChallengeModeClick}
+        />
+      </ButtonWrapper>
     </Step5Container>
   );
 };
