@@ -33,3 +33,6 @@ export const cardAnswerAtom = atom([]);
 
 //사용자 이름
 export const userNameAtom = atom("");
+
+//연습모드 완료 횟수
+export const practiceCountAtom = atom(3);

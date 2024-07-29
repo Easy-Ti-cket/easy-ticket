@@ -2,8 +2,8 @@ import Button from "../../components/button/Button";
 import styled from "styled-components";
 import Tooltip from "../../components/tooltip/Tooltip";
 import AnimationArea from "../../components/Animation";
-import { useAtom } from "jotai";
-import { levelAtom } from "../../store/atom";
+import { useSetAtom, useAtomValue } from "jotai";
+import { levelAtom, practiceCountAtom } from "../../store/atom";
 import { useNavigate } from "react-router-dom";
 
 const SelectLevelContainer = styled.div`
@@ -29,13 +29,10 @@ const ButtonBox = styled.div`
 `;
 
 const SelectLevel = () => {
-  const [level, setLevel] = useAtom(levelAtom);
+  const setLevel = useSetAtom(levelAtom);
+  const PracticeCount = useAtomValue(practiceCountAtom);
 
-  const levels = [
-    { text: "초급", tooltip: "이 단계를 추천해요!", focus: true },
-    { text: "중급", focus: false },
-    { text: "고급", focus: false }
-  ];
+  const levels = ["초급", "중급", "고급"];
   const nav = useNavigate();
   const handleClick = (e) => {
     setLevel(
@@ -47,6 +44,13 @@ const SelectLevel = () => {
     );
     nav("/progress/step0");
   };
+
+  const recommenedLevel =
+    PracticeCount < 5
+      ? "초급"
+      : PracticeCount >= 5 && PracticeCount < 10
+        ? "중급"
+        : "고급";
   return (
     <SelectLevelContainer>
       <Instructions>
@@ -54,11 +58,11 @@ const SelectLevel = () => {
         선택해주세요
       </Instructions>
       <ButtonContainer>
-        {levels.map(({ text, tooltip, focus }) => (
+        {levels.map((text) => (
           <ButtonBox key={text}>
-            {tooltip ? (
-              <Tooltip text={tooltip}>
-                <AnimationArea $focus={focus}>
+            {text == recommenedLevel ? (
+              <Tooltip text={"이 단계를 추천해요!"}>
+                <AnimationArea $focus={true}>
                   <Button
                     type="mode"
                     text={text}
@@ -67,7 +71,7 @@ const SelectLevel = () => {
                 </AnimationArea>
               </Tooltip>
             ) : (
-              <AnimationArea $focus={focus}>
+              <AnimationArea $focus={false}>
                 <Button type="mode" text={text} onClick={handleClick}></Button>
               </AnimationArea>
             )}
