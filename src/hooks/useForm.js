@@ -1,8 +1,8 @@
 import { useAtomValue } from "jotai";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { cardAnswerAtom } from "../store/atom";
 
-export const useForm = () => {
+export const useForm = (correctNum) => {
   const cardAnswer = useAtomValue(cardAnswerAtom);
   console.log(cardAnswer);
 
@@ -27,12 +27,21 @@ export const useForm = () => {
       const newResponse = { ...prev, [name]: value };
 
       // 정답과 답변이 같을 경우
-      if (answerList[name] === value) {
+      //cardNum은 string으로 값을 받으므로 정답을 string으로 변환하여 대조
+      if (String(answerList[name]) === value) {
         setCorrectList((prev) => ({ ...prev, [name]: true }));
       }
       return newResponse;
     });
   };
+  //해당 페이지 모든 답안을 맞혔을 경우 isAnswer true
+  const [isAnswer, setIsAnswer] = useState(false);
+  useEffect(() => {
+    //useForm에 입력한 정답 개수 기반 페이지 전체가 정답인지 판정
+    if (Object.keys(correctList).length === correctNum) {
+      setIsAnswer(true);
+    }
+  }, [correctList]);
 
-  return { handleChange, response, correctList };
+  return { handleChange, correctList, isAnswer };
 };

@@ -3,7 +3,6 @@ import Input from "../input/Input";
 import { InputContainer, InputField, Label } from "../input/InputStyle";
 import AnimationArea from "../Animation";
 import { FormWrap } from "./FormStyle";
-import { useForm } from "../../hooks/useForm";
 
 const CardInputFied = styled(InputField)`
   width: 40px;

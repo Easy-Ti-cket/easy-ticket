@@ -12,7 +12,9 @@ const Input = ({
 }) => {
   return (
     <AnimationArea $focus={focus}>
-      {type === "text" && <InputText text={text} onChange={onChange} />}
+      {type === "text" && (
+        <InputText name={name} value={value} text={text} onChange={onChange} />
+      )}
       {type === "radio" && (
         <InputRadio name={name} value={value} text={text} onChange={onChange} />
       )}

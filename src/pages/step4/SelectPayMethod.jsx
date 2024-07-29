@@ -6,13 +6,13 @@ import { useEffect, useState } from "react";
 import Button from "../../components/button/Button";
 import { useNavigate } from "react-router-dom";
 
-const Step4Wrap = styled.div`
+const SelectPayWrap = styled.div`
   display: inline-flex;
   gap: 67px;
   position: relative;
   padding: 20px;
 `;
-const Step4Container = styled.div`
+export const Step4Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -40,11 +40,7 @@ const SelectPayMethod = () => {
   //페이지 모든 답안을 맞았을 경우
   const [isAnswer, setIsAnswer] = useState(false);
   useEffect(() => {
-    if (
-      correctList["PayMethodForm"] &&
-      correctList["DetailPayForm"] &&
-      correctList["CardTypes"]
-    ) {
+    if (Object.keys(correctList).length === 3) {
       setIsAnswer(true);
     }
   }, [correctList]);
@@ -52,7 +48,7 @@ const SelectPayMethod = () => {
   const navigate = useNavigate();
 
   return (
-    <Step4Wrap>
+    <SelectPayWrap>
       {/*결제 방식 선택 */}
       <Step4Container>
         <SubTtitle>결제 방식 선택</SubTtitle>
@@ -74,7 +70,7 @@ const SelectPayMethod = () => {
           />
         </BtnWrap>
       )}
-    </Step4Wrap>
+    </SelectPayWrap>
   );
 };
 

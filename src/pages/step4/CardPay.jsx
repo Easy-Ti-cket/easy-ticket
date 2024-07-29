@@ -1,9 +1,16 @@
 import styled from "styled-components";
 import Card from "../../components/card/Card";
 import CardForm from "../../components/forms/CardForm";
-import { Step4Container } from "./Step4Style";
 import { useForm } from "../../hooks/useForm";
 import Button from "../../components/button/Button";
+import { useAtomValue } from "jotai";
+import { cardAnswerAtom } from "../../store/atom";
+import { useEffect, useState } from "react";
+import { Step4Container } from "./SelectPayMethod";
+
+const CardPayWrap = styled(Step4Container)`
+  align-items: center;
+`;
 
 const CardFormContainer = styled.div`
   width: 100%;
@@ -12,17 +19,31 @@ const CardFormContainer = styled.div`
   align-items: center;
   padding: 20px;
 `;
-const CardPay = () => {
-  const { handleChange, correctList } = useForm();
 
+const Highlight = styled.span`
+  margin: 0 10px;
+  color: var(--key-color);
+`;
+
+const CardPay = () => {
+  //useForm 훅에 정답 개수 전달, correctList가 정답 개수에 다다를 경우 isAnswer true
+  const { handleChange, correctList, isAnswer } = useForm(6);
+  const cardAnswer = useAtomValue(cardAnswerAtom);
+
+  //확인용
+  console.log(`정답 key값: ${JSON.stringify(correctList, null, 2)}`);
   return (
-    <Step4Container>
+    <CardPayWrap>
       <Card />
+      <span>
+        카드 비밀번호는 <Highlight>{cardAnswer[4]}</Highlight> 입니다
+      </span>
       <CardFormContainer>
         <CardForm handleChange={handleChange} />
       </CardFormContainer>
-      <Button text="다음 단계" />
-    </Step4Container>
+      {/*다음단계 버튼을 누르면 step5로 이동 */}
+      {isAnswer && <Button text="다음 단계" />}
+    </CardPayWrap>
   );
 };
 
