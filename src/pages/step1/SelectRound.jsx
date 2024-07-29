@@ -55,19 +55,26 @@ const SelectRound = () => {
     setLevel(currentLevel);
     setProgress(1);
     if (currentLevel === "low") {
-      setPosterId(0);
+      setPosterId(0); // 초급일 경우 고정
     } else {
-      setPosterId(selectedPoster);
+      setPosterId(selectedPoster); // 나머지 경우 포스터 선택 가능
     }
   }, [currentLevel, setLevel, setProgress, selectedPoster]);
 
-  // 특정 날짜로 고정하여 정답 설정
+  // 날짜 정답 지정
   const handleDateSelect = (formattedDate) => {
-    if (currentLevel === "low" && formattedDate === "2024-07-26") {
+    const correctDate = {
+      0: "2024-07-26",
+      1: "2024-06-30",
+      2: "2024-08-11",
+      3: "2024-07-27"
+    }[posterId];
+
+    if (formattedDate === correctDate) {
       setDateSelected(true);
       setAnimationStep(1);
-    } else if (currentLevel === "low") {
-      alert("날짜를 다시 선택하세요.");
+    } else {
+      alert("날짜를 다시 선택해주세요.");
     }
   };
 
@@ -76,12 +83,12 @@ const SelectRound = () => {
       setRoundSelected(true);
       setAnimationStep(2);
     } else {
-      alert("먼저 7월 26일 날짜를 선택해주세요.");
+      alert("먼저 올바른 날짜를 선택해주세요.");
     }
   };
 
   const handleReserveClick = () => {
-    if (currentLevel === "low" && !roundSelected) {
+    if (!roundSelected) {
       alert("먼저 회차를 선택해주세요.");
       return;
     }
