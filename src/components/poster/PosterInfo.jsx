@@ -6,7 +6,7 @@ import { postersAtom, levelAtom } from "../../store/atom";
 
 // 공연 제목
 const PosterTitle = styled.h2`
-  font-family: "pretendardS";
+  font-family: "pretendardB";
   font-size: 24px;
   font-weight: 600;
   line-height: normal;
