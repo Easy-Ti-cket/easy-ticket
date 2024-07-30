@@ -16,6 +16,8 @@ const TimerContainer = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: center;
+  margin: 10px 0; //  프로그래스바와 텍스트박스 사이 상하 간격 추가
 `;
 
 // 아이콘 스타일 지정

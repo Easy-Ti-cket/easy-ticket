@@ -1,8 +1,10 @@
+// App.js
 import React from "react";
-import SeatSection from "./components/seatSection/SeatSection";
+
+import { RouterProvider } from "react-router-dom";
+import router from "./routes";
 
 function App() {
-  return <SeatSection />;
-}
+  return <RouterProvider router={router} />;
 
 export default App;
