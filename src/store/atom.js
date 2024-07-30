@@ -40,3 +40,6 @@ export const allowedSeatAtom = atom({
 
 //좌석 선택 여부 상태
 export const isSeatSelectedAtom = atom(false);
+
+//구역 선택
+export const allowedSectionAtom = atom(getRandomInt(1, 4));
