@@ -15,6 +15,7 @@ const PayMethodForm = ({ handleChange, isSelected }) => {
   //level에 따라 animation 설정
   const level = useAtomValue(levelAtom);
 
+
   return (
     <FormWrap>
       {textArr.map((methodItem, index) => (

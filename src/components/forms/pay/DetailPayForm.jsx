@@ -4,7 +4,6 @@ import Input from "../../input/Input";
 import { useAtomValue } from "jotai";
 import { levelAtom } from "../../../store/atom";
 import AnimationArea from "../../Animation";
-
 const DetailPayFormWrap = styled(FormWrap)`
   flex-direction: row;
 `;

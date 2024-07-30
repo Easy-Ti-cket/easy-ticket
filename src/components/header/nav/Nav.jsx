@@ -38,8 +38,8 @@ const NavContent = styled.li`
   //조건부 css : 마우스 hover 네비게이터는 서브네비게이터가 사라지기 전까지 css 유지
   //1) 현재 sideNavigator 영역까지 포함됐을 때 hovered상태인가?
   //2) 해당 navigator가 hovered상태인가?
-  color: ${({ ishovered, isactive }) =>
-    ishovered && isactive ? "var(--key-color)" : "var(--text-color)"};
+  color: ${({ $ishovered, $isactive }) =>
+    $ishovered && $isactive ? "var(--key-color)" : "var(--text-color)"};
 
   &::after {
     content: "";
@@ -51,9 +51,9 @@ const NavContent = styled.li`
     background-color: var(--key-color);
     border-radius: 50px;
     transition: height 0.1s ease;
-    ${({ isactive, ishovered }) =>
-      isactive &&
-      ishovered &&
+    ${({ $isactive, $ishovered }) =>
+      $isactive &&
+      $ishovered &&
       css`
         height: 4px;
       `};
@@ -80,22 +80,22 @@ const Nav = () => {
         {/* 네비게이터 */}
         <NavContainer>
           <NavContent
-            ishovered={ishovered}
-            isactive={hovereditem === "연습모드"}
+            $ishovered={ishovered}
+            $isactive={hovereditem === "연습모드"}
             onMouseEnter={() => handleHoveredItemEnter("연습모드")}
           >
             연습 모드
           </NavContent>
           <NavContent
-            ishovered={ishovered}
-            isactive={hovereditem === "실전모드"}
+            $ishovered={ishovered}
+            $isactive={hovereditem === "실전모드"}
             onMouseEnter={() => handleHoveredItemEnter("실전모드")}
           >
             실전 모드
           </NavContent>
           <NavContent
-            ishovered={ishovered}
-            isactive={hovereditem === null}
+            $ishovered={ishovered}
+            $isactive={hovereditem === null}
             onMouseEnter={() => handleHoveredItemEnter(null)}
           >
             내 기록 보기
