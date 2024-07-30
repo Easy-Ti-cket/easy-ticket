@@ -43,3 +43,5 @@ export const isSeatSelectedAtom = atom(false);
 
 //구역 선택
 export const allowedSectionAtom = atom(getRandomInt(1, 4));
+
+export const userNameAtom = atom("");

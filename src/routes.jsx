@@ -5,13 +5,15 @@ import Intro from "./pages/step0/Intro";
 import SelectPerformance from "./pages/step1/SelectPerformance";
 import SelectRound from "./pages/step1/SelectRound";
 import ProgressContents from "./pages/ProgressContents";
+import Main from "./pages/main/Main";
 import Step5 from "./pages/step5/Step5";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <Layout></Layout>,
+    element: <Layout />,
     children: [
+      { path: "main", element: <Main /> },
       {
         path: "progress",
         element: <ProgressContents />,
