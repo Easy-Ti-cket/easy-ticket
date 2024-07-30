@@ -10,12 +10,9 @@ const SelectPerformance = () => {
   const [, setProgress] = useAtom(progressAtom);
   const navigate = useNavigate();
 
-  setLevel("high");
-  setProgress(1);
-
   const handlePosterClick = (posterId) => {
     setSelectedPoster(posterId);
-    navigate("/step1-2");
+    navigate("/progress/step1-2");
   };
 
   return <PosterList onPosterClick={handlePosterClick} />;
