@@ -5,7 +5,7 @@ import { useAtom } from "jotai";
 import { levelAtom, progressAtom } from "../../store/atom";
 import Button from "../../components/button/Button";
 import AnimationArea from "../../components/Animation";
-import IntroMessage from "./IntroMessage";
+import IntroMessage from "./introMessage/IntroMessage";
 
 const IntroContainer = styled.div`
   display: flex;
