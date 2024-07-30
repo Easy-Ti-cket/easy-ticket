@@ -10,6 +10,7 @@ import SelectRound from "./pages/practiceMode/step1/SelectRound";
 import SelectPayMethod from "./pages/practiceMode/step4/SelectPayMethod";
 import CardPay from "./pages/practiceMode/step4/CardPay";
 import Step5 from "./pages/practiceMode/step5/Step5";
+import SelectSeat from "./pages/practiceMode/step2/SelectSeat";
 
 const router = createBrowserRouter([
   {
@@ -37,6 +38,7 @@ const router = createBrowserRouter([
             element: <SelectRound />,
             label: "날짜 및 회차 선택"
           },
+          { path: "step2", element: <SelectSeat />, label: "좌석 선택" },
           {
             path: "step4-1",
             element: <SelectPayMethod />,
