@@ -1,7 +1,11 @@
 import React from "react";
 import { useAtom } from "jotai";
-import { levelAtom } from "../../store/atom";
-import { LowLevelText, MiddleLevelText, HighLevelText } from "./IntroText";
+import { levelAtom } from "../../../store/atom";
+import {
+  LowLevelText,
+  MiddleLevelText,
+  HighLevelText
+} from "../introMessage/introText/IntroText";
 
 const IntroMessage = () => {
   const [level] = useAtom(levelAtom);

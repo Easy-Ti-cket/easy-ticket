@@ -30,3 +30,16 @@ export const selectedPosterAtom = atom(0);
 
 //카드번호 정답
 export const cardAnswerAtom = atom([]);
+
+//보라색 좌석 위치 상태
+export const allowedSeatAtom = atom({
+  gridIndex: getRandomInt(0, 3),
+  row: getRandomInt(0, 4),
+  col: getRandomInt(0, 4)
+});
+
+//좌석 선택 여부 상태
+export const isSeatSelectedAtom = atom(false);
+
+//구역 선택
+export const allowedSectionAtom = atom(getRandomInt(1, 4));
