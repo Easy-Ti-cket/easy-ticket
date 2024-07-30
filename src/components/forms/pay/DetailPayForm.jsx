@@ -1,7 +1,9 @@
 import styled from "styled-components";
 import { FormWrap } from "../FormStyle";
 import Input from "../../input/Input";
-import { useForm } from "../../../hooks/useForm";
+import { useAtomValue } from "jotai";
+import { levelAtom } from "../../../store/atom";
+import AnimationArea from "../../Animation";
 const DetailPayFormWrap = styled(FormWrap)`
   flex-direction: row;
 `;
@@ -37,14 +39,14 @@ const optionArr = [
   "신한카드",
   "롯데카드"
 ];
-const DetailPayForm = () => {
-  const { handleChange, answer } = useForm();
-  //삭제 예정 ) 정답 확인
-  console.log(answer);
+//isSelected : 선택되었는가?
+//드롭다운은 '결제수단'은 선택됐지만 '페이지 전체 정답'이 아닌 경우 애니메이션
+const DetailPayForm = ({ handleChange, isSelected, isAnswer }) => {
+  const level = useAtomValue(levelAtom);
   return (
     <DetailPayFormWrap>
       <FormWrap>
-        {textArr.map((payItem) => (
+        {textArr.map((payItem, index) => (
           <Input
             name="DetailPayForm"
             key={payItem}
@@ -52,20 +54,23 @@ const DetailPayForm = () => {
             value={payItem}
             text={payItem}
             onChange={handleChange}
+            $focus={level !== "high" && index == 0 && !isSelected}
           />
         ))}
       </FormWrap>
-      <DropDown name="CardTypes" onChange={handleChange}>
-        {/*드롭다운의 placeholder역할 */}
-        <option value="" disabled>
-          카드 종류를 선택해 주세요
-        </option>
-        {optionArr.map((optionItem) => (
-          <option key={optionItem} value={optionItem}>
-            {optionItem}
+      <AnimationArea $focus={isSelected && !isAnswer}>
+        <DropDown name="CardTypes" onChange={handleChange}>
+          {/*드롭다운의 placeholder역할 */}
+          <option value="" disabled>
+            카드 종류를 선택해 주세요
           </option>
-        ))}
-      </DropDown>
+          {optionArr.map((optionItem) => (
+            <option key={optionItem} value={optionItem}>
+              {optionItem}
+            </option>
+          ))}
+        </DropDown>
+      </AnimationArea>
     </DetailPayFormWrap>
   );
 };
