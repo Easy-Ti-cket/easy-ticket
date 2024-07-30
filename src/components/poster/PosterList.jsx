@@ -7,7 +7,7 @@ import AnimationArea from "../Animation";
 
 // 공연 제목
 const PosterTitle = styled.h2`
-  font-family: "pretendardS";
+  font-family: "pretendardB";
   font-size: 20px;
   font-weight: 600;
   text-align: left;
