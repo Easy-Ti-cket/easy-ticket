@@ -1,14 +1,22 @@
 import { useState } from "react";
 import { StyledCalendar, StyledCalendarWrapper } from "./calenderStyles";
 
-const SelectCalender = () => {
+const SelectCalender = ({ onDateSelect }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
-  // console.log(selectedDate); //date 받아옴, 삭제 예정
+
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+    const offsetDate = new Date(
+      date.getTime() - date.getTimezoneOffset() * 60000 // 로컬 타임으로 변경
+    );
+    const formattedDate = offsetDate.toISOString().split("T")[0]; // 날짜를 "YYYY-MM-DD" 형식으로 포맷팅
+    onDateSelect(formattedDate); // 부모 컴포넌트로 날짜 전달
+  };
 
   return (
     <StyledCalendarWrapper>
       <StyledCalendar
-        onChange={setSelectedDate}
+        onChange={handleDateChange}
         value={selectedDate}
         calendarType="gregory"
         view="month"
@@ -18,7 +26,6 @@ const SelectCalender = () => {
         next2Label={null}
         showNeighboringMonth={false}
         formatDay={(_, date) =>
-          //xx일 -> xx 으로 format 변경
           new Date(date).toLocaleDateString("en-us", {
             day: "2-digit"
           })
@@ -32,4 +39,5 @@ const SelectCalender = () => {
     </StyledCalendarWrapper>
   );
 };
+
 export default SelectCalender;
