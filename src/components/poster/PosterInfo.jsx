@@ -2,11 +2,11 @@ import React from "react";
 import styled from "styled-components";
 import Poster from "./Poster";
 import { useAtom } from "jotai";
-import { postersAtom } from "../../store/atom";
+import { postersAtom, levelAtom } from "../../store/atom";
 
 // 공연 제목
 const PosterTitle = styled.h2`
-  font-family: PretendardS;
+  font-family: "pretendardB";
   font-size: 24px;
   font-weight: 600;
   line-height: normal;
@@ -17,18 +17,18 @@ const PosterTitle = styled.h2`
 
 // 공연 장소
 const PosterVenue = styled.div`
-  font-family: PretendardR;
-  font-size: 18px;
-  margin: 8px 4px;
+  font-family: "pretendardR";
+  font-size: 16px;
+  margin: 4px 8px;
   color: var(--text-color);
   width: 100%;
 `;
 
-// 공연 시간
+// 공연 시간 및 관람 등급
 const PosterTime = styled.div`
-  font-family: PretendardR;
-  font-size: 18px;
-  margin: 8px 4px;
+  font-family: "pretendardR";
+  font-size: 16px;
+  margin: 4px 8px;
   color: var(--text-color);
   width: 100%;
 `;
@@ -45,10 +45,11 @@ const PosterContainer = styled.div`
 
 const PosterInfo = ({ id }) => {
   const [posters] = useAtom(postersAtom);
+  const [level] = useAtom(levelAtom);
   const poster = posters[id];
 
   return (
-    <PosterContainer key={poster.id}>
+    <PosterContainer>
       <PosterTitle>{poster.title_ko}</PosterTitle>
       <Poster id={id} />
       <PosterVenue>장소: {poster.venue}</PosterVenue>

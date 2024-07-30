@@ -30,7 +30,7 @@ const Instructions = styled.p`
 const InputGroup = styled.div`
   display: flex;
   align-items: center;
-  margin: 20px 0 30px 0;
+  margin: 60px 0 10px 0;
   font-size: 25px;
 `;
 
