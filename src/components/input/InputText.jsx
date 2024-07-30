@@ -1,11 +1,16 @@
 import { InputContainer, InputField, Label } from "./InputStyle";
 
 /*props별 기본값 설정*/
-const InputText = ({ text = "add text", onChange }) => {
+const InputText = ({ name, value, text = "add text", onChange }) => {
   return (
     <InputContainer>
       <Label htmlFor="textInput">{text}</Label>
-      <InputField id="textInput" onChange={onChange} />
+      <InputField
+        name={name}
+        value={value}
+        id="textInput"
+        onChange={onChange}
+      />
     </InputContainer>
   );
 };

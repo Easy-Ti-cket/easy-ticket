@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import useRandomNum from "../../hooks/useRandomNum"; // randomNum 훅 사용
 import HorizonFront from "./settings/horizontal/HorizonFront";
@@ -14,20 +14,25 @@ const Wrap = styled.div`
 const Card = () => {
   const { cardNumbers } = useRandomNum(); // useRandomNum 훅 호출
   //0 또는 1 선택 - 카드 타입 랜덤 선택
-  const cardType = Math.floor(Math.random() * 2);
+  const [cardType, setCardType] = useState(null);
+  useEffect(() => {
+    // 컴포넌트 마운트 시 카드 타입을 설정
+    setCardType(Math.floor(Math.random() * 2));
+  }, []);
+
   return (
     <Wrap>
       {cardType === 1 ? (
         <>
           <HorizonFront numbers={cardNumbers.slice(0, 4)} />
-          <HorizonBack cvc={cardNumbers.slice(4)} />
+          <HorizonBack cvc={cardNumbers.slice(5)} />
         </>
       ) : (
         <>
           <VerticalFront />
           <VerticalBack
             numbers={cardNumbers.slice(0, 4)}
-            cvc={cardNumbers.slice(4)}
+            cvc={cardNumbers.slice(5)}
           />
         </>
       )}

@@ -1,5 +1,5 @@
 import React from "react";
-import { createBrowserRouter, Outlet } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
 import Layout from "./pages/Layout";
 import Intro from "./pages/step0/Intro";
 import SelectPerformance from "./pages/step1/SelectPerformance";
@@ -8,6 +8,8 @@ import ProgressContents from "./pages/ProgressContents";
 import Main from "./pages/main/Main";
 import SelectLevel from "./pages/selectLevel/SelectLevel";
 import Step5 from "./pages/step5/Step5";
+import SelectPayMethod from "./pages/step4/SelectPayMethod";
+import CardPay from "./pages/step4/CardPay";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +37,16 @@ const router = createBrowserRouter([
           {
             path: "step5",
             element: <Step5 />
+          },
+          {
+            path: "step4-1",
+            element: <SelectPayMethod />,
+            label: "결제방식 / 수단 선택"
+          },
+          {
+            path: "step4-2",
+            element: <CardPay />,
+            label: "카드 결제창"
           }
         ]
       }
