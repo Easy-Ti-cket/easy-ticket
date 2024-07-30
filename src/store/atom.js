@@ -1,4 +1,5 @@
 import { atom } from "jotai";
+import { atomWithStorage } from "jotai/utils";
 import posters from "../components/poster/poster.json";
 import getRandomInt from "../util/getRandomInt";
 
@@ -45,3 +46,6 @@ export const isSeatSelectedAtom = atom(false);
 export const allowedSectionAtom = atom(getRandomInt(1, 4));
 
 export const userNameAtom = atom("");
+
+//연습모드 완료 횟수
+export const practiceCountAtom = atomWithStorage("practiceCount", 0);

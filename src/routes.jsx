@@ -6,6 +6,7 @@ import SelectPerformance from "./pages/step1/SelectPerformance";
 import SelectRound from "./pages/step1/SelectRound";
 import ProgressContents from "./pages/ProgressContents";
 import Main from "./pages/main/Main";
+import SelectLevel from "./pages/selectLevel/SelectLevel";
 import Step5 from "./pages/step5/Step5";
 
 const router = createBrowserRouter([
@@ -14,6 +15,7 @@ const router = createBrowserRouter([
     element: <Layout />,
     children: [
       { path: "main", element: <Main /> },
+      { path: "select-level", element: <SelectLevel /> },
       {
         path: "progress",
         element: <ProgressContents />,
