@@ -1,7 +1,11 @@
 import React from "react";
-import PosterList from "../../components/poster/PosterList";
+import PosterList from "../../../components/poster/PosterList";
 import { useAtom } from "jotai";
-import { selectedPosterAtom, levelAtom, progressAtom } from "../../store/atom";
+import {
+  selectedPosterAtom,
+  levelAtom,
+  progressAtom
+} from "../../../store/atom";
 import { useNavigate } from "react-router-dom";
 
 const SelectPerformance = () => {

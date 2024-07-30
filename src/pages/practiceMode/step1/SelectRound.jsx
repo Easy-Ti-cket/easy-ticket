@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
-import PosterInfo from "../../components/poster/PosterInfo";
-import SelectCalender from "../../components/calender/SelectCalender";
-import Button from "../../components/button/Button";
+import PosterInfo from "../../../components/poster/PosterInfo";
+import SelectCalender from "../../../components/calender/SelectCalender";
+import Button from "../../../components/button/Button";
 import styled from "styled-components";
 import { useAtom } from "jotai";
-import { selectedPosterAtom, levelAtom, progressAtom } from "../../store/atom";
-import AnimationArea from "../../components/Animation";
+import {
+  selectedPosterAtom,
+  levelAtom,
+  progressAtom
+} from "../../../store/atom";
+import AnimationArea from "../../../components/Animation";
 
 const Container = styled.div`
   display: flex;

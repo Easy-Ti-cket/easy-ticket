@@ -1,6 +1,6 @@
 import React from "react";
 import { useAtom } from "jotai";
-import { levelAtom } from "../../../store/atom";
+import { levelAtom } from "../../../../store/atom";
 import {
   LowLevelText,
   MiddleLevelText,

@@ -1,10 +1,10 @@
 import styled from "styled-components";
-import Card from "../../components/card/Card";
-import CardForm from "../../components/forms/CardForm";
-import { useForm } from "../../hooks/useForm";
-import Button from "../../components/button/Button";
+import Card from "../../../components/card/Card";
+import CardForm from "../../../components/forms/CardForm";
+import { useForm } from "../../../hooks/useForm";
+import Button from "../../../components/button/Button";
 import { useAtomValue } from "jotai";
-import { cardAnswerAtom } from "../../store/atom";
+import { cardAnswerAtom } from "../../../store/atom";
 import { Step4Container } from "./SelectPayMethod";
 
 const CardPayWrap = styled(Step4Container)`

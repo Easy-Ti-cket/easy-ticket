@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import Button from "../../components/button/Button";
+import Button from "../../../components/button/Button";
 import { useAtom } from "jotai";
-import { levelAtom, progressAtom } from "../../store/atom";
+import { levelAtom, progressAtom } from "../../../store/atom";
 import { useNavigate } from "react-router-dom";
 
 const Step5Container = styled.div`

@@ -1,9 +1,9 @@
-import Button from "../../components/button/Button";
+import Button from "../../../components/button/Button";
 import styled from "styled-components";
-import Tooltip from "../../components/tooltip/Tooltip";
-import AnimationArea from "../../components/Animation";
+import Tooltip from "../../../components/tooltip/Tooltip";
+import AnimationArea from "../../../components/Animation";
 import { useSetAtom, useAtomValue } from "jotai";
-import { levelAtom, practiceCountAtom } from "../../store/atom";
+import { levelAtom, practiceCountAtom } from "../../../store/atom";
 import { useNavigate } from "react-router-dom";
 
 const SelectLevelContainer = styled.div`

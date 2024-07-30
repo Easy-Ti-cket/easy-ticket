@@ -1,8 +1,8 @@
 import styled from "styled-components";
-import PayMethodForm from "../../components/forms/pay/PayMethodForm";
-import DetailPayForm from "../../components/forms/pay/DetailPayForm";
-import { useForm } from "../../hooks/useForm";
-import Button from "../../components/button/Button";
+import PayMethodForm from "../../../components/forms/pay/PayMethodForm";
+import DetailPayForm from "../../../components/forms/pay/DetailPayForm";
+import { useForm } from "../../../hooks/useForm";
+import Button from "../../../components/button/Button";
 import { useNavigate } from "react-router-dom";
 
 const SelectPayWrap = styled.div`
