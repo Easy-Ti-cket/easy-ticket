@@ -26,6 +26,8 @@ const Section = ({ num }) => {
   const handleSectionClick = () => {
     if (num == allowedSection) {
       setIsSectionSelected(true);
+    } else {
+      alert("알맞은 구역을 선택해주세요.");
     }
   };
   return (

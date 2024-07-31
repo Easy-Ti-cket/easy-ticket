@@ -43,6 +43,8 @@ const SeatInfo = () => {
   const handleButtonClick = () => {
     if (isSeatSelected) {
       nav("/progress/step3");
+    } else {
+      alert("좌석을 선택해주세요.");
     }
   };
   return (
