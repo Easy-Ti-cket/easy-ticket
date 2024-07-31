@@ -18,7 +18,7 @@ import {
   SeatPrice,
   ButtonAnimationArea
 } from "./SeatInfoStyles";
-
+import { useNavigate } from "react-router-dom";
 const SeatInfo = () => {
   const isSeatSelected = useAtomValue(isSeatSelectedAtom);
   const allowedSeat = useAtomValue(allowedSeatAtom);
@@ -30,7 +30,7 @@ const SeatInfo = () => {
     { grade: "3구역 0석", price: 49900 },
     { grade: "4구역 0석", price: 49900 }
   ];
-
+  const nav = useNavigate();
   //allowedSection이 유효한지 확인, 유효하다면 해당 구역의 좌석을 1석으로 변경
   if (allowedSection > 0 && allowedSection <= seats.length) {
     seats[allowedSection - 1].grade = `${allowedSection}구역 1석`;
@@ -40,6 +40,11 @@ const SeatInfo = () => {
   if (isSeatSelected && level == "low") {
     isFocus = true;
   }
+  const handleButtonClick = () => {
+    if (isSeatSelected) {
+      nav("/progress/step3");
+    }
+  };
   return (
     <SeatInfoContainer>
       <Header>좌석등급 / 잔여석</Header>
@@ -74,7 +79,11 @@ const SeatInfo = () => {
         </SelectedSeatsInfo>
       </SelectedSeats>
       <ButtonAnimationArea $focus={isFocus}>
-        <Button text={"좌석선택완료"} type={"select-seat"}></Button>
+        <Button
+          text={"좌석선택완료"}
+          type={"select-seat"}
+          onClick={handleButtonClick}
+        ></Button>
       </ButtonAnimationArea>
     </SeatInfoContainer>
   );
