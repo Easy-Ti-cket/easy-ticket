@@ -42,6 +42,7 @@ export const allowedSeatAtom = atom({
 //좌석 선택 여부 상태
 export const isSeatSelectedAtom = atom(false);
 
+//구역 선택 여부 상태
 export const isSectionSelectedAtom = atom(false);
 
 //구역 선택
