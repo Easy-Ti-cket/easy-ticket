@@ -76,9 +76,9 @@ const MyBookingInfo = () => {
     { title: "배송비", content: delivery ? "3000원" : "0원" },
     { title: "쿠폰할인", content: "0원" }
   ];
-  // const nav = useNavigate();
+  const nav = useNavigate();
   const handleButtonClick = () => {
-    // nav("/progress/step4-1");
+    nav("/progress/step4-1");
   };
 
   return (
