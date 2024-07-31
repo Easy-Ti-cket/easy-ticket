@@ -1,4 +1,4 @@
-/* 디폴트(이전, 다음 단계) */
+/* 디폴트(다음 단계) */
 .button {
   display: flex;
   width: 180px;
@@ -21,6 +21,17 @@
   transition: 0.8s ease;
 }
 
+/*이전 단계*/
+.button--prev {
+  background-color: var(--sub-color);
+  border: 1px solid var(--key-color);
+  color: var(--key-color);
+}
+.button--prev:hover {
+  background-color: var(--sub-color);
+  border: 1px solid var(--key-color);
+  color: var(--key-color);
+}
 /* 좌석 선택 */
 .button--select-seat {
   width: 285px;
