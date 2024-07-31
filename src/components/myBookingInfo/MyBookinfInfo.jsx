@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Button from "../button/Button";
 import Animation from "../Animation";
-import { allowedSeatAtom } from "../../store/atom";
+import { allowedSeatAtom, isDeliverySelectedAtom } from "../../store/atom";
 import { useAtomValue } from "jotai";
 import { useNavigate } from "react-router-dom";
 
@@ -63,6 +63,7 @@ const NextAnimation = styled(Animation)`
 `;
 const MyBookingInfo = () => {
   const allowedSeat = useAtomValue(allowedSeatAtom);
+  const delivery = useAtomValue(isDeliverySelectedAtom);
   const Info = [
     // 공연 날짜 Atom 필요
     { title: "일시", content: "2024년 6월 29일(토) 14:00" },
@@ -72,12 +73,12 @@ const MyBookingInfo = () => {
     },
     { title: "티켓금액", content: "99000원" },
     { title: "수수료", content: "2000원" },
-    { title: "쿠폰할인", content: "0원" },
-    { title: "포인트할인", content: "0원" }
+    { title: "배송비", content: delivery ? "3000원" : "0원" },
+    { title: "쿠폰할인", content: "0원" }
   ];
-  const nav = useNavigate();
+  // const nav = useNavigate();
   const handleButtonClick = () => {
-    nav("/progress/step4-1");
+    // nav("/progress/step4-1");
   };
 
   return (
@@ -93,7 +94,7 @@ const MyBookingInfo = () => {
       </InfoContatiner>
       <TotalAmount>
         <AmountTitle>총 결제금액</AmountTitle>
-        <AmountContent>101000원</AmountContent>
+        <AmountContent>{delivery ? "104000원" : "101000원"}</AmountContent>
       </TotalAmount>
       <ButtonContainer>
         <PaddingContainer>
