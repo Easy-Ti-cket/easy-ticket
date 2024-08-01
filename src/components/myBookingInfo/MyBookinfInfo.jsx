@@ -85,7 +85,7 @@ const MyBookingInfo = () => {
     { title: "쿠폰할인", price: 0 }
   ];
 
-  // const nav = useNavigate();
+  const nav = useNavigate();
   const handleButtonClick = () => {
     if (seatCount === 0) {
       alert("좌석을 선택해주세요.");
@@ -96,7 +96,7 @@ const MyBookingInfo = () => {
       return;
     }
     if (buttonText === "결제하기") {
-      // nav("/progress/step4-1");
+      nav("/progress/step4-1");
     }
   };
   const totalAmount = Info.reduce((acc, currentValue) => {
