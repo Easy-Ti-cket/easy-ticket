@@ -49,3 +49,6 @@ export const userNameAtom = atom("");
 
 //연습모드 완료 횟수
 export const practiceCountAtom = atomWithStorage("practiceCount", 0);
+
+//좌석 매수 개수
+export const seatCountAtom = atom(0);
