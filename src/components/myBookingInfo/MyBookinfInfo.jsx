@@ -86,16 +86,20 @@ const MyBookingInfo = () => {
   ];
 
   const nav = useNavigate();
+
   // 버튼 클릭 이벤트
   const handleButtonClick = () => {
+    // 좌석 매수가 0일 경우 경고창 출력
     if (seatCount === 0) {
       alert("좌석을 선택해주세요.");
       return;
     }
+    // 매수가 1 이상이고 버튼이 다음 단계일 경우 결제하기로 변경
     if (seatCount > 0 && buttonText === "다음 단계") {
       setButtonText("결제하기");
       return;
     }
+    // 버튼이 결제하기일 경우 step4-1로 이동
     if (buttonText === "결제하기") {
       nav("/progress/step4-1");
     }
