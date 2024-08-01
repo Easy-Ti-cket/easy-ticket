@@ -128,7 +128,7 @@ const MyBookingInfo = () => {
       </InfoContatiner>
       <TotalAmount>
         <AmountTitle>총 결제금액</AmountTitle>
-        <AmountContent>{totalAmount}</AmountContent>
+        <AmountContent>{totalAmount}원</AmountContent>
       </TotalAmount>
       <ButtonContainer>
         <PaddingContainer>
