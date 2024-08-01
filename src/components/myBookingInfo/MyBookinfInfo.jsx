@@ -86,6 +86,7 @@ const MyBookingInfo = () => {
   ];
 
   const nav = useNavigate();
+  // 버튼 클릭 이벤트
   const handleButtonClick = () => {
     if (seatCount === 0) {
       alert("좌석을 선택해주세요.");
