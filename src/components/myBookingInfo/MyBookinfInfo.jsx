@@ -1,8 +1,13 @@
 import styled from "styled-components";
 import Button from "../button/Button";
 import Animation from "../Animation";
-import { allowedSeatAtom, isDeliverySelectedAtom } from "../../store/atom";
+import {
+  allowedSeatAtom,
+  isDeliverySelectedAtom,
+  seatCountAtom
+} from "../../store/atom";
 import { useAtomValue } from "jotai";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
@@ -64,22 +69,49 @@ const NextAnimation = styled(Animation)`
 const MyBookingInfo = () => {
   const allowedSeat = useAtomValue(allowedSeatAtom);
   const delivery = useAtomValue(isDeliverySelectedAtom);
+  const seatCount = useAtomValue(seatCountAtom);
+  const [buttonText, setButtonText] = useState("다음 단계");
+  const [focus, setFocus] = useState(false);
   const Info = [
-    // 공연 날짜 Atom 필요
+    // 공연 날짜 및 시간
     { title: "일시", content: "2024년 6월 29일(토) 14:00" },
     {
       title: "선택좌석(1석)",
       content: `${allowedSeat.row + 1}열-${allowedSeat.col + 1}`
     },
-    { title: "티켓금액", content: "99000원" },
-    { title: "수수료", content: "2000원" },
-    { title: "배송비", content: delivery ? "3000원" : "0원" },
-    { title: "쿠폰할인", content: "0원" }
+    { title: "티켓금액", price: `${seatCount ? 99000 : 0}` },
+    { title: "수수료", price: `${seatCount ? 2000 : 0}` },
+    { title: "배송비", price: `${delivery ? 3000 : 0}` },
+    { title: "쿠폰할인", price: 0 }
   ];
-  const nav = useNavigate();
+
+  // const nav = useNavigate();
   const handleButtonClick = () => {
-    nav("/progress/step4-1");
+    if (seatCount === 0) {
+      alert("좌석을 선택해주세요.");
+      return;
+    }
+    if (seatCount > 0) {
+      setButtonText("결제하기");
+      return;
+    }
+    if (buttonText === "결제하기") {
+      // nav("/progress/step4-1");
+    }
   };
+  const totalAmount = Info.reduce((acc, currentValue) => {
+    if (currentValue.price !== undefined) {
+      return acc + Number(currentValue.price);
+    }
+    return acc;
+  }, 0);
+
+  // 애니메이션 등장 조절
+  useEffect(() => {
+    if (seatCount > 0) {
+      setFocus(true);
+    }
+  }, [seatCount]);
 
   return (
     <Container>
@@ -88,21 +120,23 @@ const MyBookingInfo = () => {
         {Info.map((item, index) => (
           <InfoItem key={index}>
             <InfoText>{item.title}</InfoText>
-            <InfoText>{item.content}</InfoText>
+            <InfoText>
+              {item.price != undefined ? item.price + "원" : item.content}
+            </InfoText>
           </InfoItem>
         ))}
       </InfoContatiner>
       <TotalAmount>
         <AmountTitle>총 결제금액</AmountTitle>
-        <AmountContent>{delivery ? "104000원" : "101000원"}</AmountContent>
+        <AmountContent>{totalAmount}</AmountContent>
       </TotalAmount>
       <ButtonContainer>
         <PaddingContainer>
           <Button text="이전 단계" type="prev"></Button>
         </PaddingContainer>
 
-        <NextAnimation $focus={true}>
-          <Button text="다음 단계" onClick={handleButtonClick}></Button>
+        <NextAnimation $focus={focus}>
+          <Button text={buttonText} onClick={handleButtonClick}></Button>
         </NextAnimation>
       </ButtonContainer>
     </Container>
