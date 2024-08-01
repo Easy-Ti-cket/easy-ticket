@@ -91,7 +91,7 @@ const MyBookingInfo = () => {
       alert("좌석을 선택해주세요.");
       return;
     }
-    if (seatCount > 0) {
+    if (seatCount > 0 && buttonText === "다음 단계") {
       setButtonText("결제하기");
       return;
     }
