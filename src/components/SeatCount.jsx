@@ -38,6 +38,7 @@ const CountSelector = styled.select`
   border-radius: 4px;
   text-align: center;
   font-size: 16px;
+  margin: ${(props) => (props.$focus ? "0px" : "3px")};
 `;
 
 const HighlightText = styled.span`
@@ -50,7 +51,10 @@ const SeatCount = () => {
   const handleSeatCountChange = (event) => {
     setSeatCount(Number(event.target.value));
   };
-
+  let focus = true;
+  if (seatCount === 1) {
+    focus = false;
+  }
   return (
     <SeatCountContainer>
       <Header>티켓 가격</Header>
@@ -62,8 +66,12 @@ const SeatCount = () => {
         <InfoText>기본가</InfoText>
         <InfoText>일반</InfoText>
         <InfoText>99,000원</InfoText>
-        <Animation $focus={true}>
-          <CountSelector name={"seatCount"} onChange={handleSeatCountChange}>
+        <Animation $focus={focus}>
+          <CountSelector
+            $focus={focus}
+            name={"seatCount"}
+            onChange={handleSeatCountChange}
+          >
             <option value={0}>0매</option>
             <option value={1}>1매</option>
           </CountSelector>
