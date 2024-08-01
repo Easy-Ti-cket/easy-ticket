@@ -4,7 +4,8 @@ import Animation from "../Animation";
 import {
   allowedSeatAtom,
   isDeliverySelectedAtom,
-  seatCountAtom
+  seatCountAtom,
+  levelAtom
 } from "../../store/atom";
 import { useAtomValue } from "jotai";
 import { useEffect, useState } from "react";
@@ -70,6 +71,7 @@ const MyBookingInfo = () => {
   const allowedSeat = useAtomValue(allowedSeatAtom);
   const delivery = useAtomValue(isDeliverySelectedAtom);
   const seatCount = useAtomValue(seatCountAtom);
+  const level = useAtomValue(levelAtom);
   const [buttonText, setButtonText] = useState("다음 단계");
   const [focus, setFocus] = useState(false);
   const Info = [
@@ -113,7 +115,7 @@ const MyBookingInfo = () => {
 
   // 애니메이션 등장 조절
   useEffect(() => {
-    if (seatCount > 0) {
+    if (seatCount > 0 && level === "low") {
       setFocus(true);
     }
   }, [seatCount]);
