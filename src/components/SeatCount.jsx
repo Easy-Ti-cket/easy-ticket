@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import { seatCountAtom } from "../store/atom";
-import { useAtom } from "jotai";
+import { useEffect, useState } from "react";
+import { seatCountAtom, levelAtom } from "../store/atom";
+import { useAtom, useAtomValue } from "jotai";
 import Animation from "./Animation";
 const SeatCountContainer = styled.div`
   border: 1px solid var(--key-color);
@@ -47,14 +48,21 @@ const HighlightText = styled.span`
 
 const SeatCount = () => {
   const [seatCount, setSeatCount] = useAtom(seatCountAtom);
+  const level = useAtomValue(levelAtom);
+  const [focus, setFocus] = useState(false);
 
   const handleSeatCountChange = (event) => {
     setSeatCount(Number(event.target.value));
   };
-  let focus = true;
-  if (seatCount === 1) {
-    focus = false;
-  }
+
+  useEffect(() => {
+    if (seatCount === 0 && level === "low") {
+      setFocus(true);
+    } else if (seatCount === 1) {
+      setFocus(false);
+    }
+  }, [seatCount]);
+
   return (
     <SeatCountContainer>
       <Header>티켓 가격</Header>
