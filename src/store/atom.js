@@ -51,7 +51,14 @@ export const userNameAtom = atom("");
 export const practiceCountAtom = atomWithStorage("practiceCount", 0);
 
 //좌석 매수 개수
-export const seatCountAtom = atom(0);
+export const seatCountAtom = atom(1);
+
+//좌석 등급, 가격
+export const seatInfoAtom = atom({
+  grade: "",
+  price: 0,
+  date: "  "
+});
 
 //배송 선택 여부 상태
 export const isDeliverySelectedAtom = atom(false);

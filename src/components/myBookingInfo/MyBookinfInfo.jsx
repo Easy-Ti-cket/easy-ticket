@@ -5,7 +5,8 @@ import {
   allowedSeatAtom,
   isDeliverySelectedAtom,
   seatCountAtom,
-  levelAtom
+  levelAtom,
+  seatInfoAtom
 } from "../../store/atom";
 import { useAtomValue } from "jotai";
 import { useEffect, useState } from "react";
@@ -71,17 +72,18 @@ const MyBookingInfo = () => {
   const allowedSeat = useAtomValue(allowedSeatAtom);
   const delivery = useAtomValue(isDeliverySelectedAtom);
   const seatCount = useAtomValue(seatCountAtom);
+  const seatInfo = useAtomValue(seatInfoAtom);
   const level = useAtomValue(levelAtom);
   const [buttonText, setButtonText] = useState("다음 단계");
   const [focus, setFocus] = useState(false);
   const Info = [
     // 공연 날짜 및 시간
-    { title: "일시", content: "2024년 6월 29일(토) 14:00" },
+    { title: "일시", content: seatInfo.date },
     {
       title: "선택좌석(1석)",
       content: `${allowedSeat.row + 1}열-${allowedSeat.col + 1}`
     },
-    { title: "티켓금액", price: `${seatCount ? 99000 : 0}` },
+    { title: "티켓금액", price: `${seatCount ? seatInfo.price : 0}` },
     { title: "수수료", price: `${seatCount ? 2000 : 0}` },
     { title: "배송비", price: `${delivery ? 3000 : 0}` },
     { title: "쿠폰할인", price: 0 }
