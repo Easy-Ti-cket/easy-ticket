@@ -1,8 +1,15 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-import { seatCountAtom, levelAtom } from "../store/atom";
+import {
+  seatCountAtom,
+  levelAtom,
+  postersAtom,
+  selectedPosterAtom,
+  seatInfoAtom
+} from "../store/atom";
 import { useAtom, useAtomValue } from "jotai";
 import Animation from "./Animation";
+
 const SeatCountContainer = styled.div`
   border: 1px solid var(--key-color);
   border-radius: 8px;
@@ -49,6 +56,7 @@ const HighlightText = styled.span`
 const SeatCount = () => {
   const [seatCount, setSeatCount] = useAtom(seatCountAtom);
   const level = useAtomValue(levelAtom);
+  const seatInfo = useAtomValue(seatInfoAtom);
   const [focus, setFocus] = useState(false);
 
   const handleSeatCountChange = (event) => {
@@ -67,13 +75,13 @@ const SeatCount = () => {
     <SeatCountContainer>
       <Header>티켓 가격</Header>
       <Header>
-        스탠딩 | <HighlightText>좌석 {seatCount}매</HighlightText>를
+        {seatInfo.grade} | <HighlightText>좌석 {seatCount}매</HighlightText>를
         선택하셨습니다
       </Header>
       <InfoRow>
         <InfoText>기본가</InfoText>
         <InfoText>일반</InfoText>
-        <InfoText>99,000원</InfoText>
+        <InfoText>{seatInfo.price}원</InfoText>
         <Animation $focus={focus}>
           <CountSelector
             $focus={focus}

@@ -5,8 +5,8 @@ import { allowedSeatAtom } from "../../../store/atom.js";
 
 const GridContainer = styled.div`
   display: grid;
-  grid-template-rows: ${(props) => `repeat(${props.rows}, 25px)`};
-  grid-template-columns: ${(props) => `repeat(${props.columns}, 25px)`};
+  grid-template-rows: ${(props) => `repeat(${props.$rows}, 25px)`};
+  grid-template-columns: ${(props) => `repeat(${props.$columns}, 25px)`};
   place-items: center;
   padding: 0;
 `;
@@ -33,7 +33,7 @@ const SeatGrid = ({ rows = 5, columns = 5, gridIndex }) => {
   };
 
   return (
-    <GridContainer rows={rows} columns={columns}>
+    <GridContainer $rows={rows} $columns={columns}>
       {renderSeats()}
     </GridContainer>
   );
