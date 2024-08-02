@@ -8,7 +8,7 @@ function getRandomSeat(poster) {
 
   const randomPrice = convertPriceToNumber(poster.price[randomSeat]);
 
-  return { grade: randomSeat, price: randomPrice };
+  return { grade: randomSeat, price: randomPrice, date: poster.date };
 }
 
 export default getRandomSeat;

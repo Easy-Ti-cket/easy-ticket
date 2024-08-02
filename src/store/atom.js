@@ -56,5 +56,6 @@ export const seatCountAtom = atom(0);
 //좌석 등급, 가격
 export const seatInfoAtom = atom({
   grade: "",
-  price: 0
+  price: 0,
+  date: ""
 });
