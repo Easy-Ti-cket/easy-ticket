@@ -19,6 +19,8 @@ const Seat = ({ isallowed }) => {
   const handleClick = () => {
     if (isallowed && !isSeatSelected) {
       setIsSeatSelected(true);
+    } else {
+      alert("이미 선택된 좌석입니다.");
     }
   };
   let focus = false;
