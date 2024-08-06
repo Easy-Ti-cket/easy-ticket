@@ -1,10 +1,13 @@
 import Button from "../button/Button";
-import { useAtomValue } from "jotai";
+import { useAtomValue, useAtom } from "jotai";
 import {
   isSeatSelectedAtom,
   allowedSeatAtom,
   levelAtom,
-  allowedSectionAtom
+  allowedSectionAtom,
+  postersAtom,
+  selectedPosterAtom,
+  seatInfoAtom
 } from "../../store/atom";
 import {
   SeatInfoContainer,
@@ -18,23 +21,26 @@ import {
   SeatPrice,
   ButtonAnimationArea
 } from "./SeatInfoStyles";
-import { useNavigate } from "react-router-dom";
+import convertPriceObjectToArray from "../../util/convertPriceObjectToArray";
+import getRandomSeat from "../../util/getRandomSeat";
+import { useEffect } from "react";
+
 const SeatInfo = () => {
   const isSeatSelected = useAtomValue(isSeatSelectedAtom);
   const allowedSeat = useAtomValue(allowedSeatAtom);
-  const allowedSection = useAtomValue(allowedSectionAtom);
   const level = useAtomValue(levelAtom);
-  const seats = [
-    { grade: "1구역 0석", price: 99000 },
-    { grade: "2구역 0석", price: 99000 },
-    { grade: "3구역 0석", price: 49900 },
-    { grade: "4구역 0석", price: 49900 }
-  ];
-  const nav = useNavigate();
-  //allowedSection이 유효한지 확인, 유효하다면 해당 구역의 좌석을 1석으로 변경
-  if (allowedSection > 0 && allowedSection <= seats.length) {
-    seats[allowedSection - 1].grade = `${allowedSection}구역 1석`;
-  }
+
+  const posters = useAtomValue(postersAtom);
+  const posterId = useAtomValue(selectedPosterAtom);
+  const selectedPoster = posters[posterId];
+
+  const seats = convertPriceObjectToArray(selectedPoster.price);
+  const [seatInfo, setSeatInfo] = useAtom(seatInfoAtom);
+  useEffect(() => {
+    if (isSeatSelected) {
+      setSeatInfo(getRandomSeat(selectedPoster));
+    }
+  }, [isSeatSelected]);
 
   let isFocus = false;
   if (isSeatSelected && level == "low") {
@@ -74,7 +80,7 @@ const SeatInfo = () => {
           <SeatPrice>좌석정보</SeatPrice>
           {isSeatSelected && (
             <>
-              <SeatGrade>전석</SeatGrade>
+              <SeatGrade>{seatInfo.grade}</SeatGrade>
               <SeatPrice>{`${allowedSeat.row + 1}열-${allowedSeat.col + 1}`}</SeatPrice>
             </>
           )}
