@@ -59,6 +59,3 @@ export const seatInfoAtom = atom({
   price: 0,
   date: "  "
 });
-
-//배송 선택 여부 상태
-export const isDeliverySelectedAtom = atom(false);

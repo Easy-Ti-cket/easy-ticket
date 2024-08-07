@@ -3,7 +3,6 @@ import Button from "../button/Button";
 import Animation from "../Animation";
 import {
   allowedSeatAtom,
-  isDeliverySelectedAtom,
   seatCountAtom,
   levelAtom,
   seatInfoAtom
@@ -68,9 +67,8 @@ const PaddingContainer = styled.div`
 const NextAnimation = styled(Animation)`
   padding: 3px;
 `;
-const MyBookingInfo = () => {
+const MyBookingInfo = ({ option }) => {
   const allowedSeat = useAtomValue(allowedSeatAtom);
-  const delivery = useAtomValue(isDeliverySelectedAtom);
   const seatCount = useAtomValue(seatCountAtom);
   const seatInfo = useAtomValue(seatInfoAtom);
   const level = useAtomValue(levelAtom);
@@ -85,7 +83,7 @@ const MyBookingInfo = () => {
     },
     { title: "티켓금액", price: `${seatCount ? seatInfo.price : 0}` },
     { title: "수수료", price: `${seatCount ? 2000 : 0}` },
-    { title: "배송비", price: `${delivery ? 3000 : 0}` },
+    { title: "배송비", price: `${option === "배송" ? 3000 : 0}` },
     { title: "쿠폰할인", price: 0 }
   ];
 
