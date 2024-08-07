@@ -55,8 +55,6 @@ const ProgressContents = ({ text }) => {
   };
   return (
     <ProgressContentsContainer>
-      {/*도움말 모달창*/}
-      {isModalOpen && <Modal />}
       {/*프로그래스 바*/}
       <ProgressBarBox>
         <ProgressBar />
@@ -72,6 +70,10 @@ const ProgressContents = ({ text }) => {
             type="help"
           />
         </ButtonContainer>
+        {/*도움말 모달창*/}
+        {isModalOpen && (
+          <Modal onClick={handleModalClose} contents="내용입니다" />
+        )}
         <Outlet />
       </ContentsBox>
     </ProgressContentsContainer>

@@ -43,14 +43,13 @@ const ButtonWrap = styled.div`
   position: absolute;
   bottom: 20px;
 `;
-const Modal = ({ text }) => {
+const Modal = ({ contents, onClick }) => {
   return (
     <Background>
       <ModalContainer>
-        {text}
-        텍스트입니다
+        {contents}
         <ButtonWrap>
-          <Button text="닫기" />
+          <Button text="닫기" onClick={onClick} />
         </ButtonWrap>
       </ModalContainer>
     </Background>
