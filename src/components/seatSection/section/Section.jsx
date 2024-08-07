@@ -1,7 +1,11 @@
 import styled from "styled-components";
 import AnimationArea from "../../Animation";
-import { useAtomValue } from "jotai";
-import { allowedSectionAtom, levelAtom } from "../../../store/atom";
+import { useAtomValue, useSetAtom } from "jotai";
+import {
+  allowedSectionAtom,
+  levelAtom,
+  isSectionSelectedAtom
+} from "../../../store/atom";
 
 const SectionDiv = styled.div`
   border: 1px solid var(--key-color);
@@ -13,14 +17,24 @@ const SectionDiv = styled.div`
 `;
 const Section = ({ num }) => {
   const allowedSection = useAtomValue(allowedSectionAtom);
+  const setIsSectionSelected = useSetAtom(isSectionSelectedAtom);
   const level = useAtomValue(levelAtom);
   let isfocus = false;
   if (num == allowedSection && level == "low") {
     isfocus = true;
   }
+  const handleSectionClick = () => {
+    if (num == allowedSection) {
+      setIsSectionSelected(true);
+    } else {
+      alert("알맞은 구역을 선택해주세요.");
+    }
+  };
   return (
     <AnimationArea $focus={isfocus}>
-      <SectionDiv $cursor={isfocus}>{num}구역</SectionDiv>
+      <SectionDiv $cursor={isfocus} onClick={handleSectionClick}>
+        {num}구역
+      </SectionDiv>
     </AnimationArea>
   );
 };

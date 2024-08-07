@@ -42,9 +42,13 @@ export const allowedSeatAtom = atom({
 //좌석 선택 여부 상태
 export const isSeatSelectedAtom = atom(false);
 
+//구역 선택 여부 상태
+export const isSectionSelectedAtom = atom(false);
+
 //구역 선택
 export const allowedSectionAtom = atom(getRandomInt(1, 4));
 
+//사용자 이름
 export const userNameAtom = atom("");
 
 //연습모드 완료 횟수

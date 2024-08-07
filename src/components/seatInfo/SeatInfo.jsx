@@ -24,6 +24,7 @@ import {
 import convertPriceObjectToArray from "../../util/convertPriceObjectToArray";
 import getRandomSeat from "../../util/getRandomSeat";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SeatInfo = () => {
   const isSeatSelected = useAtomValue(isSeatSelectedAtom);
@@ -46,6 +47,14 @@ const SeatInfo = () => {
   if (isSeatSelected && level == "low") {
     isFocus = true;
   }
+  const nav = useNavigate();
+  const handleButtonClick = () => {
+    if (isSeatSelected) {
+      nav("/progress/step3");
+    } else {
+      alert("좌석을 선택해주세요.");
+    }
+  };
   return (
     <SeatInfoContainer>
       <Header>좌석등급 / 잔여석</Header>
@@ -80,7 +89,11 @@ const SeatInfo = () => {
         </SelectedSeatsInfo>
       </SelectedSeats>
       <ButtonAnimationArea $focus={isFocus}>
-        <Button text={"좌석선택완료"} type={"select-seat"}></Button>
+        <Button
+          text={"좌석선택완료"}
+          type={"select-seat"}
+          onClick={handleButtonClick}
+        ></Button>
       </ButtonAnimationArea>
     </SeatInfoContainer>
   );
