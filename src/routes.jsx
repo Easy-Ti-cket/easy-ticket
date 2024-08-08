@@ -17,7 +17,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <Layout />,
     children: [
-      { path: "main", element: <Main />, label: "메인화면-로그인" },
+      { path: "", element: <Main />, label: "메인화면-로그인" },
       { path: "select-level", element: <SelectLevel />, label: "난이도 선택" },
       {
         path: "progress",
