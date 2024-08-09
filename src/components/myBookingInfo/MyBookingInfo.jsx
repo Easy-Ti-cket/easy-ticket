@@ -38,7 +38,10 @@ const InfoItem = styled.div`
   justify-content: space-between;
   margin: 10px 0;
 `;
-const InfoText = styled.div``;
+const InfoText = styled.div`
+  font-family: "pretendardB";
+  font-size: 16px;
+`;
 const TotalAmount = styled.div`
   margin: 0 20px 0 20px;
   display: flex;
@@ -47,7 +50,6 @@ const TotalAmount = styled.div`
 `;
 
 const AmountTitle = styled.div`
-  font-family: B;
   margin-top: 20px;
   font-family: pretendardB;
 `;

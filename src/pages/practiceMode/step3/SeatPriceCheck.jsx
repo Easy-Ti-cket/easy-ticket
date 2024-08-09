@@ -6,7 +6,7 @@ import TicketMethod from "../../../components/forms/ticket/TicketMethod";
 
 const Wrap = styled.div`
   display: flex;
-  gap: 50px;
+  gap: 20px;
 `;
 
 const SeatPriceCheck = () => {

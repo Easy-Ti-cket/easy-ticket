@@ -7,7 +7,7 @@ import { levelAtom } from "../../../store/atom";
 
 const BuyerWrap = styled.div`
   display: flex;
-  gap: 50px;
+  gap: 30px;
 `;
 
 const BuyerContainer = styled(FormWrap)`

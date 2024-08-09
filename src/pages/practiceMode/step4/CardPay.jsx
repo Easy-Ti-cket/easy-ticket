@@ -6,6 +6,7 @@ import Button from "../../../components/button/Button";
 import { useAtomValue } from "jotai";
 import { cardAnswerAtom } from "../../../store/atom";
 import { Step4Container } from "./SelectPayMethod";
+import { useNavigate } from "react-router-dom";
 
 const CardPayWrap = styled(Step4Container)`
   align-items: center;
@@ -40,7 +41,7 @@ const CardPay = () => {
         : 2
       : 1
     : 0;
-
+  const navigate = useNavigate();
   return (
     <CardPayWrap>
       <Card />
@@ -51,7 +52,9 @@ const CardPay = () => {
         <CardForm focusNum={focusNum} handleChange={handleChange} />
       </CardFormContainer>
       {/*다음단계 버튼을 누르면 step5로 이동 */}
-      {isAnswer && <Button text="다음 단계" />}
+      {isAnswer && (
+        <Button text="다음 단계" onClick={() => navigate("/progress/step5")} />
+      )}
     </CardPayWrap>
   );
 };
