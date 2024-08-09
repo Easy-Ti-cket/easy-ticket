@@ -9,8 +9,8 @@ const SeatChartContainer = styled.div`
   align-items: center;
   margin-top: 20px;
   //임시로 크기 지정, contentsBox배치 시 달라질 수 있음
-  width: 700px;
-  height: 400px;
+  width: 500px;
+  height: 500px;
 `;
 const Stage = styled.div`
   display: flex;
