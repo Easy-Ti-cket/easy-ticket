@@ -30,7 +30,7 @@ export const SeatTableContainer = styled.div`
   height: 110px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  // justify-content: space-between;
 `;
 
 export const SeatTableDiv = styled.div`
