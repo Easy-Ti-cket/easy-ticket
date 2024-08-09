@@ -24,6 +24,7 @@ import {
 import convertPriceObjectToArray from "../../util/convertPriceObjectToArray";
 import getRandomSeat from "../../util/getRandomSeat";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const SeatInfo = () => {
   const isSeatSelected = useAtomValue(isSeatSelectedAtom);
@@ -46,6 +47,7 @@ const SeatInfo = () => {
   if (isSeatSelected && level == "low") {
     isFocus = true;
   }
+  const nav = useNavigate();
   const handleButtonClick = () => {
     if (isSeatSelected) {
       nav("/progress/step3");
