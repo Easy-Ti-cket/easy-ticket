@@ -11,6 +11,7 @@ import SelectPayMethod from "./pages/practiceMode/step4/SelectPayMethod";
 import CardPay from "./pages/practiceMode/step4/CardPay";
 import Step5 from "./pages/practiceMode/step5/Step5";
 import SelectSeat from "./pages/practiceMode/step2/SelectSeat";
+import SeatPriceCheck from "./pages/practiceMode/step3/SeatPriceCheck";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,11 @@ const router = createBrowserRouter([
             label: "날짜 및 회차 선택"
           },
           { path: "step2", element: <SelectSeat />, label: "좌석 선택" },
+          {
+            path: "step3-1",
+            element: <SeatPriceCheck />,
+            label: "좌석 매수 및 가격 확인"
+          },
           {
             path: "step4-1",
             element: <SelectPayMethod />,

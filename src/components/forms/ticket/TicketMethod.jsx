@@ -23,8 +23,7 @@ const TicketMethodWrap = styled(FormWrap)`
   align-items: start;
   padding: 20px;
 `;
-const TicketMethod = () => {
-  const [option, setOption] = useState("현장수령");
+const TicketMethod = ({ option, setOption }) => {
   const handleOptionChange = (e) => {
     setOption(e.target.value);
   };

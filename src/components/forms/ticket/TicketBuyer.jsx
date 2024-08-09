@@ -48,9 +48,8 @@ const data_delivery = [
 const TicketBuyer = ({ option }) => {
   //난이도 - 생년월일 입력 구현
   const level = useAtomValue(levelAtom);
-  const { handleChange, answer } = useForm();
-  //삭제 예정 ) 정답 확인
-  console.log(answer);
+  const { handleChange } = useForm();
+
   return (
     <BuyerWrap>
       {(option === "현장수령" || option === "배송") && (
