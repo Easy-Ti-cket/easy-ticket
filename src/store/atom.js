@@ -57,5 +57,5 @@ export const seatCountAtom = atom(1);
 export const seatInfoAtom = atom({
   grade: "",
   price: 0,
-  date: "  "
+  date: ""
 });
