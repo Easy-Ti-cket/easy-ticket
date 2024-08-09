@@ -99,7 +99,6 @@ const MyBookingInfo = ({ option, step3Stage, addStage }) => {
       //2단계로 수정
       setButtonText("결제하기");
       addStage();
-      console.log(step3Stage);
       return;
     }
     // 버튼이 결제하기일 경우 step4-1로 이동
