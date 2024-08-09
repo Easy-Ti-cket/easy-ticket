@@ -1,8 +1,10 @@
 import styled from "styled-components";
 import MyBookingInfo from "../../../components/myBookingInfo/MyBookingInfo";
 import SeatCount from "../../../components/SeatCount";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import TicketMethod from "../../../components/forms/ticket/TicketMethod";
+import { useSetAtom } from "jotai";
+import { progressAtom } from "../../../store/atom";
 
 const Wrap = styled.div`
   display: flex;
@@ -15,6 +17,8 @@ const SeatPriceCheck = () => {
   //step4 단계에 대한 정보
   const [step3Stage, setStep3Stage] = useState(1);
   const addStage = () => setStep3Stage((prev) => prev + 1);
+  const setProgress = useSetAtom(progressAtom);
+  useEffect(() => setProgress(3));
   return (
     <Wrap>
       {step3Stage == 1 ? (

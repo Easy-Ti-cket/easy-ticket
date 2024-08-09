@@ -18,7 +18,7 @@ const SeatCountContainer = styled.div`
 
 const Header = styled.div`
   font-family: pretendardB;
-  font-size: 24px;
+  font-size: 20px;
 `;
 
 const InfoRow = styled.div`
