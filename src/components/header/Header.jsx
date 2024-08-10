@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Nav from "./nav/Nav";
-import logo from "../../assests/logo.png";
+import Logo from "../../assests/logo.svg?react";
 
 /*헤더 Container*/
 const HeaderContainer = styled.div`
@@ -25,7 +25,7 @@ const Header = () => {
   return (
     <HeaderContainer>
       <LogoContainer>
-        <img src={logo} alt="Logo" />
+        <Logo />
       </LogoContainer>
       <Nav />
     </HeaderContainer>
