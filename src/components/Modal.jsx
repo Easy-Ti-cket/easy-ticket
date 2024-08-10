@@ -20,7 +20,7 @@ const Background = styled.div`
   width: 100%;
   height: 100vh;
   background-color: rgba(121, 121, 121, 0.3); /* 30% opacity color */
-  z-index: 1000;
+  z-index: 5000;
 `;
 const ModalContainer = styled.div`
   position: absolute;
