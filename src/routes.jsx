@@ -3,7 +3,9 @@ import { createBrowserRouter } from "react-router-dom";
 import Layout from "./pages/Layout";
 import ProgressContents from "./pages/ProgressContents";
 import Main from "./pages/main/Main";
+import SelectMode from "./pages/practiceMode/selectMode/selectMode";
 import SelectLevel from "./pages/practiceMode/selectLevel/SelectLevel";
+import SelectSite from "./pages/practiceMode/selectSite/selectSite";
 import Intro from "./pages/practiceMode/step0/Intro";
 import SelectPerformance from "./pages/practiceMode/step1/SelectPerformance";
 import SelectRound from "./pages/practiceMode/step1/SelectRound";
@@ -11,14 +13,17 @@ import SelectPayMethod from "./pages/practiceMode/step4/SelectPayMethod";
 import CardPay from "./pages/practiceMode/step4/CardPay";
 import Step5 from "./pages/practiceMode/step5/Step5";
 import SelectSeat from "./pages/practiceMode/step2/SelectSeat";
+import SeatPriceCheck from "./pages/practiceMode/step3/SeatPriceCheck";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     children: [
-      { path: "", element: <Main />, label: "메인화면-로그인" },
+      { path: "main", element: <Main />, label: "메인화면-로그인" },
+      { path: "select-mode", element: <SelectMode />, label: "모드 선택" },
       { path: "select-level", element: <SelectLevel />, label: "난이도 선택" },
+      { path: "select-site", element: <SelectSite />, label: "사이트 선택" },
       {
         path: "progress",
         element: <ProgressContents />,
@@ -39,6 +44,11 @@ const router = createBrowserRouter([
             label: "날짜 및 회차 선택"
           },
           { path: "step2", element: <SelectSeat />, label: "좌석 선택" },
+          {
+            path: "step3-1",
+            element: <SeatPriceCheck />,
+            label: "좌석 매수 및 가격 확인"
+          },
           {
             path: "step4-1",
             element: <SelectPayMethod />,
