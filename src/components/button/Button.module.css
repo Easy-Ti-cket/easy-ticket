@@ -9,7 +9,7 @@
   border-radius: 4px;
   justify-content: center;
   align-items: center;
-  font-family: pretendardR;
+  font-family: "pretendardR";
   font-size: 16px;
   font-style: normal;
   background-color: var(--key-color);
@@ -51,6 +51,7 @@
 /* 도움말 */
 .button--help {
   background-color: var(--point-color2);
+  font-family: "pretendardB";
   color: var(--text-color2, #333333);
 }
 .button--help:hover {
