@@ -4,6 +4,8 @@ import Animation from "../../components/Animation";
 import { useAtom } from "jotai";
 import { userNameAtom } from "../../store/atom";
 import { useNavigate } from "react-router-dom";
+import MainImage from "../../assests/images/main.png";
+
 const MainContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -25,12 +27,17 @@ const Instructions = styled.p`
   margin-top: 20px;
   font-family: pretendardB;
   font-size: 25px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  letter-spacing: -1.5px;
+  white-space: pre-wrap;
 `;
 
 const InputGroup = styled.div`
   display: flex;
   align-items: center;
-  margin: 60px 0 10px 0;
+  margin: 20px 0;
   font-size: 25px;
 `;
 
@@ -46,6 +53,13 @@ const Input = styled.input`
   border-radius: 4px;
   font-family: pretendardB;
   font-size: 20px;
+`;
+
+const SytledMainImage = styled.img`
+  width: 150px;
+  height: auto;
+  flex-shrink: 0;
+  object-fit: cover;
 `;
 
 function Main() {
@@ -68,13 +82,18 @@ function Main() {
     <MainContainer>
       <Title>
         {/* 로고로 대체 */}
-        쉽게 <Logo>🎟️</Logo> 티켓
+        쉽게<Logo>🎫</Logo>티켓
       </Title>
-      <Instructions>아래 빈칸에 성함을 입력해 주세요.</Instructions>
+      <SytledMainImage src={MainImage} alt="main image" />
       <Instructions>
+        안녕하세요! {/* 메인 페이지 멘트 수정 필요 */}
+        <br />
+        아래 빈칸에 성함을 입력해 주세요.
+        <br />
         <span style={{ color: "var(--key-color)" }}>‘시작하기’</span> 버튼을
         누르면 시작합니다.
       </Instructions>
+
       <InputGroup>
         <Label htmlFor="name">이름</Label>
         <Input
