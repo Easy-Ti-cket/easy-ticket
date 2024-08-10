@@ -4,6 +4,9 @@ import DetailPayForm from "../../../components/forms/pay/DetailPayForm";
 import { useForm } from "../../../hooks/useForm";
 import Button from "../../../components/button/Button";
 import { useNavigate } from "react-router-dom";
+import { useSetAtom } from "jotai";
+import { progressAtom } from "../../../store/atom";
+import { useEffect } from "react";
 
 const SelectPayWrap = styled.div`
   display: inline-flex;
@@ -39,7 +42,11 @@ const SelectPayMethod = () => {
   const isPayMethodCorrect = correctList["PayMethodForm"];
   // 다음 페이지 이동
   const navigate = useNavigate();
-
+  // progress bar 설정
+  const setProgress = useSetAtom(progressAtom);
+  useEffect(() => {
+    setProgress(4);
+  }, []);
   return (
     <SelectPayWrap>
       {/*결제 방식 선택 */}

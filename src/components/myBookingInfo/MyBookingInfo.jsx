@@ -16,30 +16,32 @@ const Container = styled.div`
   border-radius: 8px;
   width: 400px;
   height: 457px;
-  margin: 20px auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 `;
 
 const Title = styled.div`
-  font-family: pretendardB;
+  font-family: "pretendardB";
   margin-bottom: 20px;
   margin: 20px 20px 0 20px;
 `;
 
-const InfoContatiner = styled.div`
+const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 20px 20px 0 20px;
-  font-family: pretendardR;
+  font-family: "pretendardR";
 `;
 const InfoItem = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 10px 0;
 `;
-const InfoText = styled.div``;
+const InfoText = styled.div`
+  font-family: "pretendardB";
+  font-size: 16px;
+`;
 const TotalAmount = styled.div`
   margin: 0 20px 0 20px;
   display: flex;
@@ -48,7 +50,6 @@ const TotalAmount = styled.div`
 `;
 
 const AmountTitle = styled.div`
-  font-family: B;
   margin-top: 20px;
   font-family: pretendardB;
 `;
@@ -67,7 +68,7 @@ const PaddingContainer = styled.div`
 const NextAnimation = styled(Animation)`
   padding: 3px;
 `;
-const MyBookingInfo = ({ option }) => {
+const MyBookingInfo = ({ option, step3Stage, addStage }) => {
   const allowedSeat = useAtomValue(allowedSeatAtom);
   const seatCount = useAtomValue(seatCountAtom);
   const seatInfo = useAtomValue(seatInfoAtom);
@@ -86,7 +87,6 @@ const MyBookingInfo = ({ option }) => {
     { title: "배송비", price: `${option === "배송" ? 3000 : 0}` },
     { title: "쿠폰할인", price: 0 }
   ];
-
   const nav = useNavigate();
 
   // 버튼 클릭 이벤트
@@ -96,13 +96,15 @@ const MyBookingInfo = ({ option }) => {
       alert("좌석을 선택해주세요.");
       return;
     }
-    // 매수가 1 이상이고 버튼이 다음 단계일 경우 결제하기로 변경
-    if (seatCount > 0 && buttonText === "다음 단계") {
+    // 매수가 1 이상이고 1단계 (티켓매수 선택 및 가격 확인)일 경우 결제하기로 변경
+    if (seatCount > 0 && step3Stage == 1) {
+      //2단계로 수정
       setButtonText("결제하기");
+      addStage();
       return;
     }
     // 버튼이 결제하기일 경우 step4-1로 이동
-    if (buttonText === "결제하기") {
+    if (step3Stage == 2) {
       nav("/progress/step4-1");
     }
   };
@@ -123,7 +125,7 @@ const MyBookingInfo = ({ option }) => {
   return (
     <Container>
       <Title>My 예매 정보</Title>
-      <InfoContatiner>
+      <InfoContainer>
         {Info.map((item, index) => (
           <InfoItem key={index}>
             <InfoText>{item.title}</InfoText>
@@ -132,7 +134,7 @@ const MyBookingInfo = ({ option }) => {
             </InfoText>
           </InfoItem>
         ))}
-      </InfoContatiner>
+      </InfoContainer>
       <TotalAmount>
         <AmountTitle>총 결제금액</AmountTitle>
         <AmountContent>{totalAmount}원</AmountContent>

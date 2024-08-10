@@ -1,12 +1,6 @@
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-import {
-  seatCountAtom,
-  levelAtom,
-  postersAtom,
-  selectedPosterAtom,
-  seatInfoAtom
-} from "../store/atom";
+import { seatCountAtom, levelAtom, seatInfoAtom } from "../store/atom";
 import { useAtom, useAtomValue } from "jotai";
 import Animation from "./Animation";
 
@@ -23,8 +17,8 @@ const SeatCountContainer = styled.div`
 `;
 
 const Header = styled.div`
-  font-family: PretendardB;
-  font-size: 24px;
+  font-family: pretendardB;
+  font-size: 20px;
 `;
 
 const InfoRow = styled.div`
@@ -32,7 +26,7 @@ const InfoRow = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-top: 10px;
-  font-family: PretendardR;
+  font-family: pretendardR;
 `;
 
 const InfoText = styled.div`
