@@ -50,7 +50,7 @@ const SeatInfo = () => {
   const nav = useNavigate();
   const handleButtonClick = () => {
     if (isSeatSelected) {
-      nav("/progress/step3");
+      nav("/progress/step3-1");
     } else {
       alert("좌석을 선택해주세요.");
     }
