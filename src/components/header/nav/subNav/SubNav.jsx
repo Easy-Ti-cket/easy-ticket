@@ -1,5 +1,7 @@
 import styled from "styled-components";
-
+import { useNavigate } from "react-router-dom";
+import { levelAtom } from "../../../../store/atom";
+import { useSetAtom } from "jotai";
 const SubNavWrap = styled.div`
   width: 1320px;
   height: 50px;
@@ -31,14 +33,26 @@ const SubNavContent = styled.li`
 `;
 
 const SubNav = ({ hovereditem }) => {
+  const nav = useNavigate();
+  const setLevel = useSetAtom(levelAtom);
+  const handleSubNavClick = (e) => {
+    const level =
+      e.target.innerText === "초급"
+        ? "low"
+        : e.target.innerText === "중급"
+          ? "middle"
+          : "high";
+    setLevel(level);
+    nav("/progress/step0");
+  };
   return (
     <>
       {hovereditem === "연습모드" && (
         <SubNavWrap>
           <SubNavContainer>
-            <SubNavContent>초급</SubNavContent>
-            <SubNavContent>중급</SubNavContent>
-            <SubNavContent>고급</SubNavContent>
+            <SubNavContent onClick={handleSubNavClick}>초급</SubNavContent>
+            <SubNavContent onClick={handleSubNavClick}>중급</SubNavContent>
+            <SubNavContent onClick={handleSubNavClick}>고급</SubNavContent>
           </SubNavContainer>
         </SubNavWrap>
       )}
