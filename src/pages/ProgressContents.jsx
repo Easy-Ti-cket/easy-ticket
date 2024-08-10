@@ -31,11 +31,12 @@ const ContentsBox = styled.div`
   flex-grow: 1;
   margin-bottom: 30px;
   min-height: 500px;
+  border: var(--fill-color) 1px solid;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
   //도움말 버튼 부모 position
   position: relative;
-  // 삭제할 코드
-  background-color: #f6f6f6;
-  border: 1px solid #000000;
 `;
 //도움말 버튼 컨테이너
 const ButtonContainer = styled.div`
