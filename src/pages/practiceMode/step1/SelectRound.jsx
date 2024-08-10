@@ -10,6 +10,7 @@ import {
   progressAtom
 } from "../../../store/atom";
 import AnimationArea from "../../../components/Animation";
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -54,7 +55,7 @@ const SelectRound = () => {
   const [dateSelected, setDateSelected] = useState(false);
   const [roundSelected, setRoundSelected] = useState(false);
   const [animationStep, setAnimationStep] = useState(0);
-
+  const navigate = useNavigate();
   useEffect(() => {
     setLevel(currentLevel);
     setProgress(1);
@@ -96,7 +97,7 @@ const SelectRound = () => {
       alert("먼저 회차를 선택해주세요.");
       return;
     }
-    // 2단계 페이지로 넘어가기
+    navigate("/progress/step2");
   };
 
   return (
