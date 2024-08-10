@@ -13,6 +13,7 @@ const SelectPayWrap = styled.div`
   gap: 67px;
   position: relative;
   padding: 20px;
+  height: 300px;
 `;
 export const Step4Container = styled.div`
   display: flex;
@@ -30,7 +31,7 @@ const SubTtitle = styled.div`
 `;
 const BtnWrap = styled.div`
   position: absolute;
-  bottom: -100px;
+  bottom: 0px;
   right: 0;
 `;
 
