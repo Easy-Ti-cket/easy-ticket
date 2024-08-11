@@ -11,7 +11,7 @@ const MainContainer = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: 600px;
   text-align: center;
 `;
 
@@ -47,7 +47,7 @@ const Input = styled.input`
 `;
 
 const SytledMainImage = styled.img`
-  width: 500px;
+  width: 600px;
   height: auto;
   flex-shrink: 0;
   object-fit: cover;
