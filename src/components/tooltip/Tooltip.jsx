@@ -9,7 +9,7 @@ const StyledTooltip = styled.div`
   .react-tooltip {
     background-color: var(--point-color2);
     color: var(--text-color2);
-    font-family: PretendardM;
+    font-family: pretendardM;
     padding: 10px;
     border-radius: 8px;
     z-index: 99;
