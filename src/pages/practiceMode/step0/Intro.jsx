@@ -26,6 +26,10 @@ const Intro = () => {
 
   const handleClick = () => {
     setProgress(1);
+    if (level === "low" || level === "middle") {
+      navigate("/progress/step1-2");
+      return;
+    }
     navigate("/progress/step1-1");
   };
 
