@@ -1,6 +1,6 @@
 // 타이머 컴포넌트
 
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useAtom } from "jotai";
 import styled from "styled-components";
 import timerIcon from "../../assests/images/icons/timer.svg";
@@ -37,41 +37,62 @@ const StyledCountdownText = styled.div`
 `;
 
 // props로 type과 second 받기
-const Timer = ({ type, second }) => {
+const Timer = ({ type, second, isModalOpen }) => {
   const [secondCount, setSecondCount] = useAtom(readSecondCount);
   const [, writeSecond] = useAtom(writeSecondCount);
   const [minuteCount, setMinuteCount] = useAtom(readMinuteCount);
   const [, writeMinute] = useAtom(writeMinuteCount);
 
+  //타이머  ID (타이머 제어 호출 값)
+  const countdownRef = useRef(null);
+
   useEffect(() => {
-    if (type === "second") {
-      writeSecond(() => second); // 초(second) 초기값 설정
-      const countdown = setInterval(() => {
-        writeSecond((prevCount) => {
-          if (prevCount <= 1) {
-            clearInterval(countdown);
-            return 0;
-          }
-          return prevCount - 1;
-        });
-      }, 1000);
-
-      return () => clearInterval(countdown);
-    } else if (type === "minute") {
-      writeMinute(() => second); // 분(minute) 초기값 설정
-      const countdown = setInterval(() => {
-        writeMinute((prevCount) => {
-          if (prevCount <= 1) {
-            clearInterval(countdown);
-            return 0;
-          }
-          return prevCount - 1;
-        });
-      }, 1000);
-
-      return () => clearInterval(countdown);
+    if (!isModalOpen) {
+      if (type === "second") {
+        console.log(secondCount);
+        if (!secondCount) {
+          writeSecond(() => second); // 초(second) 초기값 설정
+        } else {
+          writeSecond(() => secondCount);
+        }
+        countdownRef.current = setInterval(() => {
+          writeSecond((prevCount) => {
+            if (prevCount <= 1) {
+              clearInterval(countdownRef.current);
+              return 0;
+            }
+            return prevCount - 1;
+          });
+        }, 1000);
+      } else if (type === "minute") {
+        //minuteCount가 없을 경우 (타이머가 시작하지 않았을 경우)
+        //second로 초기화
+        if (!minuteCount) {
+          writeMinute(() => second); // 분(minute) 초기값 설정
+          //타이머가 시작하고 일시정지 될 경우
+          //일시정지된 값  = minuteCount로 초기화
+        } else {
+          writeMinute(() => minuteCount);
+        }
+        countdownRef.current = setInterval(() => {
+          writeMinute((prevCount) => {
+            if (prevCount <= 1) {
+              clearInterval(countdownRef.current);
+              return 0;
+            }
+            return prevCount - 1;
+          });
+        }, 1000);
+      } else {
+        //모달이 열려있을 경우 일시정지
+        if (countdownRef.current) {
+          clearInterval(countdownRef.current);
+        }
+      }
     }
-  }, [writeSecond, writeMinute, second, type]);
+    //컴포넌트 언마운트 시 (타이머)
+    return () => clearInterval(countdownRef.current);
+  }, [isModalOpen, writeSecond, writeMinute, second, type]);
 
   const minutes = Math.floor(minuteCount / 60); // 분으로 분리
   const seconds = minuteCount % 60; // 초로 분리

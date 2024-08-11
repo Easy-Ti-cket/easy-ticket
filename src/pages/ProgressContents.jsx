@@ -5,8 +5,8 @@ import { Outlet } from "react-router-dom";
 import Button from "../components/button/Button";
 import { useState } from "react";
 import Modal from "../components/Modal";
-import { useAtomValue } from "jotai";
-import { levelAtom } from "../store/atom";
+import { useAtomValue, useSetAtom } from "jotai";
+import { levelAtom, writeSecondCount } from "../store/atom";
 
 //ProgressBar+ContentsBox Container
 const ProgressContentsContainer = styled.div`
@@ -52,12 +52,14 @@ const ProgressContents = ({ text }) => {
   //레벨 별 타이머 출력 설정
   const level = useAtomValue(levelAtom);
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   const handleModalOpen = () => {
     setIsModalOpen(true);
   };
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
+
   return (
     <ProgressContentsContainer>
       {/*프로그래스 바*/}
@@ -65,7 +67,10 @@ const ProgressContents = ({ text }) => {
         <ProgressBar />
       </ProgressBarBox>
       {/*고급 level일 경우에만 Timer 설정 */}
-      {level === "high" && <Timer type={"minute"} second={1000} />}
+      {/*모달이 열렸을 경우 Timer 정지*/}
+      {level === "high" && (
+        <Timer type={"minute"} second={1000} isModalOpen={isModalOpen} />
+      )}
       <TextBox>{text}</TextBox>
       <ContentsBox>
         {/*도움말 버튼 */}
