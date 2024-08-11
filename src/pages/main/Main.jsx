@@ -62,11 +62,13 @@ function Main() {
     setName(name);
   };
 
+  //시작하기 클릭 시
   const handleClick = () => {
     if (name === "") {
       alert("이름을 입력해주세요.");
       return;
     }
+    localStorage.setItem("name", name);
     navigate("/select-mode");
   };
   return (
