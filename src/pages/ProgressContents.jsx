@@ -5,8 +5,8 @@ import { Outlet } from "react-router-dom";
 import Button from "../components/button/Button";
 import { useState } from "react";
 import Modal from "../components/Modal";
-import { useAtomValue, useSetAtom } from "jotai";
-import { levelAtom, writeSecondCount } from "../store/atom";
+import { useAtomValue } from "jotai";
+import { levelAtom } from "../store/atom";
 
 //ProgressBar+ContentsBox Container
 const ProgressContentsContainer = styled.div`
