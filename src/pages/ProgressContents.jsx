@@ -5,7 +5,7 @@ import { Outlet } from "react-router-dom";
 import Button from "../components/button/Button";
 import { useState } from "react";
 import Modal from "../components/Modal";
-import { useStepText } from "../hooks/useStepText";
+import useText from "../hooks/useText";
 
 //ProgressBar+ContentsBox Container
 const ProgressContentsContainer = styled.div`
@@ -55,6 +55,8 @@ const ProgressContents = () => {
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
+  const helpText = useText("help");
+  const stepText = useText("step");
   return (
     <ProgressContentsContainer>
       {/*프로그래스 바*/}
@@ -62,7 +64,7 @@ const ProgressContents = () => {
         <ProgressBar />
       </ProgressBarBox>
       <Timer type={"minute"} second={1000}></Timer>
-      <TextBox>{useStepText()}</TextBox>
+      <TextBox>{stepText}</TextBox>
       <ContentsBox>
         {/*도움말 버튼 */}
         <ButtonContainer>
@@ -74,7 +76,7 @@ const ProgressContents = () => {
         </ButtonContainer>
         {/*도움말 모달창*/}
         {isModalOpen && (
-          <Modal onClick={handleModalClose} contents="내용입니다" />
+          <Modal onClick={handleModalClose} contents={helpText} />
         )}
         <Outlet />
       </ContentsBox>
