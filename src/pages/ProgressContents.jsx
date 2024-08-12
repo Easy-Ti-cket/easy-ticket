@@ -5,6 +5,7 @@ import { Outlet } from "react-router-dom";
 import Button from "../components/button/Button";
 import { useState } from "react";
 import Modal from "../components/Modal";
+import { useStepText } from "../hooks/useStepText";
 
 //ProgressBar+ContentsBox Container
 const ProgressContentsContainer = styled.div`
@@ -46,7 +47,7 @@ const ButtonContainer = styled.div`
 `;
 /*난이도별 contents를 children으로 받아서 ProgressBar와 함께 렌더링
 Outlet으로 대체 예정*/
-const ProgressContents = ({ text }) => {
+const ProgressContents = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleModalOpen = () => {
     setIsModalOpen(true);
@@ -61,7 +62,7 @@ const ProgressContents = ({ text }) => {
         <ProgressBar />
       </ProgressBarBox>
       <Timer type={"minute"} second={1000}></Timer>
-      <TextBox>{text}</TextBox>
+      <TextBox>{useStepText()}</TextBox>
       <ContentsBox>
         {/*도움말 버튼 */}
         <ButtonContainer>

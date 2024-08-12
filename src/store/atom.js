@@ -63,3 +63,6 @@ export const seatInfoAtom = atom({
   price: 0,
   date: ""
 });
+
+//단계별 텍스트
+export const stepTextNumberAtom = atom(0);
