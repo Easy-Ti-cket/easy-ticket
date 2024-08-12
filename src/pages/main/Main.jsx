@@ -68,7 +68,7 @@ function Main() {
       alert("이름을 입력해주세요.");
       return;
     }
-    localStorage.setItem("name", name);
+    sessionStorage.setItem("name", name);
     navigate("/select-mode");
   };
   return (
