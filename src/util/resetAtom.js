@@ -1,5 +1,4 @@
 const resetAtom = () => {
-  sessionStorage.removeItem("level");
   sessionStorage.removeItem("selectedPoster");
   sessionStorage.removeItem("allowedSeat");
   sessionStorage.removeItem("isSeatSelected");
