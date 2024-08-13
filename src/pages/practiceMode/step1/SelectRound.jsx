@@ -57,7 +57,7 @@ const SelectRound = () => {
   const [animationStep, setAnimationStep] = useState(0);
   const navigate = useNavigate();
   useEffect(() => {
-    setLevel(currentLevel);
+    // setLevel(currentLevel);
     setProgress(1);
     if (currentLevel === "low") {
       setPosterId(0); // 초급일 경우 고정
