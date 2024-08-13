@@ -25,7 +25,7 @@ const useText = (type) => {
     if (progress === 0) return;
     // 고급모드일 경우 고급모드 text만 필터링
     const currentTexts = textsArray[progress - 1].filter((text) =>
-      level === "high" ? text.level === "high" : text.level !== "high"
+      level === "high" ? text.high : text.low
     );
 
     setFilteredTexts(currentTexts);
