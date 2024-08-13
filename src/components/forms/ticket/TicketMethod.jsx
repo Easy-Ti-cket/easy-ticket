@@ -22,6 +22,7 @@ const TicketMethodWrap = styled(FormWrap)`
   justify-content: center;
   align-items: start;
   padding: 20px;
+  height: 417px;
 `;
 const TicketMethod = ({ option, setOption }) => {
   const handleOptionChange = (e) => {
