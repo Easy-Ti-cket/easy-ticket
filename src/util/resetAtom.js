@@ -1,4 +1,4 @@
-const useResetAtom = () => {
+const resetAtom = () => {
   sessionStorage.removeItem("level");
   sessionStorage.removeItem("selectedPoster");
   sessionStorage.removeItem("allowedSeat");
@@ -10,4 +10,4 @@ const useResetAtom = () => {
   sessionStorage.removeItem("posterId");
 };
 
-export default useResetAtom;
+export default resetAtom;

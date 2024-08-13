@@ -1,6 +1,8 @@
 import Header from "../components/header/Header";
 import styled from "styled-components";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
+import { useEffect } from "react";
+import resetAtom from "../util/resetAtom";
 
 const LayoutPage = styled.div`
   height: 100vh;
@@ -9,9 +11,16 @@ const LayoutPage = styled.div`
   align-items: center;
 `;
 
-/*Header고정, children으로 받은 컴포넌트 렌더링
- Outlet으로 대체 예정*/
 const Layout = () => {
+  const path = useLocation().pathname;
+  const isStep = path.includes("step");
+
+  useEffect(() => {
+    if (!isStep) {
+      resetAtom();
+    }
+  }, [isStep]); // isStep이 변경될 때만 실행됨
+
   return (
     <LayoutPage>
       <Header />
