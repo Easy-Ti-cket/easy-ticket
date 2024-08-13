@@ -34,7 +34,7 @@ const StepLine = styled.div`
   height: 13px;
   background-color: ${(props) =>
     props.$active
-      ? props.theme.progressBarColors.interpark
+      ? props.theme.progressBarColors[props.$themeSite]
       : "var(--fill-color)"};
   margin-bottom: 10px;
 
@@ -57,7 +57,7 @@ const StepLabel = styled.div`
 
 const ProgressBar = () => {
   const progress = useAtomValue(progressAtom);
-  const challengeSite = useAtomValue(themeSiteAtom);
+  const themeSite = useAtomValue(themeSiteAtom);
   const steps = [
     "공연 및 회차선택",
     "좌석 선택",
@@ -76,6 +76,7 @@ const ProgressBar = () => {
               index == 0 ? "rounded-start" : index == 4 ? "rounded-end" : ""
             }
             $active={progress >= index + 1}
+            $themeSite={themeSite}
           />
           <StepLabel $active={progress == index + 1}>{stepName}</StepLabel>
         </ProgressStep>
