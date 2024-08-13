@@ -85,3 +85,5 @@ export const seatInfoAtom = atomWithStorage(
   },
   storage
 );
+
+export const themeSiteAtom = atomWithStorage("themeSite", "", storage);

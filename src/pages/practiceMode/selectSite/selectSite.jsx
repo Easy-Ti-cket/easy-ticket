@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import Button from "../../../components/button/Button";
+import { themeSiteAtom } from "../../../store/atom";
+import { useSetAtom } from "jotai";
 const SelectSiteContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -34,7 +36,7 @@ const ButtonBox = styled.div`
 
 const SelectSite = () => {
   const nav = useNavigate();
-
+  const setThemeSite = useSetAtom(themeSiteAtom);
   const sites = [
     { name: "인터파크 티켓", icon: interparkIcon, path: "/interpark" },
     { name: "멜론티켓", icon: melonticketIcon, path: "/melonticket" },
@@ -43,6 +45,8 @@ const SelectSite = () => {
   ];
 
   const handleClick = (path) => {
+    //site 종류를 sessionStorage에 저장
+    setThemeSite(path.replace("/", ""));
     nav(path);
   };
 
