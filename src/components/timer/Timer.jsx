@@ -97,7 +97,6 @@ const Timer = ({ type, second, isModalOpen }) => {
         }, 1000);
       }
     }
-
     // 컴포넌트 언마운트 시 타이머 클리어
     return () => clearInterval(countdownRef.current);
   }, [
@@ -110,7 +109,6 @@ const Timer = ({ type, second, isModalOpen }) => {
     writeSecond,
     writeMinute
   ]);
-
   const minutes = Math.floor(minuteCount / 60); // 분으로 분리
   const seconds = minuteCount % 60; // 초로 분리
 
