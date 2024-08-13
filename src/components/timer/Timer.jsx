@@ -3,10 +3,12 @@ import { useAtom } from "jotai";
 import styled from "styled-components";
 import timerIcon from "../../assests/images/icons/timer.svg";
 import {
-  readSecondCount,
-  writeSecondCount,
-  readMinuteCount,
-  writeMinuteCount
+  // readSecondCount,
+  // writeSecondCount,
+  // readMinuteCount,
+  // writeMinuteCount
+  secondCountAtom,
+  minuteCountAtom
 } from "../../store/atom";
 import { useLocation } from "react-router-dom";
 
@@ -37,11 +39,10 @@ const StyledCountdownText = styled.div`
 
 // props로 type과 second 받기
 const Timer = ({ type, second, isModalOpen }) => {
-  const [secondCount, setSecondCount] = useAtom(readSecondCount);
-  const [, writeSecond] = useAtom(writeSecondCount);
-  const [minuteCount, setMinuteCount] = useAtom(readMinuteCount);
-  const [, writeMinute] = useAtom(writeMinuteCount);
-
+  const [secondCount, writeSecond] = useAtom(secondCountAtom);
+  // const [, writeSecond] = useAtom(writeSecondCount);
+  const [minuteCount, writeMinute] = useAtom(minuteCountAtom);
+  // const [, writeMinute] = useAtom(writeMinuteCount);
   // 타이머 ID (타이머 제어 호출 값)
   const countdownRef = useRef(null);
   //타이머 제어를 위한 현재 위치 출력
@@ -65,14 +66,11 @@ const Timer = ({ type, second, isModalOpen }) => {
     } else if (path === "/progress/step0") {
       //고급 시작화면에서는 타이머 멈추고 리셋
       clearInterval(countdownRef.current);
-      writeSecond(() => second); // 초(second) 초기값 설정
-      writeMinute(() => second - 100);
+      // writeSecond(second); // 초(second) 초기값 설정
+      writeMinute(second - 100);
     } else {
       // 타이머 시작
       if (type === "second") {
-        if (!secondCount) {
-          writeSecond(() => second); // 초(second) 초기값 설정
-        }
         countdownRef.current = setInterval(() => {
           writeSecond((prevCount) => {
             if (prevCount <= 1) {
@@ -83,9 +81,7 @@ const Timer = ({ type, second, isModalOpen }) => {
           });
         }, 1000);
       } else if (type === "minute") {
-        if (!minuteCount) {
-          writeMinute(() => second - 100); // 분(minute) 초기값 설정
-        }
+        // console.log("minuteCount", minuteCount);
         countdownRef.current = setInterval(() => {
           writeMinute((prevCount) => {
             if (prevCount <= 1) {
@@ -97,7 +93,6 @@ const Timer = ({ type, second, isModalOpen }) => {
         }, 1000);
       }
     }
-
     // 컴포넌트 언마운트 시 타이머 클리어
     return () => clearInterval(countdownRef.current);
   }, [
@@ -110,7 +105,6 @@ const Timer = ({ type, second, isModalOpen }) => {
     writeSecond,
     writeMinute
   ]);
-
   const minutes = Math.floor(minuteCount / 60); // 분으로 분리
   const seconds = minuteCount % 60; // 초로 분리
 
