@@ -4,16 +4,30 @@ import SeatChart from "../../../components/seatChart/SeatChart";
 import styled from "styled-components";
 import { useEffect } from "react";
 import { useAtomValue, useSetAtom } from "jotai";
-import { isSectionSelectedAtom, progressAtom } from "../../../store/atom";
+import {
+  isSectionSelectedAtom,
+  isSeatSelectedAtom,
+  progressAtom,
+  stepTextNumberAtom
+} from "../../../store/atom";
 const SelectSeatcontainer = styled.div`
   display: flex;
   justify-content: space-evenly;
   align-items: center;
 `;
 const SelectSeat = () => {
+  const setStepTextNumber = useSetAtom(stepTextNumberAtom);
   const isSectionSelected = useAtomValue(isSectionSelectedAtom);
+  const isSeatSelected = useAtomValue(isSeatSelectedAtom);
   const setProgress = useSetAtom(progressAtom);
-  useEffect(() => setProgress(2));
+  useEffect(() => {
+    setProgress(2);
+    setStepTextNumber(0);
+  }, []);
+  useEffect(() => {
+    if (isSectionSelected || isSeatSelected)
+      setStepTextNumber((prev) => prev + 1);
+  }, [isSectionSelected, isSeatSelected]);
   return (
     <SelectSeatcontainer>
       {isSectionSelected ? (

@@ -43,7 +43,11 @@ const router = createBrowserRouter([
             element: <SelectRound />,
             label: "날짜 및 회차 선택"
           },
-          { path: "step2", element: <SelectSeat />, label: "좌석 선택" },
+          {
+            path: "step2",
+            element: <SelectSeat />,
+            label: "좌석 선택"
+          },
           {
             path: "step3-1",
             element: <SeatPriceCheck />,

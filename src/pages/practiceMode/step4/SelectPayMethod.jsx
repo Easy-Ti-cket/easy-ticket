@@ -5,7 +5,7 @@ import { useForm } from "../../../hooks/useForm";
 import Button from "../../../components/button/Button";
 import { useNavigate } from "react-router-dom";
 import { useSetAtom } from "jotai";
-import { progressAtom } from "../../../store/atom";
+import { progressAtom, stepTextNumberAtom } from "../../../store/atom";
 import { useEffect } from "react";
 
 const SelectPayWrap = styled.div`
@@ -41,13 +41,22 @@ const SelectPayMethod = () => {
   const { handleChange, correctList, isAnswer } = useForm(3);
   //'신용카드'를 정확히 골랐을 경우 '결제 수단 입력' 창 생성
   const isPayMethodCorrect = correctList["PayMethodForm"];
+
+  const setStepTextNumber = useSetAtom(stepTextNumberAtom);
+
   // 다음 페이지 이동
   const navigate = useNavigate();
   // progress bar 설정
   const setProgress = useSetAtom(progressAtom);
   useEffect(() => {
     setProgress(4);
+    setStepTextNumber(0);
   }, []);
+
+  useEffect(() => {
+    if (isPayMethodCorrect) setStepTextNumber((prev) => prev + 1);
+  }, [isPayMethodCorrect]);
+
   return (
     <SelectPayWrap>
       {/*결제 방식 선택 */}
@@ -74,7 +83,10 @@ const SelectPayMethod = () => {
         <BtnWrap>
           <Button
             text="다음 단계"
-            onClick={() => navigate("/progress/step4-2")}
+            onClick={() => {
+              navigate("/progress/step4-2");
+              setStepTextNumber((prev) => prev + 1);
+            }}
           />
         </BtnWrap>
       )}

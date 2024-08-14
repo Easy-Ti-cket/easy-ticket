@@ -4,7 +4,7 @@ import SeatCount from "../../../components/SeatCount";
 import { useEffect, useState } from "react";
 import TicketMethod from "../../../components/forms/ticket/TicketMethod";
 import { useSetAtom } from "jotai";
-import { progressAtom } from "../../../store/atom";
+import { progressAtom, stepTextNumberAtom } from "../../../store/atom";
 
 const Wrap = styled.div`
   display: flex;
@@ -18,7 +18,14 @@ const SeatPriceCheck = () => {
   const [step3Stage, setStep3Stage] = useState(1);
   const addStage = () => setStep3Stage((prev) => prev + 1);
   const setProgress = useSetAtom(progressAtom);
-  useEffect(() => setProgress(3));
+  const setStepTextNumber = useSetAtom(stepTextNumberAtom);
+  useEffect(() => {
+    setProgress(3);
+    setStepTextNumber(0);
+  }, []);
+  useEffect(() => {
+    if (step3Stage == 2) setStepTextNumber((prev) => prev + 1);
+  }, [step3Stage]);
   return (
     <Wrap>
       {step3Stage == 1 ? (

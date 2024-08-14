@@ -22,19 +22,18 @@ const useText = (type) => {
   const [filteredTexts, setFilteredTexts] = useState([]);
 
   useEffect(() => {
-    if (progress === 0) return;
+    if (progress === 0 || progress === 5) {
+      return;
+    }
     // 고급모드일 경우 고급모드 text만 필터링
     const currentTexts = textsArray[progress - 1].filter((text) =>
       level === "high" ? text.high : text.low
     );
-
     setFilteredTexts(currentTexts);
   }, [progress, level, stepTextNumber]);
-
-  if (progress === 0 || !filteredTexts[stepTextNumber]) {
-    return null;
+  if (progress === 0 || progress === 5) {
+    return;
   }
-
   return filteredTexts[stepTextNumber]?.content;
 };
 

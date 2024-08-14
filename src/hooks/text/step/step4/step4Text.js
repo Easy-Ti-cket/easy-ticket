@@ -1,10 +1,10 @@
 const step4Text = [
   {
-    high: true,
     low: true,
     content:
       "다음은 결제 방식 선택 창입니다. ‘신용카드’ 결제 방식을 선택해 주세요.\n\n(실제로는 다양한 결제 수단이 존재합니다. < 빨간 글씨로 작게 추가)\n\n- 고급 : 신용카드를 선택해 주세요"
   },
+  { high: true, content: "신용카드를 선택해 주세요" },
   {
     high: true,
     low: true,
