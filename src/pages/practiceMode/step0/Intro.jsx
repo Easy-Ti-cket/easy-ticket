@@ -12,7 +12,7 @@ const IntroContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 500px;
+  height: 100%;
 `;
 
 const Intro = () => {
@@ -27,7 +27,7 @@ const Intro = () => {
   const handleClick = () => {
     setProgress(1);
     if (level === "low" || level === "middle") {
-      navigate("/progress/?step=step1-2");
+      navigate("/progress/step1-2");
       return;
     }
     navigate("/progress/step1-1");
