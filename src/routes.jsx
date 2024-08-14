@@ -14,6 +14,7 @@ import CardPay from "./pages/practiceMode/step4/CardPay";
 import Step5 from "./pages/practiceMode/step5/Step5";
 import SelectSeat from "./pages/practiceMode/step2/SelectSeat";
 import SeatPriceCheck from "./pages/practiceMode/step3/SeatPriceCheck";
+import PrivateRoute from "./pages/PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -35,37 +36,37 @@ const router = createBrowserRouter([
           },
           {
             path: "step1-1",
-            element: <SelectPerformance />,
+            element: <PrivateRoute element={<SelectPerformance />} />,
             label: "공연 선택"
           },
           {
             path: "step1-2",
-            element: <SelectRound />,
+            element: <PrivateRoute element={<SelectRound />} />,
             label: "날짜 및 회차 선택"
           },
           {
             path: "step2",
-            element: <SelectSeat />,
+            element: <PrivateRoute element={<SelectSeat />} />,
             label: "좌석 선택"
           },
           {
             path: "step3-1",
-            element: <SeatPriceCheck />,
+            element: <PrivateRoute element={<SeatPriceCheck />} />,
             label: "좌석 매수 및 가격 확인"
           },
           {
             path: "step4-1",
-            element: <SelectPayMethod />,
+            element: <PrivateRoute element={<SelectPayMethod />} />,
             label: "결제방식 / 수단 선택"
           },
           {
             path: "step4-2",
-            element: <CardPay />,
+            element: <PrivateRoute element={<CardPay />} />,
             label: "카드 결제창"
           },
           {
             path: "step5",
-            element: <Step5 />,
+            element: <PrivateRoute element={<Step5 />} />,
             label: "예매 성공"
           }
         ]
