@@ -10,6 +10,7 @@ import {
 import { useAtomValue } from "jotai";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useForm } from "../../hooks/useForm";
 
 const Container = styled.div`
   border: 1px solid var(--key-color);
@@ -68,7 +69,7 @@ const PaddingContainer = styled.div`
 const NextAnimation = styled(Animation)`
   padding: 3px;
 `;
-const MyBookingInfo = ({ option, step3Stage, addStage }) => {
+const MyBookingInfo = ({ option, step3Stage, addStage, isValidate }) => {
   const allowedSeat = useAtomValue(allowedSeatAtom);
   const seatCount = useAtomValue(seatCountAtom);
   const seatInfo = useAtomValue(seatInfoAtom);
@@ -105,7 +106,18 @@ const MyBookingInfo = ({ option, step3Stage, addStage }) => {
     }
     // 버튼이 결제하기일 경우 step4-1로 이동
     if (step3Stage == 2) {
-      nav("/progress/step4-1");
+      //티켓수령방법 + 생년월일을 모두 다 작성했을 경우
+      console.log(isValidate);
+      if (!isValidate.includes("birth")) {
+        alert("생년월일을 작성해 주세요");
+        return;
+      }
+      if (!isValidate.includes("method")) {
+        alert("티켓 수령 방법을 선택해 주세요");
+        return;
+      } else {
+        nav("/progress/step4-1");
+      }
     }
   };
   const totalAmount = Info.reduce((acc, currentValue) => {

@@ -24,9 +24,17 @@ const TicketMethodWrap = styled(FormWrap)`
   padding: 20px;
   height: 417px;
 `;
-const TicketMethod = ({ option, setOption }) => {
+const TicketMethod = ({ option, setOption, setIsValidate }) => {
   const handleOptionChange = (e) => {
     setOption(e.target.value);
+    //검사 로직
+    if (e.target.value) {
+      setIsValidate((prev) =>
+        prev.includes("method") ? prev : [...prev, "method"]
+      );
+    } else {
+      setIsValidate((prev) => prev.filter((item) => item !== "method"));
+    }
   };
   return (
     <TicketMethodWrap>
@@ -51,7 +59,7 @@ const TicketMethod = ({ option, setOption }) => {
       <TicketMethodCont>
         {/*예매자 확인 */}
         <SectionTitle>예매자 확인</SectionTitle>
-        <TicketBuyer option={option} />
+        <TicketBuyer option={option} setIsValidate={setIsValidate} />
       </TicketMethodCont>
     </TicketMethodWrap>
   );

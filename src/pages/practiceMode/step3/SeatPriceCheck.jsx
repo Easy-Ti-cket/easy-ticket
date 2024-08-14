@@ -19,17 +19,25 @@ const SeatPriceCheck = () => {
   const addStage = () => setStep3Stage((prev) => prev + 1);
   const setProgress = useSetAtom(progressAtom);
   useEffect(() => setProgress(3));
+  // 폼 검사 로직
+  const [isValidate, setIsValidate] = useState([]);
+
   return (
     <Wrap>
       {step3Stage == 1 ? (
         <SeatCount />
       ) : (
-        <TicketMethod option={option} setOption={setOption} />
+        <TicketMethod
+          option={option}
+          setOption={setOption}
+          setIsValidate={setIsValidate}
+        />
       )}
       <MyBookingInfo
         step3Stage={step3Stage}
         addStage={addStage}
         option={option}
+        isValidate={isValidate}
       />
     </Wrap>
   );

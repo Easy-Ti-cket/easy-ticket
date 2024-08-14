@@ -4,6 +4,7 @@ import { InputContainer, Label } from "../../input/InputStyle";
 import { useForm } from "../../../hooks/useForm";
 import { useAtomValue } from "jotai";
 import { levelAtom } from "../../../store/atom";
+import { useState } from "react";
 
 const BuyerWrap = styled.div`
   display: flex;
@@ -45,10 +46,19 @@ const data_delivery = [
   { label: "우편번호", value: "123-1234" }
 ];
 
-const TicketBuyer = ({ option }) => {
+const TicketBuyer = ({ option, setIsValidate }) => {
   //난이도 - 생년월일 입력 구현
   const level = useAtomValue(levelAtom);
-  const { handleChange } = useForm();
+  // 생년월일 입력 검사 로직
+  const handleChange = (e) => {
+    if (e.target.value === "") {
+      setIsValidate((prev) => prev.filter((item) => item !== "birth"));
+    } else {
+      setIsValidate((prev) =>
+        prev.includes("birth") ? prev : [...prev, "birth"]
+      );
+    }
+  };
 
   return (
     <BuyerWrap>
