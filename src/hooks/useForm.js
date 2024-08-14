@@ -29,6 +29,8 @@ export const useForm = (correctNum) => {
       //cardNum은 string으로 값을 받으므로 정답을 string으로 변환하여 대조
       if (String(answerList[name]) === value) {
         setCorrectList((prev) => ({ ...prev, [name]: true }));
+      } else {
+        setCorrectList((prev) => ({ ...prev, [name]: false }));
       }
       return newResponse;
     });

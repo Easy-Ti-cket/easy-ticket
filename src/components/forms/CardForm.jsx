@@ -11,6 +11,7 @@ const CardInputFied = styled(InputField)`
 `;
 const CardForm = ({ focusNum, handleChange }) => {
   const level = useAtomValue(levelAtom);
+
   return (
     <FormWrap>
       {/*카드 번호 */}

@@ -6,13 +6,18 @@ import { levelAtom } from "../../../store/atom";
 import AnimationArea from "../../Animation";
 const DetailPayFormWrap = styled(FormWrap)`
   flex-direction: row;
+  color: ${(props) => props.$hasPayFormError && "var(--point-color)"};
 `;
 const DropDown = styled.select`
   width: 230px;
   height: 35px;
-  border: 1px solid var(--fill-color);
   border-radius: 4px;
   margin-left: 5px;
+  border: ${(props) =>
+    props.$cardTypesError
+      ? "2px solid var(--point-color)"
+      : "1px solid var(--fill-color)"};
+
   //값 설정 후 생기는 outline 제거
   &:focus {
     outline: none;
@@ -41,10 +46,16 @@ const optionArr = [
 ];
 //isSelected : 선택되었는가?
 //드롭다운은 '결제수단'은 선택됐지만 '페이지 전체 정답'이 아닌 경우 애니메이션
-const DetailPayForm = ({ handleChange, isSelected, isAnswer }) => {
+const DetailPayForm = ({
+  handleChange,
+  isSelected,
+  isAnswer,
+  hasPayFormError,
+  cardTypesError
+}) => {
   const level = useAtomValue(levelAtom);
   return (
-    <DetailPayFormWrap>
+    <DetailPayFormWrap $hasPayFormError={hasPayFormError}>
       <FormWrap>
         {textArr.map((payItem, index) => (
           <Input
@@ -59,7 +70,11 @@ const DetailPayForm = ({ handleChange, isSelected, isAnswer }) => {
         ))}
       </FormWrap>
       <AnimationArea $focus={level === "low" && isSelected && !isAnswer}>
-        <DropDown name="CardTypes" onChange={handleChange}>
+        <DropDown
+          name="CardTypes"
+          onChange={handleChange}
+          $cardTypesError={cardTypesError}
+        >
           {/*드롭다운의 placeholder역할 */}
           <option value="" disabled>
             카드 종류를 선택해 주세요
