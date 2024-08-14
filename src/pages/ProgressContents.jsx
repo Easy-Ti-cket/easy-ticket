@@ -62,8 +62,8 @@ const ProgressContents = () => {
     setIsModalOpen(false);
   };
 
-  const helpText = useText("help");
-  const stepText = useText("step");
+  const { helpText, stepText } = useText();
+
   return (
     <ProgressContentsContainer>
       {/*프로그래스 바*/}

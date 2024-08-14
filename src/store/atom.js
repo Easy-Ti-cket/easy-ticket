@@ -88,3 +88,6 @@ export const seatInfoAtom = atomWithStorage(
 
 //단계별 텍스트
 export const stepTextNumberAtom = atomWithStorage("stepTextNumber", 0, storage);
+
+//도움말 텍스트
+export const helpTextNumberAtom = atomWithStorage("helpTextNumber", 0, storage);

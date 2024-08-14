@@ -8,7 +8,8 @@ import {
   isSectionSelectedAtom,
   isSeatSelectedAtom,
   progressAtom,
-  stepTextNumberAtom
+  stepTextNumberAtom,
+  helpTextNumberAtom
 } from "../../../store/atom";
 const SelectSeatcontainer = styled.div`
   display: flex;
@@ -17,17 +18,24 @@ const SelectSeatcontainer = styled.div`
 `;
 const SelectSeat = () => {
   const setStepTextNumber = useSetAtom(stepTextNumberAtom);
+  const setHelpTextNumber = useSetAtom(helpTextNumberAtom);
   const isSectionSelected = useAtomValue(isSectionSelectedAtom);
   const isSeatSelected = useAtomValue(isSeatSelectedAtom);
   const setProgress = useSetAtom(progressAtom);
+
   useEffect(() => {
     setProgress(2);
     setStepTextNumber(0);
+    setHelpTextNumber(0);
   }, []);
+
   useEffect(() => {
-    if (isSectionSelected || isSeatSelected)
+    if (isSectionSelected || isSeatSelected) {
       setStepTextNumber((prev) => prev + 1);
+      setHelpTextNumber((prev) => prev + 1);
+    }
   }, [isSectionSelected, isSeatSelected]);
+
   return (
     <SelectSeatcontainer>
       {isSectionSelected ? (

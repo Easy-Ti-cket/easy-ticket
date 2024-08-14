@@ -53,11 +53,13 @@ const SelectRound = () => {
   const [selectedPoster] = useAtom(selectedPosterAtom);
   const [currentLevel] = useAtom(levelAtom);
   const setStepTextNumber = useSetAtom(stepTextNumberAtom);
+
   const [posterId, setPosterId] = useState(0);
   const [dateSelected, setDateSelected] = useState(false);
   const [roundSelected, setRoundSelected] = useState(false);
   const [animationStep, setAnimationStep] = useState(0);
   const navigate = useNavigate();
+
   useEffect(() => {
     // setLevel(currentLevel);
     setProgress(1);

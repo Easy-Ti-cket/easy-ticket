@@ -5,7 +5,11 @@ import { useForm } from "../../../hooks/useForm";
 import Button from "../../../components/button/Button";
 import { useNavigate } from "react-router-dom";
 import { useSetAtom } from "jotai";
-import { progressAtom, stepTextNumberAtom } from "../../../store/atom";
+import {
+  progressAtom,
+  stepTextNumberAtom,
+  helpTextNumberAtom
+} from "../../../store/atom";
 import { useEffect } from "react";
 
 const SelectPayWrap = styled.div`
@@ -43,6 +47,7 @@ const SelectPayMethod = () => {
   const isPayMethodCorrect = correctList["PayMethodForm"];
 
   const setStepTextNumber = useSetAtom(stepTextNumberAtom);
+  const setHelpTextNumber = useSetAtom(helpTextNumberAtom);
 
   // 다음 페이지 이동
   const navigate = useNavigate();
@@ -51,10 +56,14 @@ const SelectPayMethod = () => {
   useEffect(() => {
     setProgress(4);
     setStepTextNumber(0);
+    setHelpTextNumber(0);
   }, []);
 
   useEffect(() => {
-    if (isPayMethodCorrect) setStepTextNumber((prev) => prev + 1);
+    if (isPayMethodCorrect) {
+      setStepTextNumber((prev) => prev + 1);
+      setHelpTextNumber((prev) => prev + 1);
+    }
   }, [isPayMethodCorrect]);
 
   return (
@@ -86,6 +95,7 @@ const SelectPayMethod = () => {
             onClick={() => {
               navigate("/progress/step4-2");
               setStepTextNumber((prev) => prev + 1);
+              setHelpTextNumber((prev) => prev + 1);
             }}
           />
         </BtnWrap>
