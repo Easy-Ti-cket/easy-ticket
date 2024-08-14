@@ -36,7 +36,7 @@ const ContentsBox = styled.div`
   border-radius: 8px;
   display: inline-flex;
   justify-content: center;
-  padding: 30px;
+  padding: 30px 0;
   //도움말 버튼 부모 position
   position: relative;
 `;
