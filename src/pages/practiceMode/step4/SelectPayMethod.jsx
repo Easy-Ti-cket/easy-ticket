@@ -41,7 +41,6 @@ const SelectPayMethod = () => {
   //onChange 이벤트 핸들러, 정답 리스트, 페이지 전체 정답 여부
   //useForm 매개변수 - 맞혀야 하는 문제 개수
   const { handleChange, correctList, isAnswer } = useForm(3);
-  console.log(correctList);
   //'신용카드'를 정확히 골랐을 경우 '결제 수단 입력' 창 생성
   const isPayMethodCorrect = correctList["PayMethodForm"];
   // 다음 페이지 이동
