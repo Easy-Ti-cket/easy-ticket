@@ -54,11 +54,11 @@ const DetailPayForm = ({ handleChange, isSelected, isAnswer }) => {
             value={payItem}
             text={payItem}
             onChange={handleChange}
-            $focus={level !== "high" && index == 0 && !isSelected}
+            $focus={level === "low" && index == 0 && !isSelected}
           />
         ))}
       </FormWrap>
-      <AnimationArea $focus={level !== "high" && isSelected && !isAnswer}>
+      <AnimationArea $focus={level === "low" && isSelected && !isAnswer}>
         <DropDown name="CardTypes" onChange={handleChange}>
           {/*드롭다운의 placeholder역할 */}
           <option value="" disabled>
