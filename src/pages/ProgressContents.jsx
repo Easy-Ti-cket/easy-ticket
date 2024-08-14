@@ -4,7 +4,7 @@ import Timer from "../components/timer/Timer";
 import { Outlet } from "react-router-dom";
 import Button from "../components/button/Button";
 import { useState } from "react";
-import Modal from "../components/Modal";
+import Modal from "../components/modal/Modal";
 import { useAtomValue } from "jotai";
 import { levelAtom } from "../store/atom";
 
