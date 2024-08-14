@@ -69,7 +69,13 @@ const PaddingContainer = styled.div`
 const NextAnimation = styled(Animation)`
   padding: 3px;
 `;
-const MyBookingInfo = ({ option, step3Stage, addStage, isValidate }) => {
+const MyBookingInfo = ({
+  option,
+  step3Stage,
+  addStage,
+  isValidate,
+  setErrorArray
+}) => {
   const allowedSeat = useAtomValue(allowedSeatAtom);
   const seatCount = useAtomValue(seatCountAtom);
   const seatInfo = useAtomValue(seatInfoAtom);
@@ -106,16 +112,18 @@ const MyBookingInfo = ({ option, step3Stage, addStage, isValidate }) => {
     }
     // 버튼이 결제하기일 경우 step4-1로 이동
     if (step3Stage == 2) {
-      //티켓수령방법 + 생년월일을 모두 다 작성했을 경우
-      console.log(isValidate);
-      if (!isValidate.includes("birth")) {
-        alert("생년월일을 작성해 주세요");
-        return;
-      }
+      //티켓수령방법 + 생년월일을 작성 검사 로직
       if (!isValidate.includes("method")) {
+        setErrorArray(() => "method");
         alert("티켓 수령 방법을 선택해 주세요");
         return;
+      }
+      if (level === "high" && !isValidate.includes("birth")) {
+        setErrorArray(() => ["birth"]);
+        alert("생년월일을 정확하게 작성해 주세요");
+        return;
       } else {
+        setErrorArray(() => []);
         nav("/progress/step4-1");
       }
     }
