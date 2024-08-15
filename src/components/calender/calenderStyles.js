@@ -107,4 +107,8 @@ export const StyledCalendarWrapper = styled.div`
   }
 `;
 
-export const StyledCalendar = styled(Calendar)``;
+export const StyledCalendar = styled(Calendar)`
+  .react-calendar__month-view__days__day--weekend {
+    color: var(--point-color);
+  }
+`;
