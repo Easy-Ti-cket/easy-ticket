@@ -4,6 +4,7 @@ import { InputContainer, Label } from "../../input/InputStyle";
 import { useForm } from "../../../hooks/useForm";
 import { useAtomValue } from "jotai";
 import { levelAtom } from "../../../store/atom";
+import { useState } from "react";
 
 const BuyerWrap = styled.div`
   display: flex;
@@ -28,7 +29,19 @@ const InfoBox = styled.div`
 
 //생년월일 input
 const InfoInput = styled(InfoBox).attrs({ as: "input" })`
+  //스피너 없애기
+  /* WebKit 기반 브라우저 (Chrome, Safari) */
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  /* Edge, IE */
+  & {
+    appearance: textfield;
+  }
   box-sizing: border-box;
+  border: ${(props) => props.$hasError && "2px solid var(--point-color)"};
 `;
 
 // mock buyer data
@@ -45,11 +58,24 @@ const data_delivery = [
   { label: "우편번호", value: "123-1234" }
 ];
 
-const TicketBuyer = ({ option }) => {
+const TicketBuyer = ({ option, setIsValidate, errorArray }) => {
   //난이도 - 생년월일 입력 구현
   const level = useAtomValue(levelAtom);
-  const { handleChange } = useForm();
-
+  // 생년월일 입력 검사 로직
+  const [birth, setBirth] = useState("");
+  const handleChange = (e) => {
+    const value = e.target.value;
+    // 생년월일이 비어있거나 길이가 8이 아닌 경우 에러
+    if (value === "" || value.length !== 8) {
+      setIsValidate((prev) => prev.filter((item) => item !== "birth"));
+    } else {
+      setIsValidate((prev) =>
+        prev.includes("birth") ? prev : [...prev, "birth"]
+      );
+    }
+  };
+  //css 설정
+  const hasError = errorArray.includes("birth");
   return (
     <BuyerWrap>
       {(option === "현장수령" || option === "배송") && (
@@ -58,7 +84,13 @@ const TicketBuyer = ({ option }) => {
             <InputContainer key={index}>
               <Label>{item.label}</Label>
               {level === "high" && item.label === "생년월일" ? (
-                <InfoInput name="birth" onChange={handleChange}></InfoInput>
+                <InfoInput
+                  name="birth"
+                  type="number"
+                  onChange={handleChange}
+                  placeholder="생년월일 예시 : 20010111"
+                  $hasError={hasError}
+                ></InfoInput>
               ) : (
                 <InfoBox>{item.value}</InfoBox>
               )}

@@ -16,6 +16,7 @@ export const useForm = (correctNum) => {
     cardPassword: cardAnswer[4],
     cvc: cardAnswer[5]
   };
+
   // 사용자가 입력한 답
   const [, setResponse] = useState({});
   const [correctList, setCorrectList] = useState({});
@@ -24,11 +25,12 @@ export const useForm = (correctNum) => {
     const { name, value } = e.target;
     setResponse((prev) => {
       const newResponse = { ...prev, [name]: value };
-
       // 정답과 답변이 같을 경우
       //cardNum은 string으로 값을 받으므로 정답을 string으로 변환하여 대조
       if (String(answerList[name]) === value) {
         setCorrectList((prev) => ({ ...prev, [name]: true }));
+      } else {
+        setCorrectList((prev) => ({ ...prev, [name]: false }));
       }
       return newResponse;
     });

@@ -12,6 +12,7 @@ const SectionTitle = styled.div`
 const TicketMethodCont = styled.div`
   display: flex;
   flex-direction: column;
+  color: ${(props) => props.$hasError && "var(--point-color)"};
 `;
 const TicketMethodWrap = styled(FormWrap)`
   border: 1px solid var(--key-color);
@@ -24,14 +25,24 @@ const TicketMethodWrap = styled(FormWrap)`
   padding: 20px;
   height: 417px;
 `;
-const TicketMethod = ({ option, setOption }) => {
+const TicketMethod = ({ option, setOption, setIsValidate, errorArray }) => {
   const handleOptionChange = (e) => {
     setOption(e.target.value);
+    //검사 로직
+    if (e.target.value) {
+      setIsValidate((prev) =>
+        prev.includes("method") ? prev : [...prev, "method"]
+      );
+    } else {
+      setIsValidate((prev) => prev.filter((item) => item !== "method"));
+    }
   };
+  // css 설정
+  const hasError = errorArray.includes("method");
   return (
     <TicketMethodWrap>
       {/*티켓수령방법 */}
-      <TicketMethodCont>
+      <TicketMethodCont $hasError={hasError}>
         <SectionTitle>티켓수령방법</SectionTitle>
         <Input
           type="radio"
@@ -51,7 +62,11 @@ const TicketMethod = ({ option, setOption }) => {
       <TicketMethodCont>
         {/*예매자 확인 */}
         <SectionTitle>예매자 확인</SectionTitle>
-        <TicketBuyer option={option} />
+        <TicketBuyer
+          option={option}
+          setIsValidate={setIsValidate}
+          errorArray={errorArray}
+        />
       </TicketMethodCont>
     </TicketMethodWrap>
   );

@@ -6,10 +6,11 @@ import Button from "../../../components/button/Button";
 import { useNavigate } from "react-router-dom";
 import { useSetAtom } from "jotai";
 import { progressAtom } from "../../../store/atom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const SelectPayWrap = styled.div`
-  display: inline-flex;
+  width: 80%;
+  display: flex;
   gap: 67px;
   position: relative;
   padding: 20px;
@@ -20,6 +21,7 @@ export const Step4Container = styled.div`
   flex-direction: column;
   align-items: start;
   gap: 20px;
+  margin: 0 20px;
 `;
 const SubTtitle = styled.div`
   width: 447px;
@@ -48,6 +50,24 @@ const SelectPayMethod = () => {
   useEffect(() => {
     setProgress(4);
   }, []);
+  //검사 로직
+  const [hasPayFormError, setHasPayFormError] = useState(false);
+  const [cardTypesError, setCardTypesError] = useState(false);
+
+  const handleClick = () => {
+    if (!correctList.DetailPayForm) {
+      setHasPayFormError(true);
+      alert("올바른 결제 수단을 선택해 주세요");
+      return;
+    }
+    if (!correctList.CardTypes) {
+      setHasPayFormError(false);
+      setCardTypesError(true);
+      alert("올바른 카드를 선택해 주세요");
+    } else {
+      navigate("/progress/step4-2");
+    }
+  };
   return (
     <SelectPayWrap>
       {/*결제 방식 선택 */}
@@ -60,23 +80,21 @@ const SelectPayMethod = () => {
       </Step4Container>
       {/*결제 수단 선택 */}
       {isPayMethodCorrect && (
-        <Step4Container>
-          <SubTtitle>결제 수단 선택</SubTtitle>
-          <DetailPayForm
-            isSelected={correctList["DetailPayForm"]}
-            isAnswer={isAnswer}
-            handleChange={handleChange}
-          />
-        </Step4Container>
-      )}
-      {/*다음 단계 버튼 */}
-      {isAnswer && (
-        <BtnWrap>
-          <Button
-            text="다음 단계"
-            onClick={() => navigate("/progress/step4-2")}
-          />
-        </BtnWrap>
+        <>
+          <Step4Container>
+            <SubTtitle>결제 수단 선택</SubTtitle>
+            <DetailPayForm
+              isSelected={correctList["DetailPayForm"]}
+              isAnswer={isAnswer}
+              handleChange={handleChange}
+              hasPayFormError={hasPayFormError}
+              cardTypesError={cardTypesError}
+            />
+          </Step4Container>
+          <BtnWrap>
+            <Button text="다음 단계" onClick={handleClick} />
+          </BtnWrap>
+        </>
       )}
     </SelectPayWrap>
   );
