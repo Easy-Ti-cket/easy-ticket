@@ -105,6 +105,11 @@ export const StyledCalendarWrapper = styled.div`
     background-color: var(--key-color);
     color: var(--sub-color);
   }
+
+  /* 월 클릭되지 않도록 수정 */
+  .react-calendar__navigation__label {
+    pointer-events: none;
+  }
 `;
 
 export const StyledCalendar = styled(Calendar)`
