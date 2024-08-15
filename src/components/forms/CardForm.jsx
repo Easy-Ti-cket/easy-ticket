@@ -11,10 +11,11 @@ const CardInputFied = styled(InputField)`
 `;
 const CardForm = ({ focusNum, handleChange }) => {
   const level = useAtomValue(levelAtom);
+
   return (
     <FormWrap>
       {/*카드 번호 */}
-      <AnimationArea $focus={level !== "high" && focusNum == 0}>
+      <AnimationArea $focus={level === "low" && focusNum == 0}>
         <InputContainer>
           <Label>카드 번호</Label>
           <CardInputFied name="cardNum1" onChange={handleChange} />-
@@ -24,13 +25,13 @@ const CardForm = ({ focusNum, handleChange }) => {
         </InputContainer>
       </AnimationArea>
       <Input
-        $focus={level !== "high" && focusNum == 1}
+        $focus={level === "low" && focusNum == 1}
         text="카드 비밀번호"
         name="cardPassword"
         onChange={handleChange}
       />
       <Input
-        $focus={level !== "high" && focusNum == 2}
+        $focus={level === "low" && focusNum == 2}
         text="cvc 번호"
         name="cvc"
         onChange={handleChange}

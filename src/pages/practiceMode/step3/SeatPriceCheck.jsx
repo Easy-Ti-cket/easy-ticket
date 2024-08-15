@@ -22,6 +22,7 @@ const SeatPriceCheck = () => {
   const [step3Stage, setStep3Stage] = useState(1);
   const addStage = () => setStep3Stage((prev) => prev + 1);
   const setProgress = useSetAtom(progressAtom);
+
   const setStepTextNumber = useSetAtom(stepTextNumberAtom);
   const setHelpTextNumber = useSetAtom(helpTextNumberAtom);
 
@@ -30,23 +31,36 @@ const SeatPriceCheck = () => {
     setStepTextNumber(0);
     setHelpTextNumber(0);
   }, []);
+
   useEffect(() => {
     if (step3Stage == 2) {
       setStepTextNumber((prev) => prev + 1);
       setHelpTextNumber((prev) => prev + 1);
     }
   }, [step3Stage]);
+
+  // 폼 검사 로직
+  const [isValidate, setIsValidate] = useState([]);
+  const [errorArray, setErrorArray] = useState([]); //css 변경용
+
   return (
     <Wrap>
       {step3Stage == 1 ? (
         <SeatCount />
       ) : (
-        <TicketMethod option={option} setOption={setOption} />
+        <TicketMethod
+          option={option}
+          setOption={setOption}
+          setIsValidate={setIsValidate}
+          errorArray={errorArray}
+        />
       )}
       <MyBookingInfo
         step3Stage={step3Stage}
         addStage={addStage}
         option={option}
+        isValidate={isValidate}
+        setErrorArray={setErrorArray}
       />
     </Wrap>
   );

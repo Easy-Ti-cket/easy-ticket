@@ -14,7 +14,6 @@ const ProgressContentsContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100%;
 `;
 
 const ProgressBarBox = styled.div`
@@ -36,8 +35,9 @@ const ContentsBox = styled.div`
   min-height: 500px;
   border: var(--fill-color) 1px solid;
   border-radius: 8px;
-  display: flex;
+  display: inline-flex;
   justify-content: center;
+  padding: 30px 0;
   //도움말 버튼 부모 position
   position: relative;
 `;

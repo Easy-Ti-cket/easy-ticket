@@ -1,8 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { StyledCalendar, StyledCalendarWrapper } from "./calenderStyles";
 
-const SelectCalender = ({ onDateSelect }) => {
-  const [selectedDate, setSelectedDate] = useState(new Date());
+const SelectCalender = ({ onDateSelect, initialDate }) => {
+  const [selectedDate, setSelectedDate] = useState(initialDate);
+  const [activeStartDate, setActiveStartDate] = useState(new Date());
+
+  useEffect(() => {
+    if (initialDate) {
+      setSelectedDate(new Date(initialDate));
+    }
+  }, [initialDate]);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -13,28 +20,33 @@ const SelectCalender = ({ onDateSelect }) => {
     onDateSelect(formattedDate); // 부모 컴포넌트로 날짜 전달
   };
 
+  // 화살표 사이 월 글자 클릭 무시
+  const handleMonthClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation(); // 클릭 이벤트가 상위 요소로도 전파되지 않도록 방지
+  };
+
+  // 화살표로 월 이동은 허용
+  const handleActiveStartDateChange = ({ activeStartDate }) => {
+    setActiveStartDate(activeStartDate);
+  };
+
   return (
     <StyledCalendarWrapper>
       <StyledCalendar
         onChange={handleDateChange}
         value={selectedDate}
         calendarType="gregory"
-        view="month"
         prevLabel="←"
         nextLabel="→"
         prev2Label={null}
         next2Label={null}
         showNeighboringMonth={false}
-        formatDay={(_, date) =>
-          new Date(date).toLocaleDateString("en-us", {
-            day: "2-digit"
-          })
-        }
-        formatMonthYear={(_, date) =>
-          new Date(date).toLocaleDateString("en-us", {
-            month: "numeric"
-          }) + "월"
-        }
+        formatDay={(locale, date) => new Date(date).getDate()}
+        formatMonthYear={(locale, date) => `${new Date(date).getMonth() + 1}월`}
+        onActiveStartDateChange={handleActiveStartDateChange}
+        activeStartDate={activeStartDate}
+        onClickMonth={handleMonthClick}
       />
     </StyledCalendarWrapper>
   );

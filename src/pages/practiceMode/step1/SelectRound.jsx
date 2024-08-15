@@ -60,6 +60,8 @@ const SelectRound = () => {
   const [animationStep, setAnimationStep] = useState(0);
   const navigate = useNavigate();
 
+  const posterDates = ["2024-07-26", "2024-06-30", "2024-08-11", "2024-07-27"];
+
   useEffect(() => {
     // setLevel(currentLevel);
     setProgress(1);
@@ -72,12 +74,7 @@ const SelectRound = () => {
 
   // 날짜 정답 지정
   const handleDateSelect = (formattedDate) => {
-    const correctDate = {
-      0: "2024-07-26",
-      1: "2024-06-30",
-      2: "2024-08-11",
-      3: "2024-07-27"
-    }[posterId];
+    const correctDate = posterDates[posterId];
 
     if (formattedDate === correctDate) {
       setDateSelected(true);
@@ -115,7 +112,10 @@ const SelectRound = () => {
         {currentLevel === "low" ? (
           <>
             <AnimationArea $focus={animationStep === 0}>
-              <SelectCalender onDateSelect={handleDateSelect} />
+              <SelectCalender
+                onDateSelect={handleDateSelect}
+                initialDate={new Date(posterDates[posterId])}
+              />
             </AnimationArea>
             <RoundWrapper>
               <p>회차</p>
@@ -141,7 +141,10 @@ const SelectRound = () => {
           </>
         ) : (
           <>
-            <SelectCalender onDateSelect={handleDateSelect} />
+            <SelectCalender
+              onDateSelect={handleDateSelect}
+              initialDate={new Date(posterDates[posterId])}
+            />
             <RoundWrapper>
               <p>회차</p>
               <Button text="1회" type="outline" onClick={handleRoundClick} />
