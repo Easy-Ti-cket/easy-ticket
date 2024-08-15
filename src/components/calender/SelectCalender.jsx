@@ -1,8 +1,14 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { StyledCalendar, StyledCalendarWrapper } from "./calenderStyles";
 
-const SelectCalender = ({ onDateSelect }) => {
-  const [selectedDate, setSelectedDate] = useState(new Date());
+const SelectCalender = ({ onDateSelect, initialDate }) => {
+  const [selectedDate, setSelectedDate] = useState(initialDate);
+
+  useEffect(() => {
+    if (initialDate) {
+      setSelectedDate(initialDate);
+    }
+  }, [initialDate]);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -25,16 +31,8 @@ const SelectCalender = ({ onDateSelect }) => {
         prev2Label={null}
         next2Label={null}
         showNeighboringMonth={false}
-        formatDay={(_, date) =>
-          new Date(date).toLocaleDateString("en-us", {
-            day: "2-digit"
-          })
-        }
-        formatMonthYear={(_, date) =>
-          new Date(date).toLocaleDateString("en-us", {
-            month: "numeric"
-          }) + "월"
-        }
+        formatDay={(locale, date) => new Date(date).getDate()}
+        formatMonthYear={(locale, date) => `${new Date(date).getMonth() + 1}월`}
       />
     </StyledCalendarWrapper>
   );
