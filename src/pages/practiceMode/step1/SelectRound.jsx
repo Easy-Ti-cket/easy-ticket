@@ -12,6 +12,7 @@ import {
 } from "../../../store/atom";
 import AnimationArea from "../../../components/Animation";
 import { useNavigate } from "react-router-dom";
+import formatTime from "../../../util/time";
 
 const Container = styled.div`
   display: flex;
@@ -53,6 +54,7 @@ const SelectRound = () => {
   const [dateSelected, setDateSelected] = useState(false);
   const [roundSelected, setRoundSelected] = useState(false);
   const [animationStep, setAnimationStep] = useState(0);
+  const [timesButtons, setTimesButtons] = useState([]);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -66,31 +68,26 @@ const SelectRound = () => {
 
   const poster = posters[posterId];
   const posterDates = poster ? poster.date : [];
+  const posterTimes = poster ? poster.time : {};
 
   // 날짜 정답 지정
   const handleDateSelect = (formattedDate) => {
-    console.log("Selected Date:", formattedDate);
-    console.log("Poster Dates:", posterDates);
+    const correctDate = posterDates[0]; // 날짜 배열의 첫 번째 날짜를 정답으로 설정
 
-    // 포스터 날짜 배열에서 첫 번째 날짜를 정답으로 설정
-    const correctDate = posterDates.length > 0 ? posterDates[0] : "";
-
-    // 날짜 비교 시 시간 부분 제거
-    const formattedDateWithoutTime = formattedDate.split("T")[0];
-    const correctDateWithoutTime = correctDate.split("T")[0];
-
-    console.log("Correct Date:", correctDateWithoutTime);
-
-    if (formattedDateWithoutTime === correctDateWithoutTime) {
+    if (formattedDate === correctDate) {
       setDateSelected(true);
       setAnimationStep(1);
+      const timesArray = formatTime(posterTimes, formattedDate);
+      setTimesButtons(timesArray);
     } else {
       alert("날짜를 다시 선택해주세요.");
     }
   };
 
-  const handleRoundClick = () => {
+  // 회차 선택
+  const handleRoundClick = (time) => {
     if (dateSelected) {
+      alert(`${time}으로 공연을 예매합니다.`);
       setRoundSelected(true);
       setAnimationStep(2);
     } else {
@@ -112,53 +109,60 @@ const SelectRound = () => {
         <PosterInfo id={posterId} />
       </LeftSection>
       <RightSection>
-        {currentLevel === "low" ? (
-          <>
-            <AnimationArea $focus={animationStep === 0}>
-              <SelectCalender
-                onDateSelect={handleDateSelect}
-                initialDate={
-                  posterDates.length > 0 ? new Date(posterDates[0]) : new Date()
-                }
-              />
-            </AnimationArea>
-            <RoundWrapper>
-              <p>회차</p>
-              {animationStep >= 1 ? (
-                <AnimationArea $focus={animationStep === 1}>
+        <SelectCalender
+          onDateSelect={handleDateSelect}
+          initialDate={
+            posterDates.length > 0 ? new Date(posterDates[0]) : new Date()
+          }
+        />
+        <RoundWrapper>
+          <p>회차</p>
+          {currentLevel === "low" ? (
+            <>
+              <AnimationArea $focus={animationStep === 1}>
+                {timesButtons.length > 0 ? (
+                  timesButtons.map((time, index) => (
+                    <Button
+                      key={index}
+                      text={`${index + 1}회 - ${time}`}
+                      type="outline"
+                      onClick={() => handleRoundClick(time)}
+                    />
+                  ))
+                ) : (
                   <Button
-                    text="1회"
+                    text="날짜 선택 후 확인"
                     type="outline"
-                    onClick={handleRoundClick}
+                    onClick={() => handleRoundClick("날짜 선택 후 확인")}
                   />
-                </AnimationArea>
-              ) : (
-                <Button text="1회" type="outline" onClick={handleRoundClick} />
-              )}
-              {animationStep >= 2 ? (
-                <AnimationArea $focus={animationStep === 2}>
-                  <Button text="예매하기" onClick={handleReserveClick} />
-                </AnimationArea>
-              ) : (
+                )}
+              </AnimationArea>
+              <AnimationArea $focus={animationStep === 2}>
                 <Button text="예매하기" onClick={handleReserveClick} />
+              </AnimationArea>
+            </>
+          ) : (
+            <>
+              {timesButtons.length > 0 ? (
+                timesButtons.map((time, index) => (
+                  <Button
+                    key={index}
+                    text={`${index + 1}회 - ${time}`}
+                    type="outline"
+                    onClick={() => handleRoundClick(time)}
+                  />
+                ))
+              ) : (
+                <Button
+                  text="날짜 선택 후 확인"
+                  type="outline"
+                  onClick={() => handleRoundClick("날짜 선택 후 확인")}
+                />
               )}
-            </RoundWrapper>
-          </>
-        ) : (
-          <>
-            <SelectCalender
-              onDateSelect={handleDateSelect}
-              initialDate={
-                posterDates.length > 0 ? new Date(posterDates[0]) : new Date()
-              }
-            />
-            <RoundWrapper>
-              <p>회차</p>
-              <Button text="1회" type="outline" onClick={handleRoundClick} />
               <Button text="예매하기" onClick={handleReserveClick} />
-            </RoundWrapper>
-          </>
-        )}
+            </>
+          )}
+        </RoundWrapper>
       </RightSection>
     </Container>
   );
