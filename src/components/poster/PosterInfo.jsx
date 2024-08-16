@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Poster from "./Poster";
 import { useAtom } from "jotai";
 import { postersAtom, levelAtom } from "../../store/atom";
+import { formatDateRange } from "../../util/date";
 
 // 공연 제목
 const PosterTitle = styled.h2`
@@ -53,7 +54,7 @@ const PosterInfo = ({ id }) => {
       <PosterTitle>{poster.title_ko}</PosterTitle>
       <Poster id={id} />
       <PosterVenue>장소: {poster.venue}</PosterVenue>
-      <PosterTime>시간: {poster.date}</PosterTime>
+      <PosterTime>시간: {formatDateRange(poster.date)}</PosterTime>
       <PosterTime>관람등급: {poster.age}</PosterTime>
     </PosterContainer>
   );

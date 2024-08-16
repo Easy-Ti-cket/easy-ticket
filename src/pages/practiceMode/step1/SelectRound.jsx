@@ -7,7 +7,8 @@ import { useAtom } from "jotai";
 import {
   selectedPosterAtom,
   levelAtom,
-  progressAtom
+  progressAtom,
+  postersAtom
 } from "../../../store/atom";
 import AnimationArea from "../../../components/Animation";
 import { useNavigate } from "react-router-dom";
@@ -15,8 +16,6 @@ import { useNavigate } from "react-router-dom";
 const Container = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 1320px;
-  flex-shrink: 0;
 `;
 
 const LeftSection = styled.div`
@@ -33,8 +32,6 @@ const RightSection = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 20px;
-  margin-top: 20px;
 `;
 
 const RoundWrapper = styled.div`
@@ -51,27 +48,40 @@ const SelectRound = () => {
   const [, setProgress] = useAtom(progressAtom);
   const [selectedPoster] = useAtom(selectedPosterAtom);
   const [currentLevel] = useAtom(levelAtom);
+  const [posters] = useAtom(postersAtom); // 포스터 데이터 가져오기
   const [posterId, setPosterId] = useState(0);
   const [dateSelected, setDateSelected] = useState(false);
   const [roundSelected, setRoundSelected] = useState(false);
   const [animationStep, setAnimationStep] = useState(0);
   const navigate = useNavigate();
-  const posterDates = ["2024-07-26", "2024-06-30", "2024-08-11", "2024-07-27"];
 
   useEffect(() => {
     setProgress(1);
     if (currentLevel === "low" || currentLevel === "middle") {
       setPosterId(0);
     } else {
-      setPosterId(selectedPoster); // 나머지 경우 포스터 선택 가능
+      setPosterId(selectedPoster);
     }
   }, [currentLevel, setLevel, setProgress, selectedPoster]);
 
+  const poster = posters[posterId];
+  const posterDates = poster ? poster.date : [];
+
   // 날짜 정답 지정
   const handleDateSelect = (formattedDate) => {
-    const correctDate = posterDates[posterId];
+    console.log("Selected Date:", formattedDate);
+    console.log("Poster Dates:", posterDates);
 
-    if (formattedDate === correctDate) {
+    // 포스터 날짜 배열에서 첫 번째 날짜를 정답으로 설정
+    const correctDate = posterDates.length > 0 ? posterDates[0] : "";
+
+    // 날짜 비교 시 시간 부분 제거
+    const formattedDateWithoutTime = formattedDate.split("T")[0];
+    const correctDateWithoutTime = correctDate.split("T")[0];
+
+    console.log("Correct Date:", correctDateWithoutTime);
+
+    if (formattedDateWithoutTime === correctDateWithoutTime) {
       setDateSelected(true);
       setAnimationStep(1);
     } else {
@@ -107,7 +117,9 @@ const SelectRound = () => {
             <AnimationArea $focus={animationStep === 0}>
               <SelectCalender
                 onDateSelect={handleDateSelect}
-                initialDate={new Date(posterDates[posterId])}
+                initialDate={
+                  posterDates.length > 0 ? new Date(posterDates[0]) : new Date()
+                }
               />
             </AnimationArea>
             <RoundWrapper>
@@ -136,7 +148,9 @@ const SelectRound = () => {
           <>
             <SelectCalender
               onDateSelect={handleDateSelect}
-              initialDate={new Date(posterDates[posterId])}
+              initialDate={
+                posterDates.length > 0 ? new Date(posterDates[0]) : new Date()
+              }
             />
             <RoundWrapper>
               <p>회차</p>

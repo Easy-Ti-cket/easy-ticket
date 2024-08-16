@@ -5,7 +5,7 @@
     "title_ko": "노엘 갤러거 하이 플라잉 버즈",
     "title_en": "Noel Gallagher's High Flying Birds",
     "venue": "일산 킨텍스 제 1전시장 1, 2홀",
-    "date": "2024년 7월 26일 (금)",
+    "date": ["2024-07-26"],
     "time": "오후 8시",
     "age": "만 12세 이상",
     "price": {
@@ -22,7 +22,7 @@
     "title_ko": "뮤지컬 벤자민 버튼",
     "title_en": "Benjamin Button",
     "venue": "세종문화회관 M씨어터",
-    "date": "2024년 5월 11일(토) ~ 6월 30일(일)",
+    "date": ["2024-05-11", "2024-06-30"],
     "time": "화,목 7시 30분 / 수,금,토,공휴일 3시, 7시 30분 / 일 3시",
     "age": " 14세 이상",
     "price": {
@@ -37,7 +37,7 @@
     "src": "../../src/assests/images/posters/poster-trot.svg",
     "title_ko": "트롯 3파전 콘서트 - 창원",
     "venue": "창원컨벤션센터 2,3홀",
-    "date": "2024년 08월 11일(일)",
+    "date": ["2024-08-11"],
     "time": "17시 00분",
     "age": "만8세이상",
     "price": {
@@ -50,7 +50,7 @@
     "src": "../../src/assests/images/posters/poster-leechanwon.svg",
     "title_ko": "[수원] 2024 이찬원 콘서트 '찬가(燦歌)'",
     "venue": "수원 실내 체육관",
-    "date": "24년 7월 27일(토) ~ 28일(일)",
+    "date": ["2024-07-27", "2024-07-28"],
     "time": "오후 5시",
     "age": "만 7세 이상(미취학아동이상)",
     "price": {

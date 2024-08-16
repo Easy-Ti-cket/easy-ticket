@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useAtom } from "jotai";
-import { selectedPosterAtom, levelAtom } from "../../store/atom";
+import { selectedPosterAtom, levelAtom, postersAtom } from "../../store/atom";
 import { StyledCalendar, StyledCalendarWrapper } from "./calenderStyles";
 
 const SelectCalender = ({ onDateSelect }) => {
@@ -8,7 +8,7 @@ const SelectCalender = ({ onDateSelect }) => {
   const [activeStartDate, setActiveStartDate] = useState(new Date());
   const [level] = useAtom(levelAtom);
   const [selectedPoster] = useAtom(selectedPosterAtom);
-  const posterDates = ["2024-07-26", "2024-06-30", "2024-08-11", "2024-07-27"];
+  const [posters] = useAtom(postersAtom);
   const [posterId, setPosterId] = useState(0);
 
   useEffect(() => {
@@ -20,12 +20,13 @@ const SelectCalender = ({ onDateSelect }) => {
   }, [level, selectedPoster]);
 
   useEffect(() => {
-    const initialDate = posterDates[posterId];
-    if (initialDate) {
-      setSelectedDate(new Date(initialDate));
-      setActiveStartDate(new Date(initialDate));
+    const poster = posters[posterId];
+    if (poster && poster.date && poster.date.length > 0) {
+      const initialDate = new Date(poster.date[0]); // 첫 번째 날짜를 사용
+      setSelectedDate(initialDate);
+      setActiveStartDate(initialDate);
     }
-  }, [posterId]);
+  }, [posterId, posters]);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
