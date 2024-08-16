@@ -15,13 +15,14 @@ import Step5 from "./pages/practiceMode/step5/Step5";
 import SelectSeat from "./pages/practiceMode/step2/SelectSeat";
 import SeatPriceCheck from "./pages/practiceMode/step3/SeatPriceCheck";
 import PrivateRoute from "./pages/PrivateRoute";
-
+import Test from "./pages/Test";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Layout />,
     children: [
       { path: "/", element: <Main />, label: "메인화면-로그인" },
+      { path: "test", element: <Test /> },
       { path: "select-mode", element: <SelectMode />, label: "모드 선택" },
       { path: "select-level", element: <SelectLevel />, label: "난이도 선택" },
       { path: "select-site", element: <SelectSite />, label: "사이트 선택" },
