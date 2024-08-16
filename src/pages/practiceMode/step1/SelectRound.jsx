@@ -55,6 +55,7 @@ const SelectRound = () => {
   const [roundSelected, setRoundSelected] = useState(false);
   const [animationStep, setAnimationStep] = useState(0);
   const [timesButtons, setTimesButtons] = useState([]);
+  const [correctRound, setCorrectRound] = useState(null); // 정답 회차 저장
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -79,6 +80,11 @@ const SelectRound = () => {
       setAnimationStep(1);
       const timesArray = formatTime(posterTimes, formattedDate);
       setTimesButtons(timesArray);
+
+      // 회차 데이터에서 첫 번째 회차를 정답으로 설정
+      if (timesArray.length > 0) {
+        setCorrectRound(timesArray[0]);
+      }
     } else {
       alert("날짜를 다시 선택해주세요.");
     }
@@ -87,9 +93,13 @@ const SelectRound = () => {
   // 회차 선택
   const handleRoundClick = (time) => {
     if (dateSelected) {
-      alert(`${time}으로 공연을 예매합니다.`);
-      setRoundSelected(true);
-      setAnimationStep(2);
+      if (time === correctRound) {
+        alert(`${time}으로 공연을 예매합니다.`);
+        setRoundSelected(true);
+        setAnimationStep(2);
+      } else {
+        alert("회차를 다시 선택해주세요.");
+      }
     } else {
       alert("먼저 올바른 날짜를 선택해주세요.");
     }
