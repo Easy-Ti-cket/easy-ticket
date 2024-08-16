@@ -59,10 +59,9 @@ const SelectRound = () => {
   const posterDates = ["2024-07-26", "2024-06-30", "2024-08-11", "2024-07-27"];
 
   useEffect(() => {
-    // setLevel(currentLevel);
     setProgress(1);
-    if (currentLevel === "low") {
-      setPosterId(0); // 초급일 경우 고정
+    if (currentLevel === "low" || currentLevel === "middle") {
+      setPosterId(0);
     } else {
       setPosterId(selectedPoster); // 나머지 경우 포스터 선택 가능
     }

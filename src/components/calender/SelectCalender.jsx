@@ -1,15 +1,31 @@
 import { useState, useEffect } from "react";
+import { useAtom } from "jotai";
+import { selectedPosterAtom, levelAtom } from "../../store/atom";
 import { StyledCalendar, StyledCalendarWrapper } from "./calenderStyles";
 
-const SelectCalender = ({ onDateSelect, initialDate }) => {
-  const [selectedDate, setSelectedDate] = useState(initialDate);
+const SelectCalender = ({ onDateSelect }) => {
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const [activeStartDate, setActiveStartDate] = useState(new Date());
+  const [level] = useAtom(levelAtom);
+  const [selectedPoster] = useAtom(selectedPosterAtom);
+  const posterDates = ["2024-07-26", "2024-06-30", "2024-08-11", "2024-07-27"];
+  const [posterId, setPosterId] = useState(0);
 
   useEffect(() => {
+    if (level === "low" || level === "middle") {
+      setPosterId(0);
+    } else {
+      setPosterId(selectedPoster);
+    }
+  }, [level, selectedPoster]);
+
+  useEffect(() => {
+    const initialDate = posterDates[posterId];
     if (initialDate) {
       setSelectedDate(new Date(initialDate));
+      setActiveStartDate(new Date(initialDate));
     }
-  }, [initialDate]);
+  }, [posterId]);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);
