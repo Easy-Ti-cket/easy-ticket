@@ -62,7 +62,7 @@ const ProgressContents = () => {
     setIsModalOpen(false);
   };
 
-  const { helpText, stepText } = useText();
+  const { stepText, helpText } = useText();
 
   return (
     <ProgressContentsContainer>

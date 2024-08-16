@@ -42,7 +42,10 @@ const useText = () => {
     setFilteredHelpTexts(currentHelpTexts);
   }, [progress, level]);
   if (progress === 0 || progress === 5) {
-    return;
+    return {
+      stepText: "",
+      helpText: ""
+    };
   }
   console.log(filteredHelpTexts[helpTextNumber]?.content);
   return {
