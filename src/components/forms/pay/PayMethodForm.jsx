@@ -25,7 +25,7 @@ const PayMethodForm = ({ handleChange, isSelected }) => {
           value={methodItem}
           text={methodItem}
           onChange={handleChange}
-          $focus={level !== "high" && index === 0 && !isSelected}
+          $focus={level === "low" && index === 0 && !isSelected}
         />
       ))}
     </FormWrap>
