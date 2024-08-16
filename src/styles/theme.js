@@ -1,75 +1,29 @@
-import "../index.css";
-
-const practice = {
-  "--sub-color": "#edeaf9",
-  "--key-color": "#472fd2",
-  "--hover-color": "#1d00c8",
-  /*point color*/
-  " --point-color": "#ff6347",
-  "--point-color2": "#ffbe17",
-  "--point-hover-color2": "#efb316",
-  /*gray scale*/
-  "--fill-color": "#cccccc",
-  "--text-color": "#666666",
-  "--text-color2": "#333333"
-};
 const interpark = {
-  "--sub-color": "#edeaf9",
-  "--key-color": "#000000",
-  "--hover-color": "#1d00c8",
-  /*point color*/
-  " --point-color": "#ff6347",
-  "--point-color2": "#ffbe17",
-  "--point-hover-color2": "#efb316",
-  /*gray scale*/
-  "--fill-color": "#cccccc",
-  "--text-color": "#666666",
-  "--text-color2": "#333333"
+  keyColor: "#d40000",
+  hoverColor: "#b50000",
+  subColor: "#00ff50"
 };
 
 const melonticket = {
-  "--sub-color": "#edeaf9",
-  "--key-color": "#472fd2",
-  "--hover-color": "#1d00c8",
-  /*point color*/
-  " --point-color": "#ff6347",
-  "--point-color2": "#ffbe17",
-  "--point-hover-color2": "#efb316",
-  /*gray scale*/
-  "--fill-color": "#cccccc",
-  "--text-color": "#666666",
-  "--text-color2": "#333333"
+  keyColor: "#00ff00",
+  hoverColor: "#00b500",
+  subColor: "#00ff0050"
 };
 
 const ticketlink = {
-  "--sub-color": "#edeaf9",
-  "--key-color": "#472fd2",
-  "--hover-color": "#1d00c8",
-  /*point color*/
-  " --point-color": "#ff6347",
-  "--point-color2": "#ffbe17",
-  "--point-hover-color2": "#efb316",
-  /*gray scale*/
-  "--fill-color": "#cccccc",
-  "--text-color": "#666666",
-  "--text-color2": "#333333"
+  keyColor: "#00ff00",
+  hoverColor: "#00b500",
+  subColor: "#00ff0050"
 };
 
 const yes24 = {
-  "--sub-color": "#edeaf9",
-  "--key-color": "#472fd2",
-  "--hover-color": "#1d00c8",
-  /*point color*/
-  " --point-color": "#ff6347",
-  "--point-color2": "#ffbe17",
-  "--point-hover-color2": "#efb316",
-  /*gray scale*/
-  "--fill-color": "#cccccc",
-  "--text-color": "#666666",
-  "--text-color2": "#333333"
+  keyColor: "#00a2ff",
+  hoverColor: "#005bb5",
+  subColor: "#00a2ff50"
 };
 
-// 내보내는 테마 객체
+const practice = {};
+
 const theme = {
   interpark,
   melonticket,

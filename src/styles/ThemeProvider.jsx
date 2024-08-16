@@ -1,10 +1,9 @@
 // ThemeProvider.jsx
 import React, { createContext, useState, useContext, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import styles from "./variables.module.css";
-import theme from "./theme";
 import { useAtom } from "jotai";
 import { themeSiteAtom } from "../store/atom";
+import theme from "./theme";
 
 const ThemeContext = createContext();
 
@@ -33,7 +32,6 @@ export const ThemeProvider = ({ children }) => {
   }, [location, setCurrentTheme]);
 
   const themeStyles = {
-    "--button-color": theme.buttonColors[currentTheme],
     "--progress-bar-color": theme.progressBarColors[currentTheme]
   };
 
