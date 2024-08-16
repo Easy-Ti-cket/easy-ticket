@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { levelAtom } from "../../../../store/atom";
+import { levelAtom, themeSiteAtom } from "../../../../store/atom";
 import { useSetAtom } from "jotai";
 const SubNavWrap = styled.div`
   width: 1320px;
@@ -35,6 +35,8 @@ const SubNavContent = styled.li`
 const SubNav = ({ hovereditem }) => {
   const nav = useNavigate();
   const setLevel = useSetAtom(levelAtom);
+  const setThemeSite = useSetAtom(themeSiteAtom);
+
   const handleSubNavClick = (e) => {
     const level =
       e.target.innerText === "초급"
@@ -45,6 +47,12 @@ const SubNav = ({ hovereditem }) => {
     setLevel(level);
     nav("/progress/step0");
   };
+
+  const handleSiteClick = (site) => {
+    setThemeSite(site);
+    nav(`/${site}`);
+  };
+
   return (
     <>
       {hovereditem === "연습모드" && (
@@ -60,10 +68,18 @@ const SubNav = ({ hovereditem }) => {
       {hovereditem === "실전모드" && (
         <SubNavWrap>
           <SubNavContainer>
-            <SubNavContent>인터파크 티켓</SubNavContent>
-            <SubNavContent>멜론티켓</SubNavContent>
-            <SubNavContent>예스24</SubNavContent>
-            <SubNavContent>티켓링크</SubNavContent>
+            <SubNavContent onClick={() => handleSiteClick("interpark")}>
+              인터파크 티켓
+            </SubNavContent>
+            <SubNavContent onClick={() => handleSiteClick("melonticket")}>
+              멜론티켓
+            </SubNavContent>
+            <SubNavContent onClick={() => handleSiteClick("yes24")}>
+              예스24
+            </SubNavContent>
+            <SubNavContent onClick={() => handleSiteClick("ticketlink")}>
+              티켓링크
+            </SubNavContent>
           </SubNavContainer>
         </SubNavWrap>
       )}
