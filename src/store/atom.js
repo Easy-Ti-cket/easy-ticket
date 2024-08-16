@@ -23,7 +23,7 @@ export const minuteCountAtom = atomWithStorage("minute", 0, storage);
 export const levelAtom = atomWithStorage("level", "low", storage);
 
 //단계 별 상태 (0,1,2,3,4,5)
-export const progressAtom = atom(0);
+export const progressAtom = atom(3);
 
 // 포스터 json 데이터
 export const postersAtom = atom(posters);
@@ -86,4 +86,4 @@ export const seatInfoAtom = atomWithStorage(
   storage
 );
 
-export const themeSiteAtom = atomWithStorage("themeSite", "", storage);
+export const themeSiteAtom = atomWithStorage("themeSite", "practice", storage);

@@ -34,7 +34,7 @@ const StepLine = styled.div`
   height: 13px;
   background-color: ${(props) =>
     props.$active
-      ? props.theme.progressBarColors[props.$themeSite]
+      ? props.theme[props.$themeSite]["--key-color"]
       : "var(--fill-color)"};
   margin-bottom: 10px;
 
