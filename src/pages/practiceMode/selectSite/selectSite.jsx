@@ -40,7 +40,7 @@ const SelectSite = () => {
   const sites = [
     { name: "인터파크 티켓", icon: interparkIcon, path: "/interpark" },
     { name: "멜론티켓", icon: melonticketIcon, path: "/melonticket" },
-    { name: "티켓링크", icon: tickelinkIcon, path: "/tickelink" },
+    { name: "티켓링크", icon: tickelinkIcon, path: "/ticketlink" },
     { name: "예스24(YES24)", icon: yes24Icon, path: "/yes24" }
   ];
 
