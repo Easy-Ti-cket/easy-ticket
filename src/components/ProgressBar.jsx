@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { useAtomValue } from "jotai";
-import { progressAtom } from "../store/atom";
+import { progressAtom, themeSiteAtom } from "../store/atom";
 const ProgressBarContainer = styled.div`
   display: flex;
   width: 100%;
@@ -33,7 +33,9 @@ const StepLine = styled.div`
   width: 211px;
   height: 13px;
   background-color: ${(props) =>
-    props.$active ? "var(--key-color)" : "var(--fill-color)"};
+    props.$active
+      ? props.theme[props.$themeSite]["--key-color"]
+      : "var(--fill-color)"};
   margin-bottom: 10px;
 
   &.rounded-start {
@@ -55,6 +57,7 @@ const StepLabel = styled.div`
 
 const ProgressBar = () => {
   const progress = useAtomValue(progressAtom);
+  const themeSite = useAtomValue(themeSiteAtom);
   const steps = [
     "공연 및 회차선택",
     "좌석 선택",
@@ -73,6 +76,7 @@ const ProgressBar = () => {
               index == 0 ? "rounded-start" : index == 4 ? "rounded-end" : ""
             }
             $active={progress >= index + 1}
+            $themeSite={themeSite}
           />
           <StepLabel $active={progress == index + 1}>{stepName}</StepLabel>
         </ProgressStep>
