@@ -135,11 +135,15 @@ const SelectRoundInterpark = () => {
           ) : (
             <Button
               text="날짜 선택 후 확인"
-              type="outline"
+              type="outline--interpark"
               onClick={() => handleRoundClick("날짜 선택 후 확인")}
             />
           )}
-          <Button text="예매하기" onClick={handleReserveClick} />
+          <Button
+            text="예매하기"
+            type="interpark"
+            onClick={handleReserveClick}
+          />
         </RoundWrapper>
       </RightSection>
     </Container>
