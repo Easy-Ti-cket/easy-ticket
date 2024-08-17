@@ -9,7 +9,8 @@ const NavWrap = styled.div`
   height: 80px;
   display: flex;
   align-items: flex-end;
-  border-bottom: 1px solid var(--sub-color);
+  border-bottom: 1px solid var(--fill-color);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05);
 `;
 //네비게이터 hover 시 서브네비게이터가 나오도록 허용할 구간
 const NavHoverSection = styled.div`
