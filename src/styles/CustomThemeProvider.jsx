@@ -12,7 +12,7 @@ export const CustomThemeProvider = ({ children }) => {
     //세션스토리지에서 값이 가져와지기 전에 렌더링 되는 것 방지
     const currentTheme = sessionStorage.getItem("themeSite");
     if (currentTheme) {
-      console.log(`현재 theme: ${currentTheme}`);
+      // console.log(`현재 theme: ${currentTheme}`);
       let newTheme;
       switch (currentTheme) {
         case "melonticket":
