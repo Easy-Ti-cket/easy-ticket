@@ -128,22 +128,18 @@ const SelectRoundInterpark = () => {
               <Button
                 key={index}
                 text={`${index + 1}회 - ${time}`}
-                type="outline--interpark"
+                type="outline"
                 onClick={() => handleRoundClick(time)}
               />
             ))
           ) : (
             <Button
               text="날짜 선택 후 확인"
-              type="outline--interpark"
+              type="outline"
               onClick={() => handleRoundClick("날짜 선택 후 확인")}
             />
           )}
-          <Button
-            text="예매하기"
-            type="interpark"
-            onClick={handleReserveClick}
-          />
+          <Button text="예매하기" onClick={handleReserveClick} />
         </RoundWrapper>
       </RightSection>
     </Container>
