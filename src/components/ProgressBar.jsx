@@ -65,7 +65,10 @@ const StepLabel = styled.div`
 
 const ProgressBar = () => {
   const progress = useAtomValue(progressAtom);
-  const themeSite = useAtomValue(themeSiteAtom);
+  //세션스토리지에서 값을 가져오기 전 렌더링 방지
+  //타이밍 문제 해결을 위한 것으로 삭제 가능
+  const themeSite = sessionStorage.getItem("themeSite");
+  console.log(themeSite);
   const steps = [
     "공연 및 회차선택",
     "좌석 선택",

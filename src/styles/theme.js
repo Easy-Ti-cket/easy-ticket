@@ -8,14 +8,14 @@ const interpark = {
 const melonticket = {
   keyColor: "#00ff00",
   hoverColor: "#00b500",
-  subColor: "#00ff0050",
+  subColor: "#00ff50",
   grayColor: "#2c2c2c"
 };
 
 const ticketlink = {
   keyColor: "#00ff00",
   hoverColor: "#00b500",
-  subColor: "#00ff0050",
+  subColor: "#000050",
   grayColor: "#2c2c2c"
 };
 

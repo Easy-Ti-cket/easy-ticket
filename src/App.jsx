@@ -7,11 +7,11 @@ import { CustomThemeProvider } from "./styles/CustomThemeProvider";
 
 function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <CustomThemeProvider>
+    <CustomThemeProvider>
+      <ThemeProvider theme={theme}>
         <RouterProvider router={router} />
-      </CustomThemeProvider>
-    </ThemeProvider>
+      </ThemeProvider>
+    </CustomThemeProvider>
   );
 }
 
