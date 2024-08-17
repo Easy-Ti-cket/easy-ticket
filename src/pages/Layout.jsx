@@ -12,15 +12,17 @@ const LayoutPage = styled.div`
 `;
 
 const Layout = () => {
-  //step을  포함하는 주소가 아니거나 step0라면
-  //세션 스토리지 초기화
   const path = useLocation().pathname;
 
   useEffect(() => {
-    if (path === "/progress/step0" || path === "/progress/step5") {
+    if (
+      path === "/" ||
+      path === "/progress/step0" ||
+      path === "/progress/step5"
+    ) {
       resetAtom();
     }
-  }, [path]); // isStep이 변경될 때만 실행됨
+  }, [path]); // path가 변경될 때만 실행됨
 
   return (
     <LayoutPage>
