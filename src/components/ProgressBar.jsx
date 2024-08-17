@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { useAtomValue } from "jotai";
 import { progressAtom, themeSiteAtom } from "../store/atom";
+
 const ProgressBarContainer = styled.div`
   display: flex;
   width: 100%;
@@ -16,6 +17,14 @@ const ProgressStep = styled.div`
   align-items: center;
 `;
 
+const getColor = (props, type) => {
+  if (props.$themeSite === "practice") {
+    return "var(--key-color)";
+  } else {
+    return props.theme[props.$themeSite][type];
+  }
+};
+
 const StepNumber = styled.div`
   display: flex;
   align-items: center;
@@ -24,18 +33,17 @@ const StepNumber = styled.div`
   height: 30px;
   border-radius: 50%;
   background-color: ${(props) =>
-    props.$active ? "var(--key-color)" : "var(--fill-color)"};
-  color: #ffff;
+    props.$active ? getColor(props, "grayColor") : "var(--fill-color)"};
+  color: #fff;
   margin-bottom: 10px;
   font-family: "pretendardB";
 `;
+
 const StepLine = styled.div`
   width: 211px;
   height: 13px;
   background-color: ${(props) =>
-    props.$active
-      ? props.theme[props.$themeSite]["--key-color"]
-      : "var(--fill-color)"};
+    props.$active ? getColor(props, "grayColor") : "var(--fill-color)"};
   margin-bottom: 10px;
 
   &.rounded-start {
@@ -49,7 +57,7 @@ const StepLine = styled.div`
 const StepLabel = styled.div`
   font-size: 20px;
   color: ${(props) =>
-    props.$active ? "var(--key-color)" : "var(--text-color)"};
+    props.$active ? getColor(props, "grayColor") : "var(--text-color)"};
   text-align: center;
   font-family: "pretendardB";
   white-space: nowrap;
@@ -69,19 +77,24 @@ const ProgressBar = () => {
   return (
     <ProgressBarContainer>
       {steps.map((stepName, index) => (
-        <ProgressStep key={index} $active={progress >= index + 1}>
-          <StepNumber $active={progress == index + 1}>{index + 1}</StepNumber>
+        <ProgressStep key={index}>
+          <StepNumber $active={progress == index + 1} $themeSite={themeSite}>
+            {index + 1}
+          </StepNumber>
           <StepLine
             className={
               index == 0 ? "rounded-start" : index == 4 ? "rounded-end" : ""
             }
-            $active={progress >= index + 1}
+            $active={progress > index} // 이전 단계를 활성화 상태로 표시
             $themeSite={themeSite}
           />
-          <StepLabel $active={progress == index + 1}>{stepName}</StepLabel>
+          <StepLabel $active={progress == index + 1} $themeSite={themeSite}>
+            {stepName}
+          </StepLabel>
         </ProgressStep>
       ))}
     </ProgressBarContainer>
   );
 };
+
 export default ProgressBar;
