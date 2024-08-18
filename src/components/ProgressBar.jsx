@@ -1,6 +1,8 @@
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useAtomValue } from "jotai";
+import { useAtomValue, useAtom } from "jotai";
 import { progressAtom, themeSiteAtom } from "../store/atom";
+import theme from "../styles/theme";
 
 const ProgressBarContainer = styled.div`
   display: flex;
@@ -17,12 +19,13 @@ const ProgressStep = styled.div`
   align-items: center;
 `;
 
+// 테마에 따라 색상을 반환하는 함수
 const getColor = (props, type) => {
-  if (props.$themeSite === "practice") {
+  const themeColors = theme[props.$themeSite] || theme.default;
+  if (props.$themeSite === "practice" || props.$themeSite === null) {
+    // 디폴트 테마(practice)이면 기본 키 컬러 적용
     return "var(--key-color)";
-  } else {
-    return props.theme[props.$themeSite][type];
-  }
+  } else return themeColors[type];
 };
 
 const StepNumber = styled.div`
@@ -63,12 +66,35 @@ const StepLabel = styled.div`
   white-space: nowrap;
 `;
 
+const Loading = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 105px;
+  width: 100%;
+  max-width: 1121px;
+  font-size: 20px;
+  font-family: "pretendardB";
+`;
+
 const ProgressBar = () => {
   const progress = useAtomValue(progressAtom);
-  //세션스토리지에서 값을 가져오기 전 렌더링 방지
-  //타이밍 문제 해결을 위한 것으로 삭제 가능
-  const themeSite = sessionStorage.getItem("themeSite");
-  console.log(themeSite);
+  const [themeSite, setThemeSite] = useAtom(themeSiteAtom);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchTheme = () => {
+      const storedTheme = sessionStorage.getItem("themeSite");
+      if (storedTheme) {
+        setThemeSite(storedTheme);
+      } else {
+        setThemeSite("practice");
+      }
+      setIsLoading(false);
+    };
+    fetchTheme();
+  }, [setThemeSite]);
+
   const steps = [
     "공연 및 회차선택",
     "좌석 선택",
@@ -81,17 +107,17 @@ const ProgressBar = () => {
     <ProgressBarContainer>
       {steps.map((stepName, index) => (
         <ProgressStep key={index}>
-          <StepNumber $active={progress == index + 1} $themeSite={themeSite}>
+          <StepNumber $active={progress === index + 1} $themeSite={themeSite}>
             {index + 1}
           </StepNumber>
           <StepLine
             className={
-              index == 0 ? "rounded-start" : index == 4 ? "rounded-end" : ""
+              index === 0 ? "rounded-start" : index === 4 ? "rounded-end" : ""
             }
             $active={progress > index} // 이전 단계를 활성화 상태로 표시
             $themeSite={themeSite}
           />
-          <StepLabel $active={progress == index + 1} $themeSite={themeSite}>
+          <StepLabel $active={progress === index + 1} $themeSite={themeSite}>
             {stepName}
           </StepLabel>
         </ProgressStep>
