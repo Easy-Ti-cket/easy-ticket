@@ -18,7 +18,7 @@
 }
 .button:hover {
   background-color: var(--hover-color);
-  transition: 0.8s ease;
+  transition: 0.3s ease;
 }
 
 /*이전 단계*/

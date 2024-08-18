@@ -11,10 +11,10 @@ const SelectSiteContainer = styled.div`
   justify-content: center;
   margin-top: 50px;
 `;
-import interparkIcon from "../../../assests/images/icons/interpark.svg";
-import melonticketIcon from "../../../assests/images/icons/melonticket.svg";
-import tickelinkIcon from "../../../assests/images/icons/tickelink.svg";
-import yes24Icon from "../../../assests/images/icons/yes24.svg";
+import interparkIcon from "../../../assests/images/icons/site/interpark.svg";
+import melonticketIcon from "../../../assests/images/icons/site/melonticket.svg";
+import tickelinkIcon from "../../../assests/images/icons/site/tickelink.svg";
+import yes24Icon from "../../../assests/images/icons/site/yes24.svg";
 
 const Instructions = styled.p`
   margin-top: 20px;
