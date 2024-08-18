@@ -62,7 +62,6 @@ const ProgressContents = ({ text }) => {
   //esc 일시정지 제어
   //step0 화면에서는 일시정지 렌더링되지 않도록 설정
   const path = useLocation().pathname;
-  console.log(path !== "/progress/step0");
   const [isPaused, setIsPaused] = useState(false);
   const handlePaused = (e) => {
     if (path !== "/progress/step0" && (e.key === "Escape" || e.key === "esc")) {
