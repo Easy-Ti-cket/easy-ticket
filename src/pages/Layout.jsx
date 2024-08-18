@@ -16,13 +16,13 @@ const Layout = () => {
 
   useEffect(() => {
     if (
-      path === "/" ||
+      path === "" ||
       path === "/progress/step0" ||
       path === "/progress/step5"
     ) {
       resetAtom();
     }
-  }, [path]); // path가 변경될 때만 실행됨
+  }, [path]); // path가 변경될 때만 실행됨 (메인 및 연습모드 시작과 후)
 
   return (
     <LayoutPage>

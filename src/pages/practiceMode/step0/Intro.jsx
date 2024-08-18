@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useAtom } from "jotai";
-import { themeSiteAtom } from "../../../store/atom";
-import { levelAtom, progressAtom } from "../../../store/atom";
+import { useAtom, useSetAtom } from "jotai";
+import { levelAtom, progressAtom, themeSiteAtom } from "../../../store/atom";
 import Button from "../../../components/button/Button";
 import AnimationArea from "../../../components/Animation";
 import IntroMessage from "./introMessage/IntroMessage";
@@ -20,13 +19,10 @@ const Intro = () => {
   const navigate = useNavigate();
   const [level] = useAtom(levelAtom);
   const [progress, setProgress] = useAtom(progressAtom);
-  const [themeSite, setThemeSite] = useAtom(themeSiteAtom);
+  const setThemeSite = useSetAtom(themeSiteAtom);
 
   useEffect(() => {
-    // 사이트 선택 시 default 테마를 적용
-    if (window.location.pathname === "/progress/step0") {
-      setThemeSite("practice");
-    }
+    setThemeSite("practice");
   }, [setThemeSite]);
 
   useEffect(() => {

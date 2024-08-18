@@ -37,12 +37,12 @@ const ButtonBox = styled.div`
 
 const SelectSite = () => {
   const navigate = useNavigate();
-  const [themeSite, setThemeSite] = useAtom(themeSiteAtom);
+  const setThemeSite = useSetAtom(themeSiteAtom);
 
   useEffect(() => {
     // 사이트 선택 시 default 테마를 적용
     if (window.location.pathname === "/select-site") {
-      setThemeSite("practice");
+      setThemeSite(null);
     }
   }, [setThemeSite]);
 

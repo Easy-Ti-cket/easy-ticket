@@ -43,8 +43,8 @@ const SelectMode = () => {
   const setThemeSite = useSetAtom(themeSiteAtom);
 
   const handleClick = (mode) => {
+    setThemeSite(null);
     if (mode === "연습모드") {
-      setThemeSite("practice");
       nav("/select-level");
     } else {
       nav("/select-site");

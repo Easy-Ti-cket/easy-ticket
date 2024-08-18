@@ -1,8 +1,9 @@
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Button from "../../components/button/Button";
 import Animation from "../../components/Animation";
-import { useAtom } from "jotai";
-import { userNameAtom } from "../../store/atom";
+import { useAtom, useSetAtom } from "jotai";
+import { userNameAtom, themeSiteAtom } from "../../store/atom";
 import { useNavigate } from "react-router-dom";
 import MainImage from "../../assests/images/main.png";
 
@@ -46,7 +47,7 @@ const Input = styled.input`
   color: var(--text-color);
 `;
 
-const SytledMainImage = styled.img`
+const StyledMainImage = styled.img`
   width: 600px;
   height: auto;
   flex-shrink: 0;
@@ -55,14 +56,19 @@ const SytledMainImage = styled.img`
 
 function Main() {
   const [name, setName] = useAtom(userNameAtom);
+  const setThemeSite = useSetAtom(themeSiteAtom);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setThemeSite(null);
+  }, [setThemeSite]);
 
   const handleNameInput = (e) => {
     const name = e.target.value;
     setName(name);
   };
 
-  //시작하기 클릭 시
+  // 시작하기 클릭 시
   const handleClick = () => {
     if (name === "") {
       alert("이름을 입력해주세요.");
@@ -71,9 +77,10 @@ function Main() {
     sessionStorage.setItem("name", name);
     navigate("/select-mode");
   };
+
   return (
     <MainContainer>
-      <SytledMainImage src={MainImage} alt="main image" />
+      <StyledMainImage src={MainImage} alt="main image" />
       <Instructions>
         아래 빈칸에 성함을 입력하신 후,{" "}
         <span style={{ color: "var(--key-color)" }}>‘시작하기’</span> 버튼을
