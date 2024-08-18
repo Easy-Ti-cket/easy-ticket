@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import ProgressBar from "../components/ProgressBar";
 import Timer from "../components/timer/Timer";
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import Button from "../components/button/Button";
 import { useEffect, useState } from "react";
 import Modal from "../components/modal/Modal";
@@ -60,15 +60,23 @@ const ProgressContents = ({ text }) => {
     setIsModalOpen(false);
   };
   //esc 일시정지 제어
+  //step0 화면에서는 일시정지 렌더링되지 않도록 설정
+  const path = useLocation().pathname;
+  console.log(path !== "/progress/step0");
   const [isPaused, setIsPaused] = useState(false);
   const handlePaused = (e) => {
-    if (e.key === "Escape" || e.key === "esc") {
+    if (path !== "/progress/step0" && (e.key === "Escape" || e.key === "esc")) {
       setIsPaused((prev) => !prev);
     }
+    return;
   };
   useEffect(() => {
     window.addEventListener("keydown", handlePaused);
-  }, []);
+    //컴포넌트 언마운트 or 경로 변경될 때 이벤트 리스너 제거
+    return () => {
+      window.removeEventListener("keydown", handlePaused);
+    };
+  }, [path]);
 
   return (
     <ProgressContentsContainer>
