@@ -1,15 +1,16 @@
 import styled, { keyframes } from "styled-components";
-import Button from "./button/Button";
+import Button from "../button/Button";
 
-//아래에서 위로 올라오는 애니메이션
+// 아래에서 위로 올라오는 애니메이션
 const slideUp = keyframes`
     from {
         transform: translate(-50%, 100%)
     }
-    to{
-        transform: translate()(-50%,-50%)
+    to {
+        transform: translate(-50%, -50%)
     }
 `;
+
 const Background = styled.div`
   position: fixed;
   top: 0;
@@ -19,37 +20,40 @@ const Background = styled.div`
   align-items: center;
   width: 100%;
   height: 100vh;
-  background-color: rgba(121, 121, 121, 0.3); /* 30% opacity color */
+  background-color: rgba(121, 121, 121, 0.3);
   z-index: 5000;
 `;
+
 const ModalContainer = styled.div`
   position: absolute;
   top: 50%;
   left: 50%;
   background-color: white;
-  transform: translate(-50%, -50%); /* 중앙으로 이동 */
+  transform: translate(-50%, -50%);
   border-radius: 8px;
-  width: 500px;
-  height: 400px;
+  width: ${(props) => props.width || "500px"}; // props로 너비 추가
+  height: ${(props) => props.height || "400px"}; // props로 높이 추가
   padding: 20px;
   animation: ${slideUp} 0.2s ease-out;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 100px;
+  gap: 20px;
 `;
+
 const ButtonWrap = styled.div`
   position: absolute;
   bottom: 20px;
 `;
-const Modal = ({ contents, onClick }) => {
+
+const Modal = ({ contents, onClick, buttonText = "닫기", width, height }) => {
   return (
     <Background>
-      <ModalContainer>
+      <ModalContainer width={width} height={height}>
         {contents}
         <ButtonWrap>
-          <Button text="닫기" onClick={onClick} />
+          <Button text={buttonText} onClick={onClick} />
         </ButtonWrap>
       </ModalContainer>
     </Background>
