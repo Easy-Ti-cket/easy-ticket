@@ -1,6 +1,9 @@
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useAtomValue } from "jotai";
+import { useAtomValue, useAtom } from "jotai";
 import { progressAtom, themeSiteAtom } from "../store/atom";
+import theme from "../styles/theme";
+
 const ProgressBarContainer = styled.div`
   display: flex;
   width: 100%;
@@ -16,6 +19,15 @@ const ProgressStep = styled.div`
   align-items: center;
 `;
 
+// 테마에 따라 색상을 반환하는 함수
+const getColor = (props, type) => {
+  const themeColors = theme[props.$themeSite] || theme.default;
+  if (props.$themeSite === "practice" || props.$themeSite === null) {
+    // 디폴트 테마(practice)이면 기본 키 컬러 적용
+    return "var(--key-color)";
+  } else return themeColors[type];
+};
+
 const StepNumber = styled.div`
   display: flex;
   align-items: center;
@@ -24,18 +36,17 @@ const StepNumber = styled.div`
   height: 30px;
   border-radius: 50%;
   background-color: ${(props) =>
-    props.$active ? "var(--key-color)" : "var(--fill-color)"};
-  color: #ffff;
+    props.$active ? getColor(props, "grayColor") : "var(--fill-color)"};
+  color: #fff;
   margin-bottom: 10px;
   font-family: "pretendardB";
 `;
+
 const StepLine = styled.div`
   width: 211px;
   height: 13px;
   background-color: ${(props) =>
-    props.$active
-      ? props.theme[props.$themeSite]["--key-color"]
-      : "var(--fill-color)"};
+    props.$active ? getColor(props, "grayColor") : "var(--fill-color)"};
   margin-bottom: 10px;
 
   &.rounded-start {
@@ -49,15 +60,41 @@ const StepLine = styled.div`
 const StepLabel = styled.div`
   font-size: 20px;
   color: ${(props) =>
-    props.$active ? "var(--key-color)" : "var(--text-color)"};
+    props.$active ? getColor(props, "grayColor") : "var(--text-color)"};
   text-align: center;
   font-family: "pretendardB";
   white-space: nowrap;
 `;
 
+const Loading = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 105px;
+  width: 100%;
+  max-width: 1121px;
+  font-size: 20px;
+  font-family: "pretendardB";
+`;
+
 const ProgressBar = () => {
   const progress = useAtomValue(progressAtom);
-  const themeSite = useAtomValue(themeSiteAtom);
+  const [themeSite, setThemeSite] = useAtom(themeSiteAtom);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchTheme = () => {
+      const storedTheme = sessionStorage.getItem("themeSite");
+      if (storedTheme) {
+        setThemeSite(storedTheme);
+      } else {
+        setThemeSite("practice");
+      }
+      setIsLoading(false);
+    };
+    fetchTheme();
+  }, [setThemeSite]);
+
   const steps = [
     "공연 및 회차선택",
     "좌석 선택",
@@ -69,19 +106,24 @@ const ProgressBar = () => {
   return (
     <ProgressBarContainer>
       {steps.map((stepName, index) => (
-        <ProgressStep key={index} $active={progress >= index + 1}>
-          <StepNumber $active={progress == index + 1}>{index + 1}</StepNumber>
+        <ProgressStep key={index}>
+          <StepNumber $active={progress === index + 1} $themeSite={themeSite}>
+            {index + 1}
+          </StepNumber>
           <StepLine
             className={
-              index == 0 ? "rounded-start" : index == 4 ? "rounded-end" : ""
+              index === 0 ? "rounded-start" : index === 4 ? "rounded-end" : ""
             }
-            $active={progress >= index + 1}
+            $active={progress > index} // 이전 단계를 활성화 상태로 표시
             $themeSite={themeSite}
           />
-          <StepLabel $active={progress == index + 1}>{stepName}</StepLabel>
+          <StepLabel $active={progress === index + 1} $themeSite={themeSite}>
+            {stepName}
+          </StepLabel>
         </ProgressStep>
       ))}
     </ProgressBarContainer>
   );
 };
+
 export default ProgressBar;

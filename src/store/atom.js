@@ -86,4 +86,4 @@ export const seatInfoAtom = atomWithStorage(
   storage
 );
 
-export const themeSiteAtom = atomWithStorage("themeSite", "practice", storage);
+export const themeSiteAtom = atomWithStorage("themeSite", null, storage);

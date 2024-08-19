@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useAtom } from "jotai";
-import { levelAtom, progressAtom } from "../../../store/atom";
+import { useAtom, useSetAtom } from "jotai";
+import { levelAtom, progressAtom, themeSiteAtom } from "../../../store/atom";
 import Button from "../../../components/button/Button";
 import AnimationArea from "../../../components/Animation";
 import IntroMessage from "./introMessage/IntroMessage";
@@ -19,6 +19,11 @@ const Intro = () => {
   const navigate = useNavigate();
   const [level] = useAtom(levelAtom);
   const [progress, setProgress] = useAtom(progressAtom);
+  const setThemeSite = useSetAtom(themeSiteAtom);
+
+  useEffect(() => {
+    setThemeSite("practice");
+  }, [setThemeSite]);
 
   useEffect(() => {
     setProgress(0);

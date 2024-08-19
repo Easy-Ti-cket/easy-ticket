@@ -1,81 +1,44 @@
-import "../index.css";
-
-const practice = {
-  "--sub-color": "#edeaf9",
-  "--key-color": "#472fd2",
-  "--hover-color": "#1d00c8",
-  /*point color*/
-  " --point-color": "#ff6347",
-  "--point-color2": "#ffbe17",
-  "--point-hover-color2": "#efb316",
-  /*gray scale*/
-  "--fill-color": "#cccccc",
-  "--text-color": "#666666",
-  "--text-color2": "#333333"
-};
 const interpark = {
-  "--sub-color": "#edeaf9",
-  "--key-color": "#000000",
-  "--hover-color": "#1d00c8",
-  /*point color*/
-  " --point-color": "#ff6347",
-  "--point-color2": "#ffbe17",
-  "--point-hover-color2": "#efb316",
-  /*gray scale*/
-  "--fill-color": "#cccccc",
-  "--text-color": "#666666",
-  "--text-color2": "#333333"
+  keyColor: "var(--key-color-interpark)",
+  hoverColor: "var(--hover-color-interpark)",
+  subColor: "var(--sub-color-interpark)",
+  grayColor: "var(--gray-color-interpark)"
 };
 
 const melonticket = {
-  "--sub-color": "#edeaf9",
-  "--key-color": "#472fd2",
-  "--hover-color": "#1d00c8",
-  /*point color*/
-  " --point-color": "#ff6347",
-  "--point-color2": "#ffbe17",
-  "--point-hover-color2": "#efb316",
-  /*gray scale*/
-  "--fill-color": "#cccccc",
-  "--text-color": "#666666",
-  "--text-color2": "#333333"
+  keyColor: "var(--key-color-melonticket)",
+  hoverColor: "var(--hover-color-melonticket)",
+  subColor: "var(--sub-color-melonticket)",
+  grayColor: "var(--gray-color-melonticket)"
 };
 
 const ticketlink = {
-  "--sub-color": "#edeaf9",
-  "--key-color": "#472fd2",
-  "--hover-color": "#1d00c8",
-  /*point color*/
-  " --point-color": "#ff6347",
-  "--point-color2": "#ffbe17",
-  "--point-hover-color2": "#efb316",
-  /*gray scale*/
-  "--fill-color": "#cccccc",
-  "--text-color": "#666666",
-  "--text-color2": "#333333"
+  keyColor: "var(--key-color-ticketlink)",
+  hoverColor: "var(--hover-color-ticketlink)",
+  subColor: "var(--sub-color-ticketlink)",
+  grayColor: "var(--gray-color-ticketlink)"
 };
 
 const yes24 = {
-  "--sub-color": "#edeaf9",
-  "--key-color": "#472fd2",
-  "--hover-color": "#1d00c8",
-  /*point color*/
-  " --point-color": "#ff6347",
-  "--point-color2": "#ffbe17",
-  "--point-hover-color2": "#efb316",
-  /*gray scale*/
-  "--fill-color": "#cccccc",
-  "--text-color": "#666666",
-  "--text-color2": "#333333"
+  keyColor: "var(--key-color-yes24)",
+  hoverColor: "var(--hover-color-yes24)",
+  subColor: "var(--sub-color-yes24)",
+  grayColor: "var(--gray-color-yes24)"
 };
 
-// 내보내는 테마 객체
+const practice = {
+  keyColor: "var(--key-color)",
+  hoverColor: "var(--hover-color)",
+  subColor: "var(--sub-color)",
+  grayColor: "var(--gray-color)"
+};
+
 const theme = {
   interpark,
   melonticket,
   ticketlink,
   yes24,
-  practice
+  default: practice
 };
 
 export default theme;

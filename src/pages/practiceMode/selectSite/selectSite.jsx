@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import Button from "../../../components/button/Button";
 import { themeSiteAtom } from "../../../store/atom";
-import { useSetAtom } from "jotai";
+import { useSetAtom, useAtom } from "jotai";
+import interparkIcon from "../../../assests/images/icons/interpark.svg";
+import melonticketIcon from "../../../assests/images/icons/melonticket.svg";
+import tickelinkIcon from "../../../assests/images/icons/tickelink.svg";
+import yes24Icon from "../../../assests/images/icons/yes24.svg";
+
 const SelectSiteContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -11,10 +16,6 @@ const SelectSiteContainer = styled.div`
   justify-content: center;
   margin-top: 50px;
 `;
-import interparkIcon from "../../../assests/images/icons/interpark.svg";
-import melonticketIcon from "../../../assests/images/icons/melonticket.svg";
-import tickelinkIcon from "../../../assests/images/icons/tickelink.svg";
-import yes24Icon from "../../../assests/images/icons/yes24.svg";
 
 const Instructions = styled.p`
   margin-top: 20px;
@@ -35,19 +36,42 @@ const ButtonBox = styled.div`
 `;
 
 const SelectSite = () => {
-  const nav = useNavigate();
+  const navigate = useNavigate();
   const setThemeSite = useSetAtom(themeSiteAtom);
+
+  useEffect(() => {
+    // 사이트 선택 시 default 테마를 적용
+    if (window.location.pathname === "/select-site") {
+      setThemeSite(null);
+    }
+  }, [setThemeSite]);
+
   const sites = [
-    { name: "인터파크 티켓", icon: interparkIcon, path: "/interpark" },
-    { name: "멜론티켓", icon: melonticketIcon, path: "/melonticket" },
-    { name: "티켓링크", icon: tickelinkIcon, path: "/ticketlink" },
-    { name: "예스24(YES24)", icon: yes24Icon, path: "/yes24" }
+    {
+      name: "인터파크 티켓",
+      icon: interparkIcon,
+      path: "/interpark/step1", // 테마 적용 테스트 페이지
+      theme: "interpark"
+    },
+    {
+      name: "멜론티켓",
+      icon: melonticketIcon,
+      path: "/melonticket",
+      theme: "melonticket"
+    },
+    {
+      name: "티켓링크",
+      icon: tickelinkIcon,
+      path: "/ticketlink",
+      theme: "ticketlink"
+    },
+    { name: "예스24(YES24)", icon: yes24Icon, path: "/yes24", theme: "yes24" }
   ];
 
-  const handleClick = (path) => {
-    //site 종류를 sessionStorage에 저장
-    setThemeSite(path.replace("/", ""));
-    nav(path);
+  // 라우팅
+  const handleClick = (path, theme) => {
+    setThemeSite(theme);
+    navigate(path);
   };
 
   return (
@@ -62,7 +86,7 @@ const SelectSite = () => {
             <Button
               text={site.name}
               icon={site.icon}
-              onClick={() => handleClick(site.path)}
+              onClick={() => handleClick(site.path, site.theme)}
               type="mode"
             />
           </ButtonBox>

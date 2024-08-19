@@ -9,6 +9,7 @@ import SelectSite from "./pages/practiceMode/selectSite/selectSite";
 import Intro from "./pages/practiceMode/step0/Intro";
 import SelectPerformance from "./pages/practiceMode/step1/SelectPerformance";
 import SelectRound from "./pages/practiceMode/step1/SelectRound";
+import SelectRoundInterpark from "./pages/challengeMode/interpark/SelectRoundInterpark";
 import SelectPayMethod from "./pages/practiceMode/step4/SelectPayMethod";
 import CardPay from "./pages/practiceMode/step4/CardPay";
 import Step5 from "./pages/practiceMode/step5/Step5";
@@ -63,6 +64,22 @@ const router = createBrowserRouter([
             path: "step4-2",
             element: <PrivateRoute element={<CardPay />} />,
             label: "카드 결제창"
+          },
+          {
+            path: "step5",
+            element: <PrivateRoute element={<Step5 />} />,
+            label: "예매 성공"
+          }
+        ]
+      },
+      {
+        path: "interpark",
+        element: <ProgressContents />,
+        children: [
+          {
+            path: "step1",
+            element: <PrivateRoute element={<SelectRoundInterpark />} />,
+            label: "날짜 및 회차 선택"
           },
           {
             path: "step5",
