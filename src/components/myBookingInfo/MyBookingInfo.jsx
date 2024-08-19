@@ -61,7 +61,6 @@ const AmountContent = styled.div`
   font-family: pretendardB;
   font-size: 28px;
   margin-top: 20px;
-  color: var(--key-color);
 `;
 const ButtonContainer = styled.div`
   display: flex;
