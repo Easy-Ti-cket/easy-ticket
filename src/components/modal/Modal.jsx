@@ -58,7 +58,7 @@ const Modal = ({
   return (
     <Background>
       <ModalContainer width={width} height={height}>
-        {contents}
+        {contents}``
         {/*닫기 버튼 */}
         {buttonShow && (
           <ButtonWrap>
