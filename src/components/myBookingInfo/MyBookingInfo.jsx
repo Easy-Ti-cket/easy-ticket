@@ -10,10 +10,9 @@ import {
 import { useAtomValue } from "jotai";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useForm } from "../../hooks/useForm";
 
 const Container = styled.div`
-  border: 1px solid var(--key-color);
+  border: 2px solid var(--fill-color);
   border-radius: 8px;
   width: 400px;
   height: 457px;
@@ -47,7 +46,7 @@ const TotalAmount = styled.div`
   margin: 0 20px 0 20px;
   display: flex;
   justify-content: space-between;
-  border-top: 1px solid var(--key-color);
+  border-top: 2px solid var(--fill-color);
 `;
 
 const AmountTitle = styled.div`
