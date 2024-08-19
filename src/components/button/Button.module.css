@@ -9,7 +9,7 @@
   border-radius: 4px;
   justify-content: center;
   align-items: center;
-  font-family: "pretendardR";
+  font-family: "pretendardB";
   font-size: 16px;
   font-style: normal;
   background-color: var(--key-color);
@@ -23,13 +23,13 @@
 
 /*이전 단계*/
 .button--prev {
-  background-color: var(--sub-color);
-  border: 1px solid var(--key-color);
+  background-color: #fff;
+  border: 2px solid var(--key-color);
   color: var(--key-color);
 }
 .button--prev:hover {
   background-color: var(--sub-color);
-  border: 1px solid var(--key-color);
+  border: 2px solid var(--key-color);
   color: var(--key-color);
 }
 /* 좌석 선택 */
