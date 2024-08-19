@@ -5,7 +5,7 @@ import { useAtom, useAtomValue } from "jotai";
 import Animation from "./Animation";
 
 const SeatCountContainer = styled.div`
-  border: 1px solid var(--key-color);
+  border: 2px solid var(--fill-color);
   border-radius: 8px;
   padding: 20px;
   padding-bottom: 10px;
@@ -32,7 +32,10 @@ const InfoRow = styled.div`
 const InfoText = styled.div`
   color: var(--text-color);
 `;
-
+const Price = styled.span`
+  color: var(--key-color);
+  font-family: "pretendardB";
+`;
 const CountSelector = styled.select`
   width: 70px;
   height: 30px;
@@ -75,7 +78,7 @@ const SeatCount = () => {
       <InfoRow>
         <InfoText>기본가</InfoText>
         <InfoText>일반</InfoText>
-        <InfoText>{seatInfo.price}원</InfoText>
+        <Price>{seatInfo.price}원</Price>
         <Animation $focus={focus}>
           <CountSelector
             $focus={focus}

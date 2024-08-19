@@ -31,12 +31,16 @@ const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 20px 20px 0 20px;
-  font-family: "pretendardR";
 `;
 const InfoItem = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 10px 0;
+`;
+const InfoTitle = styled.span`
+  color: var(--text-color);
+  font-family: "pretendardB";
+  font-size: 16px;
 `;
 const InfoText = styled.div`
   font-family: "pretendardB";
@@ -57,6 +61,7 @@ const AmountContent = styled.div`
   font-family: pretendardB;
   font-size: 28px;
   margin-top: 20px;
+  color: var(--key-color);
 `;
 const ButtonContainer = styled.div`
   display: flex;
@@ -147,7 +152,7 @@ const MyBookingInfo = ({
       <InfoContainer>
         {Info.map((item, index) => (
           <InfoItem key={index}>
-            <InfoText>{item.title}</InfoText>
+            <InfoTitle>{item.title}</InfoTitle>
             <InfoText>
               {item.price != undefined ? item.price + "원" : item.content}
             </InfoText>
