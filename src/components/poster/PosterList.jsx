@@ -58,19 +58,17 @@ const PosterContainer = styled.div`
   width: 240px;
   height: 470px;
   border-radius: 8px;
-  background-color: var(--sub-color);
+  background-color: var(--fill-color);
   padding: 4px 2px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 
   /* hover 시 색상 적절히 변하도록 css 적용 */
   &:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-    background-color: var(--key-color);
-    color: white;
+    background-color: var(--sub-color);
   }
 
   &:hover ${PosterTitle}, &:hover ${PosterVenue}, &:hover ${PosterTime} {
-    color: white;
   }
 `;
 
