@@ -19,6 +19,7 @@
   --sub-color: #edeaf9;
   --key-color: #472fd2;
   --hover-color: #1d00c8;
+  --progress-color: #9a8ce5;
 
   /*point color*/
   --point-color: #ff6347;
@@ -32,22 +33,26 @@
 
   --key-color-interpark: #d40000;
   --hover-color-interpark: #b50000;
-  --sub-color-interpark: #00ff50;
+  --sub-color-interpark: #ffdada;
+  --progress-color-interpark: #d47373;
   --gray-color-interpark: #2c2c2c;
 
   --key-color-melonticket: #00cd3c;
   --hover-color-melonticket: #00b500;
-  --sub-color-melonticket: #00ff0050;
+  --sub-color-melonticket: #d1ffd1;
+  --progress-color-melonticket: #3d8553;
   --gray-color-melonticket: #2c2c2c;
 
-  --key-color-ticketlink: #00ff00;
-  --hover-color-ticketlink: #00b500;
-  --sub-color-ticketlink: #00ff0050;
+  --key-color-ticketlink: #ff1c1c;
+  --hover-color-ticketlink: #b50000;
+  --sub-color-ticketlink: #ffcfcf;
+  --progress-color-ticketlink: #c7bd4f;
   --gray-color-ticketlink: #2c2c2c;
 
   --key-color-yes24: #00a2ff;
   --hover-color-yes24: #005bb5;
-  --sub-color-yes24: #00a2ff50;
+  --sub-color-yes24: #def3ff;
+  --progress-color-yes24: #241e94;
   --gray-color-yes24: #2c2c2c;
 }
 /* Interpark 테마 */
@@ -56,6 +61,7 @@
   --hover-color: var(--hover-color-interpark);
   --sub-color: var(--sub-color-interpark);
   --gray-color: var(--gray-color-interpark);
+  --progress-color: var(--progress-color-interpark);
 }
 
 /* Melonticket 테마 */
@@ -64,6 +70,7 @@
   --hover-color: var(--hover-color-melonticket);
   --sub-color: var(--sub-color-melonticket);
   --gray-color: var(--gray-color-melonticket);
+  --progress-color: var(--progress-color-melonticket);
 }
 
 /* Ticketlink 테마 */
@@ -72,6 +79,7 @@
   --hover-color: var(--hover-color-ticketlink);
   --sub-color: var(--sub-color-ticketlink);
   --gray-color: var(--gray-color-ticketlink);
+  --progress-color: var(--progress-color-ticketlink);
 }
 
 /* Yes24 테마 */
@@ -80,6 +88,7 @@
   --hover-color: var(--hover-color-yes24);
   --sub-color: var(--sub-color-yes24);
   --gray-color: var(--gray-color-yes24);
+  --progress-color: var(--progress-color-yes24);
 }
 /*default setting*/
 body {

@@ -16,7 +16,7 @@ const Stage = styled.div`
   display: flex;
   width: 400px;
   min-height: 70px;
-  border: 1px solid var(--key-color);
+  border: 2px solid var(--fill-color);
   border-radius: 4px;
   margin: 5px;
   align-items: center;
@@ -35,7 +35,7 @@ const SeatGridContainer = styled.div`
 const SeatChart = () => {
   return (
     <SeatChartContainer>
-      <Stage>스테이지</Stage>
+      <Stage>무대</Stage>
       <SeatGridContainer>
         {/* SeatGrid 4개 배치 */}
         {[0, 1, 2, 3].map((gridIndex) => (

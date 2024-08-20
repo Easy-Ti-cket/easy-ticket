@@ -24,6 +24,7 @@ const AnimationArea = styled.div`
       animation: ${blink} 1.5s infinite;
     `}
   border-radius: 8px;
+  z-index: 500;
 `;
 
 export default AnimationArea;

@@ -16,6 +16,7 @@ import Step5 from "./pages/practiceMode/step5/Step5";
 import SelectSeat from "./pages/practiceMode/step2/SelectSeat";
 import SeatPriceCheck from "./pages/practiceMode/step3/SeatPriceCheck";
 import PrivateRoute from "./pages/PrivateRoute";
+import ChallangeIntro from "./pages/challengeMode/step0/ChallangeIntro";
 
 const router = createBrowserRouter([
   {
@@ -76,6 +77,11 @@ const router = createBrowserRouter([
         path: "interpark",
         element: <ProgressContents />,
         children: [
+          {
+            path: "step0",
+            element: <PrivateRoute element={<ChallangeIntro />} />,
+            label: "인트로"
+          },
           {
             path: "step1",
             element: <PrivateRoute element={<SelectRoundInterpark />} />,

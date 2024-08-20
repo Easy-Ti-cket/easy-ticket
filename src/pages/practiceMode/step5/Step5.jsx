@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import Button from "../../../components/button/Button";
-import { useAtom } from "jotai";
-import { levelAtom, progressAtom } from "../../../store/atom";
+import { useAtom, useSetAtom } from "jotai";
+import { levelAtom, progressAtom, themeSiteAtom } from "../../../store/atom";
 import { useNavigate } from "react-router-dom";
-import useResetAtom from "../../../util/resetAtom";
+
 const Step5Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -46,11 +46,15 @@ const Step5 = () => {
   const [, setProgress] = useAtom(progressAtom);
   const navigate = useNavigate();
 
+  const setThemeSite = useSetAtom(themeSiteAtom);
+
+  useEffect(() => {
+    setThemeSite(null);
+  }, [setThemeSite]);
+
   useEffect(() => {
     setProgress(5);
   }, [setProgress]);
-
-  // useResetAtom();
 
   // 난이도 선택 창으로
   const handlePracticeModeClick = () => {

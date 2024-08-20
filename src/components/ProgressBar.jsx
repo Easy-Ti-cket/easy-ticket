@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useAtomValue, useAtom } from "jotai";
 import { progressAtom, themeSiteAtom } from "../store/atom";
-import theme from "../styles/theme";
 
 const ProgressBarContainer = styled.div`
   display: flex;
@@ -19,14 +18,14 @@ const ProgressStep = styled.div`
   align-items: center;
 `;
 
-// 테마에 따라 색상을 반환하는 함수
-const getColor = (props, type) => {
-  const themeColors = theme[props.$themeSite] || theme.default;
-  if (props.$themeSite === "practice" || props.$themeSite === null) {
-    // 디폴트 테마(practice)이면 기본 키 컬러 적용
-    return "var(--key-color)";
-  } else return themeColors[type];
-};
+// // 테마에 따라 색상을 반환하는 함수
+// const getColor = (props, type) => {
+//   const themeColors = theme[props.$themeSite] || theme.default;
+//   if (props.$themeSite === "practice" || props.$themeSite === null) {
+//     // 디폴트 테마(practice)이면 기본 키 컬러 적용
+//     return "var(--key-color)";
+//   } else return themeColors[type];
+// };
 
 const StepNumber = styled.div`
   display: flex;
@@ -36,7 +35,7 @@ const StepNumber = styled.div`
   height: 30px;
   border-radius: 50%;
   background-color: ${(props) =>
-    props.$active ? getColor(props, "grayColor") : "var(--fill-color)"};
+    props.$active ? "var(--progress-color)" : "var(--fill-color)"};
   color: #fff;
   margin-bottom: 10px;
   font-family: "pretendardB";
@@ -46,7 +45,7 @@ const StepLine = styled.div`
   width: 211px;
   height: 13px;
   background-color: ${(props) =>
-    props.$active ? getColor(props, "grayColor") : "var(--fill-color)"};
+    props.$active ? "var(--progress-color)" : "var(--fill-color)"};
   margin-bottom: 10px;
 
   &.rounded-start {
@@ -60,7 +59,7 @@ const StepLine = styled.div`
 const StepLabel = styled.div`
   font-size: 20px;
   color: ${(props) =>
-    props.$active ? getColor(props, "grayColor") : "var(--text-color)"};
+    props.$active ? "var(--key-color)" : "var(--text-color)"};
   text-align: center;
   font-family: "pretendardB";
   white-space: nowrap;

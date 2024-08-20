@@ -52,7 +52,7 @@ const ProgressContents = ({ text }) => {
   //레벨 별 타이머 출력 설정
   const level = useAtomValue(levelAtom);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const theme = useAtomValue(themeSiteAtom);
+  const themeSite = useAtomValue(themeSiteAtom);
 
   const handleModalOpen = () => {
     setIsModalOpen(true);
@@ -62,8 +62,8 @@ const ProgressContents = ({ text }) => {
     setIsModalOpen(false);
   };
 
-  // 실전 모드인 경우(테마 정보가 있는 경우) 도움말 버튼 숨기기
-  const showHelpButton = !theme;
+  // 연습모드인 경우만 도움말 버튼 보여주기
+  const showHelpButton = themeSite === "practice";
 
   return (
     <ProgressContentsContainer>

@@ -15,7 +15,7 @@ const TicketMethodCont = styled.div`
   color: ${(props) => props.$hasError && "var(--point-color)"};
 `;
 const TicketMethodWrap = styled(FormWrap)`
-  border: 1px solid var(--key-color);
+  border: 2px solid var(--fill-color);
   border-radius: 8px;
   display: inline-flex;
   flex-direction: column;
