@@ -40,10 +40,7 @@ const SelectSite = () => {
   const setThemeSite = useSetAtom(themeSiteAtom);
 
   useEffect(() => {
-    // 사이트 선택 시 default 테마를 적용
-    if (window.location.pathname === "/select-site") {
-      setThemeSite(null);
-    }
+    setThemeSite(null);
   }, [setThemeSite]);
 
   const sites = [
