@@ -47,14 +47,24 @@ const ButtonWrap = styled.div`
   bottom: 20px;
 `;
 
-const Modal = ({ contents, onClick, buttonText = "닫기", width, height }) => {
+const Modal = ({
+  contents,
+  onClick,
+  buttonText = "닫기",
+  width,
+  height,
+  buttonShow = true //닫기 버튼 보여줄 것인지
+}) => {
   return (
     <Background>
       <ModalContainer width={width} height={height}>
-        {contents}
-        <ButtonWrap>
-          <Button text={buttonText} onClick={onClick} />
-        </ButtonWrap>
+        {contents}``
+        {/*닫기 버튼 */}
+        {buttonShow && (
+          <ButtonWrap>
+            <Button text={buttonText} onClick={onClick} />
+          </ButtonWrap>
+        )}
       </ModalContainer>
     </Background>
   );

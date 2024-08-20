@@ -1,4 +1,3 @@
-import Calendar from "react-calendar";
 import ProgressBar from "../components/ProgressBar";
 import Button from "../components/button/Button";
 import SelectCalender from "../components/calender/SelectCalender";

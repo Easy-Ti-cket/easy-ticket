@@ -4,10 +4,10 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../../components/button/Button";
 import { themeSiteAtom } from "../../../store/atom";
 import { useSetAtom, useAtom } from "jotai";
-import interparkIcon from "../../../assests/images/icons/interpark.svg";
-import melonticketIcon from "../../../assests/images/icons/melonticket.svg";
-import tickelinkIcon from "../../../assests/images/icons/tickelink.svg";
-import yes24Icon from "../../../assests/images/icons/yes24.svg";
+import interparkIcon from "../../../assests/images/icons/site/interpark.svg";
+import melonticketIcon from "../../../assests/images/icons/site/melonticket.svg";
+import tickelinkIcon from "../../../assests/images/icons/site/tickelink.svg";
+import yes24Icon from "../../../assests/images/icons/site/yes24.svg";
 
 const SelectSiteContainer = styled.div`
   display: flex;
