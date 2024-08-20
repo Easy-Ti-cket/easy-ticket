@@ -39,8 +39,10 @@ const NavContent = styled.li`
   //조건부 css : 마우스 hover 네비게이터는 서브네비게이터가 사라지기 전까지 css 유지
   //1) 현재 sideNavigator 영역까지 포함됐을 때 hovered상태인가?
   //2) 해당 navigator가 hovered상태인가?
-  color: ${({ $ishovered, $isactive }) =>
-    $ishovered && $isactive ? "var(--key-color)" : "var(--text-color)"};
+  color: ${(props) =>
+    props.$ishovered && props.$isactive
+      ? props.theme.default.keyColor
+      : "var(--text-color)"};
 
   &::after {
     content: "";
@@ -49,7 +51,7 @@ const NavContent = styled.li`
     left: 0;
     width: 120px;
     height: 0;
-    background-color: var(--key-color);
+    background-color: ${(props) => props.theme.default.keyColor};
     border-radius: 50px;
     transition: height 0.1s ease;
     ${({ $isactive, $ishovered }) =>

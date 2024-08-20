@@ -2,10 +2,11 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { levelAtom, themeSiteAtom } from "../../../../store/atom";
 import { useSetAtom } from "jotai";
+
 const SubNavWrap = styled.div`
   width: 1320px;
   height: 50px;
-  background-color: var(--sub-color);
+  background-color: ${(props) => props.theme.default.subColor};
   display: flex;
   justify-content: center;
 `;

@@ -11,7 +11,6 @@ const HeaderContainer = styled.div`
   position: relative;
 `;
 
-//로고로 대치 예정
 const LogoContainer = styled.div`
   width: 140px;
   height: 80px;
