@@ -1,28 +1,24 @@
 const interpark = {
-  keyColor: "var(--key-color-interpark)",
-  hoverColor: "var(--hover-color-interpark)",
-  subColor: "var(--sub-color-interpark)",
+  keyColor: "var(--key-color)",
+  subColor: "var(--sub-color)",
   grayColor: "var(--gray-color-interpark)"
 };
 
 const melonticket = {
-  keyColor: "var(--key-color-melonticket)",
-  hoverColor: "var(--hover-color-melonticket)",
-  subColor: "var(--sub-color-melonticket)",
+  keyColor: "var(--key-color)",
+  subColor: "var(--sub-color)",
   grayColor: "var(--gray-color-melonticket)"
 };
 
 const ticketlink = {
-  keyColor: "var(--key-color-ticketlink)",
-  hoverColor: "var(--hover-color-ticketlink)",
-  subColor: "var(--sub-color-ticketlink)",
+  keyColor: "var(--key-color)",
+  subColor: "var(--sub-color)",
   grayColor: "var(--gray-color-ticketlink)"
 };
 
 const yes24 = {
-  keyColor: "var(--key-color-yes24)",
-  hoverColor: "var(--hover-color-yes24)",
-  subColor: "var(--sub-color-yes24)",
+  keyColor: "var(--key-color)",
+  subColor: "var(--sub-color)",
   grayColor: "var(--gray-color-yes24)"
 };
 

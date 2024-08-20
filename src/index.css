@@ -32,22 +32,22 @@
 
   --key-color-interpark: #d40000;
   --hover-color-interpark: #b50000;
-  --sub-color-interpark: #00ff50;
+  --sub-color-interpark: #ffdada;
   --gray-color-interpark: #2c2c2c;
 
   --key-color-melonticket: #00cd3c;
   --hover-color-melonticket: #00b500;
-  --sub-color-melonticket: #00ff0050;
+  --sub-color-melonticket: #d1ffd1;
   --gray-color-melonticket: #2c2c2c;
 
-  --key-color-ticketlink: #00ff00;
-  --hover-color-ticketlink: #00b500;
-  --sub-color-ticketlink: #00ff0050;
+  --key-color-ticketlink: #ff1c1c;
+  --hover-color-ticketlink: #b50000;
+  --sub-color-ticketlink: #ffcfcf;
   --gray-color-ticketlink: #2c2c2c;
 
   --key-color-yes24: #00a2ff;
   --hover-color-yes24: #005bb5;
-  --sub-color-yes24: #00a2ff50;
+  --sub-color-yes24: #def3ff;
   --gray-color-yes24: #2c2c2c;
 }
 /* Interpark 테마 */
