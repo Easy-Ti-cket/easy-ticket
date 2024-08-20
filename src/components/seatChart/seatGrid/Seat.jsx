@@ -5,13 +5,13 @@ import AnimationArea from "../../Animation";
 const SeatDiv = styled.div`
   width: 20px;
   height: 20px;
-  border: 1px solid var(--key-color);
   border-radius: 4px;
-  background-color: ${(props) => props.$isallowed && "var(--key-color)"};
+  background-color: ${(props) =>
+    props.$isallowed ? "var(--key-color)" : "var(--fill-color)"};
   cursor: ${(props) => props.$isallowed && "pointer"};
 `;
 const SeatAnimationArea = styled(AnimationArea)`
-  padding: 5px;
+  padding: 3px;
 `;
 const Seat = ({ isallowed }) => {
   const level = useAtomValue(levelAtom);

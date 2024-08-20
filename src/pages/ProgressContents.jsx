@@ -6,7 +6,7 @@ import Button from "../components/button/Button";
 import { useEffect, useState } from "react";
 import Modal from "../components/modal/Modal";
 import { useAtomValue } from "jotai";
-import { levelAtom } from "../store/atom";
+import { themeSiteAtom, levelAtom } from "../store/atom";
 import EscModal from "../components/modal/EscModalContents";
 
 //ProgressBar+ContentsBox Container
@@ -53,9 +53,12 @@ const ProgressContents = ({ text }) => {
   const level = useAtomValue(levelAtom);
   //도움말 모달창 제어
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const themeSite = useAtomValue(themeSiteAtom);
+
   const handleModalOpen = () => {
     setIsModalOpen(true);
   };
+
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
@@ -77,6 +80,9 @@ const ProgressContents = ({ text }) => {
     };
   }, [path]);
 
+  // 연습모드인 경우만 도움말 버튼 보여주기
+  const showHelpButton = themeSite === "practice";
+
   return (
     <ProgressContentsContainer>
       {/*프로그래스 바*/}
@@ -96,13 +102,15 @@ const ProgressContents = ({ text }) => {
       <TextBox>{text}</TextBox>
       <ContentsBox>
         {/*도움말 버튼 */}
-        <ButtonContainer>
-          <Button
-            onClick={handleModalOpen}
-            text="도움이 필요하신가요?"
-            type="help"
-          />
-        </ButtonContainer>
+        {showHelpButton && (
+          <ButtonContainer>
+            <Button
+              onClick={handleModalOpen}
+              text="도움이 필요하신가요?"
+              type="help"
+            />
+          </ButtonContainer>
+        )}
         {/*일시정지 모달창 */}
         {isPaused && (
           <Modal

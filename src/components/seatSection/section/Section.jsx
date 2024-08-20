@@ -8,12 +8,18 @@ import {
 } from "../../../store/atom";
 
 const SectionDiv = styled.div`
-  border: 1px solid var(--key-color);
+  border: 2px solid var(--fill-color);
   border-radius: 4px;
   width: 200px;
   height: 150px;
-  cursor: ${(props) => props.$cursor && "pointer"};
+  cursor: pointer;
   margin: ${(props) => !props.$cursor && "3px"};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    border: 2px solid var(--text-color);
+  }
 `;
 const Section = ({ num }) => {
   const allowedSection = useAtomValue(allowedSectionAtom);

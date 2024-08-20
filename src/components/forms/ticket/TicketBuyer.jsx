@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { FormWrap } from "../FormStyle";
 import { InputContainer, Label } from "../../input/InputStyle";
-import { useForm } from "../../../hooks/useForm";
 import { useAtomValue } from "jotai";
 import { levelAtom } from "../../../store/atom";
 import { useState } from "react";
@@ -13,6 +12,10 @@ const BuyerWrap = styled.div`
 
 const BuyerContainer = styled(FormWrap)`
   gap: 10px;
+`;
+
+const BuyerLabel = styled(Label)`
+  color: var(--text-color);
 `;
 
 const InfoBox = styled.div`
@@ -82,7 +85,7 @@ const TicketBuyer = ({ option, setIsValidate, errorArray }) => {
         <BuyerContainer>
           {data_essential.map((item, index) => (
             <InputContainer key={index}>
-              <Label>{item.label}</Label>
+              <BuyerLabel>{item.label}</BuyerLabel>
               {level === "high" && item.label === "생년월일" ? (
                 <InfoInput
                   name="birth"

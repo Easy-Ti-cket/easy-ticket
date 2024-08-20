@@ -4,7 +4,6 @@ import {
   isSeatSelectedAtom,
   allowedSeatAtom,
   levelAtom,
-  allowedSectionAtom,
   postersAtom,
   selectedPosterAtom,
   seatInfoAtom
@@ -18,6 +17,7 @@ import {
   SelectedSeatsHeader,
   SelectedSeatsInfo,
   SeatGrade,
+  SeatInfoCont,
   SeatPrice,
   ButtonAnimationArea
 } from "./SeatInfoStyles";
@@ -79,11 +79,11 @@ const SeatInfo = () => {
       <SelectedSeats>
         <SelectedSeatsInfo>
           <SeatGrade>좌석등급</SeatGrade>
-          <SeatPrice>좌석정보</SeatPrice>
+          <SeatGrade>좌석정보</SeatGrade>
           {isSeatSelected && (
             <>
-              <SeatGrade>{seatInfo.grade}</SeatGrade>
-              <SeatPrice>{`${allowedSeat.row + 1}열-${allowedSeat.col + 1}`}</SeatPrice>
+              <SeatInfoCont>{seatInfo.grade}</SeatInfoCont>
+              <SeatInfoCont>{`${allowedSeat.row + 1}열-${allowedSeat.col + 1}`}</SeatInfoCont>
             </>
           )}
         </SelectedSeatsInfo>
