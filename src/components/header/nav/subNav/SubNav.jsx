@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { levelAtom, themeSiteAtom } from "../../../../store/atom";
@@ -38,6 +39,11 @@ const SubNav = ({ hovereditem }) => {
   const setLevel = useSetAtom(levelAtom);
   const setThemeSite = useSetAtom(themeSiteAtom);
 
+  useEffect(() => {
+    // 기본 theme로 초기화
+    setThemeSite("practice");
+  }, [setThemeSite]);
+
   const handleSubNavClick = (e) => {
     const level =
       e.target.innerText === "초급"
@@ -50,8 +56,9 @@ const SubNav = ({ hovereditem }) => {
   };
 
   const handleSiteClick = (site) => {
+    setLevel("high");
     setThemeSite(site);
-    nav(`/${site}`);
+    nav(`/${site}/step0`); // 각 사이트의 인트로 페이지로 이동
   };
 
   return (
