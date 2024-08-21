@@ -79,20 +79,6 @@ const Loading = styled.div`
 const ProgressBar = () => {
   const progress = useAtomValue(progressAtom);
   const [themeSite, setThemeSite] = useAtom(themeSiteAtom);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchTheme = () => {
-      const storedTheme = sessionStorage.getItem("themeSite");
-      if (storedTheme) {
-        setThemeSite(storedTheme);
-      } else {
-        setThemeSite("practice");
-      }
-      setIsLoading(false);
-    };
-    fetchTheme();
-  }, [setThemeSite]);
 
   const steps = [
     "공연 및 회차선택",

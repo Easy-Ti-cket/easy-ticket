@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import Button from "../../../components/button/Button";
 import { themeSiteAtom } from "../../../store/atom";
-import { useSetAtom } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import interparkIcon from "../../../assests/images/icons/site/interpark.svg";
 import melonticketIcon from "../../../assests/images/icons/site/melonticket.svg";
 import tickelinkIcon from "../../../assests/images/icons/site/tickelink.svg";
@@ -40,7 +40,8 @@ const SelectSite = () => {
   const setThemeSite = useSetAtom(themeSiteAtom);
 
   useEffect(() => {
-    setThemeSite(null);
+    //theme 초기화
+    setThemeSite("practice");
   }, [setThemeSite]);
 
   const sites = [

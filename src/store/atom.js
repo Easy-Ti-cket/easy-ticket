@@ -67,10 +67,10 @@ export const allowedSectionAtom = atomWithStorage(
 );
 
 //사용자 이름
-export const userNameAtom = atomWithStorage("userName", "");
+export const userNameAtom = atomWithStorage("userName", "", storage);
 
 //연습모드 완료 횟수
-export const practiceCountAtom = atomWithStorage("practiceCount", 0);
+export const practiceCountAtom = atomWithStorage("practiceCount", 0, storage);
 
 //좌석 매수 개수
 export const seatCountAtom = atomWithStorage("seatCount", 0, storage);

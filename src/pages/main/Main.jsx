@@ -3,7 +3,7 @@ import styled from "styled-components";
 import Button from "../../components/button/Button";
 import Animation from "../../components/Animation";
 import { useAtom, useSetAtom } from "jotai";
-import { userNameAtom, themeSiteAtom } from "../../store/atom";
+import { userNameAtom, themeSiteAtom, levelAtom } from "../../store/atom";
 import { useNavigate } from "react-router-dom";
 import MainImage from "../../assests/images/main.png";
 
@@ -57,10 +57,13 @@ const StyledMainImage = styled.img`
 function Main() {
   const [name, setName] = useAtom(userNameAtom);
   const setThemeSite = useSetAtom(themeSiteAtom);
+  const setLevel = useSetAtom(levelAtom);
   const navigate = useNavigate();
 
   useEffect(() => {
     setThemeSite(null);
+    setLevel(null);
+    setName(null);
   }, [setThemeSite]);
 
   const handleNameInput = (e) => {
@@ -70,11 +73,10 @@ function Main() {
 
   // 시작하기 클릭 시
   const handleClick = () => {
-    if (name === "") {
+    if (!name) {
       alert("이름을 입력해주세요.");
       return;
     }
-    sessionStorage.setItem("name", name);
     navigate("/select-mode");
   };
 

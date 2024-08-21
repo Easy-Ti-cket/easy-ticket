@@ -1,7 +1,7 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useAtom, useSetAtom } from "jotai";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { progressAtom, themeSiteAtom } from "../../../store/atom";
 import Button from "../../../components/button/Button";
 import AnimationArea from "../../../components/Animation";
@@ -18,7 +18,7 @@ const IntroContainer = styled.div`
 const ChallangeIntro = () => {
   const navigate = useNavigate();
   const [progress, setProgress] = useAtom(progressAtom);
-  const [themeSite] = useAtom(themeSiteAtom);
+  const themeSite = useAtomValue(themeSiteAtom);
 
   useEffect(() => {
     setProgress(0);
@@ -38,6 +38,9 @@ const ChallangeIntro = () => {
         break;
       case "yes24":
         navigate("/yes24/step1-1");
+        break;
+      default:
+        "practice";
         break;
     }
   };
