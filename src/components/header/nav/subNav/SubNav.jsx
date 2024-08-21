@@ -39,11 +39,6 @@ const SubNav = ({ hovereditem }) => {
   const setLevel = useSetAtom(levelAtom);
   const setThemeSite = useSetAtom(themeSiteAtom);
 
-  useEffect(() => {
-    // 기본 theme로 초기화
-    setThemeSite("practice");
-  }, [setThemeSite]);
-
   const handleSubNavClick = (e) => {
     const level =
       e.target.innerText === "초급"
