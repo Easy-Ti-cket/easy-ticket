@@ -68,7 +68,12 @@ const ProgressContents = ({ text }) => {
   const path = useLocation().pathname;
   const [isPaused, setIsPaused] = useState(false);
   const handlePaused = (e) => {
-    if (path !== "/progress/step0" && (e.key === "Escape" || e.key === "esc")) {
+    if (
+      //연습모드 step0 또는 실전모드 step0에서 렌더링되지 않도록 설정
+      path !== "/progress/step0" &&
+      path !== `/${themeSite}/step0` &&
+      (e.key === "Escape" || e.key === "esc")
+    ) {
       setIsPaused((prev) => !prev);
     }
     return;
