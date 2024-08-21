@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import Button from "../../../components/button/Button";
-import { themeSiteAtom } from "../../../store/atom";
+import { themeSiteAtom, levelAtom } from "../../../store/atom";
 import { useAtomValue, useSetAtom } from "jotai";
 import interparkIcon from "../../../assests/images/icons/site/interpark.svg";
 import melonticketIcon from "../../../assests/images/icons/site/melonticket.svg";
@@ -38,11 +38,18 @@ const ButtonBox = styled.div`
 const SelectSite = () => {
   const navigate = useNavigate();
   const setThemeSite = useSetAtom(themeSiteAtom);
+  const setLevel = useSetAtom(levelAtom);
 
   useEffect(() => {
-    //theme 초기화
+    // 사이트 선택 페이지에서는 기본 theme로 초기화
     setThemeSite("practice");
   }, [setThemeSite]);
+
+  const handleClick = (path, themeSite) => {
+    setLevel("high"); // 사이트 클릭 시 고급 난이도 설정
+    setThemeSite(themeSite); // 해당 사이트의 테마로 변경
+    navigate(path);
+  };
 
   const sites = [
     {
@@ -70,12 +77,6 @@ const SelectSite = () => {
       theme: "yes24"
     }
   ];
-
-  // 라우팅
-  const handleClick = (path, theme) => {
-    setThemeSite(theme);
-    navigate(path);
-  };
 
   return (
     <SelectSiteContainer>
