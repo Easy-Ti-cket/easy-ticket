@@ -53,6 +53,7 @@ const ProgressContents = ({ text }) => {
   const level = useAtomValue(levelAtom);
   //도움말 모달창 제어
   const [isModalOpen, setIsModalOpen] = useState(false);
+  //theme
   const themeSite = useAtomValue(themeSiteAtom);
 
   const handleModalOpen = () => {
@@ -91,7 +92,7 @@ const ProgressContents = ({ text }) => {
       </ProgressBarBox>
       {/*고급 level일 경우에만 Timer 설정 */}
       {/*모달이 열렸을 경우 Timer 정지*/}
-      {level === "high" && (
+      {level === "high" && themeSite === "practice" && (
         <Timer
           type={"minute"}
           second={1000}
