@@ -95,6 +95,28 @@ const router = createBrowserRouter([
         ]
       },
       {
+        path: "melonticket",
+        element: <ProgressContents />,
+        children: [
+          {
+            path: "step0",
+            element: <ChallangeIntro />,
+            lable: "인트로"
+          }
+        ]
+      },
+      {
+        path: "ticketlink",
+        element: <ProgressContents />,
+        children: [
+          {
+            path: "step0",
+            element: <ChallangeIntro />,
+            lable: "인트로"
+          }
+        ]
+      },
+      {
         path: "yes24",
         element: <ProgressContents />,
         children: [

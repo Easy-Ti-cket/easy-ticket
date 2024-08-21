@@ -55,19 +55,19 @@ const SelectSite = () => {
     {
       name: "인터파크 티켓",
       icon: interparkIcon,
-      path: "/interpark/step1", // 테마 적용 테스트 페이지
+      path: "/interpark/step0",
       theme: "interpark"
     },
     {
       name: "멜론티켓",
       icon: melonticketIcon,
-      path: "/melonticket",
+      path: "/melonticket/step0",
       theme: "melonticket"
     },
     {
       name: "티켓링크",
       icon: tickelinkIcon,
-      path: "/ticketlink",
+      path: "/ticketlink/step0",
       theme: "ticketlink"
     },
     {
