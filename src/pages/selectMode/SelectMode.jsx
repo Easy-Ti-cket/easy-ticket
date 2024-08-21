@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 import { useAtomValue, useSetAtom } from "jotai";
-import { practiceCountAtom, themeSiteAtom } from "../../../store/atom";
+import { practiceCountAtom, themeSiteAtom } from "../../store/atom";
 import { useNavigate } from "react-router-dom";
-import Button from "../../../components/button/Button";
-import Tooltip from "../../../components/tooltip/Tooltip";
-import AnimationArea from "../../../components/Animation";
+import Button from "../../components/button/Button";
+import Tooltip from "../../components/tooltip/Tooltip";
+import AnimationArea from "../../components/Animation";
 
 const SelectLevelContainer = styled.div`
   display: flex;

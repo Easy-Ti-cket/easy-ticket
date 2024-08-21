@@ -4,7 +4,6 @@ import "./IntroText.css";
 
 const Title = styled.div`
   font-size: 40px;
-  font-style: normal;
   letter-spacing: -2.5px;
   text-align: center;
   line-height: normal;
@@ -14,7 +13,6 @@ const Title = styled.div`
 const Main = styled.div`
   text-align: center;
   font-size: 25px;
-  font-style: normal;
   letter-spacing: -1.5px;
   line-height: normal;
   margin-bottom: 30px;
