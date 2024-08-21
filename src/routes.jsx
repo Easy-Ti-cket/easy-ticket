@@ -9,7 +9,7 @@ import SelectSite from "./pages/challengeMode/selectSite/SelectSite";
 import Intro from "./pages/practiceMode/step0/Intro";
 import SelectPerformance from "./pages/practiceMode/step1/SelectPerformance";
 import SelectRound from "./pages/practiceMode/step1/SelectRound";
-import SelectRoundInterpark from "./pages/challengeMode/interpark/SelectRoundInterpark";
+import SelectRoundInterpark from "./pages/challengeMode/interpark/step1/SelectRoundInterpark";
 import SelectPayMethod from "./pages/practiceMode/step4/SelectPayMethod";
 import CardPay from "./pages/practiceMode/step4/CardPay";
 import Step5 from "./pages/practiceMode/step5/Step5";
