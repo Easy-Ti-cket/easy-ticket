@@ -17,8 +17,8 @@ const Layout = () => {
   useEffect(() => {
     if (
       path === "" ||
-      path === "/progress/step0" ||
-      path === "/progress/step5"
+      path.endsWith("/step0") || // step0으로 끝나는 모든 경우
+      path.endsWith("/step5") // step5으로 끝나는 모든 경우
     ) {
       resetAtom();
     }
