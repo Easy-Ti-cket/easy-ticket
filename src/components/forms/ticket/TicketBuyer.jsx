@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { FormWrap } from "../FormStyle";
 import { InputContainer, Label } from "../../input/InputStyle";
 import { useAtomValue } from "jotai";
-import { levelAtom } from "../../../store/atom";
+import { levelAtom, userNameAtom } from "../../../store/atom";
 import { useState } from "react";
 
 const BuyerWrap = styled.div`
@@ -49,7 +49,7 @@ const InfoInput = styled(InfoBox).attrs({ as: "input" })`
 
 // mock buyer data
 const data_essential = [
-  { label: "이름", value: "홍길동" },
+  { label: "이름", value: "" },
   { label: "생년월일", value: "010110" },
   { label: "연락처", value: "010-1234-5678" },
   { label: "이메일", value: "abcd@gmai.com" }
@@ -62,6 +62,7 @@ const data_delivery = [
 ];
 
 const TicketBuyer = ({ option, setIsValidate, errorArray }) => {
+  const userName = useAtomValue(userNameAtom);
   //난이도 - 생년월일 입력 구현
   const level = useAtomValue(levelAtom);
   // 생년월일 입력 검사 로직
@@ -95,7 +96,10 @@ const TicketBuyer = ({ option, setIsValidate, errorArray }) => {
                   $hasError={hasError}
                 ></InfoInput>
               ) : (
-                <InfoBox>{item.value}</InfoBox>
+                <InfoBox>
+                  {/* 로그인 시 입력한 userName 값 가져오기 */}
+                  {item.label === "이름" ? userName : item.value}
+                </InfoBox>
               )}
             </InputContainer>
           ))}
