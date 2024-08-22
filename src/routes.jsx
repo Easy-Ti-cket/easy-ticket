@@ -33,7 +33,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: "step0",
-            element: <Intro />,
+            element: <PrivateRoute elemenet={<Intro />} />,
             label: "인트로 화면"
           },
           {
