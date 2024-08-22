@@ -75,13 +75,14 @@ export const practiceCountAtom = atomWithStorage("practiceCount", 0, storage);
 //좌석 매수 개수
 export const seatCountAtom = atomWithStorage("seatCount", 0, storage);
 
-//좌석 등급, 가격
+// 좌석 등급, 가격, 좌석 정보 상태
 export const seatInfoAtom = atomWithStorage(
   "seatInfo",
   {
     grade: "",
     price: 0,
-    date: ""
+    date: "",
+    seat: ""
   },
   storage
 );
