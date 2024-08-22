@@ -68,8 +68,13 @@ const StyledMainImage = styled.img`
 function Main() {
   const [name, setName] = useAtom(userNameAtom);
   const navigate = useNavigate();
+  const setThemeSite = useSetAtom(themeSiteAtom);
   //userName 작성하지 않고 시작하기를 누르거나 헤더 이동시
   const [userNameError, setUserNameError] = useAtom(userNameErrorAtom);
+
+  useEffect(() => {
+    setThemeSite(() => "practice");
+  }, []);
 
   const handleNameInput = (e) => {
     const name = e.target.value;
