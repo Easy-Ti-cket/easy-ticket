@@ -5,19 +5,18 @@ import { useSetAtom } from "jotai";
 
 const SubNavBgc = styled.div`
   width: 100vw;
-  height: 50px;
+  height: 45px;
   background-color: ${(props) => props.theme.default.subColor};
   display: flex;
   justify-content: center;
   align-items: center;
-  position: fixed;
+  position: absolute;
   left: 0;
 `;
 const SubNavWrap = styled.div`
   width: 1320px;
   display: flex;
   justify-content: center;
-  // position: fixed;
 `;
 /*서브네비게이터 ul */
 const SubNavContainer = styled.ul`

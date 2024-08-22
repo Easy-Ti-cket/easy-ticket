@@ -17,7 +17,6 @@ const NavWrap = styled.div`
   height: 80px;
   display: flex;
   align-items: flex-end;
-  position: fixed;
 `;
 //네비게이터 hover 시 서브네비게이터가 나오도록 허용할 구간
 const NavHoverSection = styled.div`
@@ -61,6 +60,7 @@ const NavContent = styled.li`
     background-color: ${(props) => props.theme.default.keyColor};
     border-radius: 50px;
     transition: height 0.1s ease;
+    z-index: 5000;
     ${({ $isactive, $ishovered }) =>
       $isactive &&
       $ishovered &&
