@@ -9,6 +9,7 @@ import {
 
 const IntroMessage = () => {
   const [level] = useAtom(levelAtom);
+  console.log(level);
 
   const renderMessage = () => {
     switch (level) {

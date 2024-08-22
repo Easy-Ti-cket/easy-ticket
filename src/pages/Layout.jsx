@@ -15,12 +15,7 @@ const Layout = () => {
   const path = useLocation().pathname;
 
   useEffect(() => {
-    if (
-      path === "/" ||
-      path === "/progress/step0" ||
-      path === "/progress/step5"
-    ) {
-      console.log(path);
+    if (path === "/" || path === "/progress/step5") {
       resetAtom();
     }
   }, [path]); // path가 변경될 때만 실행됨 (메인 및 연습모드 시작과 후)
