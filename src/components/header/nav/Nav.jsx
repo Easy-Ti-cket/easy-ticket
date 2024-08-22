@@ -5,7 +5,8 @@ import useHover from "../../../hooks/useHover";
 
 /*네비게이터 전체 */
 const NavBorderBottom = styled.div`
-  width: 100%;
+  width: 100vw;
+  min-width: 1320px;
   height: 80px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1); /* 검은색의 30% 투명도 */
   display: flex;
@@ -16,7 +17,13 @@ const NavWrap = styled.div`
   width: 1320px;
   height: 80px;
   display: flex;
+  justify-content: left;
   align-items: flex-end;
+  //특정 크기 이하로 줄어들면 navigator 없앰
+  //햄버거 메뉴 또는 다른 형태의 navigator로 수정 필요
+  @media (max-width: 1320px) {
+    display: none;
+  }
 `;
 //네비게이터 hover 시 서브네비게이터가 나오도록 허용할 구간
 const NavHoverSection = styled.div`
@@ -50,6 +57,7 @@ const NavContent = styled.li`
       ? props.theme.default.keyColor
       : "var(--text-color)"};
 
+  //navigator가 활성화되면 생기는 border-bottom
   &::after {
     content: "";
     position: absolute;

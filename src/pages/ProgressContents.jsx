@@ -55,11 +55,9 @@ const ProgressContents = ({ text }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   //theme
   const themeSite = useAtomValue(themeSiteAtom);
-
   const handleModalOpen = () => {
     setIsModalOpen(true);
   };
-
   const handleModalClose = () => {
     setIsModalOpen(false);
   };
@@ -96,7 +94,7 @@ const ProgressContents = ({ text }) => {
         <ProgressBar />
       </ProgressBarBox>
       {/*고급 level일 경우에만 Timer 설정 */}
-      {/*모달이 열렸을 경우 Timer 정지*/}
+      {/*모달이 열렸을 경우 Timer 정지 - isModalOpen, isPaused*/}
       {level === "high" && themeSite === "practice" && (
         <Timer
           type={"minute"}

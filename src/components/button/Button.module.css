@@ -18,7 +18,7 @@
 }
 .button:hover {
   background-color: var(--hover-color);
-  transition: 0.3s ease;
+  transition: 0.2s ease;
 }
 
 /*이전 단계*/
@@ -76,4 +76,15 @@
   width: 100px;
   height: 100px;
   margin-bottom: 20px;
+}
+/*모달용 작은 버튼*/
+.button--modal {
+  width: 100px;
+}
+.button--modal-outline {
+  width: 100px;
+  background-color: var(--fill-color);
+  &:hover {
+    background-color: var(--text-color2);
+  }
 }

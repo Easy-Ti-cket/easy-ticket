@@ -26,7 +26,7 @@ const Background = styled.div`
 
 const ModalContainer = styled.div`
   position: absolute;
-  top: 50%;
+  top: 400px;
   left: 50%;
   background-color: white;
   transform: translate(-50%, -50%);
@@ -47,18 +47,19 @@ const ButtonWrap = styled.div`
   bottom: 20px;
 `;
 
-const Modal = ({
-  contents,
-  onClick,
-  buttonText = "닫기",
-  width,
-  height,
-  buttonShow = true //닫기 버튼 보여줄 것인지
-}) => {
+const Modal = (props) => {
+  const {
+    contents,
+    onClick,
+    buttonText = "닫기",
+    width,
+    height,
+    buttonShow = true //닫기 버튼 보여줄 것인지
+  } = props;
   return (
     <Background>
       <ModalContainer width={width} height={height}>
-        {contents}``
+        {contents}
         {/*닫기 버튼 */}
         {buttonShow && (
           <ButtonWrap>

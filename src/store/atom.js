@@ -88,5 +88,7 @@ export const seatInfoAtom = atomWithStorage(
   },
   storage
 );
-
+//실전모드 theme
 export const themeSiteAtom = atomWithStorage("themeSite", null, storage);
+
+//타이머 제어
