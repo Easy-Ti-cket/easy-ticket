@@ -88,7 +88,6 @@ function Main() {
   // 시작하기 클릭 시
   const handleClick = () => {
     if (!name) {
-      alert("성함을 입력해주세요.");
       setUserNameError(true);
       return;
     }
