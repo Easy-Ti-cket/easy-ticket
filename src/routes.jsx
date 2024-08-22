@@ -33,7 +33,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: "step0",
-            element: <Intro />,
+            element: <PrivateRoute element={<Intro />} />,
             label: "인트로 화면"
           },
           {
@@ -100,7 +100,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: "step0",
-            element: <ChallangeIntro />,
+            element: <PrivateRoute element={<ChallangeIntro />} />,
             lable: "인트로"
           }
         ]
@@ -111,7 +111,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: "step0",
-            element: <ChallangeIntro />,
+            element: <PrivateRoute element={<ChallangeIntro />} />,
             lable: "인트로"
           }
         ]
@@ -122,7 +122,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: "step0",
-            element: <ChallangeIntro />,
+            element: <PrivateRoute element={<ChallangeIntro />} />,
             lable: "인트로"
           }
         ]

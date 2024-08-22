@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { levelAtom, themeSiteAtom } from "../../../../store/atom";
-import { useSetAtom } from "jotai";
+import { levelAtom, themeSiteAtom, userNameAtom } from "../../../../store/atom";
+import { useAtomValue, useSetAtom } from "jotai";
 
 const SubNavWrap = styled.div`
   width: 1320px;
@@ -37,8 +37,15 @@ const SubNav = ({ hovereditem }) => {
   const nav = useNavigate();
   const setLevel = useSetAtom(levelAtom);
   const setThemeSite = useSetAtom(themeSiteAtom);
+  //접근 제한
+  const userName = useAtomValue(userNameAtom);
 
   const handleNavigate = (location) => {
+    //입력된 userName이 없을 경우 이동 제한
+    if (!userName) {
+      alert("성함을 입력해 주세요");
+      return;
+    }
     if (location === "low" || location === "middle" || location === "high") {
       setLevel(location); // 레벨 설정
       nav("/progress/step0"); // 연습모드 step0로 이동
@@ -56,7 +63,7 @@ const SubNav = ({ hovereditem }) => {
             <SubNavContent onClick={() => handleNavigate("low")}>
               초급
             </SubNavContent>
-            <SubNavContent onClick={() => handleNavigate("mid")}>
+            <SubNavContent onClick={() => handleNavigate("middle")}>
               중급
             </SubNavContent>
             <SubNavContent onClick={() => handleNavigate("high")}>
