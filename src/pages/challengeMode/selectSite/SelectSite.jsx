@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import Button from "../../../components/button/Button";
 import { themeSiteAtom } from "../../../store/atom";
-import { useSetAtom, useAtom } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import interparkIcon from "../../../assests/images/icons/site/interpark.svg";
 import melonticketIcon from "../../../assests/images/icons/site/melonticket.svg";
 import tickelinkIcon from "../../../assests/images/icons/site/tickelink.svg";
@@ -40,7 +40,8 @@ const SelectSite = () => {
   const setThemeSite = useSetAtom(themeSiteAtom);
 
   useEffect(() => {
-    setThemeSite(null);
+    //theme 초기화
+    setThemeSite("practice");
   }, [setThemeSite]);
 
   const sites = [
@@ -62,7 +63,12 @@ const SelectSite = () => {
       path: "/ticketlink",
       theme: "ticketlink"
     },
-    { name: "예스24(YES24)", icon: yes24Icon, path: "/yes24", theme: "yes24" }
+    {
+      name: "예스24(YES24)",
+      icon: yes24Icon,
+      path: "/yes24/step0",
+      theme: "yes24"
+    }
   ];
 
   // 라우팅

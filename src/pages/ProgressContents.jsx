@@ -53,6 +53,7 @@ const ProgressContents = ({ text }) => {
   const level = useAtomValue(levelAtom);
   //도움말 모달창 제어
   const [isModalOpen, setIsModalOpen] = useState(false);
+  //theme
   const themeSite = useAtomValue(themeSiteAtom);
 
   const handleModalOpen = () => {
@@ -67,7 +68,12 @@ const ProgressContents = ({ text }) => {
   const path = useLocation().pathname;
   const [isPaused, setIsPaused] = useState(false);
   const handlePaused = (e) => {
-    if (path !== "/progress/step0" && (e.key === "Escape" || e.key === "esc")) {
+    if (
+      //연습모드 step0 또는 실전모드 step0에서 렌더링되지 않도록 설정
+      path !== "/progress/step0" &&
+      path !== `/${themeSite}/step0` &&
+      (e.key === "Escape" || e.key === "esc")
+    ) {
       setIsPaused((prev) => !prev);
     }
     return;
@@ -91,7 +97,7 @@ const ProgressContents = ({ text }) => {
       </ProgressBarBox>
       {/*고급 level일 경우에만 Timer 설정 */}
       {/*모달이 열렸을 경우 Timer 정지*/}
-      {level === "high" && (
+      {level === "high" && themeSite === "practice" && (
         <Timer
           type={"minute"}
           second={1000}

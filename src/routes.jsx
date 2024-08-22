@@ -3,9 +3,9 @@ import { createBrowserRouter } from "react-router-dom";
 import Layout from "./pages/Layout";
 import ProgressContents from "./pages/ProgressContents";
 import Main from "./pages/main/Main";
-import SelectMode from "./pages/practiceMode/selectMode/SelectMode";
+import SelectMode from "./pages/selectMode/SelectMode";
 import SelectLevel from "./pages/practiceMode/selectLevel/SelectLevel";
-import SelectSite from "./pages/practiceMode/selectSite/SelectSite";
+import SelectSite from "./pages/challengeMode/selectSite/SelectSite";
 import Intro from "./pages/practiceMode/step0/Intro";
 import SelectPerformance from "./pages/practiceMode/step1/SelectPerformance";
 import SelectRound from "./pages/practiceMode/step1/SelectRound";
@@ -91,6 +91,17 @@ const router = createBrowserRouter([
             path: "step5",
             element: <PrivateRoute element={<Step5 />} />,
             label: "예매 성공"
+          }
+        ]
+      },
+      {
+        path: "yes24",
+        element: <ProgressContents />,
+        children: [
+          {
+            path: "step0",
+            element: <ChallangeIntro />,
+            lable: "인트로"
           }
         ]
       }
