@@ -68,6 +68,8 @@ export const allowedSectionAtom = atomWithStorage(
 
 //사용자 이름
 export const userNameAtom = atomWithStorage("userName", "", storage);
+//사용자 이름 입력 상태 (userNameAtom이 존재하는가?)
+export const userNameErrorAtom = atom(false);
 
 //연습모드 완료 횟수
 export const practiceCountAtom = atomWithStorage("practiceCount", 0, storage);

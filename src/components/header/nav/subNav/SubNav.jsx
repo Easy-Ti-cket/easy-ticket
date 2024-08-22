@@ -1,8 +1,12 @@
-import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { levelAtom, themeSiteAtom } from "../../../../store/atom";
-import { useSetAtom } from "jotai";
+import {
+  levelAtom,
+  themeSiteAtom,
+  userNameAtom,
+  userNameErrorAtom
+} from "../../../../store/atom";
+import { useAtomValue, useSetAtom } from "jotai";
 
 const SubNavWrap = styled.div`
   width: 1320px;
@@ -38,22 +42,23 @@ const SubNav = ({ hovereditem }) => {
   const nav = useNavigate();
   const setLevel = useSetAtom(levelAtom);
   const setThemeSite = useSetAtom(themeSiteAtom);
+  //접근 시 에러 발생
+  const userName = useAtomValue(userNameAtom);
+  const setUserNameError = useSetAtom(userNameErrorAtom);
 
-  const handleSubNavClick = (e) => {
-    const level =
-      e.target.innerText === "초급"
-        ? "low"
-        : e.target.innerText === "중급"
-          ? "middle"
-          : "high";
-    setLevel(level);
-    nav("/progress/step0");
-  };
-
-  const handleSiteClick = (site) => {
-    setLevel("high");
-    setThemeSite(site);
-    nav(`/${site}/step0`); // 각 사이트의 인트로 페이지로 이동
+  const handleNavigate = (location) => {
+    //입력된 userName이 없을 경우
+    if (!userName) {
+      setUserNameError(true);
+      return;
+    }
+    if (location === "low" || location === "middle" || location === "high") {
+      setLevel(location); // 레벨 설정
+      nav("/progress/step0"); // 연습모드 step0로 이동
+    } else {
+      setThemeSite(location); // 테마 사이트 설정
+      nav(`/${location}/step0`); // 각 사이트의 인트로 페이지로 이동
+    }
   };
 
   return (
@@ -61,9 +66,15 @@ const SubNav = ({ hovereditem }) => {
       {hovereditem === "연습모드" && (
         <SubNavWrap>
           <SubNavContainer>
-            <SubNavContent onClick={handleSubNavClick}>초급</SubNavContent>
-            <SubNavContent onClick={handleSubNavClick}>중급</SubNavContent>
-            <SubNavContent onClick={handleSubNavClick}>고급</SubNavContent>
+            <SubNavContent onClick={() => handleNavigate("low")}>
+              초급
+            </SubNavContent>
+            <SubNavContent onClick={() => handleNavigate("middle")}>
+              중급
+            </SubNavContent>
+            <SubNavContent onClick={() => handleNavigate("high")}>
+              고급
+            </SubNavContent>
           </SubNavContainer>
         </SubNavWrap>
       )}
@@ -71,16 +82,16 @@ const SubNav = ({ hovereditem }) => {
       {hovereditem === "실전모드" && (
         <SubNavWrap>
           <SubNavContainer>
-            <SubNavContent onClick={() => handleSiteClick("interpark")}>
+            <SubNavContent onClick={() => handleNavigate("interpark")}>
               인터파크 티켓
             </SubNavContent>
-            <SubNavContent onClick={() => handleSiteClick("melonticket")}>
+            <SubNavContent onClick={() => handleNavigate("melonticket")}>
               멜론티켓
             </SubNavContent>
-            <SubNavContent onClick={() => handleSiteClick("yes24")}>
+            <SubNavContent onClick={() => handleNavigate("yes24")}>
               예스24
             </SubNavContent>
-            <SubNavContent onClick={() => handleSiteClick("ticketlink")}>
+            <SubNavContent onClick={() => handleNavigate("ticketlink")}>
               티켓링크
             </SubNavContent>
           </SubNavContainer>
