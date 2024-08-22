@@ -16,6 +16,7 @@ import Step5 from "./pages/practiceMode/step5/Step5";
 import SelectSeat from "./pages/practiceMode/step2/SelectSeat";
 import SelectSeatInterpark from "./pages/challengeMode/interpark/step2/SelectSeatInterpark";
 import SeatPriceCheck from "./pages/practiceMode/step3/SeatPriceCheck";
+import SelectPriceInterpark from "./pages/challengeMode/interpark/step3/SelectPriceInterpark";
 import PrivateRoute from "./pages/PrivateRoute";
 import ChallangeIntro from "./pages/challengeMode/step0/ChallangeIntro";
 
@@ -92,6 +93,11 @@ const router = createBrowserRouter([
             path: "step2",
             element: <PrivateRoute element={<SelectSeatInterpark />} />,
             label: "좌석 선택"
+          },
+          {
+            path: "step3-1",
+            element: <PrivateRoute element={<SelectPriceInterpark />} />,
+            label: "가격 및 할인 선택"
           },
           {
             path: "step5",

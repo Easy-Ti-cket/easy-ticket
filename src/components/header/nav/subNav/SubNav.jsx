@@ -34,7 +34,7 @@ const SubNavContent = styled.li`
   justify-content: center;
   cursor: pointer;
   &:hover {
-    color: var(--key-color);
+    color: ${(props) => props.theme.default.keyColor};
   }
 `;
 
