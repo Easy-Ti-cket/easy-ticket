@@ -3,9 +3,16 @@ import styled from "styled-components";
 import Button from "../../components/button/Button";
 import Animation from "../../components/Animation";
 import { useAtom, useSetAtom } from "jotai";
-import { userNameAtom, themeSiteAtom, levelAtom } from "../../store/atom";
+import {
+  userNameAtom,
+  themeSiteAtom,
+  levelAtom,
+  userNameErrorAtom
+} from "../../store/atom";
 import { useNavigate } from "react-router-dom";
 import MainImage from "../../assests/images/main.png";
+import { InputField } from "../../components/input/InputStyle";
+import ErrorTooltip from "../../components/tooltip/ErrorTooltip";
 
 const MainContainer = styled.div`
   display: flex;
@@ -23,12 +30,13 @@ const Instructions = styled.p`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  margin-bottom: 30px;
 `;
 
 const InputGroup = styled.div`
   display: flex;
   align-items: center;
-  margin: 20px 0;
+  margin: 30px 0;
   font-size: 20px;
 `;
 
@@ -37,10 +45,12 @@ const Label = styled.label`
   font-family: pretendardB;
 `;
 
-const Input = styled.input`
+const Input = styled(InputField)`
   height: 40px;
-  width: 200px;
-  border: 1px solid var(--fill-color);
+  border: ${(props) =>
+    props.$hasError
+      ? "2px solid var(--point-color)"
+      : "2px solid var(--fill-color)"};
   border-radius: 4px;
   font-family: pretendardB;
   font-size: 18px;
@@ -59,6 +69,8 @@ function Main() {
   const setThemeSite = useSetAtom(themeSiteAtom);
   const setLevel = useSetAtom(levelAtom);
   const navigate = useNavigate();
+  //userName 작성하지 않고 시작하기를 누르거나 헤더 이동시
+  const [userNameError, setUserNameError] = useAtom(userNameErrorAtom);
 
   useEffect(() => {
     setThemeSite(null);
@@ -68,13 +80,16 @@ function Main() {
 
   const handleNameInput = (e) => {
     const name = e.target.value;
+    //userName 입력 시 빨간색 바운더리 꺼짐
+    setUserNameError(false);
     setName(name);
   };
 
   // 시작하기 클릭 시
   const handleClick = () => {
     if (!name) {
-      alert("이름을 입력해주세요.");
+      alert("성함을 입력해주세요.");
+      setUserNameError(true);
       return;
     }
     navigate("/select-mode");
@@ -83,19 +98,23 @@ function Main() {
   return (
     <MainContainer>
       <StyledMainImage src={MainImage} alt="main image" />
+      {/*안내 문구 */}
       <Instructions>
         아래 빈칸에 성함을 입력하신 후,{" "}
         <span style={{ color: "var(--key-color)" }}>‘시작하기’</span> 버튼을
         클릭해 주세요.
       </Instructions>
 
+      {/*userName 없는 오류 안내 문구*/}
+      {userNameError && <ErrorTooltip contents="성함을 입력해 주세요" />}
+      {/*userName 입력란 */}
       <InputGroup>
         <Label htmlFor="name">이름</Label>
         <Input
-          type="text"
           onChange={handleNameInput}
           id="name"
-          placeholder="이름을 입력해 주세요."
+          placeholder="성함을 입력해 주세요."
+          $hasError={userNameError}
         />
       </InputGroup>
       <Animation $focus="true">

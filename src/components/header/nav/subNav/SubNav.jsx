@@ -1,6 +1,11 @@
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { levelAtom, themeSiteAtom, userNameAtom } from "../../../../store/atom";
+import {
+  levelAtom,
+  themeSiteAtom,
+  userNameAtom,
+  userNameErrorAtom
+} from "../../../../store/atom";
 import { useAtomValue, useSetAtom } from "jotai";
 
 const SubNavWrap = styled.div`
@@ -37,13 +42,14 @@ const SubNav = ({ hovereditem }) => {
   const nav = useNavigate();
   const setLevel = useSetAtom(levelAtom);
   const setThemeSite = useSetAtom(themeSiteAtom);
-  //접근 제한
+  //접근 시 에러 발생
   const userName = useAtomValue(userNameAtom);
+  const setUserNameError = useSetAtom(userNameErrorAtom);
 
   const handleNavigate = (location) => {
-    //입력된 userName이 없을 경우 이동 제한
+    //입력된 userName이 없을 경우
     if (!userName) {
-      alert("성함을 입력해 주세요");
+      setUserNameError(true);
       return;
     }
     if (location === "low" || location === "middle" || location === "high") {
