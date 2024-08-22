@@ -4,8 +4,8 @@ import DetailPayForm from "../../../components/forms/pay/DetailPayForm";
 import { useForm } from "../../../hooks/useForm";
 import Button from "../../../components/button/Button";
 import { useNavigate } from "react-router-dom";
-import { useSetAtom } from "jotai";
-import { progressAtom } from "../../../store/atom";
+import { useSetAtom, useAtomValue } from "jotai";
+import { progressAtom, themeSiteAtom } from "../../../store/atom";
 import { useEffect, useState } from "react";
 
 const SelectPayWrap = styled.div`
@@ -43,8 +43,6 @@ const SelectPayMethod = () => {
   const { handleChange, correctList, isAnswer } = useForm(3);
   //'신용카드'를 정확히 골랐을 경우 '결제 수단 입력' 창 생성
   const isPayMethodCorrect = correctList["PayMethodForm"];
-  // 다음 페이지 이동
-  const navigate = useNavigate();
   // progress bar 설정
   const setProgress = useSetAtom(progressAtom);
   useEffect(() => {
@@ -53,6 +51,8 @@ const SelectPayMethod = () => {
   //검사 로직
   const [hasPayFormError, setHasPayFormError] = useState(false);
   const [cardTypesError, setCardTypesError] = useState(false);
+  const themeSite = useAtomValue(themeSiteAtom);
+  const nav = useNavigate();
 
   const handleClick = () => {
     if (!correctList.DetailPayForm) {
@@ -65,7 +65,13 @@ const SelectPayMethod = () => {
       setCardTypesError(true);
       alert("올바른 카드를 선택해 주세요");
     } else {
-      navigate("/progress/step4-2");
+      // 연습모드 라우팅
+      if (themeSite === "practice") {
+        nav("/progress/step4-2");
+      } else {
+        // 실전모드 라우팅
+        nav(`/${themeSite}/step4-2`);
+      }
     }
   };
   return (

@@ -100,6 +100,16 @@ const router = createBrowserRouter([
             label: "가격 및 할인 선택"
           },
           {
+            path: "step4-1",
+            element: <PrivateRoute element={<SelectPayMethod />} />,
+            label: "결제방식 / 수단 선택"
+          },
+          {
+            path: "step4-2",
+            element: <PrivateRoute element={<CardPay />} />,
+            label: "카드 결제창"
+          },
+          {
             path: "step5",
             element: <PrivateRoute element={<Step5 />} />,
             label: "예매 성공"
