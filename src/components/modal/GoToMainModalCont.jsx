@@ -32,6 +32,7 @@ const GoToMainModalCont = ({ setIsConfirm }) => {
     //확인을 누를 경우
     if (confirmNavigate) {
       navigate("/");
+      setTimerControl(() => false);
       setIsConfirm(() => false);
       return;
     }

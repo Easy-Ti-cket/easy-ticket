@@ -41,6 +41,8 @@ const Header = () => {
     //location에 step을 포함하지 않은 경우 : 사이트 선택 창, 난이도 선택창 등 (모달창 불필요)
     if (!location.includes("step")) {
       navigate("/");
+      setTimerControl(() => true);
+
       return;
     }
     //location에 step을 포함한 경우 : 예매를 진행 중인 경우

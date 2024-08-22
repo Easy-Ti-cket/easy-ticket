@@ -47,7 +47,6 @@ const Timer = ({ type, second }) => {
   const path = location.pathname;
   //타이머 정지 재개
   const timerControl = useAtomValue(timerControlAtom);
-  console.log(timerControl);
 
   useEffect(() => {
     // 타이머 초기화 및 제어
