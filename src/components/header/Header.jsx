@@ -5,7 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 /*헤더 Container*/
 const HeaderContainer = styled.div`
-  width: 1320px;
+  width: 100vw;
   height: 120px;
   display: flex;
   justify-content: left;
@@ -16,12 +16,14 @@ const LogoContainer = styled.div`
   width: 140px;
   height: 80px;
   position: absolute;
-  left: 590px;
+  left: 50%;
+  transform: translateX(-60px);
   display: flex;
   justify-content: center;
   align-items: center;
   cursor: pointer;
 `;
+
 const Header = () => {
   const navigate = useNavigate();
   const location = useLocation().pathname;
@@ -40,7 +42,7 @@ const Header = () => {
   };
   return (
     <HeaderContainer>
-      <LogoContainer onClick={() => goToMain("/")}>
+      <LogoContainer onClick={() => goToMain()}>
         <Logo />
       </LogoContainer>
       <Nav />
