@@ -67,17 +67,9 @@ const StyledMainImage = styled.img`
 
 function Main() {
   const [name, setName] = useAtom(userNameAtom);
-  const setThemeSite = useSetAtom(themeSiteAtom);
-  const setLevel = useSetAtom(levelAtom);
   const navigate = useNavigate();
   //userName 작성하지 않고 시작하기를 누르거나 헤더 이동시
   const [userNameError, setUserNameError] = useAtom(userNameErrorAtom);
-
-  useEffect(() => {
-    setThemeSite(null);
-    setLevel(null);
-    setName(null);
-  }, [setThemeSite]);
 
   const handleNameInput = (e) => {
     const name = e.target.value;
@@ -100,7 +92,7 @@ function Main() {
       <StyledMainImage src={MainImage} alt="main image" />
       {/*안내 문구 */}
       <Instructions>
-        아래 빈칸에 성함을 입력하신 후,{" "}
+        아래 빈칸에 성함을 입력하신 후,
         <span style={{ color: "var(--key-color)" }}>‘시작하기’</span> 버튼을
         클릭해 주세요.
       </Instructions>
@@ -115,6 +107,7 @@ function Main() {
           id="name"
           placeholder="성함을 입력해 주세요."
           $hasError={userNameError}
+          defaultValue={name}
         />
       </InputGroup>
       <Animation $focus="true">

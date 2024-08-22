@@ -26,7 +26,7 @@ const Background = styled.div`
 
 const ModalContainer = styled.div`
   position: absolute;
-  top: 800px;
+  top: 450px;
   left: 50%;
   background-color: white;
   transform: translate(-50%, -50%);
