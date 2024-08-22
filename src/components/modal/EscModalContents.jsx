@@ -2,6 +2,8 @@ import styled from "styled-components";
 import Button from "../button/Button";
 import { useNavigate } from "react-router-dom";
 import PauseIcon from "../../assests/images/icons/playPause/pause.svg?react";
+import { useAtomValue } from "jotai";
+import { timerControlAtom } from "../../store/atom";
 
 const Wrap = styled.div`
   display: flex;
@@ -23,8 +25,10 @@ const ButtonWrap = styled.div`
   gap: 5px;
 `;
 
-const EscModalContents = ({ setIsPaused }) => {
+const EscModalContents = () => {
   const navigate = useNavigate();
+  //타이머 제어
+  const setTimerControl = useAtomValue(timerControlAtom);
   return (
     <Wrap>
       <InfoMessage>
@@ -33,7 +37,7 @@ const EscModalContents = ({ setIsPaused }) => {
       </InfoMessage>
       {/*계속하기 / 그만두기 버튼 */}
       <ButtonWrap>
-        <Button text="계속하기" onClick={() => setIsPaused(false)} />
+        <Button text="계속하기" onClick={() => setTimerControl(false)} />
         <Button text="그만두기" type="outline" onClick={() => navigate("/")} />
       </ButtonWrap>
     </Wrap>

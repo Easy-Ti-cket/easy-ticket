@@ -1,6 +1,8 @@
 import styled from "styled-components";
 import Button from "../button/Button";
 import { useNavigate } from "react-router-dom";
+import { useSetAtom } from "jotai";
+import { timerControlAtom } from "../../store/atom";
 
 const Container = styled.div`
   display: flex;
@@ -24,6 +26,8 @@ const ButtonWrap = styled.div`
 `;
 const GoToMainModalCont = ({ setIsConfirm }) => {
   const navigate = useNavigate();
+  //타이머 제어
+  const setTimerControl = useSetAtom(timerControlAtom);
   const handleClick = (confirmNavigate) => {
     //확인을 누를 경우
     if (confirmNavigate) {
@@ -32,6 +36,7 @@ const GoToMainModalCont = ({ setIsConfirm }) => {
       return;
     }
     //취소를 누를 경우
+    setTimerControl(() => false);
     setIsConfirm(() => false);
   };
   return (

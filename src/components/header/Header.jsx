@@ -5,6 +5,8 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Modal from "../modal/Modal";
 import GoToMainModalCont from "../modal/GoToMainModalCont";
+import { useAtomValue, useSetAtom } from "jotai";
+import { timerControlAtom } from "../../store/atom";
 
 /*헤더 Container*/
 const HeaderContainer = styled.div`
@@ -32,15 +34,17 @@ const Header = () => {
   const location = useLocation().pathname;
   //로고 클릭 시 경고문구 모달창
   const [isConfirm, setIsConfirm] = useState(false);
+  //모달창 타이머 제어
+  const setTimerControl = useSetAtom(timerControlAtom);
 
   const goToMain = () => {
-    //location에 step을 포함하지 않은 경우 : 사이트 선택 창, 난이도 선택창 등\
-    //진행상황에 대해  저장할 건지에 대한 모달창이 필요하지 않음
+    //location에 step을 포함하지 않은 경우 : 사이트 선택 창, 난이도 선택창 등 (모달창 불필요)
     if (!location.includes("step")) {
       navigate("/");
       return;
     }
     //location에 step을 포함한 경우 : 예매를 진행 중인 경우
+    setTimerControl(() => true);
     setIsConfirm(true);
   };
   return (

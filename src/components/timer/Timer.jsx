@@ -1,14 +1,11 @@
 import React, { useEffect, useRef } from "react";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import styled from "styled-components";
 import timerIcon from "../../assests/images/icons/timer.svg";
 import {
-  // readSecondCount,
-  // writeSecondCount,
-  // readMinuteCount,
-  // writeMinuteCount
   secondCountAtom,
-  minuteCountAtom
+  minuteCountAtom,
+  timerControlAtom
 } from "../../store/atom";
 import { useLocation } from "react-router-dom";
 
@@ -38,7 +35,7 @@ const StyledCountdownText = styled.div`
 `;
 
 // props로 type과 second 받기
-const Timer = ({ type, second, isModalOpen, isPaused }) => {
+const Timer = ({ type, second }) => {
   const [secondCount, writeSecond] = useAtom(secondCountAtom);
   // const [, writeSecond] = useAtom(writeSecondCount);
   const [minuteCount, writeMinute] = useAtom(minuteCountAtom);
@@ -48,10 +45,13 @@ const Timer = ({ type, second, isModalOpen, isPaused }) => {
   //타이머 제어를 위한 현재 위치 출력
   const location = useLocation();
   const path = location.pathname;
+  //타이머 정지 재개
+  const timerControl = useAtomValue(timerControlAtom);
+  console.log(timerControl);
 
   useEffect(() => {
     // 타이머 초기화 및 제어
-    if (isModalOpen || isPaused) {
+    if (timerControl) {
       // 모달이 열려있을 때 타이머 멈춤
       if (countdownRef.current) {
         clearInterval(countdownRef.current);
@@ -96,8 +96,7 @@ const Timer = ({ type, second, isModalOpen, isPaused }) => {
     // 컴포넌트 언마운트 시 타이머 클리어
     return () => clearInterval(countdownRef.current);
   }, [
-    isModalOpen,
-    isPaused,
+    timerControl,
     path,
     type,
     second,
