@@ -29,7 +29,8 @@ const help1Text = [
     low: true,
     content: (
       <TextBox>
-        예매하기 버튼을 클릭하면 다음 단계로 넘어가 실제로 예매를 진행합니다.
+        예매하기 버튼을 클릭하면 다음 단계로 넘어가
+        <br /> 실제로 예매를 진행합니다.
       </TextBox>
     )
   }
