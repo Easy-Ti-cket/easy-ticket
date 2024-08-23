@@ -5,10 +5,11 @@ import {
   progressAtom
 } from "../store/atom";
 import { useAtomValue } from "jotai";
-import step1Text from "./text/step/step1/step1Text";
-import step2Text from "./text/step/step2/step2Text";
+import useStep1Text from "./text/step/step1/useStep1Text";
+import useStep2Text from "./text/step/step2/useStep2Text";
 import step3Text from "./text/step/step3/step3Text";
 import step4Text from "./text/step/step4/step4Text";
+import help0Text from "./text/help/help0/help0Text.jsx";
 import help1Text from "./text/help/help1/help1Text";
 import help2Text from "./text/help/help2/help2Text";
 import help3Text from "./text/help/help3/help3Text";
@@ -22,7 +23,9 @@ const useText = () => {
   const stepTextNumber = useAtomValue(stepTextNumberAtom);
   const helpTextNumber = useAtomValue(helpTextNumberAtom);
 
-  const stepTextsArray = [step1Text, step2Text, step3Text, step4Text];
+  const step1Texts = useStep1Text();
+  const step2Texts = useStep2Text();
+  const stepTextsArray = [step1Texts, step2Texts, step3Text, step4Text];
   const helpTextsArray = [help1Text, help2Text, help3Text, help4Text];
 
   const [filteredStepTexts, setFilteredStepTexts] = useState([]);
@@ -41,13 +44,19 @@ const useText = () => {
     setFilteredStepTexts(currentStepTexts);
     setFilteredHelpTexts(currentHelpTexts);
   }, [progress, level]);
-  if (progress === 0 || progress === 5) {
+  if (progress === 5) {
     return {
-      stepText: "",
-      helpText: ""
+      stepText: null,
+      helpText: null
     };
   }
-  console.log(filteredHelpTexts[helpTextNumber]?.content);
+  if (progress === 0) {
+    return {
+      stepText: null,
+      helpText: help0Text
+    };
+  }
+
   return {
     stepText: filteredStepTexts[stepTextNumber]?.content,
     helpText: filteredHelpTexts[helpTextNumber]?.content

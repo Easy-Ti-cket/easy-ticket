@@ -35,8 +35,13 @@ const SelectSeat = () => {
       setStepTextNumber((prev) => prev + 1);
       setHelpTextNumber((prev) => prev + 1);
     }
-  }, [isSectionSelected, isSeatSelected]);
+  }, [isSectionSelected]);
 
+  useEffect(() => {
+    if (isSeatSelected) {
+      setStepTextNumber((prev) => prev + 1);
+    }
+  }, [isSeatSelected]);
   return (
     <SelectSeatcontainer>
       {isSectionSelected ? (
