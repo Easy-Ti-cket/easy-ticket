@@ -4,7 +4,6 @@ import {
   isSeatSelectedAtom,
   allowedSeatAtom,
   levelAtom,
-  allowedSectionAtom,
   postersAtom,
   selectedPosterAtom,
   seatInfoAtom
@@ -18,6 +17,7 @@ import {
   SelectedSeatsHeader,
   SelectedSeatsInfo,
   SeatGrade,
+  SeatInfoCont,
   SeatPrice,
   ButtonAnimationArea
 } from "./SeatInfoStyles";
@@ -30,18 +30,24 @@ const SeatInfo = () => {
   const isSeatSelected = useAtomValue(isSeatSelectedAtom);
   const allowedSeat = useAtomValue(allowedSeatAtom);
   const level = useAtomValue(levelAtom);
-
   const posters = useAtomValue(postersAtom);
   const posterId = useAtomValue(selectedPosterAtom);
   const selectedPoster = posters[posterId];
-
   const seats = convertPriceObjectToArray(selectedPoster.price);
   const [seatInfo, setSeatInfo] = useAtom(seatInfoAtom);
+
   useEffect(() => {
     if (isSeatSelected) {
-      setSeatInfo(getRandomSeat(selectedPoster));
+      const newSeatInfo = getRandomSeat(selectedPoster);
+      setSeatInfo({
+        ...seatInfo,
+        grade: newSeatInfo.grade,
+        price: newSeatInfo.price,
+        date: newSeatInfo.date,
+        seat: `${allowedSeat.row + 1}열 ${allowedSeat.col + 1}`
+      });
     }
-  }, [isSeatSelected]);
+  }, [isSeatSelected, allowedSeat, selectedPoster]);
 
   let isFocus = false;
   if (isSeatSelected && level == "low") {
@@ -79,11 +85,11 @@ const SeatInfo = () => {
       <SelectedSeats>
         <SelectedSeatsInfo>
           <SeatGrade>좌석등급</SeatGrade>
-          <SeatPrice>좌석정보</SeatPrice>
+          <SeatGrade>좌석정보</SeatGrade>
           {isSeatSelected && (
             <>
-              <SeatGrade>{seatInfo.grade}</SeatGrade>
-              <SeatPrice>{`${allowedSeat.row + 1}열-${allowedSeat.col + 1}`}</SeatPrice>
+              <SeatInfoCont>{seatInfo.grade}</SeatInfoCont>
+              <SeatInfoCont>{seatInfo.seat}</SeatInfoCont>
             </>
           )}
         </SelectedSeatsInfo>

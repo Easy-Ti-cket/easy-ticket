@@ -1,9 +1,14 @@
+import React, { useEffect } from "react";
 import Button from "../../../components/button/Button";
 import styled from "styled-components";
 import Tooltip from "../../../components/tooltip/Tooltip";
 import AnimationArea from "../../../components/Animation";
-import { useSetAtom, useAtomValue } from "jotai";
-import { levelAtom, practiceCountAtom } from "../../../store/atom";
+import { useAtom, useSetAtom, useAtomValue } from "jotai";
+import {
+  levelAtom,
+  practiceCountAtom,
+  themeSiteAtom
+} from "../../../store/atom";
 import { useNavigate } from "react-router-dom";
 
 const SelectLevelContainer = styled.div`
@@ -31,6 +36,11 @@ const ButtonBox = styled.div`
 const SelectLevel = () => {
   const setLevel = useSetAtom(levelAtom);
   const PracticeCount = useAtomValue(practiceCountAtom);
+  const [, setThemeSite] = useAtom(themeSiteAtom);
+
+  useEffect(() => {
+    setThemeSite(null);
+  }, [setThemeSite]);
 
   const levels = ["초급", "중급", "고급"];
   const nav = useNavigate();

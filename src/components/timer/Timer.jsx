@@ -38,7 +38,7 @@ const StyledCountdownText = styled.div`
 `;
 
 // props로 type과 second 받기
-const Timer = ({ type, second, isModalOpen }) => {
+const Timer = ({ type, second, isModalOpen, isPaused }) => {
   const [secondCount, writeSecond] = useAtom(secondCountAtom);
   // const [, writeSecond] = useAtom(writeSecondCount);
   const [minuteCount, writeMinute] = useAtom(minuteCountAtom);
@@ -51,7 +51,7 @@ const Timer = ({ type, second, isModalOpen }) => {
 
   useEffect(() => {
     // 타이머 초기화 및 제어
-    if (isModalOpen) {
+    if (isModalOpen || isPaused) {
       // 모달이 열려있을 때 타이머 멈춤
       if (countdownRef.current) {
         clearInterval(countdownRef.current);
@@ -97,6 +97,7 @@ const Timer = ({ type, second, isModalOpen }) => {
     return () => clearInterval(countdownRef.current);
   }, [
     isModalOpen,
+    isPaused,
     path,
     type,
     second,

@@ -3,18 +3,20 @@ import { createBrowserRouter } from "react-router-dom";
 import Layout from "./pages/Layout";
 import ProgressContents from "./pages/ProgressContents";
 import Main from "./pages/main/Main";
-import SelectMode from "./pages/practiceMode/selectMode/selectMode";
+import SelectMode from "./pages/selectMode/SelectMode";
 import SelectLevel from "./pages/practiceMode/selectLevel/SelectLevel";
-import SelectSite from "./pages/practiceMode/selectSite/selectSite";
+import SelectSite from "./pages/challengeMode/selectSite/SelectSite";
 import Intro from "./pages/practiceMode/step0/Intro";
 import SelectPerformance from "./pages/practiceMode/step1/SelectPerformance";
 import SelectRound from "./pages/practiceMode/step1/SelectRound";
+import SelectRoundInterpark from "./pages/challengeMode/interpark/SelectRoundInterpark";
 import SelectPayMethod from "./pages/practiceMode/step4/SelectPayMethod";
 import CardPay from "./pages/practiceMode/step4/CardPay";
 import Step5 from "./pages/practiceMode/step5/Step5";
 import SelectSeat from "./pages/practiceMode/step2/SelectSeat";
 import SeatPriceCheck from "./pages/practiceMode/step3/SeatPriceCheck";
 import PrivateRoute from "./pages/PrivateRoute";
+import ChallangeIntro from "./pages/challengeMode/step0/ChallangeIntro";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +33,7 @@ const router = createBrowserRouter([
         children: [
           {
             path: "step0",
-            element: <Intro />,
+            element: <PrivateRoute element={<Intro />} />,
             label: "인트로 화면"
           },
           {
@@ -68,6 +70,60 @@ const router = createBrowserRouter([
             path: "step5",
             element: <PrivateRoute element={<Step5 />} />,
             label: "예매 성공"
+          }
+        ]
+      },
+      {
+        path: "interpark",
+        element: <ProgressContents />,
+        children: [
+          {
+            path: "step0",
+            element: <PrivateRoute element={<ChallangeIntro />} />,
+            label: "인트로"
+          },
+          {
+            path: "step1",
+            element: <PrivateRoute element={<SelectRoundInterpark />} />,
+            label: "날짜 및 회차 선택"
+          },
+          {
+            path: "step5",
+            element: <PrivateRoute element={<Step5 />} />,
+            label: "예매 성공"
+          }
+        ]
+      },
+      {
+        path: "melonticket",
+        element: <ProgressContents />,
+        children: [
+          {
+            path: "step0",
+            element: <PrivateRoute element={<ChallangeIntro />} />,
+            lable: "인트로"
+          }
+        ]
+      },
+      {
+        path: "ticketlink",
+        element: <ProgressContents />,
+        children: [
+          {
+            path: "step0",
+            element: <PrivateRoute element={<ChallangeIntro />} />,
+            lable: "인트로"
+          }
+        ]
+      },
+      {
+        path: "yes24",
+        element: <ProgressContents />,
+        children: [
+          {
+            path: "step0",
+            element: <PrivateRoute element={<ChallangeIntro />} />,
+            lable: "인트로"
           }
         ]
       }

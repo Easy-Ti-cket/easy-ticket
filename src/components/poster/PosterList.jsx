@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Poster from "./Poster";
 import { useAtom } from "jotai";
 import { postersAtom, levelAtom } from "../../store/atom";
+import { formatDateRange } from "../../util/date";
 import AnimationArea from "../Animation";
 
 // 공연 제목
@@ -57,19 +58,17 @@ const PosterContainer = styled.div`
   width: 240px;
   height: 470px;
   border-radius: 8px;
-  background-color: var(--sub-color);
+  background-color: var(--fill-color);
   padding: 4px 2px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 
   /* hover 시 색상 적절히 변하도록 css 적용 */
   &:hover {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
-    background-color: var(--key-color);
-    color: white;
+    background-color: var(--sub-color);
   }
 
   &:hover ${PosterTitle}, &:hover ${PosterVenue}, &:hover ${PosterTime} {
-    color: white;
   }
 `;
 
@@ -120,7 +119,7 @@ const PosterList = ({ onPosterClick }) => {
                 <PosterInfo>
                   <PosterTitle>{poster.title_ko}</PosterTitle>
                   <PosterVenue>장소: {poster.venue}</PosterVenue>
-                  <PosterTime>시간: {poster.date}</PosterTime>
+                  <PosterTime>시간: {formatDateRange(poster.date)}</PosterTime>
                 </PosterInfo>
               </>
             )}

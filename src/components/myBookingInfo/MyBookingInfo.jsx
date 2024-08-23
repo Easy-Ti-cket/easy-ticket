@@ -10,10 +10,9 @@ import {
 import { useAtomValue } from "jotai";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useForm } from "../../hooks/useForm";
 
 const Container = styled.div`
-  border: 1px solid var(--key-color);
+  border: 2px solid var(--fill-color);
   border-radius: 8px;
   width: 400px;
   height: 457px;
@@ -32,12 +31,16 @@ const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin: 20px 20px 0 20px;
-  font-family: "pretendardR";
 `;
 const InfoItem = styled.div`
   display: flex;
   justify-content: space-between;
   margin: 10px 0;
+`;
+const InfoTitle = styled.span`
+  color: var(--text-color);
+  font-family: "pretendardB";
+  font-size: 16px;
 `;
 const InfoText = styled.div`
   font-family: "pretendardB";
@@ -47,7 +50,7 @@ const TotalAmount = styled.div`
   margin: 0 20px 0 20px;
   display: flex;
   justify-content: space-between;
-  border-top: 1px solid var(--key-color);
+  border-top: 2px solid var(--fill-color);
 `;
 
 const AmountTitle = styled.div`
@@ -148,7 +151,7 @@ const MyBookingInfo = ({
       <InfoContainer>
         {Info.map((item, index) => (
           <InfoItem key={index}>
-            <InfoText>{item.title}</InfoText>
+            <InfoTitle>{item.title}</InfoTitle>
             <InfoText>
               {item.price != undefined ? item.price + "원" : item.content}
             </InfoText>

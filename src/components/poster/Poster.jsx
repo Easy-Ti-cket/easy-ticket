@@ -7,7 +7,7 @@ const PosterImage = styled.img`
   width: 220px;
   height: 307px;
   object-fit: cover; // 이미지 크기를 전부 통일하게 위해 사용
-  margin: 10px;
+  padding: 10px;
 `;
 
 // json 파일에서 저장해둔 포스터 사진 src을 불러옴.

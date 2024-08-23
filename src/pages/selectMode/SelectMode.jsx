@@ -1,11 +1,11 @@
 import React from "react";
 import styled from "styled-components";
-import { useAtomValue } from "jotai";
-import { practiceCountAtom } from "../../../store/atom";
+import { useAtomValue, useSetAtom } from "jotai";
+import { practiceCountAtom, themeSiteAtom } from "../../store/atom";
 import { useNavigate } from "react-router-dom";
-import Button from "../../../components/button/Button";
-import Tooltip from "../../../components/tooltip/Tooltip";
-import AnimationArea from "../../../components/Animation";
+import Button from "../../components/button/Button";
+import Tooltip from "../../components/tooltip/Tooltip";
+import AnimationArea from "../../components/Animation";
 
 const SelectLevelContainer = styled.div`
   display: flex;
@@ -40,7 +40,10 @@ const SelectMode = () => {
   const recommendedMode = PracticeCount < 10 ? "연습모드" : "실전모드";
   const modes = ["연습모드", "실전모드"];
 
+  const setThemeSite = useSetAtom(themeSiteAtom);
+
   const handleClick = (mode) => {
+    setThemeSite(null);
     if (mode === "연습모드") {
       nav("/select-level");
     } else {

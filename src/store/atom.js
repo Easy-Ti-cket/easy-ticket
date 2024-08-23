@@ -23,7 +23,7 @@ export const minuteCountAtom = atomWithStorage("minute", 0, storage);
 export const levelAtom = atomWithStorage("level", "low", storage);
 
 //단계 별 상태 (0,1,2,3,4,5)
-export const progressAtom = atom(0);
+export const progressAtom = atom(3);
 
 // 포스터 json 데이터
 export const postersAtom = atom(posters);
@@ -67,24 +67,29 @@ export const allowedSectionAtom = atomWithStorage(
 );
 
 //사용자 이름
-export const userNameAtom = atomWithStorage("userName", "");
+export const userNameAtom = atomWithStorage("userName", "", storage);
+//사용자 이름 입력 상태 (userNameAtom이 존재하는가?)
+export const userNameErrorAtom = atom(false);
 
 //연습모드 완료 횟수
-export const practiceCountAtom = atomWithStorage("practiceCount", 0);
+export const practiceCountAtom = atomWithStorage("practiceCount", 0, storage);
 
 //좌석 매수 개수
 export const seatCountAtom = atomWithStorage("seatCount", 0, storage);
 
-//좌석 등급, 가격
+// 좌석 등급, 가격, 좌석 정보 상태
 export const seatInfoAtom = atomWithStorage(
   "seatInfo",
   {
     grade: "",
     price: 0,
-    date: ""
+    date: "",
+    seat: ""
   },
   storage
 );
+
+export const themeSiteAtom = atomWithStorage("themeSite", null, storage);
 
 //단계별 텍스트
 export const stepTextNumberAtom = atomWithStorage("stepTextNumber", 0, storage);

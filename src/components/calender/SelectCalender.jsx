@@ -1,15 +1,32 @@
 import { useState, useEffect } from "react";
+import { useAtom } from "jotai";
+import { selectedPosterAtom, levelAtom, postersAtom } from "../../store/atom";
 import { StyledCalendar, StyledCalendarWrapper } from "./calenderStyles";
 
-const SelectCalender = ({ onDateSelect, initialDate }) => {
-  const [selectedDate, setSelectedDate] = useState(initialDate);
+const SelectCalender = ({ onDateSelect }) => {
+  const [selectedDate, setSelectedDate] = useState(new Date());
   const [activeStartDate, setActiveStartDate] = useState(new Date());
+  const [level] = useAtom(levelAtom);
+  const [selectedPoster] = useAtom(selectedPosterAtom);
+  const [posters] = useAtom(postersAtom);
+  const [posterId, setPosterId] = useState(0);
 
   useEffect(() => {
-    if (initialDate) {
-      setSelectedDate(new Date(initialDate));
+    if (level === "low" || level === "middle") {
+      setPosterId(0);
+    } else {
+      setPosterId(selectedPoster);
     }
-  }, [initialDate]);
+  }, [level, selectedPoster]);
+
+  useEffect(() => {
+    const poster = posters[posterId];
+    if (poster && poster.date && poster.date.length > 0) {
+      const initialDate = new Date(poster.date[0]); // 첫 번째 날짜를 사용
+      setSelectedDate(initialDate);
+      setActiveStartDate(initialDate);
+    }
+  }, [posterId, posters]);
 
   const handleDateChange = (date) => {
     setSelectedDate(date);

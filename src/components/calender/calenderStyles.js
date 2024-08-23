@@ -37,12 +37,12 @@ export const StyledCalendarWrapper = styled.div`
     font-size: 30px;
     &:nth-child(1),
     &:nth-child(3) {
-      color: var(--key-color);
+      color: var(--fill-color);
       font-family: "pretendardR";
     }
     &:nth-child(1):hover,
     &:nth-child(3):hover {
-      color: var(--key-color);
+      color: var(--fill-color);
     }
     &:hover {
       background: none;
