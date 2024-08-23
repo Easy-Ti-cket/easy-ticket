@@ -8,6 +8,7 @@ import Modal from "../components/modal/Modal";
 import { useAtomValue } from "jotai";
 import { themeSiteAtom, levelAtom } from "../store/atom";
 import EscModal from "../components/modal/EscModalContents";
+import useText from "../hooks/useText";
 
 //ProgressBar+ContentsBox Container
 const ProgressContentsContainer = styled.div`
