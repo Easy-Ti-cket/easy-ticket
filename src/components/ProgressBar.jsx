@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useAtomValue, useAtom } from "jotai";
 import { progressAtom, themeSiteAtom } from "../store/atom";
@@ -17,15 +16,6 @@ const ProgressStep = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-
-// // 테마에 따라 색상을 반환하는 함수
-// const getColor = (props, type) => {
-//   const themeColors = theme[props.$themeSite] || theme.default;
-//   if (props.$themeSite === "practice" || props.$themeSite === null) {
-//     // 디폴트 테마(practice)이면 기본 키 컬러 적용
-//     return "var(--key-color)";
-//   } else return themeColors[type];
-// };
 
 const StepNumber = styled.div`
   display: flex;
@@ -63,17 +53,6 @@ const StepLabel = styled.div`
   text-align: center;
   font-family: "pretendardB";
   white-space: nowrap;
-`;
-
-const Loading = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 105px;
-  width: 100%;
-  max-width: 1121px;
-  font-size: 20px;
-  font-family: "pretendardB";
 `;
 
 const ProgressBar = () => {

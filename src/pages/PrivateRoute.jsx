@@ -9,7 +9,8 @@ const PrivateRoute = ({ element }) => {
   const isUser = useAtomValue(userNameAtom);
   const isSelectedLevel = useAtomValue(levelAtom);
   const isSelectedSite = useAtomValue(themeSiteAtom);
-  return isUser && (isSelectedLevel || isSelectedSite) ? (
+  return isUser !== null &&
+    (isSelectedLevel || isSelectedSite !== "practice") ? (
     element
   ) : (
     <Navigate to="/" />

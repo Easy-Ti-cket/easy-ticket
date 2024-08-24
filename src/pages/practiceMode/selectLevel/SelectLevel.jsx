@@ -36,11 +36,6 @@ const ButtonBox = styled.div`
 const SelectLevel = () => {
   const setLevel = useSetAtom(levelAtom);
   const PracticeCount = useAtomValue(practiceCountAtom);
-  const [, setThemeSite] = useAtom(themeSiteAtom);
-
-  useEffect(() => {
-    setThemeSite(null);
-  }, [setThemeSite]);
 
   const levels = ["초급", "중급", "고급"];
   const nav = useNavigate();

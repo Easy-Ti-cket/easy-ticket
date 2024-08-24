@@ -40,10 +40,7 @@ const SelectMode = () => {
   const recommendedMode = PracticeCount < 10 ? "연습모드" : "실전모드";
   const modes = ["연습모드", "실전모드"];
 
-  const setThemeSite = useSetAtom(themeSiteAtom);
-
   const handleClick = (mode) => {
-    setThemeSite(null);
     if (mode === "연습모드") {
       nav("/select-level");
     } else {

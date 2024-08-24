@@ -1,8 +1,7 @@
-// SelectRoundInterpark.jsx
 import React, { useEffect, useState } from "react";
-import PosterInfo from "../../../components/poster/PosterInfo";
-import SelectCalender from "../../../components/calender/SelectCalender";
-import Button from "../../../components/button/Button";
+import PosterInterpark from "./PosterInterpark";
+import SelectCalender from "../../../../components/calender/SelectCalender";
+import Button from "../../../../components/button/Button";
 import styled from "styled-components";
 import { useAtom } from "jotai";
 import {
@@ -11,57 +10,65 @@ import {
   levelAtom,
   progressAtom,
   postersAtom
-} from "../../../store/atom";
+} from "../../../../store/atom";
 import { useNavigate } from "react-router-dom";
-import formatTime from "../../../util/time";
+import formatTime from "../../../../util/time";
 
 const Container = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between; /* 좌우로 공간 배분 */
+  align-items: flex-start; /* 상단 정렬 */
+  padding: 20px 50px;
+  width: 100%;
 `;
 
 const LeftSection = styled.div`
-  width: 600px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start; /* 콘텐츠 상단 정렬 */
   align-items: center;
 `;
 
 const RightSection = styled.div`
-  width: 600px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start; /* 콘텐츠 상단 정렬 */
   align-items: flex-start;
+  padding-left: 20px; /* 좌측 여백 추가 */
+`;
+
+const BoxWrapper = styled.div`
+  border: 1px solid var(--fill-color);
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
 `;
 
 const RoundWrapper = styled.div`
-  width: 220px;
   display: flex;
   flex-direction: column;
-  margin-left: 20px;
-  align-items: left;
-  padding: 5px;
+  gap: 10px; /* 버튼 사이의 간격 추가 */
+  width: 100%;
+  padding-left: 20px;
 `;
 
 const SelectRoundInterpark = () => {
   const [, setLevel] = useAtom(levelAtom);
   const [, setProgress] = useAtom(progressAtom);
   const [selectedPoster] = useAtom(selectedPosterAtom);
-  const [posters] = useAtom(postersAtom); // 포스터 데이터 가져오기
+  const [posters] = useAtom(postersAtom);
   const [posterId, setPosterId] = useState(0);
   const [dateSelected, setDateSelected] = useState(false);
   const [roundSelected, setRoundSelected] = useState(false);
   const [timesButtons, setTimesButtons] = useState([]);
-  const [correctRound, setCorrectRound] = useState(null); // 정답 회차 저장
+  const [correctRound, setCorrectRound] = useState(null);
   const navigate = useNavigate();
   const [, setThemeSite] = useAtom(themeSiteAtom);
 
   useEffect(() => {
     setProgress(1);
-    setThemeSite("interpark"); // Interpark 테마 적용
-    setLevel("high"); // 고급 난이도 설정
+    setThemeSite("interpark");
+    setLevel("high");
     setPosterId(0);
   }, [setLevel, setProgress, selectedPoster, setThemeSite]);
 
@@ -69,16 +76,13 @@ const SelectRoundInterpark = () => {
   const posterDates = poster ? poster.date : [];
   const posterTimes = poster ? poster.time : {};
 
-  // 날짜 정답 지정
   const handleDateSelect = (formattedDate) => {
-    const correctDate = posterDates[0]; // 날짜 배열의 첫 번째 날짜를 정답으로 설정
-
+    const correctDate = posterDates[0];
     if (formattedDate === correctDate) {
       setDateSelected(true);
       const timesArray = formatTime(posterTimes, formattedDate);
       setTimesButtons(timesArray);
 
-      // 회차 데이터에서 첫 번째 회차를 정답으로 설정
       if (timesArray.length > 0) {
         setCorrectRound(timesArray[0]);
       }
@@ -87,7 +91,6 @@ const SelectRoundInterpark = () => {
     }
   };
 
-  // 회차 선택
   const handleRoundClick = (time) => {
     if (dateSelected) {
       if (time === correctRound) {
@@ -106,41 +109,44 @@ const SelectRoundInterpark = () => {
       alert("먼저 회차를 선택해주세요.");
       return;
     }
-    navigate("/interpark/step2");
+    navigate("/challenge/interpark/step2");
   };
 
   return (
     <Container>
       <LeftSection>
-        <PosterInfo id={posterId} />
+        <PosterInterpark id={posterId} />
       </LeftSection>
       <RightSection>
-        <SelectCalender
-          onDateSelect={handleDateSelect}
-          initialDate={
-            posterDates.length > 0 ? new Date(posterDates[0]) : new Date()
-          }
-        />
-        <RoundWrapper>
-          <p>회차</p>
-          {timesButtons.length > 0 ? (
-            timesButtons.map((time, index) => (
+        <BoxWrapper>
+          <p style={{ paddingLeft: "20px" }}>관람일</p>
+          <SelectCalender
+            onDateSelect={handleDateSelect}
+            initialDate={
+              posterDates.length > 0 ? new Date(posterDates[0]) : new Date()
+            }
+          />
+          <p style={{ paddingLeft: "20px" }}>회차</p>
+          <RoundWrapper>
+            {timesButtons.length > 0 ? (
+              timesButtons.map((time, index) => (
+                <Button
+                  key={index}
+                  text={`${index + 1}회 - ${time}`}
+                  type="outline"
+                  onClick={() => handleRoundClick(time)}
+                />
+              ))
+            ) : (
               <Button
-                key={index}
-                text={`${index + 1}회 - ${time}`}
+                text="날짜 선택 후 확인"
                 type="outline"
-                onClick={() => handleRoundClick(time)}
+                onClick={() => handleRoundClick("날짜 선택 후 확인")}
               />
-            ))
-          ) : (
-            <Button
-              text="날짜 선택 후 확인"
-              type="outline"
-              onClick={() => handleRoundClick("날짜 선택 후 확인")}
-            />
-          )}
-          <Button text="예매하기" onClick={handleReserveClick} />
-        </RoundWrapper>
+            )}
+          </RoundWrapper>
+        </BoxWrapper>
+        <Button text="인증 후 예매하기" onClick={handleReserveClick} />
       </RightSection>
     </Container>
   );

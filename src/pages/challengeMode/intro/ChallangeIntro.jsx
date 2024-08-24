@@ -28,16 +28,16 @@ const ChallangeIntro = () => {
     setProgress(1);
     switch (themeSite) {
       case "interpark":
-        navigate("/interpark/step1");
+        navigate("../step1");
         break;
       case "melonticket":
-        navigate("/melonticket/step1");
+        navigate("../step1");
         break;
       case "ticketlink":
-        navigate("/ticketlink/step1");
+        navigate("../step1");
         break;
       case "yes24":
-        navigate("/yes24/step1");
+        navigate("../step1");
         break;
       default:
         "practice";

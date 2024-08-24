@@ -49,10 +49,6 @@ const Step5 = () => {
   const setThemeSite = useSetAtom(themeSiteAtom);
 
   useEffect(() => {
-    setThemeSite(null);
-  }, [setThemeSite]);
-
-  useEffect(() => {
     setProgress(5);
   }, [setProgress]);
 

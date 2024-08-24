@@ -40,13 +40,7 @@ const SelectSite = () => {
   const setThemeSite = useSetAtom(themeSiteAtom);
   const setLevel = useSetAtom(levelAtom);
 
-  useEffect(() => {
-    // 사이트 선택 페이지에서는 기본 theme로 초기화
-    setThemeSite("practice");
-  }, [setThemeSite]);
-
   const handleClick = (path, themeSite) => {
-    setLevel("high"); // 사이트 클릭 시 고급 난이도 설정
     setThemeSite(themeSite); // 해당 사이트의 테마로 변경
     navigate(path);
   };
@@ -55,25 +49,25 @@ const SelectSite = () => {
     {
       name: "인터파크 티켓",
       icon: interparkIcon,
-      path: "/interpark/step0",
+      path: "/challenge/interpark/step0",
       theme: "interpark"
     },
     {
       name: "멜론티켓",
       icon: melonticketIcon,
-      path: "/melonticket/step0",
+      path: "/challenge/melonticket/step0",
       theme: "melonticket"
     },
     {
       name: "티켓링크",
       icon: tickelinkIcon,
-      path: "/ticketlink/step0",
+      path: "/challenge/ticketlink/step0",
       theme: "ticketlink"
     },
     {
       name: "예스24(YES24)",
       icon: yes24Icon,
-      path: "/yes24/step0",
+      path: "/challenge/yes24/step0",
       theme: "yes24"
     }
   ];

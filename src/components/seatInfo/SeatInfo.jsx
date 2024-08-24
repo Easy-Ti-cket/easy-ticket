@@ -6,7 +6,8 @@ import {
   levelAtom,
   postersAtom,
   selectedPosterAtom,
-  seatInfoAtom
+  seatInfoAtom,
+  themeSiteAtom
 } from "../../store/atom";
 import {
   SeatInfoContainer,
@@ -35,6 +36,7 @@ const SeatInfo = () => {
   const selectedPoster = posters[posterId];
   const seats = convertPriceObjectToArray(selectedPoster.price);
   const [seatInfo, setSeatInfo] = useAtom(seatInfoAtom);
+  const themeSite = useAtomValue(themeSiteAtom);
 
   useEffect(() => {
     if (isSeatSelected) {
@@ -54,13 +56,21 @@ const SeatInfo = () => {
     isFocus = true;
   }
   const nav = useNavigate();
+
   const handleButtonClick = () => {
     if (isSeatSelected) {
-      nav("/progress/step3-1");
+      // 연습모드 라우팅
+      if (themeSite === "practice") {
+        nav("/progress/step3-1");
+      } else {
+        // 실전모드 라우팅
+        nav(`/challenge/${themeSite}/step3-1`);
+      }
     } else {
       alert("좌석을 선택해주세요.");
     }
   };
+
   return (
     <SeatInfoContainer>
       <Header>좌석등급 / 잔여석</Header>
