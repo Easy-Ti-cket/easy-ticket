@@ -1,3 +1,4 @@
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import PayMethodForm from "../../../components/forms/pay/PayMethodForm";
 import DetailPayForm from "../../../components/forms/pay/DetailPayForm";
@@ -5,8 +6,12 @@ import { useForm } from "../../../hooks/useForm";
 import Button from "../../../components/button/Button";
 import { useNavigate } from "react-router-dom";
 import { useSetAtom, useAtomValue } from "jotai";
-import { progressAtom, themeSiteAtom } from "../../../store/atom";
-import { useEffect, useState } from "react";
+import {
+  progressAtom,
+  themeSiteAtom,
+  stepTextNumberAtom,
+  helpTextNumberAtom
+} from "../../../store/atom";
 
 const SelectPayWrap = styled.div`
   width: 80%;
@@ -43,11 +48,25 @@ const SelectPayMethod = () => {
   const { handleChange, correctList, isAnswer } = useForm(3);
   //'신용카드'를 정확히 골랐을 경우 '결제 수단 입력' 창 생성
   const isPayMethodCorrect = correctList["PayMethodForm"];
+
+  const setStepTextNumber = useSetAtom(stepTextNumberAtom);
+  const setHelpTextNumber = useSetAtom(helpTextNumberAtom);
+
   // progress bar 설정
   const setProgress = useSetAtom(progressAtom);
   useEffect(() => {
     setProgress(4);
+    setStepTextNumber(0);
+    setHelpTextNumber(0);
   }, []);
+
+  useEffect(() => {
+    if (isPayMethodCorrect) {
+      setStepTextNumber((prev) => prev + 1);
+      setHelpTextNumber((prev) => prev + 1);
+    }
+  }, [isPayMethodCorrect]);
+
   //검사 로직
   const [hasPayFormError, setHasPayFormError] = useState(false);
   const [cardTypesError, setCardTypesError] = useState(false);
@@ -66,8 +85,12 @@ const SelectPayMethod = () => {
       alert("올바른 카드를 선택해 주세요");
     } else {
       nav("../step4-2");
+
+      setStepTextNumber((prev) => prev + 1);
+      setHelpTextNumber((prev) => prev + 1);
     }
   };
+
   return (
     <SelectPayWrap>
       {/*결제 방식 선택 */}

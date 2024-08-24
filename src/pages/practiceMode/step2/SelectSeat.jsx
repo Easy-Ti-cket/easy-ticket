@@ -4,7 +4,13 @@ import SeatChart from "../../../components/seatChart/SeatChart";
 import styled from "styled-components";
 import { useEffect } from "react";
 import { useAtomValue, useSetAtom } from "jotai";
-import { isSectionSelectedAtom, progressAtom } from "../../../store/atom";
+import {
+  isSectionSelectedAtom,
+  isSeatSelectedAtom,
+  progressAtom,
+  stepTextNumberAtom,
+  helpTextNumberAtom
+} from "../../../store/atom";
 const SelectSeatcontainer = styled.div`
   display: flex;
   justify-content: space-evenly;
@@ -12,9 +18,30 @@ const SelectSeatcontainer = styled.div`
   gap: 80px;
 `;
 const SelectSeat = () => {
+  const setStepTextNumber = useSetAtom(stepTextNumberAtom);
+  const setHelpTextNumber = useSetAtom(helpTextNumberAtom);
   const isSectionSelected = useAtomValue(isSectionSelectedAtom);
+  const isSeatSelected = useAtomValue(isSeatSelectedAtom);
   const setProgress = useSetAtom(progressAtom);
-  useEffect(() => setProgress(2));
+
+  useEffect(() => {
+    setProgress(2);
+    setStepTextNumber(0);
+    setHelpTextNumber(0);
+  }, []);
+
+  useEffect(() => {
+    if (isSectionSelected || isSeatSelected) {
+      setStepTextNumber((prev) => prev + 1);
+      setHelpTextNumber((prev) => prev + 1);
+    }
+  }, [isSectionSelected]);
+
+  useEffect(() => {
+    if (isSeatSelected) {
+      setStepTextNumber((prev) => prev + 1);
+    }
+  }, [isSeatSelected]);
   return (
     <SelectSeatcontainer>
       {isSectionSelected ? (

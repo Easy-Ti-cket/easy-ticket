@@ -93,3 +93,9 @@ export const themeSiteAtom = atomWithStorage("themeSite", "practice", storage);
 
 //타이머 제어 - 세션스토리지 이용할 필요 x
 export const timerControlAtom = atom(false);
+
+//단계별 텍스트
+export const stepTextNumberAtom = atomWithStorage("stepTextNumber", 0, storage);
+
+//도움말 텍스트
+export const helpTextNumberAtom = atomWithStorage("helpTextNumber", 0, storage);

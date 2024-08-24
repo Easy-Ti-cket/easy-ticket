@@ -1,8 +1,16 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useAtom, useSetAtom } from "jotai";
-import { levelAtom, progressAtom, themeSiteAtom } from "../../../store/atom";
+import { useAtom, useSetAtom, useAtomValue } from "jotai";
+
+import {
+  levelAtom,
+  progressAtom,
+  themeSiteAtom,
+  stepTextNumberAtom,
+  helpTextNumberAtom
+} from "../../../store/atom";
+
 import Button from "../../../components/button/Button";
 import AnimationArea from "../../../components/Animation";
 import IntroMessage from "./introMessage/IntroMessage";
@@ -17,7 +25,8 @@ const IntroContainer = styled.div`
 
 const Intro = () => {
   const navigate = useNavigate();
-  const [level] = useAtom(levelAtom);
+  const level = useAtomValue(levelAtom);
+
   const [progress, setProgress] = useAtom(progressAtom);
   const setThemeSite = useSetAtom(themeSiteAtom);
 
@@ -25,8 +34,13 @@ const Intro = () => {
     setThemeSite("practice");
   }, [setThemeSite]);
 
+  const setStepTextNumber = useSetAtom(stepTextNumberAtom);
+  const setHelpTextNumber = useSetAtom(helpTextNumberAtom);
+
   useEffect(() => {
     setProgress(0);
+    setStepTextNumber(0);
+    setHelpTextNumber(0);
   }, [setProgress]);
 
   const handleClick = () => {

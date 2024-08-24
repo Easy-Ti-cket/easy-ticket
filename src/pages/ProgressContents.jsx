@@ -8,6 +8,7 @@ import Modal from "../components/modal/Modal";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { themeSiteAtom, levelAtom, timerControlAtom } from "../store/atom";
 import EscModalContents from "../components/modal/EscModalContents";
+import useText from "../hooks/useText";
 
 //ProgressBar+ContentsBox Container
 const ProgressContentsContainer = styled.div`
@@ -93,6 +94,8 @@ const ProgressContents = ({ text }) => {
   // 연습모드인 경우만 도움말 버튼 보여주기
   const showHelpButton = themeSite === "practice";
 
+  const { stepText, helpText } = useText();
+
   return (
     <ProgressContentsContainer>
       {/*프로그래스 바*/}
@@ -105,7 +108,7 @@ const ProgressContents = ({ text }) => {
         <Timer type={"minute"} second={1800} />
       )}
       {themeSite !== "practice" && <Timer type={"minute"} second={900} />}
-      <TextBox>{text}</TextBox>
+      <TextBox>{stepText}</TextBox>
       <ContentsBox>
         {/*도움말 버튼 */}
         {showHelpButton && (
@@ -128,7 +131,7 @@ const ProgressContents = ({ text }) => {
         )}
         {/*도움말 모달창*/}
         {isModalOpen && (
-          <Modal onClick={handleModalClose} contents="내용입니다" />
+          <Modal onClick={handleModalClose} contents={helpText} />
         )}
         <Outlet />
       </ContentsBox>

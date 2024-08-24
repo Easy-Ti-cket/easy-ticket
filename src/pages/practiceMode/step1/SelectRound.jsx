@@ -3,12 +3,13 @@ import PosterInfo from "../../../components/poster/PosterInfo";
 import SelectCalender from "../../../components/calender/SelectCalender";
 import Button from "../../../components/button/Button";
 import styled from "styled-components";
-import { useAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import {
   selectedPosterAtom,
   levelAtom,
   progressAtom,
-  postersAtom
+  postersAtom,
+  stepTextNumberAtom
 } from "../../../store/atom";
 import AnimationArea from "../../../components/Animation";
 import { useNavigate } from "react-router-dom";
@@ -49,6 +50,9 @@ const SelectRound = () => {
   const [, setProgress] = useAtom(progressAtom);
   const [selectedPoster] = useAtom(selectedPosterAtom);
   const [currentLevel] = useAtom(levelAtom);
+
+  const setStepTextNumber = useSetAtom(stepTextNumberAtom);
+
   const [posters] = useAtom(postersAtom); // 포스터 데이터 가져오기
   const [posterId, setPosterId] = useState(0);
   const [dateSelected, setDateSelected] = useState(false);
@@ -94,6 +98,7 @@ const SelectRound = () => {
   const handleRoundClick = (time) => {
     if (dateSelected) {
       if (time === correctRound) {
+        setStepTextNumber((prev) => prev + 1);
         alert(`${time}으로 공연을 예매합니다.`);
         setRoundSelected(true);
         setAnimationStep(2);
@@ -110,6 +115,7 @@ const SelectRound = () => {
       alert("먼저 회차를 선택해주세요.");
       return;
     }
+
     navigate("/progress/step2");
   };
 

@@ -4,7 +4,11 @@ import SeatCount from "../../../components/SeatCount";
 import { useEffect, useState } from "react";
 import TicketMethod from "../../../components/forms/ticket/TicketMethod";
 import { useSetAtom } from "jotai";
-import { progressAtom } from "../../../store/atom";
+import {
+  progressAtom,
+  stepTextNumberAtom,
+  helpTextNumberAtom
+} from "../../../store/atom";
 
 const Wrap = styled.div`
   display: flex;
@@ -18,7 +22,23 @@ const SeatPriceCheck = () => {
   const [step3Stage, setStep3Stage] = useState(1);
   const addStage = () => setStep3Stage((prev) => prev + 1);
   const setProgress = useSetAtom(progressAtom);
-  useEffect(() => setProgress(3));
+
+  const setStepTextNumber = useSetAtom(stepTextNumberAtom);
+  const setHelpTextNumber = useSetAtom(helpTextNumberAtom);
+
+  useEffect(() => {
+    setProgress(3);
+    setStepTextNumber(0);
+    setHelpTextNumber(0);
+  }, []);
+
+  useEffect(() => {
+    if (step3Stage == 2) {
+      setStepTextNumber((prev) => prev + 1);
+      setHelpTextNumber((prev) => prev + 1);
+    }
+  }, [step3Stage]);
+
   // 폼 검사 로직
   const [isValidate, setIsValidate] = useState([]);
   const [errorArray, setErrorArray] = useState([]); //css 변경용

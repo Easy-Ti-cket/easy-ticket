@@ -2,23 +2,29 @@ import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import Layout from "./pages/Layout";
 import ProgressContents from "./pages/ProgressContents";
+import PrivateRoute from "./pages/PrivateRoute";
 import Main from "./pages/main/Main";
 import SelectMode from "./pages/selectMode/SelectMode";
 import SelectLevel from "./pages/practiceMode/selectLevel/SelectLevel";
 import SelectSite from "./pages/challengeMode/selectSite/SelectSite";
+// step 0
 import Intro from "./pages/practiceMode/step0/Intro";
+import ChallangeIntro from "./pages/challengeMode/intro/ChallangeIntro";
+// step 1
 import SelectPerformance from "./pages/practiceMode/step1/SelectPerformance";
 import SelectRound from "./pages/practiceMode/step1/SelectRound";
 import SelectRoundInterpark from "./pages/challengeMode/interpark/step1/SelectRoundInterpark";
-import SelectPayMethod from "./pages/practiceMode/step4/SelectPayMethod";
-import CardPay from "./pages/practiceMode/step4/CardPay";
-import Step5 from "./pages/practiceMode/step5/Step5";
+// step 2
 import SelectSeat from "./pages/practiceMode/step2/SelectSeat";
 import SelectSeatInterpark from "./pages/challengeMode/interpark/step2/SelectSeatInterpark";
+// step 3
 import SeatPriceCheck from "./pages/practiceMode/step3/SeatPriceCheck";
 import SelectPriceInterpark from "./pages/challengeMode/interpark/step3/SelectPriceInterpark";
-import PrivateRoute from "./pages/PrivateRoute";
-import ChallangeIntro from "./pages/challengeMode/intro/ChallangeIntro";
+// step 4
+import SelectPayMethod from "./pages/practiceMode/step4/SelectPayMethod";
+import CardPay from "./pages/practiceMode/step4/CardPay";
+// step 5
+import Step5 from "./pages/practiceMode/step5/Step5";
 
 const router = createBrowserRouter([
   {
