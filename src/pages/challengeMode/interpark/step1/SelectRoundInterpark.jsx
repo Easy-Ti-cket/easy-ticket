@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import PosterInterpark from "../../../../components/poster/PosterInterpark";
+import PosterInterpark from "./PosterInterpark";
 import SelectCalender from "../../../../components/calender/SelectCalender";
 import Button from "../../../../components/button/Button";
 import styled from "styled-components";
@@ -109,7 +109,7 @@ const SelectRoundInterpark = () => {
       alert("먼저 회차를 선택해주세요.");
       return;
     }
-    navigate("/interpark/step2");
+    navigate("/challenge/interpark/step2");
   };
 
   return (

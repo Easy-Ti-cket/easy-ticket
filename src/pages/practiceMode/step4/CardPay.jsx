@@ -51,10 +51,11 @@ const CardPay = () => {
     } else {
       // 연습모드 라우팅
       if (themeSite === "practice") {
-        nav("/progress/step5");
+        nav("step5");
       } else {
         // 실전모드 라우팅
-        nav(`/${themeSite}/step5`);
+        // nav(`/challenge/${themeSite}/step5`);
+        nav(".../step5");
       }
     }
   };

@@ -129,12 +129,7 @@ const MyBookingInfo = ({
       } else {
         setErrorArray(() => []);
         // 연습모드 라우팅
-        if (themeSite === "practice") {
-          nav("/progress/step4-1");
-        } else {
-          // 실전모드 라우팅
-          nav(`/${themeSite}/step4-1`);
-        }
+        nav("../step4-1");
       }
     }
   };

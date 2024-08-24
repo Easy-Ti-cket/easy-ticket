@@ -65,13 +65,7 @@ const SelectPayMethod = () => {
       setCardTypesError(true);
       alert("올바른 카드를 선택해 주세요");
     } else {
-      // 연습모드 라우팅
-      if (themeSite === "practice") {
-        nav("/progress/step4-2");
-      } else {
-        // 실전모드 라우팅
-        nav(`/${themeSite}/step4-2`);
-      }
+      nav("../step4-2");
     }
   };
   return (

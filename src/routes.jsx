@@ -93,6 +93,26 @@ const router = createBrowserRouter([
                 label: "날짜 및 회차 선택"
               },
               {
+                path: "step2",
+                element: <PrivateRoute element={<SelectSeatInterpark />} />,
+                label: ""
+              },
+              {
+                path: "step3-1",
+                element: <PrivateRoute element={<SelectPriceInterpark />} />,
+                label: "날짜 및 회차 선택"
+              },
+              {
+                path: "step4-1",
+                element: <PrivateRoute element={<SelectPayMethod />} />,
+                label: "결제방식 / 수단 선택"
+              },
+              {
+                path: "step4-2",
+                element: <PrivateRoute element={<CardPay />} />,
+                label: "카드 결제창"
+              },
+              {
                 path: "step5",
                 element: <PrivateRoute element={<Step5 />} />,
                 label: "예매 성공"

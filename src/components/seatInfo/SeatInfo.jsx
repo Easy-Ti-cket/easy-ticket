@@ -64,7 +64,7 @@ const SeatInfo = () => {
         nav("/progress/step3-1");
       } else {
         // 실전모드 라우팅
-        nav(`/${themeSite}/step3-1`);
+        nav(`/challenge/${themeSite}/step3-1`);
       }
     } else {
       alert("좌석을 선택해주세요.");

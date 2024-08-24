@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import Poster from "./Poster";
+import Poster from "../../../../components/poster/Poster";
 import { useAtom } from "jotai";
-import { postersAtom, levelAtom } from "../../store/atom";
-import { formatDateRange } from "../../util/date";
+import { postersAtom, levelAtom } from "../../../../store/atom";
+import { formatDateRange } from "../../../../util/date";
 
 // 전체 요소를 담는 컨테이너
 const PosterContainer = styled.div`
