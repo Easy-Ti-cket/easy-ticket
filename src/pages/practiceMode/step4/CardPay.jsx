@@ -54,14 +54,7 @@ const CardPay = () => {
     if (!isAnswer) {
       alert("카드 정보를 정확하게 입력해 주세요");
     } else {
-      // 연습모드 라우팅
-      if (themeSite === "practice") {
-        nav("step5");
-      } else {
-        // 실전모드 라우팅
-        // nav(`/challenge/${themeSite}/step5`);
-        nav(".../step5");
-      }
+      nav("../step5");
     }
   };
   return (
