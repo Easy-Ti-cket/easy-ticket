@@ -18,13 +18,18 @@ const Layout = () => {
   const path = useLocation().pathname;
 
   useEffect(() => {
-    if (path === "/" || path === "/progress/step5") {
+    if (
+      path === "/" ||
+      path === "/progress/step5" ||
+      "/select-site" || // step5 - 실전모드 도전
+      "/select-level" // step5 - 다시 연습하기
+    ) {
       resetAtom();
     }
     if (!path.includes("challenge")) {
       setThemeSite("practice");
     }
-  }, [path]); // path가 변경될 때만 실행됨 (메인 및 연습모드 시작과 후)
+  }, [path]);
 
   return (
     <LayoutPage>
