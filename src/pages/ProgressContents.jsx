@@ -5,9 +5,9 @@ import { Outlet, useLocation } from "react-router-dom";
 import Button from "../components/button/Button";
 import { useEffect, useState } from "react";
 import Modal from "../components/modal/Modal";
-import { useAtomValue } from "jotai";
-import { themeSiteAtom, levelAtom } from "../store/atom";
-import EscModal from "../components/modal/EscModalContents";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { themeSiteAtom, levelAtom, timerControlAtom } from "../store/atom";
+import EscModalContents from "../components/modal/EscModalContents";
 import useText from "../hooks/useText";
 
 //ProgressBar+ContentsBox Container
@@ -51,19 +51,21 @@ const ButtonContainer = styled.div`
 
 /*난이도별 contents를 children으로 받아서 ProgressBar와 함께 렌더링*/
 const ProgressContents = ({ text }) => {
+  //타이머 컨트롤 state
+  const setTimerControl = useSetAtom(timerControlAtom);
   //레벨 별 타이머 출력 설정
   const level = useAtomValue(levelAtom);
   //도움말 모달창 제어
   const [isModalOpen, setIsModalOpen] = useState(false);
   //theme
   const themeSite = useAtomValue(themeSiteAtom);
-
   const handleModalOpen = () => {
     setIsModalOpen(true);
+    setTimerControl(true);
   };
-
   const handleModalClose = () => {
     setIsModalOpen(false);
+    setTimerControl(false);
   };
   //esc 일시정지 제어
   //step0 화면에서는 일시정지 렌더링되지 않도록 설정
@@ -77,6 +79,7 @@ const ProgressContents = ({ text }) => {
       (e.key === "Escape" || e.key === "esc")
     ) {
       setIsPaused((prev) => !prev);
+      setTimerControl((prev) => !prev);
     }
     return;
   };
@@ -100,15 +103,11 @@ const ProgressContents = ({ text }) => {
         <ProgressBar />
       </ProgressBarBox>
       {/*고급 level일 경우에만 Timer 설정 */}
-      {/*모달이 열렸을 경우 Timer 정지*/}
+      {/*모달이 열렸을 경우 Timer 정지 - isModalOpen, isPaused*/}
       {level === "high" && themeSite === "practice" && (
-        <Timer
-          type={"minute"}
-          second={1000}
-          isModalOpen={isModalOpen}
-          isPaused={isPaused}
-        />
+        <Timer type={"minute"} second={1800} />
       )}
+      {themeSite !== "practice" && <Timer type={"minute"} second={900} />}
       <TextBox>{stepText}</TextBox>
       <ContentsBox>
         {/*도움말 버튼 */}
@@ -124,8 +123,7 @@ const ProgressContents = ({ text }) => {
         {/*일시정지 모달창 */}
         {isPaused && (
           <Modal
-            contents={<EscModal setIsPaused={setIsPaused} />}
-            onClick={() => setIsPaused(false)}
+            contents={<EscModalContents setIsPaused={setIsPaused} />}
             buttonShow={false}
             width="350px"
             height="400px"

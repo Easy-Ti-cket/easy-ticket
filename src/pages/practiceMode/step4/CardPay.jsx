@@ -4,7 +4,11 @@ import CardForm from "../../../components/forms/CardForm";
 import { useForm } from "../../../hooks/useForm";
 import Button from "../../../components/button/Button";
 import { useAtomValue, useSetAtom, useAtom } from "jotai";
-import { cardAnswerAtom, stepTextNumberAtom } from "../../../store/atom";
+import {
+  cardAnswerAtom,
+  stepTextNumberAtom,
+  themeSiteAtom
+} from "../../../store/atom";
 import { Step4Container } from "./SelectPayMethod";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
@@ -42,14 +46,22 @@ const CardPay = () => {
         : 2
       : 1
     : 0;
+  const nav = useNavigate();
+  const themeSite = useAtomValue(themeSiteAtom);
 
-  const navigate = useNavigate();
   //검사로직
   const handleClick = () => {
     if (!isAnswer) {
       alert("카드 정보를 정확하게 입력해 주세요");
     } else {
-      navigate("/progress/step5");
+      // 연습모드 라우팅
+      if (themeSite === "practice") {
+        nav("step5");
+      } else {
+        // 실전모드 라우팅
+        // nav(`/challenge/${themeSite}/step5`);
+        nav(".../step5");
+      }
     }
   };
   return (

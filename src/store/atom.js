@@ -88,8 +88,11 @@ export const seatInfoAtom = atomWithStorage(
   },
   storage
 );
+//실전모드 theme
+export const themeSiteAtom = atomWithStorage("themeSite", "practice", storage);
 
-export const themeSiteAtom = atomWithStorage("themeSite", null, storage);
+//타이머 제어 - 세션스토리지 이용할 필요 x
+export const timerControlAtom = atom(false);
 
 //단계별 텍스트
 export const stepTextNumberAtom = atomWithStorage("stepTextNumber", 0, storage);

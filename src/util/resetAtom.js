@@ -8,7 +8,7 @@ const resetAtom = () => {
   sessionStorage.removeItem("seatInfo");
   sessionStorage.removeItem("posterId");
   sessionStorage.removeItem("minute");
-  sessionStorage.removeItem("themeSite");
+  sessionStorage.removeItem("level");
 };
 
 export default resetAtom;

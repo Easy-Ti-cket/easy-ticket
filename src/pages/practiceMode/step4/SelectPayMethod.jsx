@@ -1,16 +1,17 @@
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import PayMethodForm from "../../../components/forms/pay/PayMethodForm";
 import DetailPayForm from "../../../components/forms/pay/DetailPayForm";
 import { useForm } from "../../../hooks/useForm";
 import Button from "../../../components/button/Button";
 import { useNavigate } from "react-router-dom";
-import { useSetAtom } from "jotai";
+import { useSetAtom, useAtomValue } from "jotai";
 import {
   progressAtom,
+  themeSiteAtom,
   stepTextNumberAtom,
   helpTextNumberAtom
 } from "../../../store/atom";
-import { useEffect, useState } from "react";
 
 const SelectPayWrap = styled.div`
   width: 80%;
@@ -51,8 +52,6 @@ const SelectPayMethod = () => {
   const setStepTextNumber = useSetAtom(stepTextNumberAtom);
   const setHelpTextNumber = useSetAtom(helpTextNumberAtom);
 
-  // 다음 페이지 이동
-  const navigate = useNavigate();
   // progress bar 설정
   const setProgress = useSetAtom(progressAtom);
   useEffect(() => {
@@ -71,6 +70,8 @@ const SelectPayMethod = () => {
   //검사 로직
   const [hasPayFormError, setHasPayFormError] = useState(false);
   const [cardTypesError, setCardTypesError] = useState(false);
+  const themeSite = useAtomValue(themeSiteAtom);
+  const nav = useNavigate();
 
   const handleClick = () => {
     if (!correctList.DetailPayForm) {
@@ -83,7 +84,8 @@ const SelectPayMethod = () => {
       setCardTypesError(true);
       alert("올바른 카드를 선택해 주세요");
     } else {
-      navigate("/progress/step4-2");
+      nav("../step4-2");
+
       setStepTextNumber((prev) => prev + 1);
       setHelpTextNumber((prev) => prev + 1);
     }

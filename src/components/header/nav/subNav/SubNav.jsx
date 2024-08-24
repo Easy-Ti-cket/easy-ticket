@@ -8,10 +8,18 @@ import {
 } from "../../../../store/atom";
 import { useAtomValue, useSetAtom } from "jotai";
 
+const SubNavBgc = styled.div`
+  width: 100vw;
+  height: 45px;
+  background-color: ${(props) => props.theme.default.subColor};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0;
+`;
 const SubNavWrap = styled.div`
   width: 1320px;
-  height: 50px;
-  background-color: ${(props) => props.theme.default.subColor};
   display: flex;
   justify-content: center;
 `;
@@ -34,7 +42,7 @@ const SubNavContent = styled.li`
   justify-content: center;
   cursor: pointer;
   &:hover {
-    color: var(--key-color);
+    color: ${(props) => props.theme.default.keyColor};
   }
 `;
 
@@ -57,45 +65,49 @@ const SubNav = ({ hovereditem }) => {
       nav("/progress/step0"); // 연습모드 step0로 이동
     } else {
       setThemeSite(location); // 테마 사이트 설정
-      nav(`/${location}/step0`); // 각 사이트의 인트로 페이지로 이동
+      nav(`/challenge/${location}/step0`); // 각 사이트의 인트로 페이지로 이동
     }
   };
 
   return (
     <>
       {hovereditem === "연습모드" && (
-        <SubNavWrap>
-          <SubNavContainer>
-            <SubNavContent onClick={() => handleNavigate("low")}>
-              초급
-            </SubNavContent>
-            <SubNavContent onClick={() => handleNavigate("middle")}>
-              중급
-            </SubNavContent>
-            <SubNavContent onClick={() => handleNavigate("high")}>
-              고급
-            </SubNavContent>
-          </SubNavContainer>
-        </SubNavWrap>
+        <SubNavBgc>
+          <SubNavWrap>
+            <SubNavContainer>
+              <SubNavContent onClick={() => handleNavigate("low")}>
+                초급
+              </SubNavContent>
+              <SubNavContent onClick={() => handleNavigate("middle")}>
+                중급
+              </SubNavContent>
+              <SubNavContent onClick={() => handleNavigate("high")}>
+                고급
+              </SubNavContent>
+            </SubNavContainer>
+          </SubNavWrap>
+        </SubNavBgc>
       )}
 
       {hovereditem === "실전모드" && (
-        <SubNavWrap>
-          <SubNavContainer>
-            <SubNavContent onClick={() => handleNavigate("interpark")}>
-              인터파크 티켓
-            </SubNavContent>
-            <SubNavContent onClick={() => handleNavigate("melonticket")}>
-              멜론티켓
-            </SubNavContent>
-            <SubNavContent onClick={() => handleNavigate("yes24")}>
-              예스24
-            </SubNavContent>
-            <SubNavContent onClick={() => handleNavigate("ticketlink")}>
-              티켓링크
-            </SubNavContent>
-          </SubNavContainer>
-        </SubNavWrap>
+        <SubNavBgc>
+          <SubNavWrap>
+            <SubNavContainer>
+              <SubNavContent onClick={() => handleNavigate("interpark")}>
+                인터파크 티켓
+              </SubNavContent>
+              <SubNavContent onClick={() => handleNavigate("melonticket")}>
+                멜론티켓
+              </SubNavContent>
+              <SubNavContent onClick={() => handleNavigate("yes24")}>
+                예스24
+              </SubNavContent>
+              <SubNavContent onClick={() => handleNavigate("ticketlink")}>
+                티켓링크
+              </SubNavContent>
+            </SubNavContainer>
+          </SubNavWrap>
+        </SubNavBgc>
       )}
       {hovereditem === null && null}
     </>

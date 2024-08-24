@@ -5,7 +5,8 @@ import {
   allowedSeatAtom,
   seatCountAtom,
   levelAtom,
-  seatInfoAtom
+  seatInfoAtom,
+  themeSiteAtom
 } from "../../store/atom";
 import { useAtomValue } from "jotai";
 import { useEffect, useState } from "react";
@@ -98,8 +99,8 @@ const MyBookingInfo = ({
     { title: "쿠폰할인", price: 0 }
   ];
   const nav = useNavigate();
+  const themeSite = useAtomValue(themeSiteAtom);
 
-  // 버튼 클릭 이벤트
   const handleButtonClick = () => {
     // 좌석 매수가 0일 경우 경고창 출력
     if (seatCount === 0) {
@@ -127,7 +128,8 @@ const MyBookingInfo = ({
         return;
       } else {
         setErrorArray(() => []);
-        nav("/progress/step4-1");
+        // 연습모드 라우팅
+        nav("../step4-1");
       }
     }
   };
