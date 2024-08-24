@@ -65,7 +65,7 @@ const Timer = ({ type, second }) => {
     } else if (path.includes("step0")) {
       //고급/실전 시작화면에서는 타이머 멈추고 리셋
       clearInterval(countdownRef.current);
-      writeMinute(second - 100);
+      writeMinute(second);
     } else {
       // 타이머 시작
       if (type === "second") {
