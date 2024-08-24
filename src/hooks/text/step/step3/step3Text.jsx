@@ -21,7 +21,8 @@ const step3Text = [
         다음은 예매자 정보입니다.{" "}
         <span style={{ color: "var(--key-color)" }}>현장 수령</span> 또는
         <span style={{ color: "var(--key-color)" }}> 배송</span>을 선택 한 후,
-        <strong>‘다음단계’</strong>를 클릭해 주세요.
+        <span style={{ color: "var(--key-color)" }}> ‘다음단계’</span>를 클릭해
+        주세요.
         <br />
         배송 선택 시엔 배송비가 부과됩니다.{" "}
         <span style={{ color: "var(--point-color)" }}>

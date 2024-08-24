@@ -2,7 +2,7 @@ import Header from "../components/header/Header";
 import styled from "styled-components";
 import { Outlet, useLocation } from "react-router-dom";
 import { useEffect } from "react";
-import { useSetAtom } from "jotai";
+import { useAtom } from "jotai";
 import resetAtom from "../util/resetAtom";
 import { themeSiteAtom } from "../store/atom";
 
@@ -14,20 +14,17 @@ const LayoutPage = styled.div`
 `;
 
 const Layout = () => {
-  const setThemeSite = useSetAtom(themeSiteAtom);
+  const [themeSite, setThemeSite] = useAtom(themeSiteAtom);
   const path = useLocation().pathname;
 
   useEffect(() => {
-    if (
-      path === "/" ||
-      path === "/progress/step5" ||
-      "/select-site" || // step5 - 실전모드 도전
-      "/select-level" // step5 - 다시 연습하기
-    ) {
+    if (path === "/" || path.endsWith("step5")) {
       resetAtom();
     }
     if (!path.includes("challenge")) {
-      setThemeSite("practice");
+      if (themeSite !== "practice") {
+        setThemeSite("practice");
+      }
     }
   }, [path]);
 

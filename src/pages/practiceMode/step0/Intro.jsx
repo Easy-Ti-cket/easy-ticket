@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
-import { useAtom, useSetAtom } from "jotai";
+import { useAtom, useSetAtom, useAtomValue } from "jotai";
 
 import {
   levelAtom,
@@ -25,7 +25,8 @@ const IntroContainer = styled.div`
 
 const Intro = () => {
   const navigate = useNavigate();
-  const [level] = useAtom(levelAtom);
+  const level = useAtomValue(levelAtom);
+
   const [progress, setProgress] = useAtom(progressAtom);
   const setThemeSite = useSetAtom(themeSiteAtom);
 

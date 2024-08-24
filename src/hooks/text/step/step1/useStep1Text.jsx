@@ -34,7 +34,7 @@ const useStep1Text = () => {
       content: (
         <TextBox>
           다음은 공연 날짜 및 회차 선택창입니다.{" "}
-          <span style={{ color: "var(--key-color)" }}>{posterDate} 1회차</span>
+          <span style={{ color: "var(--key-color)" }}>{posterDate} 1회차 </span>
           공연을 선택해 주세요.
         </TextBox>
       )

@@ -11,7 +11,7 @@ const useStep2Text = () => {
       content: (
         <TextBox>
           다음은 공연장 배치도입니다.
-          <span style={{ color: "var(--key-color)" }}>{section}구역</span>을
+          <span style={{ color: "var(--key-color)" }}> {section}구역</span>을
           클릭하여 선택해 주세요.
         </TextBox>
       )
