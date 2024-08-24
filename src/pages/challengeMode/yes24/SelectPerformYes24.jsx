@@ -8,7 +8,6 @@ const SelectPerformYes24 = () => {
     const [, setLevel] = useAtom(levelAtom);
     const [, setProgress] = useAtom(progressAtom);
     setThemeSite("interpark"); // Interpark 테마 적용
-    setLevel("high"); // 고급 난이도 설정
     setPosterId(0);
   }, [setLevel, setProgress, selectedPoster, setThemeSite]);
   return <h1>yes24 페이지입니다</h1>;

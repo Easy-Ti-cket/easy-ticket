@@ -102,8 +102,9 @@ const ProgressContents = ({ text }) => {
       {/*고급 level일 경우에만 Timer 설정 */}
       {/*모달이 열렸을 경우 Timer 정지 - isModalOpen, isPaused*/}
       {level === "high" && themeSite === "practice" && (
-        <Timer type={"minute"} second={1000} />
+        <Timer type={"minute"} second={1900} />
       )}
+      {themeSite !== "practice" && <Timer type={"minute"} second={1000} />}
       <TextBox>{text}</TextBox>
       <ContentsBox>
         {/*도움말 버튼 */}

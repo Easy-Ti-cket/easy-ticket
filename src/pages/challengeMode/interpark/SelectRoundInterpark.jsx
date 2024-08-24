@@ -60,8 +60,6 @@ const SelectRoundInterpark = () => {
 
   useEffect(() => {
     setProgress(1);
-    setThemeSite("interpark"); // Interpark 테마 적용
-    setLevel("high"); // 고급 난이도 설정
     setPosterId(0);
   }, [setLevel, setProgress, selectedPoster, setThemeSite]);
 

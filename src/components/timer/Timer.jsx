@@ -62,10 +62,9 @@ const Timer = ({ type, second }) => {
     if (path === "/progress/step5") {
       //step5 -> 예매 성공일 경우 타이머 멈춤
       clearInterval(countdownRef.current);
-    } else if (path === "/progress/step0") {
-      //고급 시작화면에서는 타이머 멈추고 리셋
+    } else if (path.includes("step0")) {
+      //고급/실전 시작화면에서는 타이머 멈추고 리셋
       clearInterval(countdownRef.current);
-      // writeSecond(second); // 초(second) 초기값 설정
       writeMinute(second - 100);
     } else {
       // 타이머 시작
