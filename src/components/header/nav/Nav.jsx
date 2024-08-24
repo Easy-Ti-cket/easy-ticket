@@ -117,7 +117,7 @@ const Nav = () => {
               $isactive={hovereditem === null}
               onMouseEnter={() => handleHoveredItemEnter(null)}
             >
-              내 기록 보기
+              기록 보기
             </NavContent>
           </NavContainer>
           {/* 서브 네비게이터 */}

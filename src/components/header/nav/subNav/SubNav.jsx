@@ -65,7 +65,7 @@ const SubNav = ({ hovereditem }) => {
       nav("/progress/step0"); // 연습모드 step0로 이동
     } else {
       setThemeSite(location); // 테마 사이트 설정
-      nav(`/${location}/step0`); // 각 사이트의 인트로 페이지로 이동
+      nav(`/challenge/${location}/step0`); // 각 사이트의 인트로 페이지로 이동
     }
   };
 

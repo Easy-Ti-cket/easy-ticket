@@ -72,10 +72,6 @@ function Main() {
   //userName 작성하지 않고 시작하기를 누르거나 헤더 이동시
   const [userNameError, setUserNameError] = useAtom(userNameErrorAtom);
 
-  useEffect(() => {
-    setThemeSite(() => "practice");
-  }, []);
-
   const handleNameInput = (e) => {
     const name = e.target.value;
     //userName 입력 시 빨간색 바운더리 꺼짐
@@ -91,6 +87,8 @@ function Main() {
     }
     navigate("/select-mode");
   };
+
+  // setThemeSite("practice");
 
   return (
     <MainContainer>

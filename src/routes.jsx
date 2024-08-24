@@ -16,7 +16,7 @@ import Step5 from "./pages/practiceMode/step5/Step5";
 import SelectSeat from "./pages/practiceMode/step2/SelectSeat";
 import SeatPriceCheck from "./pages/practiceMode/step3/SeatPriceCheck";
 import PrivateRoute from "./pages/PrivateRoute";
-import ChallangeIntro from "./pages/challengeMode/step0/ChallangeIntro";
+import ChallangeIntro from "./pages/challengeMode/intro/ChallangeIntro";
 
 const router = createBrowserRouter([
   {
@@ -74,56 +74,61 @@ const router = createBrowserRouter([
         ]
       },
       {
-        path: "interpark",
-        element: <ProgressContents />,
+        path: "challenge",
         children: [
           {
-            path: "step0",
-            element: <PrivateRoute element={<ChallangeIntro />} />,
-            label: "인트로"
+            path: "interpark",
+            element: <ProgressContents />,
+            children: [
+              {
+                path: "step0",
+                element: <PrivateRoute element={<ChallangeIntro />} />,
+                label: "인트로"
+              },
+              {
+                path: "step1",
+                element: <PrivateRoute element={<SelectRoundInterpark />} />,
+                label: "날짜 및 회차 선택"
+              },
+              {
+                path: "step5",
+                element: <PrivateRoute element={<Step5 />} />,
+                label: "예매 성공"
+              }
+            ]
           },
           {
-            path: "step1",
-            element: <PrivateRoute element={<SelectRoundInterpark />} />,
-            label: "날짜 및 회차 선택"
+            path: "melonticket",
+            element: <ProgressContents />,
+            children: [
+              {
+                path: "step0",
+                element: <PrivateRoute element={<ChallangeIntro />} />,
+                lable: "인트로"
+              }
+            ]
           },
           {
-            path: "step5",
-            element: <PrivateRoute element={<Step5 />} />,
-            label: "예매 성공"
-          }
-        ]
-      },
-      {
-        path: "melonticket",
-        element: <ProgressContents />,
-        children: [
+            path: "ticketlink",
+            element: <ProgressContents />,
+            children: [
+              {
+                path: "step0",
+                element: <PrivateRoute element={<ChallangeIntro />} />,
+                lable: "인트로"
+              }
+            ]
+          },
           {
-            path: "step0",
-            element: <PrivateRoute element={<ChallangeIntro />} />,
-            lable: "인트로"
-          }
-        ]
-      },
-      {
-        path: "ticketlink",
-        element: <ProgressContents />,
-        children: [
-          {
-            path: "step0",
-            element: <PrivateRoute element={<ChallangeIntro />} />,
-            lable: "인트로"
-          }
-        ]
-      },
-      {
-        path: "yes24",
-        element: <ProgressContents />,
-        children: [
-          {
-            path: "step0",
-            element: <PrivateRoute element={<ChallangeIntro />} />,
-            lable: "인트로"
+            path: "yes24",
+            element: <ProgressContents />,
+            children: [
+              {
+                path: "step0",
+                element: <PrivateRoute element={<ChallangeIntro />} />,
+                lable: "인트로"
+              }
+            ]
           }
         ]
       }
