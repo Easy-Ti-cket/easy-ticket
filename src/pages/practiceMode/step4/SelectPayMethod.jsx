@@ -5,10 +5,9 @@ import DetailPayForm from "../../../components/forms/pay/DetailPayForm";
 import { useForm } from "../../../hooks/useForm";
 import Button from "../../../components/button/Button";
 import { useNavigate } from "react-router-dom";
-import { useSetAtom, useAtomValue } from "jotai";
+import { useSetAtom } from "jotai";
 import {
   progressAtom,
-  themeSiteAtom,
   stepTextNumberAtom,
   helpTextNumberAtom
 } from "../../../store/atom";
@@ -28,7 +27,7 @@ export const Step4Container = styled.div`
   gap: 20px;
   margin: 0 20px;
 `;
-const SubTtitle = styled.div`
+export const SubTtitle = styled.div`
   width: 447px;
   height: 37px;
   border-bottom: 1px solid var(--fill-color);
@@ -70,7 +69,6 @@ const SelectPayMethod = () => {
   //검사 로직
   const [hasPayFormError, setHasPayFormError] = useState(false);
   const [cardTypesError, setCardTypesError] = useState(false);
-  const themeSite = useAtomValue(themeSiteAtom);
   const nav = useNavigate();
 
   const handleClick = () => {

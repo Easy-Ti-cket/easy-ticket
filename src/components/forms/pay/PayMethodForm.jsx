@@ -1,7 +1,7 @@
 import { FormWrap } from "../FormStyle";
 import Input from "../../input/Input";
 import { useAtomValue } from "jotai";
-import { levelAtom } from "../../../store/atom";
+import { levelAtom, themeSiteAtom } from "../../../store/atom";
 
 const textArr = [
   "신용카드",
@@ -12,9 +12,9 @@ const textArr = [
 ];
 //선택되었다면 애니메이션 끄기
 const PayMethodForm = ({ handleChange, isSelected }) => {
-  //level에 따라 animation 설정
+  //레벨 및 연습모드 여부
   const level = useAtomValue(levelAtom);
-
+  const isPractice = useAtomValue(themeSiteAtom) === "practice";
   return (
     <FormWrap>
       {textArr.map((methodItem, index) => (
@@ -25,7 +25,7 @@ const PayMethodForm = ({ handleChange, isSelected }) => {
           value={methodItem}
           text={methodItem}
           onChange={handleChange}
-          $focus={level === "low" && index === 0 && !isSelected}
+          $focus={level === "low" && isPractice && index === 0 && !isSelected}
         />
       ))}
     </FormWrap>

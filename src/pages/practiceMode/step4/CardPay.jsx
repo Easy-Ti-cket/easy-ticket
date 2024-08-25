@@ -3,15 +3,10 @@ import Card from "../../../components/card/Card";
 import CardForm from "../../../components/forms/CardForm";
 import { useForm } from "../../../hooks/useForm";
 import Button from "../../../components/button/Button";
-import { useAtomValue, useSetAtom, useAtom } from "jotai";
-import {
-  cardAnswerAtom,
-  stepTextNumberAtom,
-  themeSiteAtom
-} from "../../../store/atom";
+import { useAtomValue } from "jotai";
+import { cardAnswerAtom, themeSiteAtom } from "../../../store/atom";
 import { Step4Container } from "./SelectPayMethod";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
 
 const CardPayWrap = styled(Step4Container)`
   align-items: center;
@@ -47,7 +42,6 @@ const CardPay = () => {
       : 1
     : 0;
   const nav = useNavigate();
-  const themeSite = useAtomValue(themeSiteAtom);
 
   //검사로직
   const handleClick = () => {

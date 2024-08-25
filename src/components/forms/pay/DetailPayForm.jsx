@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { FormWrap } from "../FormStyle";
 import Input from "../../input/Input";
 import { useAtomValue } from "jotai";
-import { levelAtom } from "../../../store/atom";
+import { levelAtom, themeSiteAtom } from "../../../store/atom";
 import AnimationArea from "../../Animation";
 const DetailPayFormWrap = styled(FormWrap)`
   flex-direction: row;
@@ -53,7 +53,9 @@ const DetailPayForm = ({
   hasPayFormError,
   cardTypesError
 }) => {
+  //레벨 및 연습모드 여부
   const level = useAtomValue(levelAtom);
+  const isPractice = useAtomValue(themeSiteAtom) === "practice";
   return (
     <DetailPayFormWrap $hasPayFormError={hasPayFormError}>
       <FormWrap>
@@ -65,7 +67,7 @@ const DetailPayForm = ({
             value={payItem}
             text={payItem}
             onChange={handleChange}
-            $focus={level === "low" && index == 0 && !isSelected}
+            $focus={level === "low" && isPractice && index == 0 && !isSelected}
           />
         ))}
       </FormWrap>
