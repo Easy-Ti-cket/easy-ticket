@@ -14,6 +14,9 @@ import ChallangeIntro from "./pages/challengeMode/intro/ChallangeIntro";
 import SelectPerformance from "./pages/practiceMode/step1/SelectPerformance";
 import SelectRound from "./pages/practiceMode/step1/SelectRound";
 import SelectRoundInterpark from "./pages/challengeMode/interpark/step1/SelectRoundInterpark";
+import SelectRoundMelonticket from "./pages/challengeMode/melonticket/step1/SelectRoundMelonticket";
+import SelectRoundTicketlink from "./pages/challengeMode/ticketlink/step1/SelectRoundTicketlink";
+import SelectRoundYes24 from "./pages/challengeMode/yes24/step1/SelectRoundYes24";
 // step 2
 import SelectSeat from "./pages/practiceMode/step2/SelectSeat";
 import SelectSeatInterpark from "./pages/challengeMode/interpark/step2/SelectSeatInterpark";
@@ -133,6 +136,11 @@ const router = createBrowserRouter([
                 path: "step0",
                 element: <PrivateRoute element={<ChallangeIntro />} />,
                 lable: "인트로"
+              },
+              {
+                path: "step1",
+                element: <PrivateRoute element={<SelectRoundMelonticket />} />,
+                label: "날짜 및 회차 선택"
               }
             ]
           },
@@ -144,6 +152,11 @@ const router = createBrowserRouter([
                 path: "step0",
                 element: <PrivateRoute element={<ChallangeIntro />} />,
                 lable: "인트로"
+              },
+              {
+                path: "step1",
+                element: <PrivateRoute element={<SelectRoundTicketlink />} />,
+                label: "날짜 및 회차 선택"
               }
             ]
           },
@@ -155,6 +168,11 @@ const router = createBrowserRouter([
                 path: "step0",
                 element: <PrivateRoute element={<ChallangeIntro />} />,
                 lable: "인트로"
+              },
+              {
+                path: "step1",
+                element: <PrivateRoute element={<SelectRoundYes24 />} />,
+                label: "날짜 및 회차 선택"
               }
             ]
           }
