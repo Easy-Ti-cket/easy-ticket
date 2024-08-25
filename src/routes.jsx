@@ -28,6 +28,9 @@ import SelectPayMethod from "./pages/practiceMode/step4/SelectPayMethod";
 import CardPay from "./pages/practiceMode/step4/CardPay";
 // step 5
 import Step5 from "./pages/practiceMode/step5/Step5";
+import Outro from "./pages/challengeMode/outro/Outro";
+// 기록 보기
+import Record from "./pages/challengeMode/outro/Record";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +41,7 @@ const router = createBrowserRouter([
       { path: "select-mode", element: <SelectMode />, label: "모드 선택" },
       { path: "select-level", element: <SelectLevel />, label: "난이도 선택" },
       { path: "select-site", element: <SelectSite />, label: "사이트 선택" },
+      { path: "record", element: <Record />, label: "기록 보기" },
       {
         path: "progress",
         element: <ProgressContents />,
@@ -123,7 +127,7 @@ const router = createBrowserRouter([
               },
               {
                 path: "step5",
-                element: <PrivateRoute element={<Step5 />} />,
+                element: <PrivateRoute element={<Outro />} />,
                 label: "예매 성공"
               }
             ]
@@ -141,6 +145,11 @@ const router = createBrowserRouter([
                 path: "step1",
                 element: <PrivateRoute element={<SelectRoundMelonticket />} />,
                 label: "날짜 및 회차 선택"
+              },
+              {
+                path: "step5",
+                element: <PrivateRoute element={<Outro />} />,
+                label: "예매 성공"
               }
             ]
           },
@@ -157,6 +166,11 @@ const router = createBrowserRouter([
                 path: "step1",
                 element: <PrivateRoute element={<SelectRoundTicketlink />} />,
                 label: "날짜 및 회차 선택"
+              },
+              {
+                path: "step5",
+                element: <PrivateRoute element={<Outro />} />,
+                label: "예매 성공"
               }
             ]
           },
@@ -173,6 +187,11 @@ const router = createBrowserRouter([
                 path: "step1",
                 element: <PrivateRoute element={<SelectRoundYes24 />} />,
                 label: "날짜 및 회차 선택"
+              },
+              {
+                path: "step5",
+                element: <PrivateRoute element={<Outro />} />,
+                label: "예매 성공"
               }
             ]
           }
