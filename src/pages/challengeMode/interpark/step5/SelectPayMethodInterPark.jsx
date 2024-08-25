@@ -69,7 +69,6 @@ const SelectPayMethodInterPark = () => {
         {/*사용 가능한 포인트 */}
         <UsablePoint />
       </PayMethodContainer>
-
       {/*결제 방식 */}
       <FormWrap>
         <SubTitleChallenge>결제 방식</SubTitleChallenge>

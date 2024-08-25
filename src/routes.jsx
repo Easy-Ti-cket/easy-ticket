@@ -22,7 +22,7 @@ import SeatPriceCheck from "./pages/practiceMode/step3/SeatPriceCheck";
 import SelectPriceInterpark from "./pages/challengeMode/interpark/step3/SelectPriceInterpark";
 // step 4
 import SelectPayMethod from "./pages/practiceMode/step4/SelectPayMethod";
-import SelectPayMethodInterPark from "./pages/challengeMode/interpark/step4/SelectPayMethodInterPark";
+import SelectPayMethodInterPark from "./pages/challengeMode/interpark/step5/SelectPayMethodInterPark";
 import CardPay from "./pages/practiceMode/step4/CardPay";
 // step 5
 import Step5 from "./pages/practiceMode/step5/Step5";
