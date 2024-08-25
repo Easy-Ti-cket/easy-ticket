@@ -7,8 +7,6 @@ import { useAtom } from "jotai";
 import {
   themeSiteAtom,
   selectedPosterAtom,
-  levelAtom,
-  progressAtom,
   postersAtom
 } from "../../../../store/atom";
 import { useNavigate } from "react-router-dom";
@@ -16,8 +14,8 @@ import formatTime from "../../../../util/time";
 
 const Container = styled.div`
   display: flex;
-  justify-content: space-between; /* 좌우로 공간 배분 */
-  align-items: flex-start; /* 상단 정렬 */
+  justify-content: space-between;
+  align-items: flex-start;
   padding: 20px 50px;
   width: 100%;
 `;
@@ -25,16 +23,16 @@ const Container = styled.div`
 const LeftSection = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* 콘텐츠 상단 정렬 */
+  justify-content: flex-start;
   align-items: center;
 `;
 
 const RightSection = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* 콘텐츠 상단 정렬 */
+  justify-content: flex-start;
   align-items: flex-start;
-  padding-left: 20px; /* 좌측 여백 추가 */
+  padding-left: 20px;
 `;
 
 const BoxWrapper = styled.div`
@@ -47,14 +45,12 @@ const BoxWrapper = styled.div`
 const RoundWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px; /* 버튼 사이의 간격 추가 */
+  gap: 10px;
   width: 100%;
   padding-left: 20px;
 `;
 
 const SelectRoundInterpark = () => {
-  const [, setLevel] = useAtom(levelAtom);
-  const [, setProgress] = useAtom(progressAtom);
   const [selectedPoster] = useAtom(selectedPosterAtom);
   const [posters] = useAtom(postersAtom);
   const [posterId, setPosterId] = useState(0);
@@ -66,11 +62,9 @@ const SelectRoundInterpark = () => {
   const [, setThemeSite] = useAtom(themeSiteAtom);
 
   useEffect(() => {
-    setProgress(1);
     setThemeSite("interpark");
-    setLevel("high");
     setPosterId(0);
-  }, [setLevel, setProgress, selectedPoster, setThemeSite]);
+  }, [setThemeSite]);
 
   const poster = posters[posterId];
   const posterDates = poster ? poster.date : [];
