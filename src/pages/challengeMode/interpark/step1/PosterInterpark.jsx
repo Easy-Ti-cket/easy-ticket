@@ -8,10 +8,9 @@ import { formatDateRange } from "../../../../util/date";
 // 전체 요소를 담는 컨테이너
 const PosterContainer = styled.div`
   display: flex;
-  justify-content: flex-start; /* 좌측 정렬 */
-  align-items: flex-start; /* 상단 정렬 */
+  justify-content: flex-start;
+  align-items: flex-start;
   flex-direction: row;
-
   flex-shrink: 0;
 `;
 
