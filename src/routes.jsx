@@ -25,6 +25,8 @@ import SelectPayMethod from "./pages/practiceMode/step4/SelectPayMethod";
 import CardPay from "./pages/practiceMode/step4/CardPay";
 // step 5
 import Step5 from "./pages/practiceMode/step5/Step5";
+//test
+import TestPage from "./pages/TestPage";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +41,7 @@ const router = createBrowserRouter([
         path: "progress",
         element: <ProgressContents />,
         children: [
+          { path: "test", element: <TestPage /> },
           {
             path: "step0",
             element: <PrivateRoute element={<Intro />} />,

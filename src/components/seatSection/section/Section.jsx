@@ -1,5 +1,12 @@
 import styled from "styled-components";
 import AnimationArea from "../../Animation";
+import {
+  SectionDiv,
+  quarterLeftSectionDiv,
+  quarterRightSectionDiv,
+  trapezoidSectionDiv,
+  RoundedSectionDiv
+} from "./SectionDiv";
 import { useAtomValue, useSetAtom } from "jotai";
 import {
   allowedSectionAtom,
@@ -7,21 +14,22 @@ import {
   isSectionSelectedAtom
 } from "../../../store/atom";
 
-const SectionDiv = styled.div`
-  border: 2px solid var(--fill-color);
-  border-radius: 4px;
-  width: 200px;
-  height: 150px;
-  cursor: pointer;
-  margin: ${(props) => !props.$cursor && "3px"};
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  &:hover {
-    border: 2px solid var(--text-color);
+// Section 스타일을 선택하는 함수
+const getSectionStyle = (shape) => {
+  switch (shape) {
+    case "quarterLeft":
+      return quarterLeftSectionDiv;
+    case "quarterRight":
+      return quarterRightSectionDiv;
+    case "trapezoid":
+      return trapezoidSectionDiv;
+    case "rounded":
+      return RoundedSectionDiv;
+    default:
+      return SectionDiv;
   }
-`;
-const Section = ({ num }) => {
+};
+const Section = ({ num, shape = "default", size = "midium" }) => {
   const allowedSection = useAtomValue(allowedSectionAtom);
   const setIsSectionSelected = useSetAtom(isSectionSelectedAtom);
   const level = useAtomValue(levelAtom);
@@ -36,11 +44,18 @@ const Section = ({ num }) => {
       alert("알맞은 구역을 선택해주세요.");
     }
   };
+  // 선택된 모양의 스타일 컴포넌트를 가져옵니다
+  const StyledSectionDiv = getSectionStyle(shape);
+
   return (
     <AnimationArea $focus={isfocus}>
-      <SectionDiv $cursor={isfocus} onClick={handleSectionClick}>
+      <StyledSectionDiv
+        $cursor={isfocus}
+        onClick={handleSectionClick}
+        $size={size}
+      >
         {num}구역
-      </SectionDiv>
+      </StyledSectionDiv>
     </AnimationArea>
   );
 };
