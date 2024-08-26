@@ -41,7 +41,6 @@ const router = createBrowserRouter([
         path: "progress",
         element: <ProgressContents />,
         children: [
-          { path: "test", element: <TestPage /> },
           {
             path: "step0",
             element: <PrivateRoute element={<Intro />} />,
@@ -87,6 +86,7 @@ const router = createBrowserRouter([
       {
         path: "challenge",
         children: [
+          { path: "test", element: <TestPage /> },
           {
             path: "interpark",
             element: <ProgressContents />,

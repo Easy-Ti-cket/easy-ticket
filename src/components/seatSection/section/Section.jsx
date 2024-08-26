@@ -13,6 +13,7 @@ import {
   levelAtom,
   isSectionSelectedAtom
 } from "../../../store/atom";
+import { useLocation } from "react-router-dom";
 
 // Section 스타일을 선택하는 함수
 const getSectionStyle = (shape) => {
@@ -32,13 +33,16 @@ const getSectionStyle = (shape) => {
 const Section = ({ num, shape = "default", size = "midium" }) => {
   const allowedSection = useAtomValue(allowedSectionAtom);
   const setIsSectionSelected = useSetAtom(isSectionSelectedAtom);
+  const path = useLocation().pathname;
+
   const level = useAtomValue(levelAtom);
   let isfocus = false;
   if (num == allowedSection && level == "low") {
     isfocus = true;
   }
+
   const handleSectionClick = () => {
-    if (num == allowedSection) {
+    if (num == allowedSection || path.includes("challenge")) {
       setIsSectionSelected(true);
     } else {
       alert("알맞은 구역을 선택해주세요.");
