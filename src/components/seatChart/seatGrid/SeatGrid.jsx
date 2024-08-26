@@ -11,7 +11,7 @@ const GridContainer = styled.div`
   padding: 0;
 `;
 
-const SeatGrid = ({ rows = 5, columns = 5, gridIndex }) => {
+const SeatGrid = ({ rows = 5, columns = 5, gridIndex, section }) => {
   const allowedSeat = useAtomValue(allowedSeatAtom);
 
   const renderSeats = () => {
@@ -23,10 +23,14 @@ const SeatGrid = ({ rows = 5, columns = 5, gridIndex }) => {
           allowedSeat.row === row &&
           allowedSeat.col === col;
         if (isallowed) {
-          seats.push(<Seat key={`${row}-${col}`} isallowed={true} />);
+          seats.push(
+            <Seat key={`${row}-${col}`} isallowed={true} $title={section} />
+          );
           continue;
         }
-        seats.push(<Seat key={`${row}-${col}`} isallowed={false} />);
+        seats.push(
+          <Seat key={`${row}-${col}`} isallowed={false} $title={section} />
+        );
       }
     }
     return seats;

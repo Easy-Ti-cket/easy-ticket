@@ -1,5 +1,7 @@
 import Section from "./section/Section";
 import styled from "styled-components";
+import SeatSection1 from "./SeatSection1";
+import DefaultSeatSection from "./DefaultSeatSection";
 
 const SeatSectionContainer = styled.div`
   display: flex;
@@ -21,22 +23,22 @@ const Stage = styled.div`
   border: 2px solid var(--fill-color);
   border-radius: 4px;
 `;
-const Sections = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  justify-content: center;
-`;
 
-const SeatSection = () => {
+const getSectionNum = ({ num }) => {
+  switch (num) {
+    case 1:
+      return SeatSection1;
+    default:
+      return DefaultSeatSection;
+  }
+};
+const SeatSection = (num = 0) => {
+  const SelectedSection = getSectionNum(num);
+  console.log(SelectedSection);
   return (
     <SeatSectionContainer>
       <Stage>스테이지</Stage>
-      <Sections>
-        {[1, 2, 3, 4].map((num) => (
-          <Section key={num} num={num}></Section>
-        ))}
-      </Sections>
+      <SelectedSection></SelectedSection>
     </SeatSectionContainer>
   );
 };

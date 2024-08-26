@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import SeatGrid from "./seatGrid/SeatGrid";
+import { useAtomValue } from "jotai";
+import { postersAtom, selectedPosterAtom } from "../../store/atom";
+import convertPriceObjectToArray from "../../util/convertPriceObjectToArray";
 
 //SeatChart 전체 컨테이너
 const SeatChartContainer = styled.div`
@@ -33,6 +36,11 @@ const SeatGridContainer = styled.div`
 `;
 
 const SeatChart = () => {
+  const Posters = useAtomValue(postersAtom);
+  const posterId = useAtomValue(selectedPosterAtom);
+  const poster = Posters[posterId];
+  const price = convertPriceObjectToArray(poster.price);
+  console.log(price);
   return (
     <SeatChartContainer>
       <Stage>무대</Stage>

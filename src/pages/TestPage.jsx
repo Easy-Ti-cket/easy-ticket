@@ -1,10 +1,10 @@
 import SeatChart from "../components/seatChart/SeatChart";
 import SeatGrid from "../components/seatChart/seatGrid/SeatGrid";
-import SeatSection1 from "../components/seatSection/SeatSection1";
+import SeatSection from "../components/seatSection/SeatSection";
 const TestPage = () => {
   return (
     <div>
-      <SeatSection1></SeatSection1>
+      <SeatSection num={1}></SeatSection>
       <SeatChart />
       <SeatGrid> </SeatGrid>
     </div>
