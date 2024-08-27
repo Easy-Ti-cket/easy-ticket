@@ -1,8 +1,17 @@
 import styled from "styled-components";
 import SeatGrid from "./seatGrid/SeatGrid";
-import { useAtomValue } from "jotai";
-import { postersAtom, selectedPosterAtom } from "../../store/atom";
+import { useAtom } from "jotai";
+import {
+  allowedSeatAtom,
+  fakeAllowedSeatAtom,
+  levelAtom
+} from "../../store/atom";
 import convertPriceObjectToArray from "../../util/convertPriceObjectToArray";
+import DefaultSeatChart from "./DefaultSeatChart";
+import SeatChart1 from "./SeatChart1";
+import SeatChart2 from "./SeatChart2";
+import { useEffect } from "react";
+import getRandomInt from "../../util/getRandomInt";
 
 //SeatChart 전체 컨테이너
 const SeatChartContainer = styled.div`
@@ -15,41 +24,24 @@ const SeatChartContainer = styled.div`
   width: 500px;
   height: 500px;
 `;
-const Stage = styled.div`
-  display: flex;
-  width: 400px;
-  min-height: 70px;
-  border: 2px solid var(--fill-color);
-  border-radius: 4px;
-  margin: 5px;
-  align-items: center;
-  justify-content: center;
-`;
+//num으로 하는게 맞나?
+const getSeatChartNum = (num) => {
+  switch (num) {
+    case 1:
+      return SeatChart1;
+    case 2:
+      return SeatChart2;
+    default:
+      return DefaultSeatChart;
+  }
+};
 
-const SeatGridContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, auto);
-  gap: 20px;
-  padding: 20px;
-  justify-content: center;
-  align-items: center;
-`;
+const SeatChart = ({ num = 0 }) => {
+  const SelectedSeatChart = getSeatChartNum(num);
 
-const SeatChart = () => {
-  const Posters = useAtomValue(postersAtom);
-  const posterId = useAtomValue(selectedPosterAtom);
-  const poster = Posters[posterId];
-  const price = convertPriceObjectToArray(poster.price);
-  console.log(price);
   return (
     <SeatChartContainer>
-      <Stage>무대</Stage>
-      <SeatGridContainer>
-        {/* SeatGrid 4개 배치 */}
-        {[0, 1, 2, 3].map((gridIndex) => (
-          <SeatGrid key={gridIndex} gridIndex={gridIndex} />
-        ))}
-      </SeatGridContainer>
+      <SelectedSeatChart></SelectedSeatChart>
     </SeatChartContainer>
   );
 };

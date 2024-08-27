@@ -45,6 +45,13 @@ export const allowedSeatAtom = atomWithStorage(
   storage
 );
 
+//이미 선택된 좌석 상태
+export const fakeAllowedSeatAtom = atomWithStorage(
+  "fakeAllowedSeat",
+  [],
+  storage
+);
+
 //좌석 선택 여부 상태
 export const isSeatSelectedAtom = atomWithStorage(
   "isSeatSelected",
@@ -58,6 +65,12 @@ export const isSectionSelectedAtom = atomWithStorage(
   false,
   storage
 );
+
+//렌더링 되는 구역 개수
+export const lengthOfSecionsAtom = atom([
+  { type: "default", length: 4 },
+  { type: 1, length: 8 }
+]);
 
 //구역 선택
 export const allowedSectionAtom = atomWithStorage(
@@ -84,7 +97,8 @@ export const seatInfoAtom = atomWithStorage(
     grade: "",
     price: 0,
     date: "",
-    seat: ""
+    seat: "",
+    color: null
   },
   storage
 );

@@ -11,7 +11,7 @@ import convertPriceObjectToArray from "../../util/convertPriceObjectToArray";
 
 const Container = styled.div`
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 1fr);
 `;
 const SectionColor = styled(Section)`
@@ -32,6 +32,7 @@ const SeatSection1 = () => {
   const priceArr = convertPriceObjectToArray(poster.price);
   const date = poster.date[0];
   const lengthOfprice = priceArr.length;
+  const cycle = Math.ceil(6 / lengthOfprice);
 
   const storeSeatInfo = (sectionIndex) => {
     const sectionPrice = priceArr[Math.floor(sectionIndex / 2) % lengthOfprice];
@@ -44,21 +45,24 @@ const SeatSection1 = () => {
     });
     setAllowedSeat({ ...allowedSeat, gridIndex: 1 });
   };
+  console.log(colors);
   return (
     <Container>
-      {[0, 1, 2, 3, 4, 5, 6, 7].map((sectionIndex) => (
+      {[0, 1, 2, 3, 4, 5].map((sectionIndex) => (
         <SectionColor
           num={sectionIndex + 1}
           key={sectionIndex}
-          size="small"
+          size={"small"}
           shape={
-            sectionIndex == 4
-              ? "QuarterLeft"
-              : sectionIndex == 7
-                ? "QuarterRight"
-                : ""
+            sectionIndex == 0
+              ? "TrapezoidLeft"
+              : sectionIndex == 1
+                ? "Rectangle"
+                : sectionIndex == 2
+                  ? "TrapezoidRight"
+                  : ""
           }
-          color={colors[Math.floor(sectionIndex / 2) % lengthOfprice]}
+          color={colors[Math.floor(sectionIndex / cycle) % lengthOfprice]}
           storeSeatInfo={() => storeSeatInfo(sectionIndex)}
         ></SectionColor>
       ))}

@@ -37,7 +37,7 @@ const SeatInfo = () => {
   const seats = convertPriceObjectToArray(selectedPoster.price);
   const [seatInfo, setSeatInfo] = useAtom(seatInfoAtom);
   const themeSite = useAtomValue(themeSiteAtom);
-
+  //seatInfo가 저장되는 시점 , 고칠 필요 있음
   useEffect(() => {
     if (isSeatSelected) {
       const newSeatInfo = getRandomSeat(selectedPoster);

@@ -4,9 +4,8 @@ import SeatSection from "../components/seatSection/SeatSection";
 const TestPage = () => {
   return (
     <div>
-      <SeatSection num={1}></SeatSection>
-      <SeatChart />
-      <SeatGrid> </SeatGrid>
+      <SeatSection num={3}></SeatSection>
+      <SeatChart num={1}></SeatChart>
     </div>
   );
 };
