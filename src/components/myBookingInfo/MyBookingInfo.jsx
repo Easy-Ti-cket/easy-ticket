@@ -1,37 +1,31 @@
 import styled from "styled-components";
-import Button from "../button/Button";
-import Animation from "../Animation";
 import {
   allowedSeatAtom,
   seatCountAtom,
   levelAtom,
-  seatInfoAtom,
-  themeSiteAtom
+  seatInfoAtom
 } from "../../store/atom";
 import { useAtomValue } from "jotai";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
   border: 2px solid var(--fill-color);
   border-radius: 8px;
   width: 400px;
-  height: 457px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding: 60px 20px;
 `;
 
 const Title = styled.div`
   font-family: "pretendardB";
   margin-bottom: 20px;
-  margin: 20px 20px 0 20px;
 `;
 
 const InfoContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 20px 20px 0 20px;
 `;
 const InfoItem = styled.div`
   display: flex;
@@ -48,44 +42,26 @@ const InfoText = styled.div`
   font-size: 16px;
 `;
 const TotalAmount = styled.div`
-  margin: 0 20px 0 20px;
   display: flex;
   justify-content: space-between;
   border-top: 2px solid var(--fill-color);
+  padding: 20px 0;
 `;
 
 const AmountTitle = styled.div`
-  margin-top: 20px;
   font-family: pretendardB;
 `;
 const AmountContent = styled.div`
   font-family: pretendardB;
   font-size: 28px;
-  margin-top: 20px;
 `;
-const ButtonContainer = styled.div`
-  display: flex;
-  justify-content: space-around;
-`;
-const PaddingContainer = styled.div`
-  padding: 6px;
-`;
-const NextAnimation = styled(Animation)`
-  padding: 3px;
-`;
-const MyBookingInfo = ({
-  option,
-  step3Stage,
-  addStage,
-  isValidate,
-  setErrorArray
-}) => {
+
+const MyBookingInfo = ({ option }) => {
   const allowedSeat = useAtomValue(allowedSeatAtom);
   const seatCount = useAtomValue(seatCountAtom);
   const seatInfo = useAtomValue(seatInfoAtom);
   const level = useAtomValue(levelAtom);
-  const [buttonText, setButtonText] = useState("다음 단계");
-  const [focus, setFocus] = useState(false);
+
   const Info = [
     // 공연 날짜 및 시간
     { title: "일시", content: seatInfo.date },
@@ -98,53 +74,13 @@ const MyBookingInfo = ({
     { title: "배송비", price: `${option === "배송" ? 3000 : 0}` },
     { title: "쿠폰할인", price: 0 }
   ];
-  const nav = useNavigate();
 
-  const handleButtonClick = () => {
-    // 좌석 매수가 0일 경우 경고창 출력
-    if (seatCount === 0) {
-      alert("좌석을 선택해주세요.");
-      return;
-    }
-    // 매수가 1 이상이고 1단계 (티켓매수 선택 및 가격 확인)일 경우 결제하기로 변경
-    if (seatCount > 0 && step3Stage == 1) {
-      //2단계로 수정
-      setButtonText("결제하기");
-      addStage();
-      return;
-    }
-    // 버튼이 결제하기일 경우 step4-1로 이동
-    if (step3Stage == 2) {
-      //티켓수령방법 + 생년월일을 작성 검사 로직
-      if (!isValidate.includes("method")) {
-        setErrorArray(() => "method");
-        alert("티켓 수령 방법을 선택해 주세요");
-        return;
-      }
-      if (level === "high" && !isValidate.includes("birth")) {
-        setErrorArray(() => ["birth"]);
-        alert("생년월일을 정확하게 작성해 주세요");
-        return;
-      } else {
-        setErrorArray(() => []);
-        // 연습모드 라우팅
-        nav("../step4-1");
-      }
-    }
-  };
   const totalAmount = Info.reduce((acc, currentValue) => {
     if (currentValue.price !== undefined) {
       return acc + Number(currentValue.price);
     }
     return acc;
   }, 0);
-
-  // 애니메이션 등장 조절
-  useEffect(() => {
-    if (seatCount > 0 && level === "low") {
-      setFocus(true);
-    }
-  }, [seatCount]);
 
   return (
     <Container>
@@ -163,15 +99,6 @@ const MyBookingInfo = ({
         <AmountTitle>총 결제금액</AmountTitle>
         <AmountContent>{totalAmount}원</AmountContent>
       </TotalAmount>
-      <ButtonContainer>
-        <PaddingContainer>
-          <Button text="이전 단계" type="prev"></Button>
-        </PaddingContainer>
-
-        <NextAnimation $focus={focus}>
-          <Button text={buttonText} onClick={handleButtonClick}></Button>
-        </NextAnimation>
-      </ButtonContainer>
     </Container>
   );
 };

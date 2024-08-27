@@ -82,6 +82,7 @@ const router = createBrowserRouter([
           }
         ]
       },
+      //실전모드
       {
         path: "challenge",
         children: [
@@ -110,12 +111,7 @@ const router = createBrowserRouter([
                 label: "날짜 및 회차 선택"
               },
               {
-                path: "step4",
-                element: <PrivateRoute elemenet={<SeatPriceCheck />} />,
-                label: "배송선택/주소지 입력"
-              },
-              {
-                path: "step5-1",
+                path: "step4-1",
                 element: (
                   <PrivateRoute element={<SelectPayMethodInterPark />} />
                 ),
