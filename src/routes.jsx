@@ -26,6 +26,7 @@ import SelectPayMethod from "./pages/practiceMode/step4/SelectPayMethod";
 import CardPay from "./pages/practiceMode/step4/CardPay";
 // step 5
 import Step5 from "./pages/practiceMode/step5/Step5";
+import Outro from "./pages/challengeMode/outro/Outro";
 
 const router = createBrowserRouter([
   {
@@ -103,12 +104,12 @@ const router = createBrowserRouter([
               {
                 path: "step2",
                 element: <PrivateRoute element={<SelectSeatInterpark />} />,
-                label: "좌석 선택"
+                label: ""
               },
               {
                 path: "step3-1",
                 element: <PrivateRoute element={<SelectPriceInterpark />} />,
-                label: "가격 및 할인 선택"
+                label: "날짜 및 회차 선택"
               },
               {
                 path: "step4-1",
@@ -124,7 +125,7 @@ const router = createBrowserRouter([
               },
               {
                 path: "step5-3",
-                element: <PrivateRoute element={<Step5 />} />,
+                element: <PrivateRoute element={<Outro />} />,
                 label: "예매 성공"
               }
             ]
