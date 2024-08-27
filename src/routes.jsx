@@ -21,7 +21,7 @@ import SelectSeatInterpark from "./pages/challengeMode/interpark/step2/SelectSea
 import SeatPriceCheck from "./pages/practiceMode/step3/SeatPriceCheck";
 import SelectPriceInterpark from "./pages/challengeMode/interpark/step3/SelectPriceInterpark";
 // step 4
-import SelectPayMethodInterPark from "./pages/challengeMode/interpark/step5/SelectPayMethodInterPark";
+import SelectPayMethodInterPark from "./pages/challengeMode/interpark/step4/SelectPayMethodInterPark";
 import SelectPayMethod from "./pages/practiceMode/step4/SelectPayMethod";
 import CardPay from "./pages/practiceMode/step4/CardPay";
 // step 5
@@ -118,7 +118,7 @@ const router = createBrowserRouter([
                 label: "결제방식 / 수단 선택"
               },
               {
-                path: "step5-2",
+                path: "step5",
                 element: <PrivateRoute element={<CardPay />} />,
                 label: "카드 결제창"
               },

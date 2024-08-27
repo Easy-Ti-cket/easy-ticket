@@ -1,47 +1,43 @@
 import styled from "styled-components";
-import {
-  allowedSeatAtom,
-  seatCountAtom,
-  levelAtom,
-  seatInfoAtom
-} from "../../store/atom";
+import { allowedSeatAtom, seatCountAtom, seatInfoAtom } from "../../store/atom";
 import { useAtomValue } from "jotai";
-import { useEffect, useState } from "react";
 
 const Container = styled.div`
-  border: 2px solid var(--fill-color);
   border-radius: 8px;
   width: 400px;
   display: flex;
+  gap: 15px;
   flex-direction: column;
-  justify-content: space-between;
-  padding: 60px 20px;
+  align-items: center;
 `;
 
 const Title = styled.div`
+  width: 100%;
   font-family: "pretendardB";
   margin-bottom: 20px;
 `;
 
 const InfoContainer = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
 `;
 const InfoItem = styled.div`
   display: flex;
-  justify-content: space-between;
   margin: 10px 0;
 `;
 const InfoTitle = styled.span`
   color: var(--text-color);
   font-family: "pretendardB";
   font-size: 16px;
+  flex: 1;
 `;
 const InfoText = styled.div`
   font-family: "pretendardB";
   font-size: 16px;
 `;
 const TotalAmount = styled.div`
+  width: 100%;
   display: flex;
   justify-content: space-between;
   border-top: 2px solid var(--fill-color);
@@ -60,7 +56,6 @@ const MyBookingInfo = ({ option }) => {
   const allowedSeat = useAtomValue(allowedSeatAtom);
   const seatCount = useAtomValue(seatCountAtom);
   const seatInfo = useAtomValue(seatInfoAtom);
-  const level = useAtomValue(levelAtom);
 
   const Info = [
     // 공연 날짜 및 시간

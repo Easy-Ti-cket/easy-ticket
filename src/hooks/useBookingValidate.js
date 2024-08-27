@@ -20,7 +20,7 @@ export const useBookingValidate = (
       return;
     }
     addStage(2);
-    console.log(step3Stage);
+    console.log(seatCount, step3Stage);
     // 버튼이 결제하기일 경우 step4-1로 이동
     if (step3Stage == 2) {
       //티켓수령방법 + 생년월일을 작성 검사 로직
@@ -40,5 +40,6 @@ export const useBookingValidate = (
       }
     }
   };
-  return handleButtonClick;
+
+  return { handleButtonClick };
 };

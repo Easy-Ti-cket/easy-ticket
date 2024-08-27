@@ -1,12 +1,8 @@
 import styled from "styled-components";
 import { FormWrap } from "../FormStyle";
 import { InputContainer, Label } from "../../input/InputStyle";
-import { useAtomValue, useSetAtom } from "jotai";
-import {
-  levelAtom,
-  ticketBuyerBirthAtom,
-  userNameAtom
-} from "../../../store/atom";
+import { useAtomValue } from "jotai";
+import { levelAtom, userNameAtom } from "../../../store/atom";
 
 const BuyerWrap = styled.div`
   display: flex;

@@ -10,6 +10,9 @@ import { FormWrap } from "../../../../components/forms/FormStyle";
 import UsablePoint from "../../components/payMethod/UsablePoint";
 import MyBookingInfo from "../../../../components/myBookingInfo/MyBookingInfo";
 import PosterInfo from "../../../../components/poster/PosterInfo";
+import { MyBookingInfoContainer } from "../../../../components/myBookingInfo/MyBookingInfoContainer";
+import PrevNextButton from "../../../../components/myBookingInfo/PrevNextButton";
+import { useNavigate } from "react-router-dom";
 
 //결제 수단 + 결제 방식 + 내 예매 정보
 const PayMethodWrap = styled.div`
@@ -37,7 +40,7 @@ const FakeButton = styled.div`
   color: #fff;
   font-size: 14px;
   width: 120px;
-  height: 20px;
+  height: 25px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -61,6 +64,8 @@ const SelectPayMethodInterPark = () => {
   });
   //포스터 정보
   const posterId = useAtomValue(selectedPosterAtom);
+  //nav
+  const nav = useNavigate();
   return (
     <PayMethodWrap>
       <PayMethodContainer>
@@ -87,7 +92,13 @@ const SelectPayMethodInterPark = () => {
       {/*내 예매 정보 */}
       <div>
         <PosterInfo id={posterId} />
-        <MyBookingInfo />
+        <MyBookingInfoContainer>
+          <MyBookingInfo />
+          <PrevNextButton
+            prevButtonOnClick={() => nav("../step3-1")}
+            nextButtonOnClick={() => nav("../step5")}
+          />
+        </MyBookingInfoContainer>
       </div>
     </PayMethodWrap>
   );
