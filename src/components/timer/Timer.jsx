@@ -59,7 +59,7 @@ const Timer = ({ type, second }) => {
     }
 
     // 경로에 따라 타이머 멈춤 또는 재개
-    if (path === "/progress/step5") {
+    if (path.endsWith("step5") || path.endsWith("outro")) {
       //step5 -> 예매 성공일 경우 타이머 멈춤
       clearInterval(countdownRef.current);
     } else if (path.includes("step0")) {

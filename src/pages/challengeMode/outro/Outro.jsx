@@ -1,10 +1,15 @@
-import React, { useEffect } from "react";
 import styled from "styled-components";
 import Button from "../../../components/button/Button";
-import { useAtom, useSetAtom } from "jotai";
-import { levelAtom, progressAtom, themeSiteAtom } from "../../../store/atom";
 import { useNavigate } from "react-router-dom";
+import { useAtomValue } from "jotai";
+import {
+  userNameAtom,
+  themeSiteAtom,
+  minuteCountAtom
+} from "../../../store/atom";
+import saveUserData from "../../../apis/saveUserData";
 import resetAtom from "../../../util/resetAtom";
+
 const Step5Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -26,12 +31,10 @@ const SuccessMessage = styled.h1`
 `;
 
 const PracticeMessage = styled.p`
-  color: var(--grayScale-textColor2, #333);
+  color: var(--text-color);
   font-family: "pretendardM";
   font-size: 40px;
-  font-style: normal;
   font-weight: 600;
-  line-height: normal;
   letter-spacing: -2px;
   margin-bottom: 40px;
 `;
@@ -39,39 +42,44 @@ const PracticeMessage = styled.p`
 const ButtonWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  gap: 20px;
 `;
 
-const Step5 = () => {
-  const [, setLevel] = useAtom(levelAtom);
-  const [, setProgress] = useAtom(progressAtom);
+const Outro = () => {
   const navigate = useNavigate();
+  // 기록 저장에 필요한 atom 불러오기
+  const userName = useAtomValue(userNameAtom);
+  const themeSite = useAtomValue(themeSiteAtom);
+  const timeSpent = useAtomValue(minuteCountAtom);
 
-  const setThemeSite = useSetAtom(themeSiteAtom);
-
-  useEffect(() => {
-    setProgress(5);
-  }, [setProgress]);
-
-  // 난이도 선택 창으로
+  // 다시 도전하기(사이트 선택)
   const handlePracticeModeClick = () => {
     resetAtom();
-    navigate("/select-level");
+    navigate("/select-site");
   };
 
-  // 실전 모드 선택 창으로
+  // 기록 보기
   const handleChallengeModeClick = () => {
     resetAtom();
-    navigate("/select-site"); // 추후 path 수정 필요
+    navigate("/record");
+  };
+
+  // 기록 저장하기
+  const handleSaveDataClick = () => {
+    saveUserData(userName, themeSite, timeSpent);
+    alert("기록을 저장했습니다.");
   };
 
   return (
     <Step5Container>
       <SuccessMessage>예매 성공!</SuccessMessage>
-      <PracticeMessage>다시 연습하시겠습니까?</PracticeMessage>
+      {/* 클리어 시간 추가 필요*/}
+      <Button text="기록 저장하기" onClick={handleSaveDataClick} />
+      <PracticeMessage>다시 도전하시겠습니까?</PracticeMessage>
       <ButtonWrapper>
-        <Button text="다시 연습하기" onClick={handlePracticeModeClick} />
+        <Button text="다시 도전하기" onClick={handlePracticeModeClick} />
         <Button
-          text="실전모드 도전하기"
+          text="기록 보러가기"
           type="outline"
           onClick={handleChallengeModeClick}
         />
@@ -80,4 +88,4 @@ const Step5 = () => {
   );
 };
 
-export default Step5;
+export default Outro;

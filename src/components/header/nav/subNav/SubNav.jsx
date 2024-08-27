@@ -7,7 +7,7 @@ import {
   userNameErrorAtom
 } from "../../../../store/atom";
 import { useAtomValue, useSetAtom } from "jotai";
-
+import resetAtom from "../../../../util/resetAtom";
 const SubNavBgc = styled.div`
   width: 100vw;
   height: 45px;
@@ -61,9 +61,11 @@ const SubNav = ({ hovereditem }) => {
       return;
     }
     if (location === "low" || location === "middle" || location === "high") {
+      resetAtom();
       setLevel(location); // 레벨 설정
       nav("/progress/step0"); // 연습모드 step0로 이동
     } else {
+      resetAtom();
       setThemeSite(location); // 테마 사이트 설정
       nav(`/challenge/${location}/step0`); // 각 사이트의 인트로 페이지로 이동
     }

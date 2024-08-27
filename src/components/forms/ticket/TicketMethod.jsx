@@ -2,12 +2,14 @@ import styled from "styled-components";
 import Input from "../../input/Input";
 import { FormWrap } from "../FormStyle";
 import TicketBuyer from "./TicketBuyer";
-import { useState } from "react";
 
 const SectionTitle = styled.div`
+  width: ${(props) => (props.$option === "현장수령" ? "500px" : "800px")};
   font-size: 20px;
   font-family: "pretendardB";
   margin-bottom: 20px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--fill-color);
 `;
 const TicketMethodCont = styled.div`
   display: flex;
@@ -15,14 +17,12 @@ const TicketMethodCont = styled.div`
   color: ${(props) => props.$hasError && "var(--point-color)"};
 `;
 const TicketMethodWrap = styled(FormWrap)`
-  border: 2px solid var(--fill-color);
   border-radius: 8px;
   display: inline-flex;
   flex-direction: column;
   gap: 50px;
   justify-content: center;
   align-items: start;
-  padding: 20px;
   height: 417px;
 `;
 const TicketMethod = ({ option, setOption, setIsValidate, errorArray }) => {
@@ -43,7 +43,7 @@ const TicketMethod = ({ option, setOption, setIsValidate, errorArray }) => {
     <TicketMethodWrap>
       {/*티켓수령방법 */}
       <TicketMethodCont $hasError={hasError}>
-        <SectionTitle>티켓수령방법</SectionTitle>
+        <SectionTitle $option={option}>티켓수령방법</SectionTitle>
         <Input
           type="radio"
           value="현장수령"
@@ -61,7 +61,7 @@ const TicketMethod = ({ option, setOption, setIsValidate, errorArray }) => {
       </TicketMethodCont>
       <TicketMethodCont>
         {/*예매자 확인 */}
-        <SectionTitle>예매자 확인</SectionTitle>
+        <SectionTitle $option={option}>예매자 확인</SectionTitle>
         <TicketBuyer
           option={option}
           setIsValidate={setIsValidate}

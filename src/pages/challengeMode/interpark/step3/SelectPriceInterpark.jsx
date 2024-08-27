@@ -5,10 +5,13 @@ import SeatCount from "../../../../components/SeatCount";
 import TicketMethod from "../../../../components/forms/ticket/TicketMethod";
 import { useSetAtom } from "jotai";
 import { progressAtom } from "../../../../store/atom";
+import { useBookingValidate } from "../../../../hooks/useBookingValidate";
+import PrevNextButton from "../../../../components/myBookingInfo/PrevNextButton";
+import { MyBookingInfoContainer } from "../../../../components/myBookingInfo/MyBookingInfoContainer";
 
 const Wrap = styled.div`
   display: flex;
-  gap: 20px;
+  gap: 15px;
 `;
 
 const SelectPriceInterpark = () => {
@@ -16,12 +19,22 @@ const SelectPriceInterpark = () => {
   const [option, setOption] = useState("현장수령");
   //step4 단계에 대한 정보
   const [step3Stage, setStep3Stage] = useState(1);
-  const addStage = () => setStep3Stage((prev) => prev + 1);
+  const addStage = (num) => setStep3Stage(num);
   const setProgress = useSetAtom(progressAtom);
   useEffect(() => setProgress(3));
-  // 폼 검사 로직
+  // 폼 검사 로직용
   const [isValidate, setIsValidate] = useState([]);
   const [errorArray, setErrorArray] = useState([]); //css 변경용
+  //검사후 이동할 위치
+  const location = "../step5-1";
+  // 버튼에 넘겨줄 검사로직 (티켓가격 + 예매자 정보 확인용)
+  const { handleButtonClick } = useBookingValidate(
+    addStage,
+    step3Stage,
+    isValidate,
+    setErrorArray,
+    location
+  );
 
   return (
     <Wrap>
@@ -35,13 +48,15 @@ const SelectPriceInterpark = () => {
           errorArray={errorArray}
         />
       )}
-      <MyBookingInfo
-        step3Stage={step3Stage}
-        addStage={addStage}
-        option={option}
-        isValidate={isValidate}
-        setErrorArray={setErrorArray}
-      />
+      {/*내 예매정보 + 버튼 */}
+      <MyBookingInfoContainer>
+        <MyBookingInfo option={option} />
+        {/*이전 버튼, 다음 버튼 클릭 시 작동할 것*/}
+        <PrevNextButton
+          prevButtonOnClick={() => addStage(1)}
+          nextButtonOnClick={handleButtonClick}
+        />
+      </MyBookingInfoContainer>
     </Wrap>
   );
 };

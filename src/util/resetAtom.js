@@ -7,9 +7,9 @@ const resetAtom = () => {
   sessionStorage.removeItem("seatCount");
   sessionStorage.removeItem("seatInfo");
   sessionStorage.removeItem("posterId");
-  sessionStorage.removeItem("minute");
   sessionStorage.removeItem("level");
   sessionStorage.removeItem("stepTextNumber");
+  sessionStorage.removeItem("minute");
   sessionStorage.removeItem("helpTextNumber");
 };
 

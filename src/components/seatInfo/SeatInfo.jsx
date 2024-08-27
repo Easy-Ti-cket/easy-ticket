@@ -59,13 +59,7 @@ const SeatInfo = () => {
 
   const handleButtonClick = () => {
     if (isSeatSelected) {
-      // 연습모드 라우팅
-      if (themeSite === "practice") {
-        nav("/progress/step3-1");
-      } else {
-        // 실전모드 라우팅
-        nav(`/challenge/${themeSite}/step3-1`);
-      }
+      nav("../step3/step4");
     } else {
       alert("좌석을 선택해주세요.");
     }

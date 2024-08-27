@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import PosterInterpark from "./PosterInterpark";
+import PosterSection from "../../components/PosterSection";
 import SelectCalender from "../../../../components/calender/SelectCalender";
 import Button from "../../../../components/button/Button";
 import styled from "styled-components";
-import { useAtom } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import {
   themeSiteAtom,
   selectedPosterAtom,
@@ -14,61 +14,72 @@ import formatTime from "../../../../util/time";
 
 const Container = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  padding: 20px 50px;
-  width: 100%;
-`;
-
-const LeftSection = styled.div`
-  display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  padding: 0 20vh;
+  box-sizing: border-box;
 `;
 
-const RightSection = styled.div`
+const UpperSection = styled.div`
+  width: 100%;
   display: flex;
-  flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-start;
-  padding-left: 20px;
-`;
-
-const BoxWrapper = styled.div`
-  border: 1px solid var(--fill-color);
-  padding: 20px;
-  border-radius: 8px;
+  align-items: center;
   margin-bottom: 30px;
 `;
 
-const RoundWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+const LowerSection = styled.div`
   width: 100%;
-  padding-left: 20px;
+  display: flex;
+  flex-direction: row;
+  gap: 30px;
+  justify-content: flex-start;
+  align-items: flex-start;
 `;
 
-const SelectRoundInterpark = () => {
-  const [selectedPoster] = useAtom(selectedPosterAtom);
-  const [posters] = useAtom(postersAtom);
+const BoxWrapper = styled.div`
+  width: auto;
+  border: 1px solid var(--fill-color);
+  padding: 20px;
+  border-radius: 8px;
+  gap: 10px;
+  display: flex;
+  flex-direction: row;
+`;
+
+const TitleText = styled.p`
+  font-size: 18px;
+  white-space: nowrap; // 글자 크기 고정
+  margin: 0;
+`;
+
+const ButtonSection = styled.div`
+  width: 100%;
+  display: flex;
+  padding-top: 20px;
+  justify-content: flex-end;
+`;
+
+const SelectRoundTicketlink = () => {
+  const selectedPoster = useAtomValue(selectedPosterAtom);
+  const posters = useAtomValue(postersAtom);
   const [posterId, setPosterId] = useState(0);
   const [dateSelected, setDateSelected] = useState(false);
   const [roundSelected, setRoundSelected] = useState(false);
   const [timesButtons, setTimesButtons] = useState([]);
   const [correctRound, setCorrectRound] = useState(null);
   const navigate = useNavigate();
-  const [, setThemeSite] = useAtom(themeSiteAtom);
+  const setThemeSite = useSetAtom(themeSiteAtom);
 
   useEffect(() => {
-    setThemeSite("interpark");
-    setPosterId(0);
+    setThemeSite("ticketlink");
+    setPosterId(2);
   }, [setThemeSite]);
 
   const poster = posters[posterId];
-  const posterDates = poster ? poster.date : [];
-  const posterTimes = poster ? poster.time : {};
+  const posterDates = poster?.date || [];
+  const posterTimes = poster?.time || {};
 
   const handleDateSelect = (formattedDate) => {
     const correctDate = posterDates[0];
@@ -76,7 +87,6 @@ const SelectRoundInterpark = () => {
       setDateSelected(true);
       const timesArray = formatTime(posterTimes, formattedDate);
       setTimesButtons(timesArray);
-
       if (timesArray.length > 0) {
         setCorrectRound(timesArray[0]);
       }
@@ -86,15 +96,15 @@ const SelectRoundInterpark = () => {
   };
 
   const handleRoundClick = (time) => {
-    if (dateSelected) {
-      if (time === correctRound) {
-        alert(`${time}으로 공연을 예매합니다.`);
-        setRoundSelected(true);
-      } else {
-        alert("회차를 다시 선택해주세요.");
-      }
-    } else {
+    if (!dateSelected) {
       alert("먼저 올바른 날짜를 선택해주세요.");
+      return;
+    }
+    if (time === correctRound) {
+      alert(`${time}으로 공연을 예매합니다.`);
+      setRoundSelected(true);
+    } else {
+      alert("회차를 다시 선택해주세요.");
     }
   };
 
@@ -103,47 +113,49 @@ const SelectRoundInterpark = () => {
       alert("먼저 회차를 선택해주세요.");
       return;
     }
-    navigate("/challenge/interpark/step2");
+    navigate("/challenge/ticketlink/step2");
   };
 
   return (
     <Container>
-      <LeftSection>
-        <PosterInterpark id={posterId} />
-      </LeftSection>
-      <RightSection>
+      <UpperSection>
+        <PosterSection id={posterId} />
+      </UpperSection>
+      <LowerSection>
         <BoxWrapper>
-          <p style={{ paddingLeft: "20px" }}>관람일</p>
+          <TitleText>날짜 선택</TitleText>
           <SelectCalender
             onDateSelect={handleDateSelect}
             initialDate={
               posterDates.length > 0 ? new Date(posterDates[0]) : new Date()
             }
           />
-          <p style={{ paddingLeft: "20px" }}>회차</p>
-          <RoundWrapper>
-            {timesButtons.length > 0 ? (
-              timesButtons.map((time, index) => (
-                <Button
-                  key={index}
-                  text={`${index + 1}회 - ${time}`}
-                  type="outline"
-                  onClick={() => handleRoundClick(time)}
-                />
-              ))
-            ) : (
-              <Button
-                text="날짜 선택 후 확인"
-                type="outline"
-                onClick={() => handleRoundClick("날짜 선택 후 확인")}
-              />
-            )}
-          </RoundWrapper>
         </BoxWrapper>
+        <BoxWrapper>
+          <TitleText>회차 선택</TitleText>
+          {timesButtons.length > 0 ? (
+            timesButtons.map((time, index) => (
+              <Button
+                key={index}
+                text={`${index + 1}회 - ${time}`}
+                type="outline"
+                onClick={() => handleRoundClick(time)}
+              />
+            ))
+          ) : (
+            <Button
+              text="날짜 선택 후 확인"
+              type="outline"
+              onClick={() => alert("날짜를 먼저 선택해주세요.")}
+            />
+          )}
+        </BoxWrapper>
+      </LowerSection>
+      <ButtonSection>
         <Button text="인증 후 예매하기" onClick={handleReserveClick} />
-      </RightSection>
+      </ButtonSection>
     </Container>
   );
 };
 
-export default SelectRoundInterpark;
+export default SelectRoundTicketlink;

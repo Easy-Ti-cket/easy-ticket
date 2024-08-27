@@ -108,7 +108,7 @@ const ProgressContents = ({ text }) => {
         <Timer type={"minute"} second={1800} />
       )}
       {themeSite !== "practice" && <Timer type={"minute"} second={900} />}
-      <TextBox>{stepText}</TextBox>
+      {!path.includes("challenge") && <TextBox>{stepText}</TextBox>}
       <ContentsBox>
         {/*도움말 버튼 */}
         {showHelpButton && (

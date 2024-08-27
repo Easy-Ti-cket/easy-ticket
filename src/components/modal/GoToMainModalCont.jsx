@@ -3,6 +3,7 @@ import Button from "../button/Button";
 import { useNavigate } from "react-router-dom";
 import { useSetAtom } from "jotai";
 import { timerControlAtom } from "../../store/atom";
+import resetAtom from "../../util/resetAtom";
 
 const Container = styled.div`
   display: flex;
@@ -31,9 +32,10 @@ const GoToMainModalCont = ({ setIsConfirm }) => {
   const handleClick = (confirmNavigate) => {
     //확인을 누를 경우
     if (confirmNavigate) {
-      navigate("/");
       setTimerControl(() => false);
       setIsConfirm(() => false);
+      resetAtom();
+      navigate("/");
       return;
     }
     //취소를 누를 경우

@@ -2,6 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components"; // css 함수 import 추가
 import SubNav from "./subNav/SubNav";
 import useHover from "../../../hooks/useHover";
+import { useNavigate } from "react-router-dom";
 
 /*네비게이터 전체 */
 const NavBorderBottom = styled.div`
@@ -87,7 +88,7 @@ const Nav = () => {
     handleMouseLeave,
     handleMouseEnter
   } = useHover();
-
+  const nav = useNavigate();
   return (
     <NavBorderBottom>
       <NavWrap>
@@ -109,6 +110,7 @@ const Nav = () => {
               $ishovered={ishovered}
               $isactive={hovereditem === "실전모드"}
               onMouseEnter={() => handleHoveredItemEnter("실전모드")}
+              onClick={() => nav("/record")}
             >
               실전 모드
             </NavContent>
