@@ -26,7 +26,7 @@ const SelectPriceInterpark = () => {
   const [isValidate, setIsValidate] = useState([]);
   const [errorArray, setErrorArray] = useState([]); //css 변경용
   //검사후 이동할 위치
-  const location = "../step4-1";
+  const location = "../step5-1";
   // 버튼에 넘겨줄 검사로직 (티켓가격 + 예매자 정보 확인용)
   const { handleButtonClick } = useBookingValidate(
     addStage,

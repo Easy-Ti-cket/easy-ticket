@@ -18,14 +18,16 @@ const Layout = () => {
   const path = useLocation().pathname;
 
   useEffect(() => {
-    if (path === "/" || path.endsWith("step5")) {
-      resetAtom();
-    }
+    // if (path === "/" || path.endsWith("step5") || path.endsWith("record")) {
+    //   resetAtom();
+    // }
     if (!path.includes("challenge")) {
       if (themeSite !== "practice") {
         setThemeSite("practice");
       }
     }
+    // if (path === path.endsWith("outro")) {
+    // }
   }, [path]);
 
   return (

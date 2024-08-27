@@ -19,9 +19,11 @@ const ChallangeIntro = () => {
   const navigate = useNavigate();
   const [progress, setProgress] = useAtom(progressAtom);
   const themeSite = useAtomValue(themeSiteAtom);
+  const setLevel = useSetAtom(levelAtom);
 
   useEffect(() => {
     setProgress(0);
+    setLevel("high");
   }, [setProgress]);
 
   const handleClick = () => {

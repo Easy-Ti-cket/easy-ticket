@@ -1,9 +1,14 @@
-import React, { useEffect } from "react";
 import styled from "styled-components";
 import Button from "../../../components/button/Button";
-import { useAtom, useSetAtom } from "jotai";
-import { progressAtom, themeSiteAtom } from "../../../store/atom";
 import { useNavigate } from "react-router-dom";
+import { useAtomValue } from "jotai";
+import {
+  userNameAtom,
+  themeSiteAtom,
+  minuteCountAtom
+} from "../../../store/atom";
+import saveUserData from "../../../apis/saveUserData";
+import resetAtom from "../../../util/resetAtom";
 
 const Step5Container = styled.div`
   display: flex;
@@ -41,29 +46,35 @@ const ButtonWrapper = styled.div`
 `;
 
 const Outro = () => {
-  const [, setProgress] = useAtom(progressAtom);
   const navigate = useNavigate();
-  const setThemeSite = useSetAtom(themeSiteAtom);
-
-  useEffect(() => {
-    setProgress(5);
-    setThemeSite("practice");
-  }, [setProgress]);
+  // 기록 저장에 필요한 atom 불러오기
+  const userName = useAtomValue(userNameAtom);
+  const themeSite = useAtomValue(themeSiteAtom);
+  const timeSpent = useAtomValue(minuteCountAtom);
 
   // 다시 도전하기(사이트 선택)
   const handlePracticeModeClick = () => {
+    resetAtom();
     navigate("/select-site");
   };
 
   // 기록 보기
   const handleChallengeModeClick = () => {
+    resetAtom();
     navigate("/record");
+  };
+
+  // 기록 저장하기
+  const handleSaveDataClick = () => {
+    saveUserData(userName, themeSite, timeSpent);
+    alert("기록을 저장했습니다.");
   };
 
   return (
     <Step5Container>
       <SuccessMessage>예매 성공!</SuccessMessage>
       {/* 클리어 시간 추가 필요*/}
+      <Button text="기록 저장하기" onClick={handleSaveDataClick} />
       <PracticeMessage>다시 도전하시겠습니까?</PracticeMessage>
       <ButtonWrapper>
         <Button text="다시 도전하기" onClick={handlePracticeModeClick} />

@@ -4,7 +4,7 @@ import Button from "../../../components/button/Button";
 import { useAtom, useSetAtom } from "jotai";
 import { levelAtom, progressAtom, themeSiteAtom } from "../../../store/atom";
 import { useNavigate } from "react-router-dom";
-
+import resetAtom from "../../../util/resetAtom";
 const Step5Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -54,11 +54,13 @@ const Step5 = () => {
 
   // 난이도 선택 창으로
   const handlePracticeModeClick = () => {
+    resetAtom();
     navigate("/select-level");
   };
 
   // 실전 모드 선택 창으로
   const handleChallengeModeClick = () => {
+    resetAtom();
     navigate("/select-site"); // 추후 path 수정 필요
   };
 

@@ -38,6 +38,7 @@ const ButtonBox = styled.div`
 const SelectSite = () => {
   const navigate = useNavigate();
   const setThemeSite = useSetAtom(themeSiteAtom);
+  const setLevel = useSetAtom(levelAtom);
 
   const handleClick = (path, themeSite) => {
     setThemeSite(themeSite); // 해당 사이트의 테마로 변경

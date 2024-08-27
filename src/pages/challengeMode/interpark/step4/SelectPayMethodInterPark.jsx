@@ -90,8 +90,8 @@ const SelectPayMethodInterPark = () => {
         <MyBookingInfoContainer>
           <MyBookingInfo />
           <PrevNextButton
-            prevButtonOnClick={() => nav("../step3-1")}
-            nextButtonOnClick={() => nav("../step5")}
+            prevButtonOnClick={() => nav("../step3/step4")}
+            nextButtonOnClick={() => nav("../step5-2")}
           />
         </MyBookingInfoContainer>
       </div>
