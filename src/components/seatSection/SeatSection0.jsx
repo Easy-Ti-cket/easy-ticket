@@ -10,19 +10,21 @@ import {
 import convertPriceObjectToArray from "../../util/convertPriceObjectToArray";
 
 const Container = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  display: flex;
+  // grid-template-columns: repeat(4, 1fr);
+  // grid-template-rows: 1fr repeat(2, 1fr) 1fr;
+  width: 800px;
+  height: 400px;
+  flex-wrap: wrap;
+  justify-content: center;
 `;
 const SectionColor = styled(Section)`
   background-color: ${(props) => props.color};
 `;
 // 구역별 color 배열, 빨강, 파랑, 노랑, 초록, 보라
 const colors = ["#ff0000", "#0000ff", "#ffff00", "#00ff00", "#800080"];
-//구역 개수 배열
-const lengthOfSections = [8, 8, 8, 8];
 
-const SeatSection3 = () => {
+const SeatSection0 = () => {
   const Posters = useAtomValue(postersAtom);
   const posterId = useAtomValue(selectedPosterAtom);
   const poster = Posters[posterId];
@@ -32,7 +34,6 @@ const SeatSection3 = () => {
   const priceArr = convertPriceObjectToArray(poster.price);
   const date = poster.date[0];
   const lengthOfprice = priceArr.length;
-  const cycle = Math.ceil(6 / lengthOfprice);
 
   const storeSeatInfo = (sectionIndex) => {
     const sectionPrice = priceArr[Math.floor(sectionIndex / 2) % lengthOfprice];
@@ -45,23 +46,23 @@ const SeatSection3 = () => {
     });
     setAllowedSeat({ ...allowedSeat, gridIndex: 1 });
   };
+
   const shapeMapping = {
-    0: "TrapezoidLeft",
-    1: "Rectangle",
+    1: "TrapezoidLeft",
     2: "TrapezoidRight",
-    6: "QuarterLeft",
-    8: "QuarterRight"
+    4: "QuarterLeft",
+    7: "QuarterRight"
   };
 
   return (
     <Container>
-      {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((sectionIndex) => (
+      {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map((sectionIndex) => (
         <SectionColor
           num={sectionIndex + 1}
           key={sectionIndex}
-          size={"small"}
+          size="small"
           shape={shapeMapping[sectionIndex]}
-          color={colors[Math.floor(sectionIndex / cycle) % lengthOfprice]}
+          color={colors[Math.floor(sectionIndex / 2) % lengthOfprice]}
           storeSeatInfo={() => storeSeatInfo(sectionIndex)}
         ></SectionColor>
       ))}
@@ -69,4 +70,4 @@ const SeatSection3 = () => {
   );
 };
 
-export default SeatSection3;
+export default SeatSection0;

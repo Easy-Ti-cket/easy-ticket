@@ -10,9 +10,11 @@ import {
 import convertPriceObjectToArray from "../../util/convertPriceObjectToArray";
 
 const Container = styled.div`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(2, 1fr);
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 600px;
+  height: 400px;
 `;
 const SectionColor = styled(Section)`
   background-color: ${(props) => props.color};
@@ -44,6 +46,10 @@ const SeatSection1 = () => {
     });
     setAllowedSeat({ ...allowedSeat, gridIndex: 1 });
   };
+  const shapeMapping = {
+    0: "TrapezoidRight",
+    2: "TrapezoidLeft"
+  };
   return (
     <Container>
       {[0, 1, 2, 3, 4, 5, 6, 7].map((sectionIndex) => (
@@ -51,13 +57,7 @@ const SeatSection1 = () => {
           num={sectionIndex + 1}
           key={sectionIndex}
           size="small"
-          shape={
-            sectionIndex == 4
-              ? "QuarterLeft"
-              : sectionIndex == 7
-                ? "QuarterRight"
-                : ""
-          }
+          shape={shapeMapping[sectionIndex]}
           color={colors[Math.floor(sectionIndex / 2) % lengthOfprice]}
           storeSeatInfo={() => storeSeatInfo(sectionIndex)}
         ></SectionColor>

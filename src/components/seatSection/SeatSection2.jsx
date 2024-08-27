@@ -45,7 +45,11 @@ const SeatSection1 = () => {
     });
     setAllowedSeat({ ...allowedSeat, gridIndex: 1 });
   };
-  console.log(colors);
+  const shapeMapping = {
+    0: "TrapezoidLeft",
+    1: "Rectangle",
+    2: "TrapezoidRight"
+  };
   return (
     <Container>
       {[0, 1, 2, 3, 4, 5].map((sectionIndex) => (
@@ -53,15 +57,7 @@ const SeatSection1 = () => {
           num={sectionIndex + 1}
           key={sectionIndex}
           size={"small"}
-          shape={
-            sectionIndex == 0
-              ? "TrapezoidLeft"
-              : sectionIndex == 1
-                ? "Rectangle"
-                : sectionIndex == 2
-                  ? "TrapezoidRight"
-                  : ""
-          }
+          shape={shapeMapping[sectionIndex]}
           color={colors[Math.floor(sectionIndex / cycle) % lengthOfprice]}
           storeSeatInfo={() => storeSeatInfo(sectionIndex)}
         ></SectionColor>

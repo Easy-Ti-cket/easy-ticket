@@ -1,5 +1,6 @@
 import Section from "./section/Section";
 import styled from "styled-components";
+import SeatSection0 from "./SeatSection0";
 import SeatSection1 from "./SeatSection1";
 import SeatSection2 from "./SeatSection2";
 import SeatSection3 from "./SeatSection3";
@@ -35,6 +36,8 @@ const Stage = styled.div`
 
 const getSectionNum = (num) => {
   switch (num) {
+    case 0:
+      return SeatSection0;
     case 1:
       return SeatSection1;
     case 2:
