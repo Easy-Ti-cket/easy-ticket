@@ -9,6 +9,9 @@ import {
   stepTextNumberAtom,
   helpTextNumberAtom
 } from "../../../store/atom";
+import { MyBookingInfoContainer } from "../../../components/myBookingInfo/MyBookingInfoContainer";
+import PrevNextButton from "../../../components/myBookingInfo/PrevNextButton";
+import { useBookingValidate } from "../../../hooks/useBookingValidate";
 
 const Wrap = styled.div`
   display: flex;
@@ -20,7 +23,7 @@ const SeatPriceCheck = () => {
   const [option, setOption] = useState("현장수령");
   //step4 단계에 대한 정보
   const [step3Stage, setStep3Stage] = useState(1);
-  const addStage = () => setStep3Stage((prev) => prev + 1);
+  const addStage = () => setStep3Stage(2);
   const setProgress = useSetAtom(progressAtom);
 
   const setStepTextNumber = useSetAtom(stepTextNumberAtom);
@@ -39,9 +42,19 @@ const SeatPriceCheck = () => {
     }
   }, [step3Stage]);
 
-  // 폼 검사 로직
+  // 폼 검사 로직용
   const [isValidate, setIsValidate] = useState([]);
   const [errorArray, setErrorArray] = useState([]); //css 변경용
+  //검사후 이동할 위치
+  const location = "../step4-1";
+  // 버튼에 넘겨줄 검사로직 (티켓가격 + 예매자 정보 확인용)
+  const handleButtonClick = useBookingValidate(
+    addStage,
+    step3Stage,
+    isValidate,
+    setErrorArray,
+    location
+  );
 
   return (
     <Wrap>
@@ -55,13 +68,19 @@ const SeatPriceCheck = () => {
           errorArray={errorArray}
         />
       )}
-      <MyBookingInfo
-        step3Stage={step3Stage}
-        addStage={addStage}
-        option={option}
-        isValidate={isValidate}
-        setErrorArray={setErrorArray}
-      />
+      <MyBookingInfoContainer>
+        <MyBookingInfo
+          step3Stage={step3Stage}
+          addStage={addStage}
+          option={option}
+          isValidate={isValidate}
+          setErrorArray={setErrorArray}
+        />
+        <PrevNextButton
+          prevButtonOnClick={() => addStage(1)}
+          nextButtonOnClick={handleButtonClick}
+        />
+      </MyBookingInfoContainer>
     </Wrap>
   );
 };

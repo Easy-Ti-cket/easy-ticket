@@ -21,11 +21,15 @@ import SelectSeatInterpark from "./pages/challengeMode/interpark/step2/SelectSea
 import SeatPriceCheck from "./pages/practiceMode/step3/SeatPriceCheck";
 import SelectPriceInterpark from "./pages/challengeMode/interpark/step3/SelectPriceInterpark";
 // step 4
+import SelectPayMethodInterPark from "./pages/challengeMode/interpark/step4/SelectPayMethodInterPark";
 import SelectPayMethod from "./pages/practiceMode/step4/SelectPayMethod";
 import CardPay from "./pages/practiceMode/step4/CardPay";
 // step 5
 import Step5 from "./pages/practiceMode/step5/Step5";
-//test
+
+import Outro from "./pages/challengeMode/outro/Outro";
+import Record from "./pages/challengeMode/outro/Record";
+
 import TestPage from "./pages/TestPage";
 
 const router = createBrowserRouter([
@@ -37,6 +41,8 @@ const router = createBrowserRouter([
       { path: "select-mode", element: <SelectMode />, label: "모드 선택" },
       { path: "select-level", element: <SelectLevel />, label: "난이도 선택" },
       { path: "select-site", element: <SelectSite />, label: "사이트 선택" },
+      { path: "record", element: <Record />, label: "기록 보기" },
+
       {
         path: "progress",
         element: <ProgressContents />,
@@ -83,6 +89,7 @@ const router = createBrowserRouter([
           }
         ]
       },
+      //실전모드
       {
         path: "challenge",
         children: [
@@ -96,6 +103,7 @@ const router = createBrowserRouter([
                 element: <PrivateRoute element={<ChallangeIntro />} />,
                 label: "인트로"
               },
+              // 공연 선택 단계 추가 필요
               {
                 path: "step1",
                 element: <PrivateRoute element={<SelectRoundInterpark />} />,
@@ -104,26 +112,29 @@ const router = createBrowserRouter([
               {
                 path: "step2",
                 element: <PrivateRoute element={<SelectSeatInterpark />} />,
-                label: ""
+                label: "좌석 선택"
               },
               {
-                path: "step3-1",
+                path: "step3/step4",
                 element: <PrivateRoute element={<SelectPriceInterpark />} />,
-                label: "날짜 및 회차 선택"
+                label:
+                  "가격 할인 및 선택 / 배송 선택 / 주문자 확인 - 프로그래스 3,4"
               },
               {
-                path: "step4-1",
-                element: <PrivateRoute element={<SelectPayMethod />} />,
-                label: "결제방식 / 수단 선택"
+                path: "step5-1",
+                element: (
+                  <PrivateRoute element={<SelectPayMethodInterPark />} />
+                ),
+                label: "결제방식 / 수단 선택 - 프로그래스 5"
               },
               {
-                path: "step4-2",
+                path: "step5-2",
                 element: <PrivateRoute element={<CardPay />} />,
                 label: "카드 결제창"
               },
               {
-                path: "step5",
-                element: <PrivateRoute element={<Step5 />} />,
+                path: "outro",
+                element: <PrivateRoute element={<Outro />} />,
                 label: "예매 성공"
               }
             ]

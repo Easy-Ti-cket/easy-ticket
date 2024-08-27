@@ -42,6 +42,7 @@ const SelectSite = () => {
 
   const handleClick = (path, themeSite) => {
     setThemeSite(themeSite); // 해당 사이트의 테마로 변경
+    setLevel("high"); // 고급 난이도로 변경
     navigate(path);
   };
 

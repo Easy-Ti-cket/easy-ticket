@@ -3,7 +3,6 @@ import { FormWrap } from "../FormStyle";
 import { InputContainer, Label } from "../../input/InputStyle";
 import { useAtomValue } from "jotai";
 import { levelAtom, userNameAtom } from "../../../store/atom";
-import { useState } from "react";
 
 const BuyerWrap = styled.div`
   display: flex;
@@ -63,14 +62,14 @@ const data_delivery = [
 
 const TicketBuyer = ({ option, setIsValidate, errorArray }) => {
   const userName = useAtomValue(userNameAtom);
+
   //난이도 - 생년월일 입력 구현
   const level = useAtomValue(levelAtom);
   // 생년월일 입력 검사 로직
-  const [birth, setBirth] = useState("");
   const handleChange = (e) => {
     const value = e.target.value;
-    // 생년월일이 비어있거나 길이가 8이 아닌 경우 에러
-    if (value === "" || value.length !== 8) {
+    // 생년월일이 비어있거나 길이가 6이 아닌 경우 에러
+    if (value === "" || value.length !== 6) {
       setIsValidate((prev) => prev.filter((item) => item !== "birth"));
     } else {
       setIsValidate((prev) =>
@@ -92,7 +91,7 @@ const TicketBuyer = ({ option, setIsValidate, errorArray }) => {
                   name="birth"
                   type="number"
                   onChange={handleChange}
-                  placeholder="생년월일 예시 : 20010111"
+                  placeholder="생년월일 예시 : 990101"
                   $hasError={hasError}
                 ></InfoInput>
               ) : (

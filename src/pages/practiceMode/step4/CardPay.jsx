@@ -3,15 +3,14 @@ import Card from "../../../components/card/Card";
 import CardForm from "../../../components/forms/CardForm";
 import { useForm } from "../../../hooks/useForm";
 import Button from "../../../components/button/Button";
-import { useAtomValue, useSetAtom, useAtom } from "jotai";
+import { useAtomValue } from "jotai";
 import {
   cardAnswerAtom,
-  stepTextNumberAtom,
-  themeSiteAtom
+  themeSiteAtom,
+  userNameAtom
 } from "../../../store/atom";
 import { Step4Container } from "./SelectPayMethod";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
 
 const CardPayWrap = styled(Step4Container)`
   align-items: center;
@@ -47,14 +46,22 @@ const CardPay = () => {
       : 1
     : 0;
   const nav = useNavigate();
+  // 실전 모드 여부를 판단하기 위한 테마 정보
   const themeSite = useAtomValue(themeSiteAtom);
+
+  //타임스탬프
+  const userName = useAtomValue(userNameAtom);
 
   //검사로직
   const handleClick = () => {
     if (!isAnswer) {
       alert("카드 정보를 정확하게 입력해 주세요");
     } else {
-      nav("../step5");
+      if (themeSite === "practice") {
+        nav("../step5");
+      } else {
+        nav("../outro");
+      }
     }
   };
   return (
@@ -67,7 +74,7 @@ const CardPay = () => {
         <CardForm focusNum={focusNum} handleChange={handleChange} />
       </CardFormContainer>
       {/*다음단계 버튼을 누르면 step5로 이동 */}
-      <Button text="다음 단계" onClick={handleClick} />
+      <Button text="결제 완료" onClick={handleClick} />
     </CardPayWrap>
   );
 };

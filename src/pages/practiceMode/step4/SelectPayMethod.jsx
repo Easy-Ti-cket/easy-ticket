@@ -4,14 +4,14 @@ import PayMethodForm from "../../../components/forms/pay/PayMethodForm";
 import DetailPayForm from "../../../components/forms/pay/DetailPayForm";
 import { useForm } from "../../../hooks/useForm";
 import Button from "../../../components/button/Button";
-import { useNavigate } from "react-router-dom";
-import { useSetAtom, useAtomValue } from "jotai";
+import { useSetAtom } from "jotai";
 import {
   progressAtom,
-  themeSiteAtom,
   stepTextNumberAtom,
   helpTextNumberAtom
 } from "../../../store/atom";
+import { useBookingValidate } from "../../../hooks/useBookingValidate";
+import { usePaymentValidate } from "../../../hooks/usePaymentValidate";
 
 const SelectPayWrap = styled.div`
   width: 80%;
@@ -28,7 +28,7 @@ export const Step4Container = styled.div`
   gap: 20px;
   margin: 0 20px;
 `;
-const SubTtitle = styled.div`
+export const SubTtitle = styled.div`
   width: 447px;
   height: 37px;
   border-bottom: 1px solid var(--fill-color);
@@ -48,7 +48,10 @@ const SelectPayMethod = () => {
   const { handleChange, correctList, isAnswer } = useForm(3);
   //'신용카드'를 정확히 골랐을 경우 '결제 수단 입력' 창 생성
   const isPayMethodCorrect = correctList["PayMethodForm"];
-
+  //검사로직
+  const { handlePayment, hasPayFormError, cardTypesError } = usePaymentValidate(
+    { correctList }
+  );
   const setStepTextNumber = useSetAtom(stepTextNumberAtom);
   const setHelpTextNumber = useSetAtom(helpTextNumberAtom);
 
@@ -66,30 +69,6 @@ const SelectPayMethod = () => {
       setHelpTextNumber((prev) => prev + 1);
     }
   }, [isPayMethodCorrect]);
-
-  //검사 로직
-  const [hasPayFormError, setHasPayFormError] = useState(false);
-  const [cardTypesError, setCardTypesError] = useState(false);
-  const themeSite = useAtomValue(themeSiteAtom);
-  const nav = useNavigate();
-
-  const handleClick = () => {
-    if (!correctList.DetailPayForm) {
-      setHasPayFormError(true);
-      alert("올바른 결제 수단을 선택해 주세요");
-      return;
-    }
-    if (!correctList.CardTypes) {
-      setHasPayFormError(false);
-      setCardTypesError(true);
-      alert("올바른 카드를 선택해 주세요");
-    } else {
-      nav("../step4-2");
-
-      setStepTextNumber((prev) => prev + 1);
-      setHelpTextNumber((prev) => prev + 1);
-    }
-  };
 
   return (
     <SelectPayWrap>
@@ -115,7 +94,7 @@ const SelectPayMethod = () => {
             />
           </Step4Container>
           <BtnWrap>
-            <Button text="다음 단계" onClick={handleClick} />
+            <Button text="다음 단계" onClick={handlePayment} />
           </BtnWrap>
         </>
       )}

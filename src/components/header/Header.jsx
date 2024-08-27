@@ -46,6 +46,7 @@ const Header = () => {
       return;
     }
     //location에 step을 포함한 경우 : 예매를 진행 중인 경우
+    //타이머 멈추고 모달창 띄움
     setTimerControl(() => true);
     setIsConfirm(true);
   };
