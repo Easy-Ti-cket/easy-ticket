@@ -103,12 +103,12 @@ const router = createBrowserRouter([
               {
                 path: "step2",
                 element: <PrivateRoute element={<SelectSeatInterpark />} />,
-                label: ""
+                label: "좌석 선택"
               },
               {
                 path: "step3-1",
                 element: <PrivateRoute element={<SelectPriceInterpark />} />,
-                label: "날짜 및 회차 선택"
+                label: "가격 및 할인 선택"
               },
               {
                 path: "step4-1",

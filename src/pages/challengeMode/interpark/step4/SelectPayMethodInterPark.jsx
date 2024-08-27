@@ -57,11 +57,6 @@ const Info = styled.span`
   color: var(--text-color2);
 `;
 const SelectPayMethodInterPark = () => {
-  //애니메이션 제거 임시, 라우팅 연결이 된 후 삭제 예정
-  const setThemeSite = useSetAtom(themeSiteAtom);
-  useEffect(() => {
-    setThemeSite("interpark");
-  });
   //포스터 정보
   const posterId = useAtomValue(selectedPosterAtom);
   //nav
