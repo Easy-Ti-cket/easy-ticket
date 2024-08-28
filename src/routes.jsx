@@ -28,6 +28,7 @@ import CardPay from "./pages/practiceMode/step4/CardPay";
 import Step5 from "./pages/practiceMode/step5/Step5";
 import Outro from "./pages/challengeMode/outro/Outro";
 import Record from "./pages/challengeMode/outro/Record";
+import SelectPriceYes24 from "./pages/challengeMode/yes24/step3-step4/SelectPriceYes24";
 
 const router = createBrowserRouter([
   {
@@ -165,6 +166,11 @@ const router = createBrowserRouter([
                 path: "step0",
                 element: <PrivateRoute element={<ChallangeIntro />} />,
                 lable: "인트로"
+              },
+              {
+                path: "step3/step4",
+                element: <PrivateRoute element={<SelectPriceYes24 />} />,
+                label: "매수 선택 및 가격 선택"
               }
             ]
           }
