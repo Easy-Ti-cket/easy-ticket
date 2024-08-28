@@ -108,9 +108,9 @@ export const helpTextNumberAtom = atomWithStorage("helpTextNumber", 0, storage);
 
 //구역 색깔
 export const sectionColorAtom = atom([
-  "#ff0000",
-  "#0000ff",
-  "#ffff00",
-  "#00ff00",
-  "#800080"
+  "#FF9999",
+  "#77B5FE",
+  "#77DD77",
+  "#FFEB66",
+  "#CBA0E3"
 ]);

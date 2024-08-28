@@ -56,16 +56,16 @@ const SeatSection0 = () => {
     7: "QuarterRight"
   };
   const colorMapping = {
-    0: colors[0],
-    1: colors[1],
-    2: colors[2],
-    3: colors[3],
-    4: colors[0],
-    5: colors[1],
-    6: colors[2],
+    0: colors[1],
+    1: colors[4],
+    2: colors[4],
+    3: colors[1],
+    4: colors[3],
+    5: colors[4],
+    6: colors[4],
     7: colors[3],
-    8: colors[4],
-    9: colors[4]
+    8: colors[0],
+    9: colors[0]
   };
   return (
     <Container>
