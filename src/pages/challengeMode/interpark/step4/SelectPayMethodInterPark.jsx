@@ -3,9 +3,8 @@ import DetailPayForm from "../../../../components/forms/pay/DetailPayForm";
 import PayMethodChallenge, {
   SubTitleChallenge
 } from "../../components/payMethod/PayMethodChallenge";
-import { useAtomValue, useSetAtom } from "jotai";
-import { useEffect } from "react";
-import { selectedPosterAtom, themeSiteAtom } from "../../../../store/atom";
+import { useAtomValue } from "jotai";
+import { selectedPosterAtom } from "../../../../store/atom";
 import { FormWrap } from "../../../../components/forms/FormStyle";
 import UsablePoint from "../../components/payMethod/UsablePoint";
 import MyBookingInfo from "../../../../components/myBookingInfo/MyBookingInfo";
@@ -13,6 +12,8 @@ import PosterInfo from "../../../../components/poster/PosterInfo";
 import { MyBookingInfoContainer } from "../../../../components/myBookingInfo/MyBookingInfoContainer";
 import PrevNextButton from "../../../../components/myBookingInfo/PrevNextButton";
 import { useNavigate } from "react-router-dom";
+import { usePaymentValidate } from "../../../../hooks/usePaymentValidate";
+import { useForm } from "../../../../hooks/useForm";
 
 //결제 수단 + 결제 방식 + 내 예매 정보
 const PayMethodWrap = styled.div`
@@ -56,11 +57,16 @@ const Info = styled.span`
   line-height: 20px;
   color: var(--text-color2);
 `;
+
 const SelectPayMethodInterPark = () => {
   //포스터 정보
   const posterId = useAtomValue(selectedPosterAtom);
   //nav
   const nav = useNavigate();
+  //step5-1 검사 로직
+  const { correctList } = useForm(3);
+  const { handlePayment } = usePaymentValidate({ correctList });
+  console.log(correctList);
   return (
     <PayMethodWrap>
       <PayMethodContainer>

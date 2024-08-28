@@ -58,6 +58,10 @@ const SeatInfo = () => {
   const nav = useNavigate();
 
   const handleButtonClick = () => {
+    if (themeSite === "practice") {
+      nav("../step3-1");
+      return;
+    }
     if (isSeatSelected) {
       nav("../step3/step4");
     } else {

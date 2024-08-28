@@ -10,7 +10,6 @@ import {
   stepTextNumberAtom,
   helpTextNumberAtom
 } from "../../../store/atom";
-import { useBookingValidate } from "../../../hooks/useBookingValidate";
 import { usePaymentValidate } from "../../../hooks/usePaymentValidate";
 
 const SelectPayWrap = styled.div`
@@ -52,6 +51,7 @@ const SelectPayMethod = () => {
   const { handlePayment, hasPayFormError, cardTypesError } = usePaymentValidate(
     { correctList }
   );
+  console.log(correctList);
   const setStepTextNumber = useSetAtom(stepTextNumberAtom);
   const setHelpTextNumber = useSetAtom(helpTextNumberAtom);
 
