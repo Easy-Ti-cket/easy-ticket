@@ -26,6 +26,7 @@ import convertPriceObjectToArray from "../../util/convertPriceObjectToArray";
 import getRandomSeat from "../../util/getRandomSeat";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 const SeatInfo = () => {
   const isSeatSelected = useAtomValue(isSeatSelectedAtom);
@@ -37,6 +38,7 @@ const SeatInfo = () => {
   const seats = convertPriceObjectToArray(selectedPoster.price);
   const [seatInfo, setSeatInfo] = useAtom(seatInfoAtom);
   const themeSite = useAtomValue(themeSiteAtom);
+  const path = useLocation().pathname;
   //seatInfo가 저장되는 시점 , 고칠 필요 있음
   useEffect(() => {
     if (isSeatSelected) {
@@ -59,7 +61,11 @@ const SeatInfo = () => {
 
   const handleButtonClick = () => {
     if (isSeatSelected) {
-      nav("../step3/step4");
+      if (path.includes("challenge")) {
+        nav("../step3/step4");
+      } else {
+        nav("../step3-1");
+      }
     } else {
       alert("좌석을 선택해주세요.");
     }
