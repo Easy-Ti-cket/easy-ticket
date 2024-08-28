@@ -28,7 +28,7 @@ export const Step4Container = styled.div`
   margin: 0 20px;
 `;
 export const SubTtitle = styled.div`
-  width: 447px;
+  width: 400px;
   height: 37px;
   border-bottom: 1px solid var(--fill-color);
   font-size: 20px;
