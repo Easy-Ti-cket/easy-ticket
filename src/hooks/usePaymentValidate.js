@@ -12,14 +12,12 @@ export const usePaymentValidate = ({ correctList }) => {
   const themeSite = useAtomValue(themeSiteAtom);
 
   const handlePayment = () => {
-    console.log(correctList);
-
     if (!correctList.DetailPayForm) {
       setHasPayFormError(true);
       alert("올바른 결제 수단을 선택해 주세요");
       return;
     }
-    if (!correctList.CardTypes) {
+    if (!correctList.CardTypes && themeSite === "practice") {
       setHasPayFormError(false);
       setCardTypesError(true);
       alert("올바른 카드를 선택해 주세요");

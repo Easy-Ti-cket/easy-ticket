@@ -13,6 +13,7 @@ import { usePaymentValidate } from "../../../../hooks/usePaymentValidate";
 import { useForm } from "../../../../hooks/useForm";
 import PayMethodForm from "../../../../components/forms/pay/PayMethodForm";
 import { SubTtitle } from "../../../practiceMode/step4/SelectPayMethod";
+import ErrorTooltip from "../../../../components/tooltip/ErrorTooltip";
 
 //결제 수단 + 결제 방식 + 내 예매 정보
 const PayMethodWrap = styled.div`
@@ -24,13 +25,14 @@ const PayMethodWrap = styled.div`
 const PayMethodContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: 20px;
   border-right: 2px solid var(--fill-color);
 `;
 
 //결제 방식
 const DetailPayFormContainer = styled(FormWrap)`
   width: 400px;
+  gap: 20px;
   border-right: 2px solid var(--fill-color);
 `;
 const CardInfo = styled.div`
@@ -65,7 +67,9 @@ const Info = styled.span`
 
 //결제방식관련 안내 문구
 const PayMethodInfo = styled.span`
-  color: var(--point-color);
+  font-family: "pretendardB";
+  font-size: 12px;
+  color: var(--text-color);
 `;
 
 const SelectPayMethodInterPark = () => {
@@ -80,15 +84,23 @@ const SelectPayMethodInterPark = () => {
   );
   //'신용카드'를 정확히 골랐을 경우 '결제 수단 입력' 창 생성
   const isPayMethodCorrect = correctList["PayMethodForm"];
-  console.log(correctList);
 
   return (
     <PayMethodWrap>
       <PayMethodContainer>
+        {!isPayMethodCorrect && (
+          <ErrorTooltip
+            contents={
+              <PayMethodInfo>
+                실전모드에선 '신용카드' 결제만 가능합니다.
+              </PayMethodInfo>
+            }
+          >
+            <br />
+          </ErrorTooltip>
+        )}
         {/*결제 수단 */}
         <SubTtitle>결제 수단</SubTtitle>
-        <span>실전모드에선 '신용카드' 결제만 가능합니다.</span>
-        <span>실제 웹사이트는 더 다양한 결제 방식이 존재합니다.</span>
         <PayMethodForm
           isSelected={isPayMethodCorrect}
           handleChange={handleChange}
@@ -98,9 +110,20 @@ const SelectPayMethodInterPark = () => {
       </PayMethodContainer>
       {/*결제 방식 */}
       <DetailPayFormContainer>
+        {!correctList["DetailPayForm"] && (
+          <ErrorTooltip
+            contents={
+              <PayMethodInfo>
+                실전모드에선 "일반 신용카드" 결제만 가능합니다.
+              </PayMethodInfo>
+            }
+          >
+            <br />
+          </ErrorTooltip>
+        )}
+        <SubTtitle>결제 방식</SubTtitle>
         {isPayMethodCorrect && (
           <>
-            <SubTtitle>결제 방식</SubTtitle>
             <CardInfo>
               {">"} 신용카드 정보 <FakeButton>무이자 할부 안내</FakeButton>
             </CardInfo>
@@ -113,7 +136,6 @@ const SelectPayMethodInterPark = () => {
             />
             <Info>
               ※현금영수증 발급 안내
-              <br />
               <br />
               현금영수증은 PC에서만 발급 가능하며, "예매내역 상세" 및
               "마이페이지 {">"} 증빙서류 {">"} 현금영수증 메뉴"에서 신청할 수
