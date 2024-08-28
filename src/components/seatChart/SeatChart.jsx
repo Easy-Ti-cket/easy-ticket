@@ -10,8 +10,9 @@ import convertPriceObjectToArray from "../../util/convertPriceObjectToArray";
 import DefaultSeatChart from "./DefaultSeatChart";
 import SeatChart1 from "./SeatChart1";
 import SeatChart2 from "./SeatChart2";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import getRandomInt from "../../util/getRandomInt";
+import { useLocation } from "react-router-dom";
 
 //SeatChart 전체 컨테이너
 const SeatChartContainer = styled.div`
@@ -25,20 +26,24 @@ const SeatChartContainer = styled.div`
   height: 500px;
 `;
 //num으로 하는게 맞나?
-const getSeatChartNum = (num) => {
-  switch (num) {
-    case 1:
+const getSeatChartNum = (type) => {
+  switch (type) {
+    case "challenge":
       return SeatChart1;
-    case 2:
-      return SeatChart2;
     default:
       return DefaultSeatChart;
   }
 };
 
-const SeatChart = ({ num = 0 }) => {
-  const SelectedSeatChart = getSeatChartNum(num);
-
+const SeatChart = () => {
+  const path = useLocation().pathname;
+  const [type, setType] = useState("default");
+  useEffect(() => {
+    if (path.includes("challenge")) {
+      setType("challenge");
+    }
+  }, []);
+  const SelectedSeatChart = getSeatChartNum(type);
   return (
     <SeatChartContainer>
       <SelectedSeatChart></SelectedSeatChart>

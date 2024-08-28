@@ -12,6 +12,8 @@ import {
   allowedSeatAtom
 } from "../../store/atom";
 import convertPriceObjectToArray from "../../util/convertPriceObjectToArray";
+import { useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const SeatSectionContainer = styled.div`
   display: flex;
@@ -49,18 +51,21 @@ const getSectionNum = (num) => {
   }
 };
 
-// 구역별 color 배열, 빨강, 파랑, 노랑, 초록, 보라
-const colors = ["#ff0000", "#0000ff", "#ffff00", "#00ff00", "#800080"];
 //구역 개수 배열
-const numOfSections = [8, 8, 8, 8];
-const SeatSection = ({ num = 0 }) => {
+const SeatSection = () => {
   const Posters = useAtomValue(postersAtom);
   const posterId = useAtomValue(selectedPosterAtom);
   const poster = Posters[posterId];
+  const [seatSectionType, setSeatSectionType] = useState("default");
 
-  const price = convertPriceObjectToArray(poster.price);
+  const path = useLocation().pathname;
 
-  const SelectedSection = getSectionNum(num);
+  useEffect(() => {
+    if (path.includes("challenge")) {
+      setSeatSectionType(posterId);
+    }
+  }, []);
+  const SelectedSection = getSectionNum(seatSectionType);
 
   return (
     <SeatSectionContainer>

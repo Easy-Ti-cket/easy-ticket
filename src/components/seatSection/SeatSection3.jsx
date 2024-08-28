@@ -5,7 +5,8 @@ import {
   postersAtom,
   selectedPosterAtom,
   seatInfoAtom,
-  allowedSeatAtom
+  allowedSeatAtom,
+  sectionColorAtom
 } from "../../store/atom";
 import convertPriceObjectToArray from "../../util/convertPriceObjectToArray";
 
@@ -17,15 +18,14 @@ const Container = styled.div`
 const SectionColor = styled(Section)`
   background-color: ${(props) => props.color};
 `;
-// 구역별 color 배열, 빨강, 파랑, 노랑, 초록, 보라
-const colors = ["#ff0000", "#0000ff", "#ffff00", "#00ff00", "#800080"];
-//구역 개수 배열
-const lengthOfSections = [8, 8, 8, 8];
 
 const SeatSection3 = () => {
   const Posters = useAtomValue(postersAtom);
   const posterId = useAtomValue(selectedPosterAtom);
   const poster = Posters[posterId];
+
+  const colors = useAtomValue(sectionColorAtom);
+
   const [seatInfo, setSeatInfo] = useAtom(seatInfoAtom);
   const [allowedSeat, setAllowedSeat] = useAtom(allowedSeatAtom);
 
@@ -41,7 +41,7 @@ const SeatSection3 = () => {
       grade: sectionPrice.grade,
       price: sectionPrice.price,
       date: date,
-      color: colors[Math.floor(sectionIndex / 2) % lengthOfprice]
+      color: colorMapping[sectionIndex]
     });
     setAllowedSeat({ ...allowedSeat, gridIndex: 1 });
   };
@@ -52,7 +52,17 @@ const SeatSection3 = () => {
     6: "QuarterLeft",
     8: "QuarterRight"
   };
-
+  const colorMapping = {
+    0: colors[0],
+    1: colors[1],
+    2: colors[0],
+    3: colors[0],
+    4: colors[2],
+    5: colors[0],
+    6: colors[3],
+    7: colors[3],
+    8: colors[3]
+  };
   return (
     <Container>
       {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((sectionIndex) => (
@@ -61,7 +71,7 @@ const SeatSection3 = () => {
           key={sectionIndex}
           size={"small"}
           shape={shapeMapping[sectionIndex]}
-          color={colors[Math.floor(sectionIndex / cycle) % lengthOfprice]}
+          color={colorMapping[sectionIndex]}
           storeSeatInfo={() => storeSeatInfo(sectionIndex)}
         ></SectionColor>
       ))}

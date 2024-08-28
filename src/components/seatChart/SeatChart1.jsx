@@ -17,18 +17,18 @@ const SeatChart = () => {
 
   useEffect(() => {
     setAllowedSeat({
-      gridIndex: 1,
+      gridIndex: 0,
       row: getRandomInt(0, 9),
       col: getRandomInt(0, 9)
     });
   }, []);
 
-  useFakeAllowedSeat(1, 9, 9);
+  useFakeAllowedSeat(0, 9, 9);
 
   return (
     <>
       <SectionName>{allowedSection}구역</SectionName>
-      <SeatGrid rows={10} columns={10} gridIndex={1} />
+      <SeatGrid rows={10} columns={10} gridIndex={0} />
     </>
   );
 };

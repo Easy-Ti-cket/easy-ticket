@@ -105,3 +105,12 @@ export const stepTextNumberAtom = atomWithStorage("stepTextNumber", 0, storage);
 
 //도움말 텍스트
 export const helpTextNumberAtom = atomWithStorage("helpTextNumber", 0, storage);
+
+//구역 색깔
+export const sectionColorAtom = atom([
+  "#ff0000",
+  "#0000ff",
+  "#ffff00",
+  "#00ff00",
+  "#800080"
+]);

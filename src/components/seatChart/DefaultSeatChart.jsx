@@ -3,6 +3,9 @@ import SeatGrid from "./seatGrid/SeatGrid";
 import { useAtomValue } from "jotai";
 import { postersAtom, selectedPosterAtom } from "../../store/atom";
 import convertPriceObjectToArray from "../../util/convertPriceObjectToArray";
+import useFakeAllowedSeat from "../../hooks/useFakeAllowedSeat";
+import { useEffect } from "react";
+import { levelAtom } from "../../store/atom";
 
 const Stage = styled.div`
   display: flex;
@@ -25,6 +28,12 @@ const SeatGridContainer = styled.div`
 `;
 
 const DefalutSeatChart = () => {
+  const level = useAtomValue(levelAtom);
+
+  if (level === "high") {
+    useFakeAllowedSeat(3, 4, 4);
+  }
+
   return (
     <>
       <Stage>스테이지</Stage>
