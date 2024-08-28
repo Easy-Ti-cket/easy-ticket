@@ -19,9 +19,9 @@ import SelectSeat from "./pages/practiceMode/step2/SelectSeat";
 import SelectSeatInterpark from "./pages/challengeMode/interpark/step2/SelectSeatInterpark";
 // step 3
 import SeatPriceCheck from "./pages/practiceMode/step3/SeatPriceCheck";
-import SelectPriceInterpark from "./pages/challengeMode/interpark/step3/SelectPriceInterpark";
+import SelectPriceInterpark from "./pages/challengeMode/interpark/step3-step4/SelectPriceInterpark";
 // step 4
-import SelectPayMethodInterPark from "./pages/challengeMode/interpark/step4/SelectPayMethodInterPark";
+import SelectPayMethodInterPark from "./pages/challengeMode/interpark/step5-1/SelectPayMethodInterPark";
 import SelectPayMethod from "./pages/practiceMode/step4/SelectPayMethod";
 import CardPay from "./pages/practiceMode/step4/CardPay";
 // step 5
