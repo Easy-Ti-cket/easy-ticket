@@ -30,8 +30,6 @@ import Step5 from "./pages/practiceMode/step5/Step5";
 import Outro from "./pages/challengeMode/outro/Outro";
 import Record from "./pages/challengeMode/outro/Record";
 
-import TestPage from "./pages/TestPage";
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -93,7 +91,6 @@ const router = createBrowserRouter([
       {
         path: "challenge",
         children: [
-          { path: "test", element: <TestPage /> },
           {
             path: "interpark",
             element: <ProgressContents />,
