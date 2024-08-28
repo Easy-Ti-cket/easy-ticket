@@ -12,6 +12,7 @@ import Intro from "./pages/practiceMode/step0/Intro";
 import ChallangeIntro from "./pages/challengeMode/intro/ChallangeIntro";
 // step 1
 import SelectPerformance from "./pages/practiceMode/step1/SelectPerformance";
+import SelectPerformanceChallengeMode from "./pages/challengeMode/SelectPerformance/SelectPerformanceChallengeMode";
 import SelectRound from "./pages/practiceMode/step1/SelectRound";
 import SelectRoundInterpark from "./pages/challengeMode/interpark/step1/SelectRoundInterpark";
 // step 2
@@ -99,9 +100,15 @@ const router = createBrowserRouter([
                 element: <PrivateRoute element={<ChallangeIntro />} />,
                 label: "인트로"
               },
-              // 공연 선택 단계 추가 필요
               {
-                path: "step1",
+                path: "step1-1",
+                element: (
+                  <PrivateRoute element={<SelectPerformanceChallengeMode />} />
+                ),
+                label: "공연 선택"
+              },
+              {
+                path: "step1-2",
                 element: <PrivateRoute element={<SelectRoundInterpark />} />,
                 label: "날짜 및 회차 선택"
               },
@@ -143,6 +150,13 @@ const router = createBrowserRouter([
                 path: "step0",
                 element: <PrivateRoute element={<ChallangeIntro />} />,
                 lable: "인트로"
+              },
+              {
+                path: "step1-1",
+                element: (
+                  <PrivateRoute element={<SelectPerformanceChallengeMode />} />
+                ),
+                label: "공연 선택"
               }
             ]
           },
@@ -154,6 +168,13 @@ const router = createBrowserRouter([
                 path: "step0",
                 element: <PrivateRoute element={<ChallangeIntro />} />,
                 lable: "인트로"
+              },
+              {
+                path: "step1-1",
+                element: (
+                  <PrivateRoute element={<SelectPerformanceChallengeMode />} />
+                ),
+                label: "공연 선택"
               }
             ]
           },
@@ -165,6 +186,13 @@ const router = createBrowserRouter([
                 path: "step0",
                 element: <PrivateRoute element={<ChallangeIntro />} />,
                 lable: "인트로"
+              },
+              {
+                path: "step1-1",
+                element: (
+                  <PrivateRoute element={<SelectPerformanceChallengeMode />} />
+                ),
+                label: "공연 선택"
               }
             ]
           }
