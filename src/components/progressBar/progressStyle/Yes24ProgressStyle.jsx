@@ -5,35 +5,37 @@ export const ProgressBarContainer = styled.div`
   height: 105px;
   justify-content: center;
   align-items: center;
-  background-color: #2d2d2d;
 `;
 export const ProgressStep = styled.div`
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: center;
   background-color: ${(props) =>
-    props.$active ? "var(--progress-color)" : "#ECECEC"};
-  height: 60px;
+    props.$active ? "#ffffff" : "var(--text-color)"};
+  height: 80px;
   width: 100%;
-  // width: 211px;
 `;
 export const StepNumber = styled.div`
   color: ${(props) =>
-    props.$active ? "var(--point-color2)" : "var(--text-color)"};
+    props.$active ? "var(--key-color)" : "var(--fill-color)"};
   font-family: "pretendardB";
   font-size: 20px;
   display: flex;
-  align-items: center;
-  justify-content: center;
   margin-bottom: 5px;
-  margin-right: 16px;
+  margin-left: 16px;
+  font-size: 20px;
+  &::before {
+    content: "step";
+  }
 `;
 
 export const StepLine = styled.div``;
 
 export const StepLabel = styled.div`
-  font-family: "pretendard";
-  color: ${(props) => (props.$active ? "#ffffff" : "var(--text-color)")};
+  margin-left: 16px;
+  font-family: "pretendardB";
+  font-size: 24px;
+  color: ${(props) => (props.$active ? "#000000" : "#ffffff")};
 `;
 
 export default {
