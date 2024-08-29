@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import {
   levelAtom,
   themeSiteAtom,
+  timerControlAtom,
   userNameAtom,
   userNameErrorAtom
 } from "../../../../store/atom";
@@ -63,9 +64,10 @@ const SubNav = ({ hovereditem }) => {
   const [isConfirm, setIsConfirm] = useState(false);
   const [levelTheme, setLevelTheme] = useState("");
   const [navLocation, setNavLocation] = useState("");
-
   //어디로 이동할 것인지 필터링
   const practiceMode = ["low", "middle", "high"];
+  //모달창 타이머 제어
+  const setTimerControl = useSetAtom(timerControlAtom);
 
   const handleNavigate = (location) => {
     //입력된 userName이 없을 경우 userName 입력 받기
@@ -77,6 +79,7 @@ const SubNav = ({ hovereditem }) => {
     //reset은 모달창에서 진행
     if (path.includes("step") && !path.includes("step0")) {
       setIsConfirm(true);
+      setTimerControl(true);
       if (practiceMode.includes(location)) {
         setNavLocation("progress/step0");
         setLevelTheme(location);
