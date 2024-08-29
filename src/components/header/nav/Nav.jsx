@@ -110,7 +110,6 @@ const Nav = () => {
               $ishovered={ishovered}
               $isactive={hovereditem === "실전모드"}
               onMouseEnter={() => handleHoveredItemEnter("실전모드")}
-              onClick={() => nav("/record")}
             >
               실전 모드
             </NavContent>
@@ -118,6 +117,7 @@ const Nav = () => {
               $ishovered={ishovered}
               $isactive={hovereditem === null}
               onMouseEnter={() => handleHoveredItemEnter(null)}
+              onClick={() => nav("/record")}
             >
               기록 보기
             </NavContent>
