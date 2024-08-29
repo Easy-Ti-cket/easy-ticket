@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   levelAtom,
   themeSiteAtom,
@@ -8,6 +8,9 @@ import {
 } from "../../../../store/atom";
 import { useAtomValue, useSetAtom } from "jotai";
 import resetAtom from "../../../../util/resetAtom";
+import { useState } from "react";
+import Modal from "../../../modal/Modal";
+import GoToMainModalCont from "../../../modal/GoToMainModalCont";
 const SubNavBgc = styled.div`
   width: 100vw;
   height: 45px;
@@ -53,11 +56,19 @@ const SubNav = ({ hovereditem }) => {
   //접근 시 에러 발생
   const userName = useAtomValue(userNameAtom);
   const setUserNameError = useSetAtom(userNameErrorAtom);
+  //현재 페이지
+  const path = useLocation().pathname;
+  //헤더를 이용해 메인화면으로 나갈 경우
+  const [isConfirm, setIsConfirm] = useState(false);
 
   const handleNavigate = (location) => {
     //입력된 userName이 없을 경우
     if (!userName) {
       setUserNameError(true);
+      return;
+    }
+    if (path.includes("step") && !path.includes("step0")) {
+      setIsConfirm(true);
       return;
     }
     if (location === "low" || location === "middle" || location === "high") {
@@ -73,6 +84,12 @@ const SubNav = ({ hovereditem }) => {
 
   return (
     <>
+      {isConfirm && (
+        <Modal
+          buttonShow={false}
+          contents={<GoToMainModalCont setIsConfirm={setIsConfirm} />}
+        />
+      )}
       {hovereditem === "연습모드" && (
         <SubNavBgc>
           <SubNavWrap>
