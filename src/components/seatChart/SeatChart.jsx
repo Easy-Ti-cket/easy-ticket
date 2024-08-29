@@ -1,5 +1,18 @@
 import styled from "styled-components";
 import SeatGrid from "./seatGrid/SeatGrid";
+import { useAtom } from "jotai";
+import {
+  allowedSeatAtom,
+  fakeAllowedSeatAtom,
+  levelAtom
+} from "../../store/atom";
+import convertPriceObjectToArray from "../../util/convertPriceObjectToArray";
+import DefaultSeatChart from "./DefaultSeatChart";
+import SeatChart1 from "./SeatChart1";
+import SeatChart2 from "./SeatChart2";
+import { useEffect, useState } from "react";
+import getRandomInt from "../../util/getRandomInt";
+import { useLocation } from "react-router-dom";
 
 //SeatChart 전체 컨테이너
 const SeatChartContainer = styled.div`
@@ -12,36 +25,28 @@ const SeatChartContainer = styled.div`
   width: 500px;
   height: 500px;
 `;
-const Stage = styled.div`
-  display: flex;
-  width: 400px;
-  min-height: 70px;
-  border: 2px solid var(--fill-color);
-  border-radius: 4px;
-  margin: 5px;
-  align-items: center;
-  justify-content: center;
-`;
-
-const SeatGridContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(2, auto);
-  gap: 20px;
-  padding: 20px;
-  justify-content: center;
-  align-items: center;
-`;
+//num으로 하는게 맞나?
+const getSeatChartNum = (type) => {
+  switch (type) {
+    case "challenge":
+      return SeatChart1;
+    default:
+      return DefaultSeatChart;
+  }
+};
 
 const SeatChart = () => {
+  const path = useLocation().pathname;
+  const [type, setType] = useState("default");
+  useEffect(() => {
+    if (path.includes("challenge")) {
+      setType("challenge");
+    }
+  }, []);
+  const SelectedSeatChart = getSeatChartNum(type);
   return (
     <SeatChartContainer>
-      <Stage>무대</Stage>
-      <SeatGridContainer>
-        {/* SeatGrid 4개 배치 */}
-        {[0, 1, 2, 3].map((gridIndex) => (
-          <SeatGrid key={gridIndex} gridIndex={gridIndex} />
-        ))}
-      </SeatGridContainer>
+      <SelectedSeatChart></SelectedSeatChart>
     </SeatChartContainer>
   );
 };

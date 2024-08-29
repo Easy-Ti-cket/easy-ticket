@@ -50,7 +50,7 @@ const BoxWrapper = styled.div`
 
 const TitleText = styled.p`
   font-size: 18px;
-  white-space: nowrap; // 글자 크기 고정
+  white-space: nowrap;
   margin: 0;
 `;
 
@@ -64,7 +64,6 @@ const ButtonSection = styled.div`
 const SelectRoundYes24 = () => {
   const selectedPoster = useAtomValue(selectedPosterAtom);
   const posters = useAtomValue(postersAtom);
-  const [posterId, setPosterId] = useState(0);
   const [dateSelected, setDateSelected] = useState(false);
   const [roundSelected, setRoundSelected] = useState(false);
   const [timesButtons, setTimesButtons] = useState([]);
@@ -74,10 +73,9 @@ const SelectRoundYes24 = () => {
 
   useEffect(() => {
     setThemeSite("yes24");
-    setPosterId(3);
   }, [setThemeSite]);
 
-  const poster = posters[posterId];
+  const poster = posters[selectedPoster];
   const posterDates = poster?.date || [];
   const posterTimes = poster?.time || {};
 
@@ -119,7 +117,7 @@ const SelectRoundYes24 = () => {
   return (
     <Container>
       <UpperSection>
-        <PosterSection id={posterId} />
+        <PosterSection id={selectedPoster} />
       </UpperSection>
       <LowerSection>
         <BoxWrapper>
