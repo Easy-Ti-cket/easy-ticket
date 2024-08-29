@@ -2,7 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import Poster from "./Poster";
 import { useAtom } from "jotai";
-import { postersAtom, levelAtom, themeSiteAtom } from "../../store/atom";
+import {
+  selectedPosterAtom,
+  postersAtom,
+  levelAtom,
+  themeSiteAtom
+} from "../../store/atom";
 import { formatDateRange } from "../../util/date";
 import AnimationArea from "../Animation";
 
@@ -83,40 +88,38 @@ const PosterList = ({ onPosterClick }) => {
   const [posters] = useAtom(postersAtom);
   const [level] = useAtom(levelAtom);
   const [themeSite] = useAtom(themeSiteAtom);
+  const [, setSelectedPoster] = useAtom(selectedPosterAtom);
 
   const handlePosterClick = (posterId) => {
-    // 초급, 중급 난이도
-    if ((level === "low" || level === "middle") && posterId !== 0) {
-      alert("첫 번째 포스터를 선택하세요.");
+    // 초급 및 중급 난이도
+    if (level === "low" || level === "middle") {
+      if (posterId !== 0) {
+        alert("첫 번째 포스터를 선택하세요.");
+        return;
+      }
+      // 첫 번째 포스터가 선택된 경우에만 포스터 클릭 동작
+      onPosterClick(posterId);
       return;
     }
 
-    // 고급 난이도
     if (level === "high") {
-      // 연습모드일 경우 첫번째 포스터로 정답 고정
+      // 연습 모드에서 고급 난이도
       if (themeSite === "practice") {
         if (posterId !== 0) {
           alert("선택하는 포스터가 맞는 지 다시 한 번 확인해주세요.");
           return;
-        }
-      } else {
-        // 실전모드의 경우 사이트별 정답 설정
-        const themeSiteMap = {
-          interpark: 0,
-          melonticket: 1,
-          ticketlink: 2,
-          yes24: 3
-        };
-
-        const correctPosterId = themeSiteMap[themeSite];
-
-        if (posterId !== correctPosterId) {
-          alert("다시 선택해주세요.");
+        } else {
+          setSelectedPoster(0); // 정답 고정
+          onPosterClick(posterId); // 포스터 클릭 동작
           return;
         }
+      } else {
+        // 실전 모드에서 고급 난이도
+        setSelectedPoster(posterId);
+        onPosterClick(posterId); // 포스터 클릭 동작
+        return;
       }
     }
-    onPosterClick(posterId);
   };
 
   return (
