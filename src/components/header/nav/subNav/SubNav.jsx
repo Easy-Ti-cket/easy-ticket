@@ -63,7 +63,6 @@ const SubNav = ({ hovereditem }) => {
   //헤더를 이용해 메인화면으로 나갈 경우
   const [isConfirm, setIsConfirm] = useState(false);
   const [levelTheme, setLevelTheme] = useState("");
-  const [navLocation, setNavLocation] = useState("");
   //어디로 이동할 것인지 필터링
   const practiceMode = ["low", "middle", "high"];
   //모달창 타이머 제어
@@ -81,11 +80,9 @@ const SubNav = ({ hovereditem }) => {
       setIsConfirm(true);
       setTimerControl(true);
       if (practiceMode.includes(location)) {
-        setNavLocation("progress/step0");
         setLevelTheme(location);
         return;
       } else {
-        setNavLocation(`challenge/${location}/step0`);
         setLevelTheme(location);
         return;
       }
@@ -108,7 +105,6 @@ const SubNav = ({ hovereditem }) => {
           buttonShow={false}
           contents={
             <GoToLocationModalCont
-              navLocation={navLocation}
               setIsConfirm={setIsConfirm}
               levelTheme={levelTheme}
             />

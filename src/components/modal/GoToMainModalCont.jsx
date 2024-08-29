@@ -25,11 +25,8 @@ const Info = styled.span`
 const ButtonWrap = styled.div`
   display: flex;
 `;
-const GoToLocationModalCont = ({
-  setIsConfirm,
-  navLocation = "/",
-  levelTheme = null
-}) => {
+
+const GoToLocationModalCont = ({ setIsConfirm, levelTheme = null }) => {
   const navigate = useNavigate();
   //타이머 제어
   const setTimerControl = useSetAtom(timerControlAtom);
@@ -40,19 +37,25 @@ const GoToLocationModalCont = ({
   const challengeMode = ["interpark", "ticketlink", "yes24", "melonticket"];
 
   const handleClick = (confirmNavigate) => {
-    //확인을 누를 경우
+    //확인을 누를 경우 - 기본 설정 사항
+    setTimerControl(() => false);
+    setIsConfirm(() => false);
+    resetAtom();
     if (confirmNavigate) {
       //levelTheme이 존재 : 헤더를 통한 이동
       if (levelTheme && practiceMode.includes(levelTheme)) {
+        //연습모드
         setLevel(levelTheme);
+        navigate("progress/step0");
+        return;
       }
       if (levelTheme && challengeMode.includes(levelTheme)) {
+        //실전모드
         setTheme(levelTheme);
+        navigate(`challenge/${levelTheme}/step0`);
+        return;
       }
-      setTimerControl(() => false);
-      setIsConfirm(() => false);
-      resetAtom();
-      navigate(navLocation);
+      navigate("/");
       return;
     }
     //취소를 누를 경우
