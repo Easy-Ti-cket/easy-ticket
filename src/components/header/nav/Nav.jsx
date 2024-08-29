@@ -1,8 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { css } from "styled-components"; // css 함수 import 추가
 import SubNav from "./subNav/SubNav";
 import useHover from "../../../hooks/useHover";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import GoToLocationModalCont from "../../modal/GoToMainModalCont";
+import Modal from "../../modal/Modal";
+import { useSetAtom } from "jotai";
+import { timerControlAtom } from "../../../store/atom";
 
 /*네비게이터 전체 */
 const NavBorderBottom = styled.div`
@@ -88,9 +92,34 @@ const Nav = () => {
     handleMouseLeave,
     handleMouseEnter
   } = useHover();
+  //모달창 제어
+  const [isConfirm, setIsConfirm] = useState("");
+  const setTimerControl = useSetAtom(timerControlAtom);
+  const path = useLocation().pathname;
   const nav = useNavigate();
+
+  const handleClick = () => {
+    setTimerControl(false);
+    if (path.includes("step") && !path.includes("step0")) {
+      setIsConfirm(true);
+      return;
+    }
+    nav("/record");
+  };
+
   return (
     <NavBorderBottom>
+      {isConfirm && (
+        <Modal
+          buttonShow={false}
+          contents={
+            <GoToLocationModalCont
+              levelTheme="/record"
+              setIsConfirm={setIsConfirm}
+            />
+          }
+        />
+      )}
       <NavWrap>
         {/*hover 시 서브네비게이터가 나오도록 허용할 네비게이터 구간 */}
         <NavHoverSection
@@ -117,7 +146,7 @@ const Nav = () => {
               $ishovered={ishovered}
               $isactive={hovereditem === null}
               onMouseEnter={() => handleHoveredItemEnter(null)}
-              onClick={() => nav("/record")}
+              onClick={handleClick}
             >
               기록 보기
             </NavContent>

@@ -1,13 +1,18 @@
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   levelAtom,
   themeSiteAtom,
+  timerControlAtom,
   userNameAtom,
   userNameErrorAtom
 } from "../../../../store/atom";
 import { useAtomValue, useSetAtom } from "jotai";
 import resetAtom from "../../../../util/resetAtom";
+import { useState } from "react";
+import Modal from "../../../modal/Modal";
+import GoToLocationModalCont from "../../../modal/GoToMainModalCont";
+
 const SubNavBgc = styled.div`
   width: 100vw;
   height: 45px;
@@ -53,14 +58,36 @@ const SubNav = ({ hovereditem }) => {
   //접근 시 에러 발생
   const userName = useAtomValue(userNameAtom);
   const setUserNameError = useSetAtom(userNameErrorAtom);
+  //현재 페이지
+  const path = useLocation().pathname;
+  //헤더를 이용해 메인화면으로 나갈 경우
+  const [isConfirm, setIsConfirm] = useState(false);
+  const [levelTheme, setLevelTheme] = useState("");
+  //어디로 이동할 것인지 필터링
+  const practiceMode = ["low", "middle", "high"];
+  //모달창 타이머 제어
+  const setTimerControl = useSetAtom(timerControlAtom);
 
   const handleNavigate = (location) => {
-    //입력된 userName이 없을 경우
+    //입력된 userName이 없을 경우 userName 입력 받기
     if (!userName) {
       setUserNameError(true);
       return;
     }
-    if (location === "low" || location === "middle" || location === "high") {
+    //예매 과정 진행 중일 경우 모달창 켜서 제어
+    //reset은 모달창에서 진행
+    if (path.includes("step") && !path.includes("step0")) {
+      setIsConfirm(true);
+      setTimerControl(true);
+      if (practiceMode.includes(location)) {
+        setLevelTheme(location);
+        return;
+      } else {
+        setLevelTheme(location);
+        return;
+      }
+    }
+    if (practiceMode.includes(location)) {
       resetAtom();
       setLevel(location); // 레벨 설정
       nav("/progress/step0"); // 연습모드 step0로 이동
@@ -73,6 +100,17 @@ const SubNav = ({ hovereditem }) => {
 
   return (
     <>
+      {isConfirm && (
+        <Modal
+          buttonShow={false}
+          contents={
+            <GoToLocationModalCont
+              setIsConfirm={setIsConfirm}
+              levelTheme={levelTheme}
+            />
+          }
+        />
+      )}
       {hovereditem === "연습모드" && (
         <SubNavBgc>
           <SubNavWrap>
