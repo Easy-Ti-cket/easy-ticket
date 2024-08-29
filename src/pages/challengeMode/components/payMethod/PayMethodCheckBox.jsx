@@ -5,6 +5,8 @@ const CheckBoxContainer = styled.div`
   gap: 10px;
   transform: translateY(-200px);
   font-size: 14px;
+  vertical-align: middle;
+  text-align: center;
 `;
 const CheckBox = styled.input`
   color: ${(props) =>

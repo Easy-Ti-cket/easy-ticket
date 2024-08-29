@@ -5,6 +5,7 @@ const PayWarning = styled.table`
   transform: translateY(-220px);
   background-color: #fff;
   width: 800px;
+  text-align: center;
 `;
 const PayWarningCont = styled.td`
   font-family: "pretendardM";
@@ -13,6 +14,7 @@ const PayWarningCont = styled.td`
   border: 1px solid var(--fill-color);
   font-size: 14px;
   vertical-align: middle;
+  padding: 5px;
   background-color: ${(props) => (props.$bgc ? "var(--dimmed-color)" : "none")};
   color: ${(props) =>
     props.$bgc ? "var(--text-color2)" : "var(--text-color)"};
