@@ -23,15 +23,17 @@ import SelectSeat from "./pages/practiceMode/step2/SelectSeat";
 import SelectSeatInterpark from "./pages/challengeMode/interpark/step2/SelectSeatInterpark";
 // step 3
 import SeatPriceCheck from "./pages/practiceMode/step3/SeatPriceCheck";
-import SelectPriceInterpark from "./pages/challengeMode/interpark/step3/SelectPriceInterpark";
+import SelectPriceInterpark from "./pages/challengeMode/interpark/step3-step4/SelectPriceInterpark";
 // step 4
-import SelectPayMethodInterPark from "./pages/challengeMode/interpark/step4/SelectPayMethodInterPark";
+import SelectPayMethodInterPark from "./pages/challengeMode/interpark/step5-1/SelectPayMethodInterPark";
 import SelectPayMethod from "./pages/practiceMode/step4/SelectPayMethod";
 import CardPay from "./pages/practiceMode/step4/CardPay";
 // step 5
 import Step5 from "./pages/practiceMode/step5/Step5";
 import Outro from "./pages/challengeMode/outro/Outro";
 import Record from "./pages/challengeMode/outro/Record";
+import SelectPriceYes24 from "./pages/challengeMode/yes24/step3-step4/SelectPriceYes24";
+import SelectPayMethodYes24 from "./pages/challengeMode/yes24/step5/SelectPayMethodYes24";
 
 const router = createBrowserRouter([
   {
@@ -211,6 +213,15 @@ const router = createBrowserRouter([
                 path: "step1-2",
                 element: <PrivateRoute element={<SelectRoundYes24 />} />,
                 label: "날짜 및 회차 선택"
+              },
+              {
+                path: "step3/step4",
+                element: <PrivateRoute element={<SelectPriceYes24 />} />,
+                label: "매수 선택 및 가격 선택"
+              },
+              {
+                path: "step5-1",
+                element: <PrivateRoute element={<SelectPayMethodYes24 />} />
               }
             ]
           }

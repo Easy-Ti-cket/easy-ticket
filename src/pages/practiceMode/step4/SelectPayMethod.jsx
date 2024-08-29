@@ -10,7 +10,6 @@ import {
   stepTextNumberAtom,
   helpTextNumberAtom
 } from "../../../store/atom";
-import { useBookingValidate } from "../../../hooks/useBookingValidate";
 import { usePaymentValidate } from "../../../hooks/usePaymentValidate";
 
 const SelectPayWrap = styled.div`
@@ -29,7 +28,7 @@ export const Step4Container = styled.div`
   margin: 0 20px;
 `;
 export const SubTtitle = styled.div`
-  width: 447px;
+  width: 400px;
   height: 37px;
   border-bottom: 1px solid var(--fill-color);
   font-size: 20px;
@@ -52,6 +51,7 @@ const SelectPayMethod = () => {
   const { handlePayment, hasPayFormError, cardTypesError } = usePaymentValidate(
     { correctList }
   );
+  console.log(correctList);
   const setStepTextNumber = useSetAtom(stepTextNumberAtom);
   const setHelpTextNumber = useSetAtom(helpTextNumberAtom);
 
