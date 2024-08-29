@@ -10,7 +10,7 @@ import { isSectionSelectedAtom, progressAtom } from "../../../../store/atom";
 const SelectSeatcontainer = styled.div`
   display: flex;
   width: 100%;
-  justify-content: space-around;6
+  justify-content: space-around;
   align-items: center;
   gap: 80px;
 `;
