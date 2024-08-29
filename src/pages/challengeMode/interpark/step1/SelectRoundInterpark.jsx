@@ -3,7 +3,7 @@ import PosterInterpark from "./PosterInterpark";
 import SelectCalender from "../../../../components/calender/SelectCalender";
 import Button from "../../../../components/button/Button";
 import styled from "styled-components";
-import { useAtom } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import {
   themeSiteAtom,
   selectedPosterAtom,
@@ -51,22 +51,20 @@ const RoundWrapper = styled.div`
 `;
 
 const SelectRoundInterpark = () => {
-  const [selectedPoster] = useAtom(selectedPosterAtom);
-  const [posters] = useAtom(postersAtom);
-  const [posterId, setPosterId] = useState(0);
+  const selectedPoster = useAtomValue(selectedPosterAtom);
+  const posters = useAtomValue(postersAtom);
   const [dateSelected, setDateSelected] = useState(false);
   const [roundSelected, setRoundSelected] = useState(false);
   const [timesButtons, setTimesButtons] = useState([]);
   const [correctRound, setCorrectRound] = useState(null);
   const navigate = useNavigate();
-  const [, setThemeSite] = useAtom(themeSiteAtom);
+  const setThemeSite = useSetAtom(themeSiteAtom);
 
   useEffect(() => {
     setThemeSite("interpark");
-    setPosterId(0);
   }, [setThemeSite]);
 
-  const poster = posters[posterId];
+  const poster = posters[selectedPoster];
   const posterDates = poster ? poster.date : [];
   const posterTimes = poster ? poster.time : {};
 
@@ -109,7 +107,7 @@ const SelectRoundInterpark = () => {
   return (
     <Container>
       <LeftSection>
-        <PosterInterpark id={posterId} />
+        <PosterInterpark id={selectedPoster} />
       </LeftSection>
       <RightSection>
         <BoxWrapper>
