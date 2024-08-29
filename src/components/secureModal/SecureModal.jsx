@@ -55,6 +55,7 @@ const InputBox = styled.input`
   border: 1px solid var(--sub-color);
   border-radius: 4px;
   text-align: center;
+  text-transform: uppercase;
 `;
 
 const SecureModal = ({ onClick }) => {

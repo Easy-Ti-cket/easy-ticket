@@ -35,9 +35,6 @@ export const usePaymentValidate = ({ correctList, isChecked = null }) => {
         alert("개인정보 수집 및 취소 수수료 관련 항목에 모두 동의해 주세요");
         return;
       }
-
-      setStepTextNumber((prev) => prev + 1);
-      setHelpTextNumber((prev) => prev + 1);
     }
   };
   return { handlePayment, hasPayFormError, cardTypesError };

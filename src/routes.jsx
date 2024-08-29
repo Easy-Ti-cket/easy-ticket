@@ -12,8 +12,12 @@ import Intro from "./pages/practiceMode/step0/Intro";
 import ChallangeIntro from "./pages/challengeMode/intro/ChallangeIntro";
 // step 1
 import SelectPerformance from "./pages/practiceMode/step1/SelectPerformance";
+import SelectPerformanceChallengeMode from "./pages/challengeMode/SelectPerformance/SelectPerformanceChallengeMode";
 import SelectRound from "./pages/practiceMode/step1/SelectRound";
 import SelectRoundInterpark from "./pages/challengeMode/interpark/step1/SelectRoundInterpark";
+import SelectRoundMelonticket from "./pages/challengeMode/melonticket/step1/SelectRoundMelonticket";
+import SelectRoundTicketlink from "./pages/challengeMode/ticketlink/step1/SelectRoundTicketlink";
+import SelectRoundYes24 from "./pages/challengeMode/yes24/step1/SelectRoundYes24";
 // step 2
 import SelectSeat from "./pages/practiceMode/step2/SelectSeat";
 import SelectSeatInterpark from "./pages/challengeMode/interpark/step2/SelectSeatInterpark";
@@ -26,6 +30,7 @@ import SelectPayMethod from "./pages/practiceMode/step4/SelectPayMethod";
 import CardPay from "./pages/practiceMode/step4/CardPay";
 // step 5
 import Step5 from "./pages/practiceMode/step5/Step5";
+
 import Outro from "./pages/challengeMode/outro/Outro";
 import Record from "./pages/challengeMode/outro/Record";
 import SelectPriceYes24 from "./pages/challengeMode/yes24/step3-step4/SelectPriceYes24";
@@ -101,9 +106,15 @@ const router = createBrowserRouter([
                 element: <PrivateRoute element={<ChallangeIntro />} />,
                 label: "인트로"
               },
-              // 공연 선택 단계 추가 필요
               {
-                path: "step1",
+                path: "step1-1",
+                element: (
+                  <PrivateRoute element={<SelectPerformanceChallengeMode />} />
+                ),
+                label: "공연 선택"
+              },
+              {
+                path: "step1-2",
                 element: <PrivateRoute element={<SelectRoundInterpark />} />,
                 label: "날짜 및 회차 선택"
               },
@@ -145,6 +156,18 @@ const router = createBrowserRouter([
                 path: "step0",
                 element: <PrivateRoute element={<ChallangeIntro />} />,
                 lable: "인트로"
+              },
+              {
+                path: "step1-1",
+                element: (
+                  <PrivateRoute element={<SelectPerformanceChallengeMode />} />
+                ),
+                label: "공연 선택"
+              },
+              {
+                path: "step1-2",
+                element: <PrivateRoute element={<SelectRoundMelonticket />} />,
+                label: "날짜 및 회차 선택"
               }
             ]
           },
@@ -156,6 +179,18 @@ const router = createBrowserRouter([
                 path: "step0",
                 element: <PrivateRoute element={<ChallangeIntro />} />,
                 lable: "인트로"
+              },
+              {
+                path: "step1-1",
+                element: (
+                  <PrivateRoute element={<SelectPerformanceChallengeMode />} />
+                ),
+                label: "공연 선택"
+              },
+              {
+                path: "step1-2",
+                element: <PrivateRoute element={<SelectRoundTicketlink />} />,
+                label: "날짜 및 회차 선택"
               }
             ]
           },
@@ -167,6 +202,18 @@ const router = createBrowserRouter([
                 path: "step0",
                 element: <PrivateRoute element={<ChallangeIntro />} />,
                 lable: "인트로"
+              },
+              {
+                path: "step1-1",
+                element: (
+                  <PrivateRoute element={<SelectPerformanceChallengeMode />} />
+                ),
+                label: "공연 선택"
+              },
+              {
+                path: "step1-2",
+                element: <PrivateRoute element={<SelectRoundYes24 />} />,
+                label: "날짜 및 회차 선택"
               },
               {
                 path: "step3/step4",
