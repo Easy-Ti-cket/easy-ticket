@@ -10,7 +10,8 @@ import { useAtomValue, useSetAtom } from "jotai";
 import resetAtom from "../../../../util/resetAtom";
 import { useState } from "react";
 import Modal from "../../../modal/Modal";
-import GoToMainModalCont from "../../../modal/GoToMainModalCont";
+import GoToLocationModalCont from "../../../modal/GoToMainModalCont";
+
 const SubNavBgc = styled.div`
   width: 100vw;
   height: 45px;
@@ -60,18 +61,33 @@ const SubNav = ({ hovereditem }) => {
   const path = useLocation().pathname;
   //헤더를 이용해 메인화면으로 나갈 경우
   const [isConfirm, setIsConfirm] = useState(false);
+  const [levelTheme, setLevelTheme] = useState("");
+  const [navLocation, setNavLocation] = useState("");
+
+  //어디로 이동할 것인지 필터링
+  const practiceMode = ["low", "middle", "high"];
 
   const handleNavigate = (location) => {
-    //입력된 userName이 없을 경우
+    //입력된 userName이 없을 경우 userName 입력 받기
     if (!userName) {
       setUserNameError(true);
       return;
     }
+    //예매 과정 진행 중일 경우 모달창 켜서 제어
+    //reset은 모달창에서 진행
     if (path.includes("step") && !path.includes("step0")) {
       setIsConfirm(true);
-      return;
+      if (practiceMode.includes(location)) {
+        setNavLocation("progress/step0");
+        setLevelTheme(location);
+        return;
+      } else {
+        setNavLocation(`challenge/${location}/step0`);
+        setLevelTheme(location);
+        return;
+      }
     }
-    if (location === "low" || location === "middle" || location === "high") {
+    if (practiceMode.includes(location)) {
       resetAtom();
       setLevel(location); // 레벨 설정
       nav("/progress/step0"); // 연습모드 step0로 이동
@@ -87,7 +103,13 @@ const SubNav = ({ hovereditem }) => {
       {isConfirm && (
         <Modal
           buttonShow={false}
-          contents={<GoToMainModalCont setIsConfirm={setIsConfirm} />}
+          contents={
+            <GoToLocationModalCont
+              navLocation={navLocation}
+              setIsConfirm={setIsConfirm}
+              levelTheme={levelTheme}
+            />
+          }
         />
       )}
       {hovereditem === "연습모드" && (
