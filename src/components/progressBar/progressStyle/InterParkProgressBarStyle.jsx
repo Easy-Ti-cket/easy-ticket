@@ -3,7 +3,6 @@ export const ProgressBarContainer = styled.div`
   display: flex;
   width: 100%;
   height: 105px;
-  justify-content: center;
   align-items: center;
   background-color: #2d2d2d;
 `;
@@ -15,7 +14,20 @@ export const ProgressStep = styled.div`
     props.$active ? "var(--progress-color)" : "#ECECEC"};
   height: 60px;
   width: 100%;
-  // width: 211px;
+  font-family: "pretendardB";
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    right: 5px;
+    bottom: 24px;
+    width: 8px;
+    height: 8px;
+    border: solid var(--key-color);
+    border-width: 0 4px 4px 0;
+    transform: rotate(-45deg);
+  }
 `;
 export const StepNumber = styled.div`
   color: ${(props) =>
@@ -32,7 +44,8 @@ export const StepNumber = styled.div`
 export const StepLine = styled.div``;
 
 export const StepLabel = styled.div`
-  font-family: "pretendard";
+  font-family: "pretendardB";
+  font-size: 24px;
   color: ${(props) => (props.$active ? "#ffffff" : "var(--text-color)")};
 `;
 

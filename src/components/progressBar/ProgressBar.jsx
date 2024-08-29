@@ -5,9 +5,6 @@ import useProgressStyle from "../../hooks/useProgressStyle";
 
 const ProgressBar = () => {
   const progress = useAtomValue(progressAtom);
-  //삭제
-  const setProgress = useAtom(progressAtom)[1];
-  setProgress(3);
 
   const [themeSite, setThemeSite] = useAtom(themeSiteAtom);
   const {

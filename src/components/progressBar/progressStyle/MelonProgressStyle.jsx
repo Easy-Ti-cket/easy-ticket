@@ -36,8 +36,8 @@ export const StepNumber = styled.div`
 export const StepLine = styled.div``;
 
 export const StepLabel = styled.div`
-  font-size: 23px;
-  color: ${(props) => (props.$active ? "#ffffff" : "var(--fill-color)")};
+  font-size: 24px;
+  color: ${(props) => (props.$active ? "#000000" : "var(--fill-color)")};
 `;
 
 export default {

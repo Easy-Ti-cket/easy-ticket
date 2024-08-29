@@ -14,6 +14,20 @@ export const ProgressStep = styled.div`
     props.$active ? "#ffffff" : "var(--text-color)"};
   height: 80px;
   width: 100%;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    width: 10px;
+    height: 10px;
+    border: solid
+      ${(props) => (props.$active ? "var(--key-color)" : "var(--text-color)")}; /* 체크 모양의 색상을 설정 */
+    border-width: 0 4px 4px 0; /* 체크 모양의 두께를 설정 */
+    transform: rotate(45deg); /* 체크 모양을 45도 회전 */
+  }
 `;
 export const StepNumber = styled.div`
   color: ${(props) =>
