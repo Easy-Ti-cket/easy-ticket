@@ -72,7 +72,7 @@ const PayMethodInfo = styled.span`
   color: var(--text-color);
 `;
 
-const SelectPayMethodInterPark = () => {
+const SelectPayMethodInterPark = ({ isChecked }) => {
   //포스터 정보
   const posterId = useAtomValue(selectedPosterAtom);
   //nav
@@ -80,7 +80,7 @@ const SelectPayMethodInterPark = () => {
   //검사로직
   const { correctList, handleChange, isAnswer } = useForm(3);
   const { handlePayment, hasPayFormError, cardTypesError } = usePaymentValidate(
-    { correctList }
+    { correctList, isChecked }
   );
   //'신용카드'를 정확히 골랐을 경우 '결제 수단 입력' 창 생성
   const isPayMethodCorrect = correctList["PayMethodForm"];

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { themeSiteAtom } from "../store/atom";
 
-export const usePaymentValidate = ({ correctList }) => {
+export const usePaymentValidate = ({ correctList, isChecked = null }) => {
   //step4 - 결제 수단 및 방식 선택 검사로직
   const [hasPayFormError, setHasPayFormError] = useState();
   const [cardTypesError, setCardTypesError] = useState();
@@ -30,6 +30,10 @@ export const usePaymentValidate = ({ correctList }) => {
         nav("../step4-2");
       } else {
         nav("../step5-2");
+      }
+      if (themeSite !== "practice" && themeSite !== "interpark" && !isChecked) {
+        alert("개인정보 수집 및 취소 수수료 관련 항목에 모두 동의해 주세요");
+        return;
       }
 
       setStepTextNumber((prev) => prev + 1);
