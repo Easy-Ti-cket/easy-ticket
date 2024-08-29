@@ -26,7 +26,7 @@ const ButtonWrap = styled.div`
   display: flex;
 `;
 
-const GoToLocationModalCont = ({ setIsConfirm, levelTheme = null }) => {
+const GoToLocationModalCont = ({ setIsConfirm, levelTheme = "/" }) => {
   const navigate = useNavigate();
   //타이머 제어
   const setTimerControl = useSetAtom(timerControlAtom);
@@ -55,7 +55,7 @@ const GoToLocationModalCont = ({ setIsConfirm, levelTheme = null }) => {
         navigate(`challenge/${levelTheme}/step0`);
         return;
       }
-      navigate("/");
+      navigate(levelTheme);
       return;
     }
     //취소를 누를 경우
