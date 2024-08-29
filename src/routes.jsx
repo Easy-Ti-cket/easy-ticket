@@ -32,7 +32,7 @@ import CardPay from "./pages/practiceMode/step4/CardPay";
 import Step5 from "./pages/practiceMode/step5/Step5";
 
 import Outro from "./pages/challengeMode/outro/Outro";
-import Record from "./pages/challengeMode/outro/Record";
+import Record from "./pages/challengeMode/record/Record";
 import SelectPriceYes24 from "./pages/challengeMode/yes24/step3-step4/SelectPriceYes24";
 import SelectPayMethodYes24 from "./pages/challengeMode/yes24/step5/SelectPayMethodYes24";
 

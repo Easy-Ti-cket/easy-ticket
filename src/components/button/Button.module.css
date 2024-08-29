@@ -77,6 +77,7 @@
   height: 100px;
   margin-bottom: 20px;
 }
+
 /*모달용 작은 버튼*/
 .button--modal {
   width: 100px;
@@ -87,4 +88,23 @@
   &:hover {
     background-color: var(--text-color2);
   }
+}
+/*record 화면의 navigate 버튼 */
+.button--record {
+  width: 120px;
+  height: 120px;
+  flex-direction: column;
+  color: var(--text-color);
+  background-color: #fff;
+  border: 1px solid var(--fill-color);
+  border-radius: 8px;
+  &:hover {
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+    background-color: #fff;
+  }
+}
+.icon--record {
+  width: 70px;
+  height: 70px;
+  margin: 0;
 }
