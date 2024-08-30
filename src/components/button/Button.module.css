@@ -91,20 +91,50 @@
 }
 /*record 화면의 navigate 버튼 */
 .button--record {
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 90px;
+  gap: 5px;
   flex-direction: column;
   color: var(--text-color);
   background-color: #fff;
   border: 1px solid var(--fill-color);
   border-radius: 8px;
+  font-size: 14px;
   &:hover {
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
     background-color: #fff;
   }
 }
+/*클릭했을 경우*/
+.button--record-onclick {
+  gap: 5px;
+  border: none;
+  width: 100px;
+  height: 80px;
+  flex-direction: column;
+  background-color: var(--key-color);
+  position: relative;
+  border: none;
+  font-size: 14px;
+
+  &:hover {
+    background-color: var(--key-color);
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid var(--key-color);
+  }
+}
 .icon--record {
-  width: 70px;
-  height: 70px;
+  width: 50px;
+  height: 50px;
   margin: 0;
 }
