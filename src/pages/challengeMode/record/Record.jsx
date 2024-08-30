@@ -4,6 +4,7 @@ import RecordNavigate from "../components/record/RecordNavigate";
 import loadUserData from "../../../apis/loadUserData";
 import { useAtomValue } from "jotai";
 import { userNameAtom } from "../../../store/atom";
+import ErrorTooltip from "../../../components/tooltip/ErrorTooltip";
 
 const RecordContainer = styled.div`
   width: 100vw;
@@ -34,7 +35,7 @@ const RecordContents = styled.div`
 //행제목
 const RecordListTitle = styled.div`
   display: flex;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 `;
 //전체 기록
 const RecordTable = styled.div`
@@ -70,6 +71,7 @@ const RecordItem = styled.li`
   font-family: "pretendardB";
   color: ${(props) =>
     props.$bold ? "var(--text-color2)" : "var(--text-color)"};
+  color: ${(props) => props.$highlight && "var(--key-color)"};
   color: ${(props) => props.$isUserRecord && "var(--key-color)"};
   font-size: ${(props) => props.$isUserRecord && "24px"};
 `;
@@ -80,14 +82,9 @@ const Record = () => {
   //필터링된 데이터 (초기값 인터파크)
   const [filteredRecords, setFilteredRecords] = useState([]);
   //내 데이터 순위
-  const [myRecordIndex, setMyRecordIndex] = useState(0);
+  const [myRecordIndex, setMyRecordIndex] = useState(-1);
   //세션스토리지에 저장된 자기 기록 (비교용)
-  const myRecordTimeStamp = JSON.parse(
-    sessionStorage.getItem("record")
-  ).timeStamp;
-  const myRecordNanoSec = myRecordTimeStamp.nanoseconds;
-  const myRecordSec = myRecordTimeStamp.seconds;
-  const userName = useAtomValue(userNameAtom);
+  const myRecordTimeStamp = JSON.parse(sessionStorage.getItem("record"));
 
   // 데이터베이스로부터 데이터 읽어오기 - loadUserData 함수
   useEffect(() => {
@@ -101,13 +98,17 @@ const Record = () => {
           sortedRecords.filter((item) => item.themeSite === "interpark")
         );
         //내 기록 순위 (세션스토리지 / db 비교)
-        setMyRecordIndex(
-          sortedRecords.findIndex(
-            (item) =>
-              item.timeStamp.nanoseconds === myRecordNanoSec &&
-              item.timeStamp.seconds === myRecordSec
-          )
-        );
+        const myRecordNanoSec = myRecordTimeStamp.timeStamp.nanoseconds;
+        const myRecordSec = myRecordTimeStamp.timeStamp.seconds;
+        if (myRecordTimeStamp) {
+          setMyRecordIndex(
+            sortedRecords.findIndex(
+              (item) =>
+                item.timeStamp.nanoseconds === myRecordNanoSec &&
+                item.timeStamp.seconds === myRecordSec
+            )
+          );
+        }
       })
       .catch((error) =>
         console.error(`데이터를 가져오는 도중 에러 발생 : ${error}`)
@@ -120,8 +121,8 @@ const Record = () => {
   };
 
   //데이터 슬라이싱
-  const startIndex = myRecordIndex < 3 ? 0 : myRecordIndex - 2;
-  const endIndex = myRecordIndex < 3 ? 5 : myRecordIndex + 2;
+  const startIndex = myRecordIndex < 5 ? 0 : myRecordIndex - 4;
+  const endIndex = myRecordIndex < 5 ? 10 : myRecordIndex + 5;
 
   return (
     <RecordContainer>
@@ -146,17 +147,29 @@ const Record = () => {
               .slice(startIndex, endIndex)
               .map((record, index) => (
                 <RecordItemContainer
-                  $isUserRecord={myRecordIndex === index}
+                  $isUserRecord={
+                    myRecordIndex ===
+                    filteredRecords.findIndex((item) => item === record)
+                  }
                   key={index}
                 >
                   <RecordItem
-                    $isUserRecord={myRecordIndex === index}
+                    $isUserRecord={
+                      myRecordIndex ===
+                      filteredRecords.findIndex((item) => item === record)
+                    }
                     $bold={true}
+                    $highlight={true}
                   >
-                    {index + 1}
+                    {filteredRecords.findIndex((item) => item === record) + 1}
                   </RecordItem>
                   <RecordItem $bold={true}>{record.userName}</RecordItem>
-                  <RecordItem $isUserRecord={myRecordIndex === index}>
+                  <RecordItem
+                    $isUserRecord={
+                      myRecordIndex ===
+                      filteredRecords.findIndex((item) => item === record)
+                    }
+                  >
                     {formatTime(record.timeSpent)}
                   </RecordItem>
                 </RecordItemContainer>
