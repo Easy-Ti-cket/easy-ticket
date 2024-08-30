@@ -9,7 +9,8 @@ import { isSectionSelectedAtom, progressAtom } from "../../../../store/atom";
 
 const SelectSeatcontainer = styled.div`
   display: flex;
-  justify-content: space-evenly;
+  width: 100%;
+  justify-content: space-around;
   align-items: center;
   gap: 80px;
 `;
@@ -29,7 +30,7 @@ const SelectSeatInterpark = () => {
     <>
       {isModalOpen && <SecureModal onClick={closeModal} />}
       <SelectSeatcontainer>
-        {isSectionSelected ? <SeatChart /> : <SeatSection />}
+        {isSectionSelected ? <SeatChart /> : <SeatSection num={0} />}
         <SeatInfo />
       </SelectSeatcontainer>
     </>

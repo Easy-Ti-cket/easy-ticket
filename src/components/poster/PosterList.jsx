@@ -2,7 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import Poster from "./Poster";
 import { useAtom } from "jotai";
-import { postersAtom, levelAtom } from "../../store/atom";
+import {
+  selectedPosterAtom,
+  postersAtom,
+  levelAtom,
+  themeSiteAtom
+} from "../../store/atom";
 import { formatDateRange } from "../../util/date";
 import AnimationArea from "../Animation";
 
@@ -82,15 +87,39 @@ const PosterInfo = styled.div`
 const PosterList = ({ onPosterClick }) => {
   const [posters] = useAtom(postersAtom);
   const [level] = useAtom(levelAtom);
+  const [themeSite] = useAtom(themeSiteAtom);
+  const [, setSelectedPoster] = useAtom(selectedPosterAtom);
 
   const handlePosterClick = (posterId) => {
-    // 선택한 포스터가 아닌 경우 예외 처리
-    if ((level === "low" || level === "middle") && posterId !== 0) {
-      alert("선택하는 포스터가 맞는 지 다시 한 번 확인해주세요.");
+    // 초급 및 중급 난이도
+    if (level === "low" || level === "middle") {
+      if (posterId !== 0) {
+        alert("첫 번째 포스터를 선택하세요.");
+        return;
+      }
+      // 첫 번째 포스터가 선택된 경우에만 포스터 클릭 동작
+      onPosterClick(posterId);
       return;
     }
-    alert("좋아요. 잘 하고 있어요!");
-    onPosterClick(posterId);
+
+    if (level === "high") {
+      // 연습 모드에서 고급 난이도
+      if (themeSite === "practice") {
+        if (posterId !== 0) {
+          alert("선택하는 포스터가 맞는 지 다시 한 번 확인해주세요.");
+          return;
+        } else {
+          setSelectedPoster(0); // 정답 고정
+          onPosterClick(posterId); // 포스터 클릭 동작
+          return;
+        }
+      } else {
+        // 실전 모드에서 고급 난이도
+        setSelectedPoster(posterId);
+        onPosterClick(posterId); // 포스터 클릭 동작
+        return;
+      }
+    }
   };
 
   return (
