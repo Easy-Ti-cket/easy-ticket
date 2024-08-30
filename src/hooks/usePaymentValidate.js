@@ -31,7 +31,7 @@ export const usePaymentValidate = ({ correctList, isChecked = null }) => {
       } else {
         nav("../step5-2");
       }
-      if (themeSite !== "practice" && themeSite !== "interpark" && !isChecked) {
+      if (themeSite !== "practice" && themeSite === "interpark" && !isChecked) {
         alert("개인정보 수집 및 취소 수수료 관련 항목에 모두 동의해 주세요");
         return;
       }
