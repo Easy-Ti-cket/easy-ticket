@@ -19,9 +19,6 @@ const RecordContents = styled.div`
   flex-direction: column;
   align-items: center;
   gap: 10px;
-  &:nth-child(1) {
-    width: 50px;
-  }
 `;
 
 const RecordTitle = styled.h2`
