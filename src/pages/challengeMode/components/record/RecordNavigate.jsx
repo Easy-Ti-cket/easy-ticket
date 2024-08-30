@@ -11,24 +11,28 @@ const NavContainer = styled.div`
   gap: 10px;
 `;
 
-const RecordNavigate = () => {
+const RecordNavigate = ({ records, setFilteredRecords }) => {
   //클릭했을 경우 css 변경
   const [isClick, setIsClick] = useState({
-    interpark: false,
+    //기본창 : 인터파크 기록
+    interpark: true,
     melonticket: false,
     ticketlink: false,
     yes24: false
   });
   const handleClick = (name) => {
+    //클릭했을 시 css 변경
     setIsClick((prev) => {
       return {
         interpark: false,
         melonticket: false,
         ticketlink: false,
         yes24: false,
-        [name]: !prev[name]
+        [name]: true
       };
     });
+    //데이터 필터링
+    setFilteredRecords(() => records.filter((item) => item.themeSite === name));
   };
   const typeName = (name) => {
     return isClick[name] ? "record-onclick" : "record";
