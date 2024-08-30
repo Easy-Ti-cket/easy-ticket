@@ -8,7 +8,7 @@ import { useState } from "react";
 
 const NavContainer = styled.div`
   display: flex;
-  gap: 10px;
+  gap: 8px;
 `;
 
 const RecordNavigate = ({ records, setFilteredRecords }) => {

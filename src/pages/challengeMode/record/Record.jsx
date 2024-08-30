@@ -14,8 +14,8 @@ const RecordContainer = styled.div`
   align-items: center;
   gap: 5px;
   padding: 20px;
+  text-align: center;
 `;
-
 const RecordTitle = styled.h2`
   font-family: "pretendardB";
   font-size: 36px;
@@ -34,42 +34,44 @@ const RecordContents = styled.div`
 //행제목
 const RecordListTitle = styled.div`
   display: flex;
+  margin-bottom: 10px;
 `;
 //전체 기록
 const RecordTable = styled.div`
-  display: inline-flex;
+  padding: 20px 0;
+  display: flex;
   flex-direction: column;
-  padding: 20px;
+  justify-content: center;
+  align-items: center;
   background-color: #fff;
   border-radius: 8px;
 `;
-//기록 한 행
+
 const RecordList = styled.ul`
   display: flex;
   flex-direction: column;
+  gap: 8px;
 `;
 // 순위 + 이름 + 기록
 const RecordItemContainer = styled.ul`
   display: flex;
-  justify-content: center;
   //로그인한 유저의 기록일 경우
-  width: ${(props) => props.$isUserRecord && "calc(100% + 100px)"};
+  box-shadow: ${(props) => props.$isUserRecord && "2px 2px 0 rgba(0,0,0,0.2)"};
+  border-radius: 8px;
   background-color: ${(props) =>
     props.$isUserRecord ? "var(--sub-color)" : "none"};
   transition: background-color 1s ease;
 `;
 const RecordItem = styled.li`
+  list-style-type: none;
   width: 100px;
-  display: flex;
   justify-content: center;
-  align-items: center;
-  padding: 10px;
-  margin-bottom: 10px;
+  padding: 15px;
   font-family: "pretendardB";
-  font-size: 24px;
   color: ${(props) =>
     props.$bold ? "var(--text-color2)" : "var(--text-color)"};
-  font-size: 16px;
+  color: ${(props) => props.$isUserRecord && "var(--key-color)"};
+  font-size: ${(props) => props.$isUserRecord && "24px"};
 `;
 
 const Record = () => {
@@ -86,8 +88,6 @@ const Record = () => {
   const myRecordNanoSec = myRecordTimeStamp.nanoseconds;
   const myRecordSec = myRecordTimeStamp.seconds;
   const userName = useAtomValue(userNameAtom);
-  // 내가 지금 몇 등인지 알아내서 슬라이싱 반영
-  // 내 기록인지 아닌짛 확인, css isUser 어쩌구 변경
 
   // 데이터베이스로부터 데이터 읽어오기 - loadUserData 함수
   useEffect(() => {
@@ -149,9 +149,16 @@ const Record = () => {
                   $isUserRecord={myRecordIndex === index}
                   key={index}
                 >
-                  <RecordItem $bold={true}>{index + 1}</RecordItem>
+                  <RecordItem
+                    $isUserRecord={myRecordIndex === index}
+                    $bold={true}
+                  >
+                    {index + 1}
+                  </RecordItem>
                   <RecordItem $bold={true}>{record.userName}</RecordItem>
-                  <RecordItem>{formatTime(record.timeSpent)}</RecordItem>
+                  <RecordItem $isUserRecord={myRecordIndex === index}>
+                    {formatTime(record.timeSpent)}
+                  </RecordItem>
                 </RecordItemContainer>
               ))}
           </RecordList>
