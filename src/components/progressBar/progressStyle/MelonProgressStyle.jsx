@@ -5,15 +5,15 @@ export const ProgressBarContainer = styled.div`
   height: 105px;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px solid #e5e5e5;
 `;
 export const ProgressStep = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #f9f9f9;
-  height: 100%;
+  height: 90px;
   width: 100%;
+  border-bottom: 1px solid #e5e5e5;
 `;
 export const StepNumber = styled.div`
   color: #ffffff;

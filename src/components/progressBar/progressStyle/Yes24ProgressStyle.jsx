@@ -12,7 +12,7 @@ export const ProgressStep = styled.div`
   justify-content: center;
   background-color: ${(props) =>
     props.$active ? "#ffffff" : "var(--text-color)"};
-  height: 80px;
+  height: 90px;
   width: 100%;
   position: relative;
 
