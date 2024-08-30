@@ -110,7 +110,7 @@
   gap: 5px;
   border: none;
   width: 100px;
-  height: 80px;
+  height: 90px;
   flex-direction: column;
   background-color: var(--key-color);
   position: relative;
