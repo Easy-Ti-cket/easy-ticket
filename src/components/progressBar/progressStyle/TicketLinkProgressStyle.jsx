@@ -19,12 +19,11 @@ export const ProgressStep = styled.div`
     /* 마지막 ProgressStep을 제외한 모든 컴포넌트에 화살표를 표시 */
     content: "";
     position: absolute;
-    z-index: 1;
     right: -20px;
     width: 0;
     height: 0;
     border-style: solid;
-    border-width: 45px 0 45px 20px; /* 화살표 크기 */
+    border-width: 45px 0 45px 20px;
     border-color: transparent transparent transparent
       ${(props) => (props.$active ? "var(--text-color2)" : "var(--text-color)")};
   }
