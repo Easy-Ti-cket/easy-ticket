@@ -15,7 +15,6 @@ export const ProgressStep = styled.div`
   height: 60px;
   width: 100%;
   font-family: "pretendardB";
-  position: relative;
 
   &::after {
     content: "";
