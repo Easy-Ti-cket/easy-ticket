@@ -117,7 +117,7 @@ const SelectRoundMelonticket = () => {
   return (
     <Container>
       <UpperSection>
-        <PosterSection id={SelectCalender} />
+        <PosterSection id={selectedPoster} />
       </UpperSection>
       <LowerSection>
         <BoxWrapper>
