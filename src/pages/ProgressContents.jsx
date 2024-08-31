@@ -1,13 +1,19 @@
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useNavigate, useLocation, Outlet } from "react-router-dom";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import Button from "../components/button/Button";
+import Modal from "../components/modal/Modal";
 import ProgressBar from "../components/ProgressBar";
 import Timer from "../components/timer/Timer";
-import { Outlet, useLocation } from "react-router-dom";
-import Button from "../components/button/Button";
-import { useEffect, useState } from "react";
-import Modal from "../components/modal/Modal";
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { themeSiteAtom, levelAtom, timerControlAtom } from "../store/atom";
 import EscModalContents from "../components/modal/EscModalContents";
+import TimeoutModal from "../components/modal/TimeoutModal";
+import {
+  themeSiteAtom,
+  levelAtom,
+  timerControlAtom,
+  minuteCountAtom
+} from "../store/atom";
 import useText from "../hooks/useText";
 
 //ProgressBar+ContentsBox Container
@@ -50,15 +56,34 @@ const ButtonContainer = styled.div`
 `;
 
 /*난이도별 contents를 children으로 받아서 ProgressBar와 함께 렌더링*/
-const ProgressContents = ({ text }) => {
+const ProgressContents = ({ text, practiceMode, challengeMode }) => {
   //타이머 컨트롤 state
   const setTimerControl = useSetAtom(timerControlAtom);
   //레벨 별 타이머 출력 설정
   const level = useAtomValue(levelAtom);
+  // 남은 시간 state
+  const [timeSpent] = useAtom(minuteCountAtom);
   //도움말 모달창 제어
   const [isModalOpen, setIsModalOpen] = useState(false);
   //theme
   const themeSite = useAtomValue(themeSiteAtom);
+  // 타임아웃 모달창 제어
+  const [isTimeoutModalOpen, setIsTimeoutModalOpen] = useState(false);
+  // 일시정지 모달창 제어
+  const [isPaused, setIsPaused] = useState(false);
+
+  const navigate = useNavigate();
+  const path = useLocation().pathname;
+
+  // 시간이 초과되었을 때 타임아웃 모달 열리도록 설정
+  useEffect(() => {
+    // 남은 시간 0 이하일 때만 모달이 열리도록 설정
+    if (timeSpent <= 0 && !isTimeoutModalOpen) {
+      setIsTimeoutModalOpen(true);
+      setTimerControl(false); // 타이머 정지
+    }
+  }, [timeSpent, isTimeoutModalOpen, setTimerControl]);
+
   const handleModalOpen = () => {
     setIsModalOpen(true);
     setTimerControl(true);
@@ -69,8 +94,7 @@ const ProgressContents = ({ text }) => {
   };
   //esc 일시정지 제어
   //step0 화면에서는 일시정지 렌더링되지 않도록 설정
-  const path = useLocation().pathname;
-  const [isPaused, setIsPaused] = useState(false);
+
   const handlePaused = (e) => {
     if (
       //연습모드 step0 또는 실전모드 step0에서 렌더링되지 않도록 설정
@@ -83,6 +107,7 @@ const ProgressContents = ({ text }) => {
     }
     return;
   };
+
   useEffect(() => {
     window.addEventListener("keydown", handlePaused);
     //컴포넌트 언마운트 or 경로 변경될 때 이벤트 리스너 제거
@@ -132,6 +157,21 @@ const ProgressContents = ({ text }) => {
         {/*도움말 모달창*/}
         {isModalOpen && (
           <Modal onClick={handleModalClose} contents={helpText} />
+        )}
+        {/*타임아웃 모달창*/}
+        {isTimeoutModalOpen && (
+          <Modal
+            contents={
+              <TimeoutModal
+                practiceMode={practiceMode}
+                challengeMode={challengeMode}
+                setIsModalOpen={setIsTimeoutModalOpen}
+              />
+            }
+            buttonShow={false}
+            width="400px"
+            height="450px"
+          />
         )}
         <Outlet />
       </ContentsBox>
