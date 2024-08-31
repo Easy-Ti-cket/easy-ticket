@@ -14,6 +14,7 @@ export const ProgressStep = styled.div`
     props.$active ? "#ffffff" : "var(--text-color)"};
   height: 90px;
   width: 100%;
+  position: relative;
 
   &::after {
     content: "";

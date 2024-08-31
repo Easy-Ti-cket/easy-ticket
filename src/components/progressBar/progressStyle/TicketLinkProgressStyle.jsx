@@ -14,10 +14,12 @@ export const ProgressStep = styled.div`
     props.$active ? "var(--text-color2)" : "var(--text-color)"};
   height: 90px;
   width: 100%;
+  position: relative;
 
   &:not(:last-child)::after {
     /* 마지막 ProgressStep을 제외한 모든 컴포넌트에 화살표를 표시 */
     content: "";
+    z-index: 1;
     position: absolute;
     right: -20px;
     width: 0;
