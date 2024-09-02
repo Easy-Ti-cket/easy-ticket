@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import ProgressBar from "../components/ProgressBar";
+import ProgressBar from "../components/progressBar/ProgressBar";
 import Timer from "../components/timer/Timer";
 import { Outlet, useLocation } from "react-router-dom";
 import Button from "../components/button/Button";
@@ -18,6 +18,9 @@ const ProgressContentsContainer = styled.div`
 `;
 
 const ProgressBarBox = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
   min-height: 145px;
 `;
 
