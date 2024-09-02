@@ -1,7 +1,14 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import styled from "styled-components";
 import { useAtom } from "jotai";
 import { selectedPosterAtom, levelAtom, postersAtom } from "../../store/atom";
 import { StyledCalendar, StyledCalendarWrapper } from "./calenderStyles";
+import ErrorTooltip from "../tooltip/ErrorTooltip";
+
+const ErrorTooltipWrapper = styled.div`
+  color: var(--text-color);
+  font-size: 17px;
+`;
 
 const SelectCalender = ({ onDateSelect }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
@@ -49,23 +56,36 @@ const SelectCalender = ({ onDateSelect }) => {
   };
 
   return (
-    <StyledCalendarWrapper>
-      <StyledCalendar
-        onChange={handleDateChange}
-        value={selectedDate}
-        calendarType="gregory"
-        prevLabel="←"
-        nextLabel="→"
-        prev2Label={null}
-        next2Label={null}
-        showNeighboringMonth={false}
-        formatDay={(locale, date) => new Date(date).getDate()}
-        formatMonthYear={(locale, date) => `${new Date(date).getMonth() + 1}월`}
-        onActiveStartDateChange={handleActiveStartDateChange}
-        activeStartDate={activeStartDate}
-        onClickMonth={handleMonthClick}
-      />
-    </StyledCalendarWrapper>
+    <>
+      <ErrorTooltip
+        contents={
+          <ErrorTooltipWrapper>
+            공연 기간 중 첫번째 날짜를 선택해주세요.
+          </ErrorTooltipWrapper>
+        }
+      ></ErrorTooltip>
+
+      <StyledCalendarWrapper>
+        <ErrorTooltipWrapper></ErrorTooltipWrapper>
+        <StyledCalendar
+          onChange={handleDateChange}
+          value={selectedDate}
+          calendarType="gregory"
+          prevLabel="←"
+          nextLabel="→"
+          prev2Label={null}
+          next2Label={null}
+          showNeighboringMonth={false}
+          formatDay={(locale, date) => new Date(date).getDate()}
+          formatMonthYear={(locale, date) =>
+            `${new Date(date).getMonth() + 1}월`
+          }
+          onActiveStartDateChange={handleActiveStartDateChange}
+          activeStartDate={activeStartDate}
+          onClickMonth={handleMonthClick}
+        />
+      </StyledCalendarWrapper>
+    </>
   );
 };
 
