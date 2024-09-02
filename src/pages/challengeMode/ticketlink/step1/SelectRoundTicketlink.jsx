@@ -45,7 +45,7 @@ const BoxWrapper = styled.div`
   border-radius: 8px;
   gap: 10px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 `;
 
 const TitleText = styled.p`
