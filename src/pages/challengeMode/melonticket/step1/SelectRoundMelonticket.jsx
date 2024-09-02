@@ -64,6 +64,7 @@ const ButtonSection = styled.div`
 const SelectRoundMelonticket = () => {
   const selectedPoster = useAtomValue(selectedPosterAtom);
   const posters = useAtomValue(postersAtom);
+  const id = useAtomValue(selectedPosterAtom);
   const [dateSelected, setDateSelected] = useState(false);
   const [roundSelected, setRoundSelected] = useState(false);
   const [timesButtons, setTimesButtons] = useState([]);
@@ -117,7 +118,7 @@ const SelectRoundMelonticket = () => {
   return (
     <Container>
       <UpperSection>
-        <PosterSection id={SelectCalender} />
+        <PosterSection id={id} />
       </UpperSection>
       <LowerSection>
         <BoxWrapper>

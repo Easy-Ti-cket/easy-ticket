@@ -21,11 +21,14 @@ import SelectRoundYes24 from "./pages/challengeMode/yes24/step1/SelectRoundYes24
 // step 2
 import SelectSeat from "./pages/practiceMode/step2/SelectSeat";
 import SelectSeatInterpark from "./pages/challengeMode/interpark/step2/SelectSeatInterpark";
+import SelectSeatMelon from "./pages/challengeMode/melonticket/step2/SelectSeatMelon";
 // step 3
 import SeatPriceCheck from "./pages/practiceMode/step3/SeatPriceCheck";
 import SelectPriceInterpark from "./pages/challengeMode/interpark/step3-step4/SelectPriceInterpark";
+import SelectPriceMelon from "./pages/challengeMode/melonticket/step3/SelectPriceMelon";
 // step 4
 import SelectPayMethodInterPark from "./pages/challengeMode/interpark/step5-1/SelectPayMethodInterPark";
+import SelectPayMethodMelon from "./pages/challengeMode/melonticket/step4/SelectPayMethodMelon";
 import SelectPayMethod from "./pages/practiceMode/step4/SelectPayMethod";
 import CardPay from "./pages/practiceMode/step4/CardPay";
 // step 5
@@ -168,6 +171,21 @@ const router = createBrowserRouter([
                 path: "step1-2",
                 element: <PrivateRoute element={<SelectRoundMelonticket />} />,
                 label: "날짜 및 회차 선택"
+              },
+              {
+                path: "step2",
+                element: <PrivateRoute element={<SelectSeatMelon />} />,
+                label: "좌석 선택"
+              },
+              {
+                path: "step3/step4",
+                element: <PrivateRoute element={<SelectPriceMelon />} />,
+                label: "티켓가격 선택"
+              },
+              {
+                path: "step5-1",
+                element: <PrivateRoute element={<SelectPayMethodMelon />} />,
+                label: "결제방식 / 수단 선택 "
               }
             ]
           },

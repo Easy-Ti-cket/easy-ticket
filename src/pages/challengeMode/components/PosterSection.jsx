@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Poster from "../../../components/poster/Poster";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { postersAtom, levelAtom } from "../../../store/atom";
 import { formatDateRange } from "../../../util/date";
 
@@ -60,8 +60,8 @@ const InfoValue = styled.td`
 `;
 
 const PosterSection = ({ id }) => {
-  const [posters] = useAtom(postersAtom);
-  const [level] = useAtom(levelAtom);
+  const posters = useAtomValue(postersAtom);
+  const level = useAtomValue(levelAtom);
   const poster = posters[id];
 
   return (
