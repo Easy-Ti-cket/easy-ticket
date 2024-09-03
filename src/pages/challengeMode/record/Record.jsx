@@ -11,8 +11,11 @@ import {
   RecordList,
   RecordListTitle,
   RecordTable,
-  RecordTitle
+  RecordTitle,
+  ButtonContainer
 } from "./RecordStyle";
+import { useNavigate } from "react-router-dom";
+import Button from "../../../components/button/Button";
 
 const Record = () => {
   //db로부터 받은 데이터 (정렬됨)
@@ -88,6 +91,7 @@ const Record = () => {
     return indexTrue && themeTrue;
   };
 
+  const nav = useNavigate();
   return (
     <RecordContainer>
       <RecordTitle>클리어 기록 보기</RecordTitle>
@@ -137,6 +141,14 @@ const Record = () => {
           pageRangeDisplayed={pageRangeDisplayed}
         />
       </RecordContents>
+      <ButtonContainer>
+        <Button text="도전하기" onClick={() => nav("/select-site")} />
+        <Button
+          text="메인으로 돌아가기"
+          onClick={() => nav("/")}
+          type="outline"
+        />
+      </ButtonContainer>
     </RecordContainer>
   );
 };

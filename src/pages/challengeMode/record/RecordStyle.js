@@ -2,11 +2,12 @@ import styled from "styled-components";
 
 export const RecordContainer = styled.div`
   width: 100vw;
+  height: 1800px;
   background-color: var(--dimmed-color);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 5px;
+  gap: 10px;
   padding: 50px 0;
   text-align: center;
 `;
@@ -67,4 +68,9 @@ export const RecordItem = styled.li`
   color: ${(props) => props.$highlight && "var(--key-color)"};
   color: ${(props) => props.$isUserRecord && "var(--key-color)"};
   font-size: ${(props) => props.$isUserRecord && "24px"};
+`;
+export const ButtonContainer = styled.div`
+  display: flex;
+  gap: 20px;
+  margin-top: 40px;
 `;
