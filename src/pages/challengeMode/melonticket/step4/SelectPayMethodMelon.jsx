@@ -31,6 +31,7 @@ const TooltipContents = styled.div`
 const MyBookingInfoContainerMelon = styled(MyBookingInfoContainer)`
   height: 500px;
 `;
+const Container = styled.div``;
 const SelectPayMethodMelon = () => {
   const setProgress = useSetAtom(progressAtom);
   useEffect(() => setProgress(3), [setProgress]);
@@ -45,26 +46,27 @@ const SelectPayMethodMelon = () => {
   const nav = useNavigate();
   return (
     <TicketMethodMelonContainer>
-      <TicketMethodMelon
-        option={option}
-        setOption={setOption}
-        setIsValidate={setIsValidate}
-        errorArray={errorArray}
-      />
-
-      <PayContainer>
-        <TextBox>결제수단을 선택하세요</TextBox>
-        <PayMethodForm></PayMethodForm>
-        <DetailPayFormMelon></DetailPayFormMelon>
-        <ErrorTooltip
-          contents={
-            <TooltipContents>
-              전체 동의를 누르면 한번에 동의 됩니다!
-            </TooltipContents>
-          }
-        ></ErrorTooltip>
-        <AgreeMentMelon></AgreeMentMelon>
-      </PayContainer>
+      <Container>
+        <TicketMethodMelon
+          option={option}
+          setOption={setOption}
+          setIsValidate={setIsValidate}
+          errorArray={errorArray}
+        />
+        <PayContainer>
+          <TextBox>결제수단을 선택하세요</TextBox>
+          <PayMethodForm></PayMethodForm>
+          <DetailPayFormMelon></DetailPayFormMelon>
+          <ErrorTooltip
+            contents={
+              <TooltipContents>
+                전체 동의를 누르면 한번에 동의 됩니다!
+              </TooltipContents>
+            }
+          ></ErrorTooltip>
+          <AgreeMentMelon></AgreeMentMelon>
+        </PayContainer>
+      </Container>
       <MyBookingInfoContainerMelon>
         <MyBookingInfo></MyBookingInfo>
         <PrevNextButton
