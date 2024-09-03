@@ -27,31 +27,37 @@ const Record = () => {
   //세션스토리지에 저장된 record
   const myRecord = JSON.parse(sessionStorage.getItem("record"));
   const myThemeSite = myRecord ? myRecord.themeSite : "interpark";
+  //로딩
+  const [loading, setLoading] = useState(true);
 
   //loadUserData
   useEffect(() => {
     loadUserData()
-      .then((res) => {
-        //정렬 후 저장
-        const sortedRecords = res.sort((a, b) => b.timeSpent - a.timeSpent);
-        setRecords(sortedRecords);
-        //기록 초기화면
-        const filter = (site) =>
-          sortedRecords.filter((item) => item.themeSite === site);
-        setFilteredRecords(filter(myThemeSite));
-        //내 기록 순위 (세션스토리지 / db 비교)
-        if (myRecord) {
-          const myRecordNanoSec = myRecord.timeStamp.nanoseconds;
-          const myRecordSec = myRecord.timeStamp.seconds;
-          setMyRecordIndex(
-            sortedRecords.findIndex(
-              (item) =>
-                item.timeStamp.nanoseconds === myRecordNanoSec &&
-                item.timeStamp.seconds === myRecordSec
-            )
-          );
-        }
-      })
+      .then(
+        (res) => {
+          //정렬 후 저장
+          const sortedRecords = res.sort((a, b) => b.timeSpent - a.timeSpent);
+          setRecords(sortedRecords);
+          //기록 초기화면
+          const filter = (site) =>
+            sortedRecords.filter((item) => item.themeSite === site);
+          setFilteredRecords(filter(myThemeSite));
+          //내 기록 순위 (세션스토리지 / db 비교)
+          if (myRecord) {
+            const myRecordNanoSec = myRecord.timeStamp.nanoseconds;
+            const myRecordSec = myRecord.timeStamp.seconds;
+            setMyRecordIndex(
+              sortedRecords.findIndex(
+                (item) =>
+                  item.timeStamp.nanoseconds === myRecordNanoSec &&
+                  item.timeStamp.seconds === myRecordSec
+              )
+            );
+          }
+          setLoading(false);
+        },
+        [setLoading]
+      )
       .catch((error) =>
         console.error(`데이터를 가져오는 도중 에러 발생 : ${error}`)
       );
@@ -66,7 +72,9 @@ const Record = () => {
   //현재 렌더링된 페이지
   const [activePage, setActivePage] = useState(1);
   useEffect(() => {
-    setActivePage(myRecordIndex ? Math.floor(myRecordIndex / 10) + 1 : 1);
+    if (myRecordIndex !== null) {
+      setActivePage(myRecordIndex ? Math.floor(myRecordIndex / 10) + 1 : 1);
+    }
   }, [myRecordIndex]);
   //한 페이지 당 보여줄 아이템 개수
   const itemsCountPerPage = 10;
@@ -90,8 +98,11 @@ const Record = () => {
     const themeTrue = myThemeSite === clickThemeSite;
     return indexTrue && themeTrue;
   };
-  console.log(activePage);
   const nav = useNavigate();
+
+  if (loading) {
+    return <h1>로딩 중</h1>;
+  }
   return (
     <RecordContainer>
       <RecordTitle>클리어 기록 보기</RecordTitle>
@@ -102,6 +113,7 @@ const Record = () => {
           myThemeSite={myThemeSite}
           setFilteredRecords={setFilteredRecords}
           setClickThemeSite={setClickThemeSite}
+          setActivePage={setActivePage}
         />
         {/*기록 테이블 */}
         <RecordTable>
