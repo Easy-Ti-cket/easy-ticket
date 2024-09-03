@@ -67,8 +67,10 @@ const TimeoutModal = ({ setIsModalOpen }) => {
       // 경로 설정
       if (themeSite === "practice" && level === "high") {
         navigate("/progress/step0");
+        resetAtom();
       } else {
         navigate(`/challenge/${themeSite}/step0`);
+        resetAtom();
       }
     }
   };
