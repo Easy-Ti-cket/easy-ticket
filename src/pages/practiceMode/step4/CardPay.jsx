@@ -49,9 +49,6 @@ const CardPay = () => {
   // 실전 모드 여부를 판단하기 위한 테마 정보
   const themeSite = useAtomValue(themeSiteAtom);
 
-  //타임스탬프
-  const userName = useAtomValue(userNameAtom);
-
   //검사로직
   const handleClick = () => {
     if (!isAnswer) {

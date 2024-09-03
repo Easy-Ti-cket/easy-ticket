@@ -16,14 +16,13 @@ export const useForm = (correctNum) => {
     cardPassword: cardAnswer[4],
     cvc: cardAnswer[5]
   };
-
   // 사용자가 입력한 답
   const [, setResponse] = useState({});
+  //폼의 name 및 정답 여부
   const [correctList, setCorrectList] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value);
     setResponse((prev) => {
       const newResponse = { ...prev, [name]: value };
       // 정답과 답변이 같을 경우
@@ -40,7 +39,11 @@ export const useForm = (correctNum) => {
   const [isAnswer, setIsAnswer] = useState(false);
   useEffect(() => {
     //useForm에 입력한 정답 개수 기반 페이지 전체가 정답인지 판정
-    if (Object.keys(correctList).length === correctNum) {
+    const correctCount = Object.values(correctList).filter((acc, val) =>
+      val ? acc + 1 : acc
+    );
+    console.log(correctCount, correctNum);
+    if (correctCount.length === correctNum) {
       setIsAnswer(true);
     }
   }, [correctList]);
