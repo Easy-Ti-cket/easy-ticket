@@ -41,7 +41,6 @@ export const useForm = (correctNum) => {
     const correctCount = Object.values(correctList).filter((acc, val) =>
       val === true ? acc + 1 : acc
     );
-
     if (correctCount.length === correctNum) {
       setIsAnswer(true);
     }
