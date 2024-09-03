@@ -21,17 +21,20 @@ import SelectRoundYes24 from "./pages/challengeMode/yes24/step1/SelectRoundYes24
 // step 2
 import SelectSeat from "./pages/practiceMode/step2/SelectSeat";
 import SelectSeatInterpark from "./pages/challengeMode/interpark/step2/SelectSeatInterpark";
-import SelectSeatMelonticket from "./pages/challengeMode/melonticket/step2/SelectSeatMelonticket";
+import SelectSeatMelon from "./pages/challengeMode/melonticket/step2/SelectSeatMelon";
 import SelectSeatTicketlink from "./pages/challengeMode/ticketlink/step2/SelectSeatTicketlink";
 import SelectSeatYes24 from "./pages/challengeMode/yes24/step2/SelectSeatYes24";
 // step 3
 import SeatPriceCheck from "./pages/practiceMode/step3/SeatPriceCheck";
+import SelectPriceInterpark from "./pages/challengeMode/interpark/step3-step4/SelectPriceInterpark";
+import SelectPriceMelon from "./pages/challengeMode/melonticket/step3/SelectPriceMelon";
 // step 4
+import SelectPayMethodInterPark from "./pages/challengeMode/interpark/step5-1/SelectPayMethodInterPark";
+import SelectPayMethodMelon from "./pages/challengeMode/melonticket/step4/SelectPayMethodMelon";
+
 import SelectPayMethod from "./pages/practiceMode/step4/SelectPayMethod";
 import CardPay from "./pages/practiceMode/step4/CardPay";
 // step 3-4
-import SelectPriceInterpark from "./pages/challengeMode/interpark/step3-step4/SelectPriceInterpark";
-import SelectPayMethodInterPark from "./pages/challengeMode/interpark/step5-1/SelectPayMethodInterPark";
 import SelectPriceTicketlink from "./pages/challengeMode/ticketlink/step3-step4/SelectPriceTicketlink";
 import SelectPriceYes24 from "./pages/challengeMode/yes24/step3-step4/SelectPriceYes24";
 // step 5
@@ -176,8 +179,29 @@ const router = createBrowserRouter([
               },
               {
                 path: "step2",
-                element: <PrivateRoute element={<SelectSeatMelonticket />} />,
+
+                element: <PrivateRoute element={<SelectSeatMelon />} />,
                 label: "좌석 선택"
+              },
+              {
+                path: "step3/step4",
+                element: <PrivateRoute element={<SelectPriceMelon />} />,
+                label: "티켓가격 선택"
+              },
+              {
+                path: "step5-1",
+                element: <PrivateRoute element={<SelectPayMethodMelon />} />,
+                label: "결제방식 / 수단 선택 "
+              },
+              {
+                path: "step5-2",
+                element: <PrivateRoute element={<CardPay />} />,
+                label: "카드 결제창"
+              },
+              {
+                path: "outro",
+                element: <PrivateRoute element={<Outro />} />,
+                label: "예매 성공"
               }
             ]
           },

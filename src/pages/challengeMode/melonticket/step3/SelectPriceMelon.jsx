@@ -30,7 +30,9 @@ const SelectPriceMelon = () => {
   const nav = useNavigate();
   const seatCount = useAtomValue(seatCountAtom);
   const setProgress = useSetAtom(progressAtom);
+
   useEffect(() => setProgress(2), []);
+
   return (
     <SelectPriceMelonContainer>
       <Container>
