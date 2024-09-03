@@ -23,6 +23,7 @@ export const useForm = (correctNum) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log(name, value);
     setResponse((prev) => {
       const newResponse = { ...prev, [name]: value };
       // 정답과 답변이 같을 경우

@@ -31,17 +31,6 @@ const InfoBox = styled.div`
 
 //생년월일 input
 const InfoInput = styled(InfoBox).attrs({ as: "input" })`
-  //스피너 없애기
-  /* WebKit 기반 브라우저 (Chrome, Safari) */
-  &::-webkit-inner-spin-button,
-  &::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  /* Edge, IE */
-  & {
-    appearance: textfield;
-  }
   box-sizing: border-box;
   border: ${(props) => props.$hasError && "2px solid var(--point-color)"};
 `;

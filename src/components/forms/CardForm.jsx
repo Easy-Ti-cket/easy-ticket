@@ -18,10 +18,29 @@ const CardForm = ({ focusNum, handleChange }) => {
       <AnimationArea $focus={level === "low" && focusNum == 0}>
         <InputContainer>
           <Label>카드 번호</Label>
-          <CardInputFied name="cardNum1" onChange={handleChange} />-
-          <CardInputFied name="cardNum2" onChange={handleChange} />-
-          <CardInputFied name="cardNum3" onChange={handleChange} />-
-          <CardInputFied name="cardNum4" onChange={handleChange} />
+          <CardInputFied
+            name="cardNum1"
+            type="number"
+            onChange={handleChange}
+          />
+          -
+          <CardInputFied
+            name="cardNum2"
+            type="number"
+            onChange={handleChange}
+          />
+          -
+          <CardInputFied
+            name="cardNum3"
+            type="number"
+            onChange={handleChange}
+          />
+          -
+          <CardInputFied
+            name="cardNum4"
+            type="number"
+            onChange={handleChange}
+          />
         </InputContainer>
       </AnimationArea>
       <Input
