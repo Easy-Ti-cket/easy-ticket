@@ -4,12 +4,14 @@ import TicketMethodMelon from "../../components/TiketMethod/TicketMethodMelon";
 import AgreeMentMelon from "../../components/AgreementMelon";
 import ErrorTooltip from "../../../../components/tooltip/ErrorTooltip";
 import styled from "styled-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useSetAtom } from "jotai";
 import OrderInfoMelon from "../../components/OrdererInfoMelon";
 import MyBookingInfo from "../../../../components/myBookingInfo/MyBookingInfo";
 import { MyBookingInfoContainer } from "../../../../components/myBookingInfo/MyBookingInfoContainer";
 import PrevNextButton from "../../../../components/myBookingInfo/PrevNextButton";
 import { useNavigate } from "react-router-dom";
+import { progressAtom } from "../../../../store/atom";
 const TicketMethodMelonContainer = styled.div`
   display: flex;
 `;
@@ -30,6 +32,8 @@ const MyBookingInfoContainerMelon = styled(MyBookingInfoContainer)`
   height: 500px;
 `;
 const SelectPayMethodMelon = () => {
+  const setProgress = useSetAtom(progressAtom);
+  useEffect(() => setProgress(3), [setProgress]);
   //현장수령 or 배송
   const [option, setOption] = useState("현장수령");
   //step4 단계에 대한 정보

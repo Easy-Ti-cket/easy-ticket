@@ -1,16 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SecureModal from "../../../../components/secureModal/SecureModal";
 import SeatChart from "../../../../components/seatChart/SeatChart";
 import SeatSection from "../../../../components/seatSection/SeatSection";
 import styled from "styled-components";
 import { useAtomValue, useSetAtom } from "jotai";
-import {
-  isSectionSelectedAtom,
-  isSeatSelectedAtom,
-  progressAtom,
-  stepTextNumberAtom,
-  helpTextNumberAtom
-} from "../../../../store/atom";
+import { isSectionSelectedAtom, progressAtom } from "../../../../store/atom";
 import SeatInfo from "../../../../components/seatInfo/SeatInfo";
 import ErrorTooltip from "../../../../components/tooltip/ErrorTooltip";
 import { SeatInfoCont } from "../../../../components/seatInfo/SeatInfoStyles";
@@ -35,12 +29,13 @@ const TooltipText = styled.div`
 const SelectSeatMelon = () => {
   const [isModalOpen, setIsModalOpen] = useState(true);
   const isSectionSelected = useAtomValue(isSectionSelectedAtom);
+  const setProgress = useSetAtom(progressAtom);
   const closeModal = () => {
     setIsModalOpen(false);
   };
   return (
     <SelectSeatContainer>
-      {/* {isModalOpen && <SecureModal onClick={closeModal} />} */}
+      {isModalOpen && <SecureModal onClick={closeModal} />}
       {isSectionSelected ? (
         <SeatChart></SeatChart>
       ) : (

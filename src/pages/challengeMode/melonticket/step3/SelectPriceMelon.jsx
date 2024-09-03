@@ -5,8 +5,10 @@ import MyBookingInfo from "../../../../components/myBookingInfo/MyBookingInfo";
 import PrevNextButton from "../../../../components/myBookingInfo/PrevNextButton";
 import { MyBookingInfoContainer } from "../../../../components/myBookingInfo/MyBookingInfoContainer";
 import { useNavigate } from "react-router-dom";
-import { useAtomValue } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import { seatCountAtom } from "../../../../store/atom";
+import { useEffect } from "react";
+import { progressAtom } from "../../../../store/atom";
 const MyBookingInfoContainerMelon = styled(MyBookingInfoContainer)`
   height: 500px;
 `;
@@ -27,6 +29,8 @@ const TextBox = styled.div`
 const SelectPriceMelon = () => {
   const nav = useNavigate();
   const seatCount = useAtomValue(seatCountAtom);
+  const setProgress = useSetAtom(progressAtom);
+  useEffect(() => setProgress(2), [setProgress]);
   return (
     <SelectPriceMelonContainer>
       <Container>

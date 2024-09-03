@@ -22,6 +22,8 @@ import SelectRoundYes24 from "./pages/challengeMode/yes24/step1/SelectRoundYes24
 import SelectSeat from "./pages/practiceMode/step2/SelectSeat";
 import SelectSeatInterpark from "./pages/challengeMode/interpark/step2/SelectSeatInterpark";
 import SelectSeatMelon from "./pages/challengeMode/melonticket/step2/SelectSeatMelon";
+import SelectSeatTicketlink from "./pages/challengeMode/ticketlink/step2/SelectSeatTicketlink";
+import SelectSeatYes24 from "./pages/challengeMode/yes24/step2/SelectSeatYes24";
 // step 3
 import SeatPriceCheck from "./pages/practiceMode/step3/SeatPriceCheck";
 import SelectPriceInterpark from "./pages/challengeMode/interpark/step3-step4/SelectPriceInterpark";
