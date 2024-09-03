@@ -76,7 +76,7 @@ const SecureModal = ({ onClick }) => {
   };
 
   const handleInputChange = (e) => {
-    setInputValue(e.target.value);
+    setInputValue(e.target.value.toUpperCase());
   };
 
   const handleSpeak = async () => {
