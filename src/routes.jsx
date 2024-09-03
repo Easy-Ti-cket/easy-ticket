@@ -39,7 +39,7 @@ import Step5 from "./pages/practiceMode/step5/Step5";
 import SelectPayMethodYes24 from "./pages/challengeMode/yes24/step5/SelectPayMethodYes24";
 import SelectPayMethodTicketlink from "./pages/challengeMode/ticketlink/step5/SelectPayMethodTicketlink";
 import Outro from "./pages/challengeMode/outro/Outro";
-import Record from "./pages/challengeMode/outro/Record";
+import Record from "./pages/challengeMode/record/Record";
 
 const router = createBrowserRouter([
   {
