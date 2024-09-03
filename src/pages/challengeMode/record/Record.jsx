@@ -138,6 +138,16 @@ const Record = () => {
     activePage * itemsCountPerPage
   );
 
+  //올바른 themeSite와 순위에서 css 변경
+  const [clickThemeSite, setClickThemeSite] = useState(myThemeSite);
+  const isUserRecord = (record) => {
+    const indexTrue =
+      myRecordIndex === filteredRecords.findIndex((item) => item === record);
+    const themeTrue = myThemeSite === clickThemeSite;
+    return indexTrue && themeTrue;
+  };
+  console.log(clickThemeSite);
+
   return (
     <RecordContainer>
       <RecordTitle>클리어 기록 보기</RecordTitle>
@@ -147,6 +157,7 @@ const Record = () => {
           records={records}
           myThemeSite={myThemeSite}
           setFilteredRecords={setFilteredRecords}
+          setClickThemeSite={setClickThemeSite}
         />
         {/*기록 테이블 */}
         <RecordTable>
@@ -160,29 +171,18 @@ const Record = () => {
           <RecordList>
             {renderData.map((record, index) => (
               <RecordItemContainer
-                $isUserRecord={
-                  myRecordIndex ===
-                  filteredRecords.findIndex((item) => item === record)
-                }
+                $isUserRecord={isUserRecord(record)}
                 key={index}
               >
                 <RecordItem
-                  $isUserRecord={
-                    myRecordIndex ===
-                    filteredRecords.findIndex((item) => item === record)
-                  }
+                  $isUserRecord={isUserRecord(record)}
                   $bold={true}
                   $highlight={true}
                 >
                   {filteredRecords.findIndex((item) => item === record) + 1}
                 </RecordItem>
                 <RecordItem $bold={true}>{record.userName}</RecordItem>
-                <RecordItem
-                  $isUserRecord={
-                    myRecordIndex ===
-                    filteredRecords.findIndex((item) => item === record)
-                  }
-                >
+                <RecordItem $isUserRecord={isUserRecord(record)}>
                   {formatTime(record.timeSpent)}
                 </RecordItem>
               </RecordItemContainer>

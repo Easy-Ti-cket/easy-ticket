@@ -11,7 +11,12 @@ const NavContainer = styled.div`
   gap: 8px;
 `;
 
-const RecordNavigate = ({ records, myThemeSite, setFilteredRecords }) => {
+const RecordNavigate = ({
+  records,
+  myThemeSite,
+  setFilteredRecords,
+  setClickThemeSite
+}) => {
   //클릭했을 경우 css 변경
   const [isClick, setIsClick] = useState({
     //기본창 : 인터파크 기록
@@ -22,7 +27,8 @@ const RecordNavigate = ({ records, myThemeSite, setFilteredRecords }) => {
     [myThemeSite]: true
   });
   const handleClick = (name) => {
-    //클릭했을 시 css 변경
+    setClickThemeSite(name);
+    //클릭했을 시 css 변경용
     setIsClick(() => {
       return {
         interpark: false,
