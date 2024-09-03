@@ -10,9 +10,15 @@ const CardInputFied = styled(InputField)`
   width: 40px;
 `;
 
+const InputWrap = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
 const CardForm = ({ focusNum, handleChange, hasErrorArray }) => {
-  console.log(hasErrorArray);
   const level = useAtomValue(levelAtom);
+  const cardInputField = ["cardNum1", "cardNum2", "cardNum3", "cardNum4"];
+  console.log(hasErrorArray);
 
   return (
     <FormWrap>
@@ -20,33 +26,17 @@ const CardForm = ({ focusNum, handleChange, hasErrorArray }) => {
       <AnimationArea $focus={level === "low" && focusNum == 0}>
         <InputContainer>
           <Label>카드 번호</Label>
-          <CardInputFied
-            name="cardNum1"
-            type="number"
-            onChange={handleChange}
-            $hasError={hasErrorArray.includes("cardNum1")}
-          />
-          -
-          <CardInputFied
-            name="cardNum2"
-            type="number"
-            onChange={handleChange}
-            $hasError={hasErrorArray.includes("cardNum2")}
-          />
-          -
-          <CardInputFied
-            name="cardNum3"
-            type="number"
-            onChange={handleChange}
-            $hasError={hasErrorArray.includes("cardNum3")}
-          />
-          -
-          <CardInputFied
-            name="cardNum4"
-            type="number"
-            onChange={handleChange}
-            $hasError={hasErrorArray.includes("cardNum4")}
-          />
+          {cardInputField.map((field, index) => (
+            <InputWrap key={index}>
+              <CardInputFied
+                name={field}
+                type="number"
+                onChange={handleChange}
+                $hasError={hasErrorArray.includes(field)}
+              />
+              {index !== 3 && <div>-</div>}
+            </InputWrap>
+          ))}
         </InputContainer>
       </AnimationArea>
       <Input

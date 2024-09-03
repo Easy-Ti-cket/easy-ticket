@@ -58,9 +58,7 @@ const CardPay = () => {
     if (!isAnswer) {
       alert("카드 정보를 정확하게 입력해 주세요");
       //정답리스트에 없는 경우 에러리스트에 삽입
-      setHasErrorArray(
-        allInputNames.filter((item) => !Object.keys(correctList).includes(item))
-      );
+      setHasErrorArray(allInputNames.filter((key) => !correctList[key]));
     } else {
       if (themeSite === "practice") {
         nav("../step5");
