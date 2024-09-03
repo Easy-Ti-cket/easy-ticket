@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PosterSection from "../../components/PosterSection";
-import SelectCalender from "../../../../components/calender/SelectCalender";
+import SelectCalendar from "../../../../components/calendar/SelectCalendar";
 import Button from "../../../../components/button/Button";
 import styled from "styled-components";
 import { useAtomValue, useSetAtom } from "jotai";
@@ -122,7 +122,7 @@ const SelectRoundTicketlink = () => {
       <LowerSection>
         <BoxWrapper>
           <TitleText>날짜 선택</TitleText>
-          <SelectCalender
+          <SelectCalendar
             onDateSelect={handleDateSelect}
             initialDate={
               posterDates.length > 0 ? new Date(posterDates[0]) : new Date()

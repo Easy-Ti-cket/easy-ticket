@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PosterInfo from "../../../components/poster/PosterInfo";
-import SelectCalender from "../../../components/calender/SelectCalender";
+import SelectCalendar from "../../../components/calendar/SelectCalendar";
 import Button from "../../../components/button/Button";
 import styled from "styled-components";
 import { useAtom, useSetAtom } from "jotai";
@@ -128,7 +128,7 @@ const SelectRound = () => {
         {/* 초급 난이도에만 캘린더 애니메이션 적용 */}
         {currentLevel === "low" ? (
           <AnimationArea $focus={animationStep === 0}>
-            <SelectCalender
+            <SelectCalendar
               onDateSelect={handleDateSelect}
               initialDate={
                 posterDates.length > 0 ? new Date(posterDates[0]) : new Date()
@@ -136,7 +136,7 @@ const SelectRound = () => {
             />
           </AnimationArea>
         ) : (
-          <SelectCalender
+          <SelectCalendar
             onDateSelect={handleDateSelect}
             initialDate={
               posterDates.length > 0 ? new Date(posterDates[0]) : new Date()

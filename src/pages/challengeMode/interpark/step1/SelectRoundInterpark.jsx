@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PosterInterpark from "./PosterInterpark";
-import SelectCalender from "../../../../components/calender/SelectCalender";
+import SelectCalendar from "../../../../components/calendar/SelectCalendar";
 import Button from "../../../../components/button/Button";
 import styled from "styled-components";
 import { useAtomValue, useSetAtom } from "jotai";
@@ -112,7 +112,7 @@ const SelectRoundInterpark = () => {
       <RightSection>
         <BoxWrapper>
           <p style={{ paddingLeft: "20px" }}>관람일</p>
-          <SelectCalender
+          <SelectCalendar
             onDateSelect={handleDateSelect}
             initialDate={
               posterDates.length > 0 ? new Date(posterDates[0]) : new Date()

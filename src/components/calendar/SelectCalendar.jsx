@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useAtom } from "jotai";
 import { selectedPosterAtom, levelAtom, postersAtom } from "../../store/atom";
-import { StyledCalendar, StyledCalendarWrapper } from "./calenderStyles";
+import { StyledCalendar, StyledCalendarWrapper } from "./calendarStyles";
 import ErrorTooltip from "../tooltip/ErrorTooltip";
 
 const ErrorTooltipWrapper = styled.div`
@@ -10,7 +10,7 @@ const ErrorTooltipWrapper = styled.div`
   font-size: 17px;
 `;
 
-const SelectCalender = ({ onDateSelect }) => {
+const SelectCalendar = ({ onDateSelect }) => {
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [activeStartDate, setActiveStartDate] = useState(new Date());
   const [level] = useAtom(levelAtom);
@@ -89,4 +89,4 @@ const SelectCalender = ({ onDateSelect }) => {
   );
 };
 
-export default SelectCalender;
+export default SelectCalendar;
