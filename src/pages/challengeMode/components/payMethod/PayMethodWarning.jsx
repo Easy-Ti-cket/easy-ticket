@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 //결제 관련 주의 사항 표
 const PayWarning = styled.table`
-  transform: translateY(-220px);
   background-color: #fff;
   width: 800px;
   text-align: center;

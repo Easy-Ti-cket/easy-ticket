@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./Button.module.css";
 
 const Button = (props) => {
-  const { text, onClick, type, icon, ...rest } = props;
+  const { text, onClick, type, icon, icontype, ...rest } = props;
 
   return (
     <button
@@ -10,7 +10,13 @@ const Button = (props) => {
       onClick={onClick}
       {...rest}
     >
-      {icon && <img src={icon} alt="" className={styles.icon} />}
+      {icon && (
+        <img
+          src={icon}
+          alt=""
+          className={`${styles.icon} ${icontype && styles[`icon--${icontype}`]}`}
+        />
+      )}
       {text}
     </button>
   );

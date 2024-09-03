@@ -11,6 +11,7 @@ import {
 } from "../../../store/atom";
 import { Step4Container } from "./SelectPayMethod";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const CardPayWrap = styled(Step4Container)`
   align-items: center;
@@ -48,14 +49,16 @@ const CardPay = () => {
   const nav = useNavigate();
   // 실전 모드 여부를 판단하기 위한 테마 정보
   const themeSite = useAtomValue(themeSiteAtom);
-
-  //타임스탬프
-  const userName = useAtomValue(userNameAtom);
+  //에러 발생 시 css 변경
+  const allInputNames = [...cardKeys, "cardPassword", "cvc"];
+  const [hasErrorArray, setHasErrorArray] = useState([]);
 
   //검사로직
   const handleClick = () => {
     if (!isAnswer) {
       alert("카드 정보를 정확하게 입력해 주세요");
+      //정답리스트에 없는 경우 에러리스트에 삽입
+      setHasErrorArray(allInputNames.filter((key) => !correctList[key]));
     } else {
       if (themeSite === "practice") {
         nav("../step5");
@@ -71,7 +74,11 @@ const CardPay = () => {
         카드 비밀번호는 <Highlight>{cardAnswer[4]}</Highlight> 입니다
       </span>
       <CardFormContainer>
-        <CardForm focusNum={focusNum} handleChange={handleChange} />
+        <CardForm
+          focusNum={focusNum}
+          hasErrorArray={hasErrorArray}
+          handleChange={handleChange}
+        />
       </CardFormContainer>
       {/*다음단계 버튼을 누르면 step5로 이동 */}
       <Button text="결제 완료" onClick={handleClick} />

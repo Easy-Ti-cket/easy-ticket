@@ -35,12 +35,14 @@ import SelectPayMethodMelon from "./pages/challengeMode/melonticket/step4/Select
 import SelectPayMethod from "./pages/practiceMode/step4/SelectPayMethod";
 import CardPay from "./pages/practiceMode/step4/CardPay";
 // step 3-4
+import SelectPriceTicketlink from "./pages/challengeMode/ticketlink/step3-step4/SelectPriceTicketlink";
 import SelectPriceYes24 from "./pages/challengeMode/yes24/step3-step4/SelectPriceYes24";
-import SelectPayMethodYes24 from "./pages/challengeMode/yes24/step5/SelectPayMethodYes24";
 // step 5
 import Step5 from "./pages/practiceMode/step5/Step5";
+import SelectPayMethodYes24 from "./pages/challengeMode/yes24/step5/SelectPayMethodYes24";
+import SelectPayMethodTicketlink from "./pages/challengeMode/ticketlink/step5/SelectPayMethodTicketlink";
 import Outro from "./pages/challengeMode/outro/Outro";
-import Record from "./pages/challengeMode/outro/Record";
+import Record from "./pages/challengeMode/record/Record";
 
 const router = createBrowserRouter([
   {
@@ -228,6 +230,27 @@ const router = createBrowserRouter([
                 path: "step2",
                 element: <PrivateRoute element={<SelectSeatTicketlink />} />,
                 label: "좌석 선택"
+              },
+              {
+                path: "step3/step4",
+                element: <PrivateRoute element={<SelectPriceTicketlink />} />,
+                label: "권종/할인/매수선택, 배송선택/예매확인"
+              },
+              {
+                path: "step5-1",
+                element: (
+                  <PrivateRoute element={<SelectPayMethodTicketlink />} />
+                )
+              },
+              {
+                path: "step5-2",
+                element: <PrivateRoute element={<CardPay />} />,
+                label: "카드 결제창"
+              },
+              {
+                path: "outro",
+                element: <PrivateRoute element={<Outro />} />,
+                label: "예매 성공"
               }
             ]
           },
@@ -265,6 +288,11 @@ const router = createBrowserRouter([
               {
                 path: "step5-1",
                 element: <PrivateRoute element={<SelectPayMethodYes24 />} />
+              },
+              {
+                path: "step5-2",
+                element: <PrivateRoute element={<CardPay />} />,
+                label: "카드 결제창"
               }
             ]
           }

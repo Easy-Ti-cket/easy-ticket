@@ -115,3 +115,10 @@ input {
     color: transparent;
   }
 }
+
+/*input type = number 의 화살표 제거*/
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
