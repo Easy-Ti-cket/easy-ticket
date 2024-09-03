@@ -29,15 +29,16 @@ import SelectPriceMelon from "./pages/challengeMode/melonticket/step3/SelectPric
 // step 4
 import SelectPayMethodInterPark from "./pages/challengeMode/interpark/step5-1/SelectPayMethodInterPark";
 import SelectPayMethodMelon from "./pages/challengeMode/melonticket/step4/SelectPayMethodMelon";
+
 import SelectPayMethod from "./pages/practiceMode/step4/SelectPayMethod";
 import CardPay from "./pages/practiceMode/step4/CardPay";
-// step 5
-import Step5 from "./pages/practiceMode/step5/Step5";
-
-import Outro from "./pages/challengeMode/outro/Outro";
-import Record from "./pages/challengeMode/outro/Record";
+// step 3-4
 import SelectPriceYes24 from "./pages/challengeMode/yes24/step3-step4/SelectPriceYes24";
 import SelectPayMethodYes24 from "./pages/challengeMode/yes24/step5/SelectPayMethodYes24";
+// step 5
+import Step5 from "./pages/practiceMode/step5/Step5";
+import Outro from "./pages/challengeMode/outro/Outro";
+import Record from "./pages/challengeMode/outro/Record";
 
 const router = createBrowserRouter([
   {
@@ -174,6 +175,7 @@ const router = createBrowserRouter([
               },
               {
                 path: "step2",
+
                 element: <PrivateRoute element={<SelectSeatMelon />} />,
                 label: "좌석 선택"
               },
@@ -219,6 +221,11 @@ const router = createBrowserRouter([
                 path: "step1-2",
                 element: <PrivateRoute element={<SelectRoundTicketlink />} />,
                 label: "날짜 및 회차 선택"
+              },
+              {
+                path: "step2",
+                element: <PrivateRoute element={<SelectSeatTicketlink />} />,
+                label: "좌석 선택"
               }
             ]
           },
@@ -242,6 +249,11 @@ const router = createBrowserRouter([
                 path: "step1-2",
                 element: <PrivateRoute element={<SelectRoundYes24 />} />,
                 label: "날짜 및 회차 선택"
+              },
+              {
+                path: "step2",
+                element: <PrivateRoute element={<SelectSeatYes24 />} />,
+                label: "좌석 선택"
               },
               {
                 path: "step3/step4",
