@@ -5,6 +5,8 @@ import MyBookingInfo from "../../../../components/myBookingInfo/MyBookingInfo";
 import PrevNextButton from "../../../../components/myBookingInfo/PrevNextButton";
 import { MyBookingInfoContainer } from "../../../../components/myBookingInfo/MyBookingInfoContainer";
 import { useNavigate } from "react-router-dom";
+import { useAtomValue } from "jotai";
+import { seatCountAtom } from "../../../../store/atom";
 const MyBookingInfoContainerMelon = styled(MyBookingInfoContainer)`
   height: 500px;
 `;
@@ -24,6 +26,7 @@ const TextBox = styled.div`
 `;
 const SelectPriceMelon = () => {
   const nav = useNavigate();
+  const seatCount = useAtomValue(seatCountAtom);
   return (
     <SelectPriceMelonContainer>
       <Container>
@@ -47,6 +50,10 @@ const SelectPriceMelon = () => {
             nav("../step2");
           }}
           nextButtonOnClick={() => {
+            if (seatCount === 0) {
+              alert("좌석 매수를 선택해주세요");
+              return;
+            }
             nav("../step5-1");
           }}
         />

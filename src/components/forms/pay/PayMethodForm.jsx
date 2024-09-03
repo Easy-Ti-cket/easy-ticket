@@ -33,6 +33,7 @@ const PayMethodForm = ({ handleChange, isSelected }) => {
 
   //melonTicket일 경우 row로 변경
   const isFormWrapRow = useAtomValue(themeSiteAtom) === "melonticket";
+
   const PayMehodFormWrap = isFormWrapRow ? FormWrapRow : FormWrap;
   return (
     <PayMehodFormWrap>

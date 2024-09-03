@@ -39,6 +39,13 @@ const AgreeMentMelon = () => {
       setIsAgreeAll(false);
     }
   };
+  const handleOnChange = (e) => {
+    setIsAgree(
+      isAgree.map((item, index) =>
+        index === Number(e.target.id) ? !item : item
+      )
+    );
+  };
   return (
     <Container>
       <LineContainer>
@@ -50,7 +57,12 @@ const AgreeMentMelon = () => {
       </LineContainer>
 
       <CheckboxContainer>
-        <input type="checkbox" id="reservationPolicy" checked={isAgree[0]} />
+        <input
+          type="checkbox"
+          id="0"
+          checked={isAgree[0]}
+          onChange={handleOnChange}
+        />
         <CheckboxLabel htmlFor="reservationPolicy">
           [필수] 예매 및 취소 수수료/취소기한을 확인하였으며 동의합니다.
         </CheckboxLabel>
@@ -58,28 +70,48 @@ const AgreeMentMelon = () => {
 
       <TermsContainer>
         <CheckboxContainer>
-          <input type="checkbox" id="paymentService" checked={isAgree[1]} />
+          <input
+            type="checkbox"
+            id="1"
+            checked={isAgree[1]}
+            onChange={handleOnChange}
+          />
           <CheckboxLabel htmlFor="paymentService">
             [필수] 결제대행 서비스 표준이용약관 <span>상세보기</span>
           </CheckboxLabel>
         </CheckboxContainer>
 
         <CheckboxContainer>
-          <input type="checkbox" id="kakaoTerms" checked={isAgree[2]} />
+          <input
+            type="checkbox"
+            id="2"
+            checked={isAgree[2]}
+            onChange={handleOnChange}
+          />
           <CheckboxLabel htmlFor="kakaoTerms">
             [필수] 카카오 전자금융 이용약관 동의 <span>상세보기</span>
           </CheckboxLabel>
         </CheckboxContainer>
 
         <CheckboxContainer>
-          <input type="checkbox" id="personalData" checked={isAgree[3]} />
+          <input
+            type="checkbox"
+            id="3"
+            checked={isAgree[3]}
+            onChange={handleOnChange}
+          />
           <CheckboxLabel htmlFor="personalData">
             [필수] 개인정보 수집/이용에 동의합니다. <span>상세보기</span>
           </CheckboxLabel>
         </CheckboxContainer>
 
         <CheckboxContainer>
-          <input type="checkbox" id="thirdParty" checked={isAgree[4]} />
+          <input
+            type="checkbox"
+            id="4"
+            checked={isAgree[4]}
+            onChange={handleOnChange}
+          />
           <CheckboxLabel htmlFor="thirdParty">
             [필수] 개인정보 제3자 제공 동의 및 주의사항 <span>상세보기</span>
           </CheckboxLabel>

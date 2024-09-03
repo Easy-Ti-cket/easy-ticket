@@ -5,6 +5,11 @@ import AgreeMentMelon from "../../components/AgreementMelon";
 import ErrorTooltip from "../../../../components/tooltip/ErrorTooltip";
 import styled from "styled-components";
 import { useState } from "react";
+import OrderInfoMelon from "../../components/OrdererInfoMelon";
+import MyBookingInfo from "../../../../components/myBookingInfo/MyBookingInfo";
+import { MyBookingInfoContainer } from "../../../../components/myBookingInfo/MyBookingInfoContainer";
+import PrevNextButton from "../../../../components/myBookingInfo/PrevNextButton";
+import { useNavigate } from "react-router-dom";
 const TicketMethodMelonContainer = styled.div`
   display: flex;
 `;
@@ -21,6 +26,9 @@ const TooltipContents = styled.div`
   font-family: PretendardR;
   width: 400px;
 `;
+const MyBookingInfoContainerMelon = styled(MyBookingInfoContainer)`
+  height: 500px;
+`;
 const SelectPayMethodMelon = () => {
   //현장수령 or 배송
   const [option, setOption] = useState("현장수령");
@@ -30,7 +38,7 @@ const SelectPayMethodMelon = () => {
   const [isValidate, setIsValidate] = useState([]);
   const [errorArray, setErrorArray] = useState([]); //css 변경용
   //검사후 이동할 위치
-  const location = "../step5-1";
+  const nav = useNavigate();
   return (
     <TicketMethodMelonContainer>
       <TicketMethodMelon
@@ -53,6 +61,17 @@ const SelectPayMethodMelon = () => {
         ></ErrorTooltip>
         <AgreeMentMelon></AgreeMentMelon>
       </PayContainer>
+      <MyBookingInfoContainerMelon>
+        <MyBookingInfo></MyBookingInfo>
+        <PrevNextButton
+          prevButtonOnClick={() => {
+            nav("../step3/step4");
+          }}
+          nextButtonOnClick={() => {
+            nav("../step5-2");
+          }}
+        />
+      </MyBookingInfoContainerMelon>
     </TicketMethodMelonContainer>
   );
 };

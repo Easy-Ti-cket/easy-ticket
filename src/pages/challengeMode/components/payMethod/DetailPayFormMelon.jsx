@@ -48,12 +48,12 @@ const optionArr = [
   "신한카드",
   "롯데카드"
 ];
-const installmentArr = ["일시불", "2개월", "3개월", "4개월", "5개월", "6개월"];
 const TextBox = styled.div`
-  font-family: PretendardR;
+  font-family: PretendardB;
   font-size: 18px;
   margin: 20px;
 `;
+const installmentArr = ["일시불", "2개월", "3개월", "4개월", "5개월", "6개월"];
 //isSelected : 선택되었는가?
 //드롭다운은 '결제수단'은 선택됐지만 '페이지 전체 정답'이 아닌 경우 애니메이션
 const DetailPayForm = ({

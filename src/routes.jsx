@@ -186,6 +186,16 @@ const router = createBrowserRouter([
                 path: "step5-1",
                 element: <PrivateRoute element={<SelectPayMethodMelon />} />,
                 label: "결제방식 / 수단 선택 "
+              },
+              {
+                path: "step5-2",
+                element: <PrivateRoute element={<CardPay />} />,
+                label: "카드 결제창"
+              },
+              {
+                path: "outro",
+                element: <PrivateRoute element={<Outro />} />,
+                label: "예매 성공"
               }
             ]
           },
