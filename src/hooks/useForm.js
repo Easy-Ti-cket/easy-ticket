@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { cardAnswerAtom } from "../store/atom";
 
 export const useForm = (correctNum) => {
+  //정답 리스트
   const cardAnswer = useAtomValue(cardAnswerAtom);
-
   const answerList = {
     PayMethodForm: "신용카드",
     DetailPayForm: "일반 신용카드",
@@ -18,9 +18,8 @@ export const useForm = (correctNum) => {
   };
   // 사용자가 입력한 답
   const [, setResponse] = useState({});
-  //폼의 name 및 정답 여부
+  //폼의 name 과 정답 여부
   const [correctList, setCorrectList] = useState({});
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setResponse((prev) => {
@@ -40,9 +39,9 @@ export const useForm = (correctNum) => {
   useEffect(() => {
     //useForm에 입력한 정답 개수 기반 페이지 전체가 정답인지 판정
     const correctCount = Object.values(correctList).filter((acc, val) =>
-      val ? acc + 1 : acc
+      val === true ? acc + 1 : acc
     );
-    console.log(correctCount, correctNum);
+
     if (correctCount.length === correctNum) {
       setIsAnswer(true);
     }

@@ -9,7 +9,9 @@ import { levelAtom } from "../../store/atom";
 const CardInputFied = styled(InputField)`
   width: 40px;
 `;
-const CardForm = ({ focusNum, handleChange }) => {
+
+const CardForm = ({ focusNum, handleChange, hasErrorArray }) => {
+  console.log(hasErrorArray);
   const level = useAtomValue(levelAtom);
 
   return (
@@ -22,24 +24,28 @@ const CardForm = ({ focusNum, handleChange }) => {
             name="cardNum1"
             type="number"
             onChange={handleChange}
+            $hasError={hasErrorArray.includes("cardNum1")}
           />
           -
           <CardInputFied
             name="cardNum2"
             type="number"
             onChange={handleChange}
+            $hasError={hasErrorArray.includes("cardNum2")}
           />
           -
           <CardInputFied
             name="cardNum3"
             type="number"
             onChange={handleChange}
+            $hasError={hasErrorArray.includes("cardNum3")}
           />
           -
           <CardInputFied
             name="cardNum4"
             type="number"
             onChange={handleChange}
+            $hasError={hasErrorArray.includes("cardNum4")}
           />
         </InputContainer>
       </AnimationArea>
@@ -48,12 +54,16 @@ const CardForm = ({ focusNum, handleChange }) => {
         text="카드 비밀번호"
         name="cardPassword"
         onChange={handleChange}
+        isNumber={true}
+        $hasError={hasErrorArray.includes("cardPassword")}
       />
       <Input
         $focus={level === "low" && focusNum == 2}
         text="cvc 번호"
         name="cvc"
         onChange={handleChange}
+        isNumber={true}
+        $hasError={hasErrorArray.includes("cvc")}
       />
     </FormWrap>
   );
