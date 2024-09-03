@@ -80,8 +80,9 @@ const Record = () => {
   const [filteredRecords, setFilteredRecords] = useState([]);
   //내 데이터 순위
   const [myRecordIndex, setMyRecordIndex] = useState(-1);
-  //세션스토리지에 저장된 자기 기록 (비교용)
+  //세션스토리지에 저장된 record
   const myRecord = JSON.parse(sessionStorage.getItem("record"));
+  const myThemeSite = JSON.parse(sessionStorage.getItem("record")).themeSite;
 
   // 데이터베이스로부터 데이터 읽어오기 - loadUserData 함수
   useEffect(() => {
@@ -90,9 +91,9 @@ const Record = () => {
         //정렬 후 저장
         const sortedRecords = res.sort((a, b) => b.timeSpent - a.timeSpent);
         setRecords(sortedRecords);
-        //기록 초기화면 - 인터파크
+        //기록 초기화면 - 사용자가 예매를 진행한 사이트
         setFilteredRecords(
-          sortedRecords.filter((item) => item.themeSite === "interpark")
+          sortedRecords.filter((item) => item.themeSite === myThemeSite)
         );
         //내 기록 순위 (세션스토리지 / db 비교)
         const myRecordNanoSec = myRecord.timeStamp.nanoseconds;
@@ -144,6 +145,7 @@ const Record = () => {
         {/*사이트 네비게이터*/}
         <RecordNavigate
           records={records}
+          myThemeSite={myThemeSite}
           setFilteredRecords={setFilteredRecords}
         />
         {/*기록 테이블 */}
