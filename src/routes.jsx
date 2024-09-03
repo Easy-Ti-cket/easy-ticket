@@ -264,6 +264,11 @@ const router = createBrowserRouter([
               {
                 path: "step5-1",
                 element: <PrivateRoute element={<SelectPayMethodYes24 />} />
+              },
+              {
+                path: "step5-2",
+                element: <PrivateRoute element={<CardPay />} />,
+                label: "카드 결제창"
               }
             ]
           }
