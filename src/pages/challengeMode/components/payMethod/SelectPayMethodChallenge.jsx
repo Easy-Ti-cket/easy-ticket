@@ -1,11 +1,7 @@
 import styled from "styled-components";
 import DetailPayForm from "../../../../components/forms/pay/DetailPayForm";
-import { useAtomValue } from "jotai";
-import { selectedPosterAtom } from "../../../../store/atom";
 import { FormWrap } from "../../../../components/forms/FormStyle";
-import UsablePoint from "../../components/payMethod/UsablePoint";
-import MyBookingInfo from "../../../../components/myBookingInfo/MyBookingInfo";
-import PosterInfo from "../../../../components/poster/PosterInfo";
+import MyBookingInfo from "../../ticketlink/step3-step4/MyBookingInfo";
 import { MyBookingInfoContainer } from "../../../../components/myBookingInfo/MyBookingInfoContainer";
 import PrevNextButton from "../../../../components/myBookingInfo/PrevNextButton";
 import { useNavigate } from "react-router-dom";
@@ -55,16 +51,6 @@ const FakeButton = styled.div`
   border-radius: 4px;
 `;
 
-//현금영수증 발급 안내
-const Info = styled.span`
-  font-size: 16px;
-  font-family: "pretendardM";
-  margin-top: 50px;
-  width: 90%;
-  line-height: 20px;
-  color: var(--text-color2);
-`;
-
 //결제방식관련 안내 문구
 const PayMethodInfo = styled.span`
   font-family: "pretendardB";
@@ -72,9 +58,7 @@ const PayMethodInfo = styled.span`
   color: var(--text-color);
 `;
 
-const SelectPayMethodInterPark = ({ isAllChecked }) => {
-  //포스터 정보
-  const posterId = useAtomValue(selectedPosterAtom);
+const SelectPayMethodChallenge = ({ isAllChecked = null }) => {
   //nav
   const nav = useNavigate();
   //검사로직
@@ -105,8 +89,6 @@ const SelectPayMethodInterPark = ({ isAllChecked }) => {
           isSelected={isPayMethodCorrect}
           handleChange={handleChange}
         />
-        {/*사용 가능한 포인트 */}
-        <UsablePoint />
       </PayMethodContainer>
       {/*결제 방식 */}
       <DetailPayFormContainer>
@@ -134,24 +116,18 @@ const SelectPayMethodInterPark = ({ isAllChecked }) => {
               hasPayFormError={hasPayFormError}
               cardTypesError={cardTypesError}
             />
-            <Info>
-              ※현금영수증 발급 안내
-              <br />
-              현금영수증은 PC에서만 발급 가능하며, "예매내역 상세" 및
-              "마이페이지 {">"} 증빙서류 {">"} 현금영수증 메뉴"에서 신청할 수
-              있습니다.
-            </Info>
           </>
         )}
       </DetailPayFormContainer>
 
       {/*내 예매 정보 */}
       <div>
-        <PosterInfo id={posterId} />
         <MyBookingInfoContainer>
           <MyBookingInfo />
           <PrevNextButton
-            prevButtonOnClick={() => nav("../step3/step4")}
+            prevButtonOnClick={() => {
+              nav("../step3/step4");
+            }}
             nextButtonOnClick={handlePayment}
           />
         </MyBookingInfoContainer>
@@ -159,4 +135,4 @@ const SelectPayMethodInterPark = ({ isAllChecked }) => {
     </PayMethodWrap>
   );
 };
-export default SelectPayMethodInterPark;
+export default SelectPayMethodChallenge;

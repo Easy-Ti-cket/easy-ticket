@@ -1,11 +1,16 @@
 import styled from "styled-components";
+
+const Wrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+`;
 //동의 버튼
 const CheckBoxContainer = styled.div`
-  display: flex;
-  gap: 10px;
-  transform: translateY(-200px);
   font-size: 14px;
-  vertical-align: middle;
+  display: flex;
+  gap: 5px;
+  align-items: center;
 `;
 const CheckBox = styled.input`
   color: ${(props) =>
@@ -19,7 +24,7 @@ const PayMethodCheckBox = ({
   item3Checked
 }) => {
   return (
-    <>
+    <Wrap>
       <CheckBoxContainer>
         <CheckBox
           name="item1"
@@ -48,7 +53,7 @@ const PayMethodCheckBox = ({
         />
         <label>취소 수수료 및 취소 기한을 확인하였으며, 동의합니다.</label>
       </CheckBoxContainer>
-    </>
+    </Wrap>
   );
 };
 
