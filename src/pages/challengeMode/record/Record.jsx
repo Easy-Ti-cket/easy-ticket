@@ -2,19 +2,16 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import RecordNavigate from "../components/record/RecordNavigate";
 import loadUserData from "../../../apis/loadUserData";
-import { useAtomValue } from "jotai";
-import { userNameAtom } from "../../../store/atom";
-import ErrorTooltip from "../../../components/tooltip/ErrorTooltip";
+import Paging from "../../../util/Paging";
 
 const RecordContainer = styled.div`
   width: 100vw;
-  height: 100vw;
   background-color: var(--dimmed-color);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 5px;
-  padding: 20px;
+  padding: 50px 0;
   text-align: center;
 `;
 const RecordTitle = styled.h2`
@@ -61,7 +58,7 @@ const RecordItemContainer = styled.ul`
   border-radius: 8px;
   background-color: ${(props) =>
     props.$isUserRecord ? "var(--sub-color)" : "none"};
-  transition: background-color 1s ease;
+  transition: background-color 0.2s ease;
 `;
 const RecordItem = styled.li`
   list-style-type: none;
@@ -84,7 +81,7 @@ const Record = () => {
   //내 데이터 순위
   const [myRecordIndex, setMyRecordIndex] = useState(-1);
   //세션스토리지에 저장된 자기 기록 (비교용)
-  const myRecordTimeStamp = JSON.parse(sessionStorage.getItem("record"));
+  const myRecord = JSON.parse(sessionStorage.getItem("record"));
 
   // 데이터베이스로부터 데이터 읽어오기 - loadUserData 함수
   useEffect(() => {
@@ -98,9 +95,9 @@ const Record = () => {
           sortedRecords.filter((item) => item.themeSite === "interpark")
         );
         //내 기록 순위 (세션스토리지 / db 비교)
-        const myRecordNanoSec = myRecordTimeStamp.timeStamp.nanoseconds;
-        const myRecordSec = myRecordTimeStamp.timeStamp.seconds;
-        if (myRecordTimeStamp) {
+        const myRecordNanoSec = myRecord.timeStamp.nanoseconds;
+        const myRecordSec = myRecord.timeStamp.seconds;
+        if (myRecord) {
           setMyRecordIndex(
             sortedRecords.findIndex(
               (item) =>
@@ -120,9 +117,25 @@ const Record = () => {
     return `${Math.floor(time / 60)}:${(time % 60).toString().padStart(2, "0")}`;
   };
 
-  //데이터 슬라이싱
-  const startIndex = myRecordIndex < 5 ? 0 : myRecordIndex - 4;
-  const endIndex = myRecordIndex < 5 ? 10 : myRecordIndex + 5;
+  //페이지네이션
+  //현재 페이지
+  const [activePage, setActivePage] = useState(1);
+  useEffect(() => {
+    setActivePage(myRecordIndex ? Math.floor(myRecordIndex / 10 + 1) : 1);
+  }, [myRecordIndex]);
+  //한 페이지 당 보여줄 아이템 개수
+  const itemsCountPerPage = 10;
+  //페이지네이션 네비게이터 개수
+  const pageRangeDisplayed = 5;
+  //페이지 변경 핸들링 함수
+  const handlePageChange = (pageNumber) => {
+    setActivePage(pageNumber);
+  };
+  //실제 렌더링할 데이터
+  const renderData = filteredRecords.slice(
+    (activePage - 1) * itemsCountPerPage,
+    activePage * itemsCountPerPage
+  );
 
   return (
     <RecordContainer>
@@ -143,39 +156,44 @@ const Record = () => {
           </RecordListTitle>
           {/*기록 */}
           <RecordList>
-            {filteredRecords
-              .slice(startIndex, endIndex)
-              .map((record, index) => (
-                <RecordItemContainer
+            {renderData.map((record, index) => (
+              <RecordItemContainer
+                $isUserRecord={
+                  myRecordIndex ===
+                  filteredRecords.findIndex((item) => item === record)
+                }
+                key={index}
+              >
+                <RecordItem
                   $isUserRecord={
                     myRecordIndex ===
                     filteredRecords.findIndex((item) => item === record)
                   }
-                  key={index}
+                  $bold={true}
+                  $highlight={true}
                 >
-                  <RecordItem
-                    $isUserRecord={
-                      myRecordIndex ===
-                      filteredRecords.findIndex((item) => item === record)
-                    }
-                    $bold={true}
-                    $highlight={true}
-                  >
-                    {filteredRecords.findIndex((item) => item === record) + 1}
-                  </RecordItem>
-                  <RecordItem $bold={true}>{record.userName}</RecordItem>
-                  <RecordItem
-                    $isUserRecord={
-                      myRecordIndex ===
-                      filteredRecords.findIndex((item) => item === record)
-                    }
-                  >
-                    {formatTime(record.timeSpent)}
-                  </RecordItem>
-                </RecordItemContainer>
-              ))}
+                  {filteredRecords.findIndex((item) => item === record) + 1}
+                </RecordItem>
+                <RecordItem $bold={true}>{record.userName}</RecordItem>
+                <RecordItem
+                  $isUserRecord={
+                    myRecordIndex ===
+                    filteredRecords.findIndex((item) => item === record)
+                  }
+                >
+                  {formatTime(record.timeSpent)}
+                </RecordItem>
+              </RecordItemContainer>
+            ))}
           </RecordList>
         </RecordTable>
+        <Paging
+          activePage={activePage} //현재 페이지
+          totalItemsCount={filteredRecords.length} //전체 data의 개수
+          itemsPerPage={itemsCountPerPage} //페이지 당 보여줄 아이템 개수
+          handlePageChange={handlePageChange}
+          pageRangeDisplayed={pageRangeDisplayed}
+        />
       </RecordContents>
     </RecordContainer>
   );
