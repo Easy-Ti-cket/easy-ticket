@@ -14,22 +14,30 @@ import { useNavigate } from "react-router-dom";
 import { progressAtom } from "../../../../store/atom";
 const TicketMethodMelonContainer = styled.div`
   display: flex;
+  gap: 20px;
 `;
 const PayContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding-left: 20px;
   justify-content: space-between;
+  padding-top: 50px;
 `;
 const TextBox = styled.div`
   font-family: PretendardB;
 `;
 const TooltipContents = styled.div`
-  font-family: PretendardR;
-  width: 400px;
+  color: var(--text-color);
+  font-size: 16px;
 `;
 const MyBookingInfoContainerMelon = styled(MyBookingInfoContainer)`
   height: 500px;
+`;
+const GrayLine = styled.div`
+  width: 100%;
+  display: flex;
+  border-top: 1px solid var(--fill-color);
+  padding: 10px 0;
+  margin-top: 5px;
 `;
 const Container = styled.div``;
 const SelectPayMethodMelon = () => {
@@ -55,6 +63,7 @@ const SelectPayMethodMelon = () => {
         />
         <PayContainer>
           <TextBox>결제수단을 선택하세요</TextBox>
+          <GrayLine />
           <PayMethodForm></PayMethodForm>
           <DetailPayFormMelon></DetailPayFormMelon>
           <ErrorTooltip
