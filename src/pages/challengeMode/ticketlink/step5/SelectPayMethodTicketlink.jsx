@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import SelectPayMethod from "./SelectPayMethod";
+import SelectPayMethodChallenge from "../../components/payMethod/SelectPayMethodChallenge";
 import { useState } from "react";
 
 const Wrap = styled.div`
@@ -29,7 +29,7 @@ const SelectPayMethodTicketlink = () => {
   // console.log(checkedboxes);
   return (
     <Wrap>
-      <SelectPayMethod isAllChecked={isAllChecked} />
+      <SelectPayMethodChallenge isAllChecked={isAllChecked} />
     </Wrap>
   );
 };

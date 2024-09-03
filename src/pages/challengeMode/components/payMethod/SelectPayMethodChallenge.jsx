@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import DetailPayForm from "../../../../components/forms/pay/DetailPayForm";
 import { FormWrap } from "../../../../components/forms/FormStyle";
-import MyBookingInfo from "../step3-step4/MyBookingInfo";
+import MyBookingInfo from "../../ticketlink/step3-step4/MyBookingInfo";
 import { MyBookingInfoContainer } from "../../../../components/myBookingInfo/MyBookingInfoContainer";
 import PrevNextButton from "../../../../components/myBookingInfo/PrevNextButton";
 import { useNavigate } from "react-router-dom";
@@ -58,13 +58,13 @@ const PayMethodInfo = styled.span`
   color: var(--text-color);
 `;
 
-const SelectPayMethod = ({ isChecked }) => {
+const SelectPayMethodChallenge = ({ isAllChecked }) => {
   //nav
   const nav = useNavigate();
   //검사로직
   const { correctList, handleChange, isAnswer } = useForm(3);
   const { handlePayment, hasPayFormError, cardTypesError } = usePaymentValidate(
-    { correctList, isChecked }
+    { correctList, isAllChecked }
   );
   //'신용카드'를 정확히 골랐을 경우 '결제 수단 입력' 창 생성
   const isPayMethodCorrect = correctList["PayMethodForm"];
@@ -125,7 +125,9 @@ const SelectPayMethod = ({ isChecked }) => {
         <MyBookingInfoContainer>
           <MyBookingInfo />
           <PrevNextButton
-            prevButtonOnClick={() => nav("../step3/step4")}
+            prevButtonOnClick={() => {
+              nav("../step3/step4");
+            }}
             nextButtonOnClick={handlePayment}
           />
         </MyBookingInfoContainer>
@@ -133,4 +135,4 @@ const SelectPayMethod = ({ isChecked }) => {
     </PayMethodWrap>
   );
 };
-export default SelectPayMethod;
+export default SelectPayMethodChallenge;

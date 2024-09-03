@@ -30,8 +30,6 @@ export const usePaymentValidate = ({ correctList, isAllChecked = null }) => {
     } else {
       if (themeSite === "practice") {
         nav("../step4-2");
-      } else {
-        nav("../step5-2");
       }
       //체크박스가 필요한 모든 실전모드
       console.log(isAllChecked);
@@ -43,6 +41,7 @@ export const usePaymentValidate = ({ correctList, isAllChecked = null }) => {
         alert("개인정보 수집 및 취소 수수료 관련 항목에 모두 동의해 주세요");
         return;
       }
+      nav("../step5-2");
     }
   };
   return { handlePayment, hasPayFormError, cardTypesError };
