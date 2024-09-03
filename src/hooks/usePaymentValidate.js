@@ -32,12 +32,7 @@ export const usePaymentValidate = ({ correctList, isAllChecked = null }) => {
         nav("../step4-2");
       }
       //체크박스가 필요한 모든 실전모드
-      console.log(isAllChecked);
-      if (
-        themeSite !== "practice" &&
-        themeSite !== "interpark" &&
-        !isAllChecked
-      ) {
+      if (themeSite === "yes24" && !isAllChecked) {
         alert("개인정보 수집 및 취소 수수료 관련 항목에 모두 동의해 주세요");
         return;
       }

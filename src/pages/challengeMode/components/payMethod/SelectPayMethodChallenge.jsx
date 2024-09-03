@@ -58,7 +58,7 @@ const PayMethodInfo = styled.span`
   color: var(--text-color);
 `;
 
-const SelectPayMethodChallenge = ({ isAllChecked }) => {
+const SelectPayMethodChallenge = ({ isAllChecked = null }) => {
   //nav
   const nav = useNavigate();
   //검사로직
