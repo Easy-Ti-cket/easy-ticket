@@ -16,4 +16,5 @@ export const Label = styled.span`
 export const InputField = styled.input`
   width: 180px;
   height: 30px;
+  border: ${(props) => props.$hasError && "2px solid var(--point-color)"};
 `;
