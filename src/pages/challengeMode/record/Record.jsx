@@ -90,7 +90,7 @@ const Record = () => {
     const themeTrue = myThemeSite === clickThemeSite;
     return indexTrue && themeTrue;
   };
-
+  console.log(activePage);
   const nav = useNavigate();
   return (
     <RecordContainer>
