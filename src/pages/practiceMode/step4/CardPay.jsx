@@ -3,15 +3,17 @@ import Card from "../../../components/card/Card";
 import CardForm from "../../../components/forms/CardForm";
 import { useForm } from "../../../hooks/useForm";
 import Button from "../../../components/button/Button";
-import { useAtomValue } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import {
   cardAnswerAtom,
   themeSiteAtom,
-  userNameAtom
+  userNameAtom,
+  stepTextNumberAtom,
+  helpTextNumberAtom
 } from "../../../store/atom";
 import { Step4Container } from "./SelectPayMethod";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const CardPayWrap = styled(Step4Container)`
   align-items: center;
@@ -52,7 +54,13 @@ const CardPay = () => {
   //에러 발생 시 css 변경
   const allInputNames = [...cardKeys, "cardPassword", "cvc"];
   const [hasErrorArray, setHasErrorArray] = useState([]);
-
+  //단계별 텍스트
+  const setStepTextNumber = useSetAtom(stepTextNumberAtom);
+  const setHelpTextNumber = useSetAtom(helpTextNumberAtom);
+  useEffect(() => {
+    setStepTextNumber(2);
+    setHelpTextNumber(2);
+  }, []);
   //검사로직
   const handleClick = () => {
     if (!isAnswer) {
@@ -67,6 +75,7 @@ const CardPay = () => {
       }
     }
   };
+
   return (
     <CardPayWrap>
       <Card />
