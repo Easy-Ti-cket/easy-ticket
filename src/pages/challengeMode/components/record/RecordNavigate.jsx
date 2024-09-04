@@ -15,7 +15,8 @@ const RecordNavigate = ({
   records,
   myThemeSite,
   setFilteredRecords,
-  setClickThemeSite
+  setClickThemeSite,
+  setActivePage
 }) => {
   //클릭했을 경우 css 변경
   const [isClick, setIsClick] = useState({
@@ -40,6 +41,7 @@ const RecordNavigate = ({
     });
     //데이터 필터링
     setFilteredRecords(() => records.filter((item) => item.themeSite === name));
+    setActivePage(1);
   };
   const typeName = (name) => {
     return isClick[name] ? "record-onclick" : "record";
