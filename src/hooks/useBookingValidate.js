@@ -1,16 +1,18 @@
 import { useAtomValue } from "jotai";
 import { useNavigate } from "react-router-dom";
-import { levelAtom, seatCountAtom } from "../store/atom";
+import { levelAtom, seatCountAtom, themeSiteAtom } from "../store/atom";
 
 export const useBookingValidate = (
   addStage,
-  step3Stage,
+  step3Stage = 1,
   isValidate,
   setErrorArray,
-  location
+  location,
+  isAgreeAll = null
 ) => {
   const seatCount = useAtomValue(seatCountAtom);
   const level = useAtomValue(levelAtom);
+  const themeSite = useAtomValue(themeSiteAtom);
 
   const nav = useNavigate();
   const handleButtonClick = () => {
@@ -20,7 +22,6 @@ export const useBookingValidate = (
       return;
     }
     addStage(2);
-    console.log(seatCount, step3Stage);
     // 버튼이 결제하기일 경우 step4-1로 이동
     if (step3Stage == 2) {
       //티켓수령방법 + 생년월일을 작성 검사 로직
@@ -32,6 +33,12 @@ export const useBookingValidate = (
       if (level === "high" && !isValidate.includes("birth")) {
         setErrorArray(() => ["birth"]);
         alert("생년월일을 정확하게 작성해 주세요");
+        return;
+      }
+      //체크박스 검사 로직
+      if (themeSite === "melonticket" && !isAgreeAll) {
+        setErrorArray(() => ["checkbox"]);
+        alert("체크박스를 모두 선택해 주세요");
         return;
       } else {
         setErrorArray(() => []);

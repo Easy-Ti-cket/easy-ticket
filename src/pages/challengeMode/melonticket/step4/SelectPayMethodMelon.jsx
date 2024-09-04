@@ -1,17 +1,18 @@
 import DetailPayFormMelon from "../../components/payMethod/DetailPayFormMelon";
 import PayMethodForm from "../../../../components/forms/pay/PayMethodForm";
-import TicketMethodMelon from "../../components/TiketMethod/TicketMethodMelon";
 import AgreeMentMelon from "../../components/AgreementMelon";
 import ErrorTooltip from "../../../../components/tooltip/ErrorTooltip";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { useSetAtom } from "jotai";
-import OrderInfoMelon from "../../components/OrdererInfoMelon";
 import MyBookingInfo from "../../../../components/myBookingInfo/MyBookingInfo";
 import { MyBookingInfoContainer } from "../../../../components/myBookingInfo/MyBookingInfoContainer";
 import PrevNextButton from "../../../../components/myBookingInfo/PrevNextButton";
 import { useNavigate } from "react-router-dom";
 import { progressAtom } from "../../../../store/atom";
+import TicketMethod from "../../../../components/forms/ticket/TicketMethod";
+import { useBookingValidate } from "../../../../hooks/useBookingValidate";
+
 const TicketMethodMelonContainer = styled.div`
   display: flex;
   gap: 20px;
@@ -23,7 +24,7 @@ const PayContainer = styled.div`
   padding-top: 50px;
 `;
 const TextBox = styled.div`
-  font-family: PretendardB;
+  font-family: pretendardB;
 `;
 const TooltipContents = styled.div`
   color: var(--text-color);
@@ -40,32 +41,50 @@ const GrayLine = styled.div`
   margin-top: 5px;
 `;
 const Container = styled.div``;
+
 const SelectPayMethodMelon = () => {
   const setProgress = useSetAtom(progressAtom);
   useEffect(() => setProgress(3), [setProgress]);
+
   //현장수령 or 배송
   const [option, setOption] = useState("현장수령");
-  //step4 단계에 대한 정보
-  const [step3Stage, setStep3Stage] = useState(1);
+  // 체크박스 상태 관리
+  const [isAgreeAll, setIsAgreeAll] = useState(false);
+  const [isAgree, setIsAgree] = useState([false, false, false, false, false]);
   // 폼 검사 로직용
   const [isValidate, setIsValidate] = useState([]);
   const [errorArray, setErrorArray] = useState([]); //css 변경용
+  const [step3Stage, setStep3Stage] = useState(1);
+  const addStage = (num) => setStep3Stage(num);
   //검사후 이동할 위치
   const nav = useNavigate();
+  const location = "../step5-2";
+  // 버튼에 넘겨줄 검사로직 (티켓가격 + 예매자 정보 확인용)
+  const { handleButtonClick } = useBookingValidate(
+    addStage,
+    step3Stage,
+    isValidate,
+    setErrorArray,
+    location,
+    isAgreeAll
+  );
+
   return (
     <TicketMethodMelonContainer>
       <Container>
-        <TicketMethodMelon
+        {/*티켓 수령 방법 / 예매자 확인*/}
+        <TicketMethod
           option={option}
           setOption={setOption}
           setIsValidate={setIsValidate}
           errorArray={errorArray}
         />
         <PayContainer>
+          {/*결제 수단 선택*/}
           <TextBox>결제수단을 선택하세요</TextBox>
           <GrayLine />
-          <PayMethodForm></PayMethodForm>
-          <DetailPayFormMelon></DetailPayFormMelon>
+          <PayMethodForm />
+          <DetailPayFormMelon />
           <ErrorTooltip
             contents={
               <TooltipContents>
@@ -73,18 +92,24 @@ const SelectPayMethodMelon = () => {
               </TooltipContents>
             }
           ></ErrorTooltip>
-          <AgreeMentMelon></AgreeMentMelon>
+          {/*동의 박스*/}
+          <AgreeMentMelon
+            isAgree={isAgree}
+            isAgreeAll={isAgreeAll}
+            setIsAgreeAll={setIsAgreeAll}
+            setIsAgree={setIsAgree}
+            errorArray={errorArray}
+          />
         </PayContainer>
       </Container>
+      {/*내 예매 정보*/}
       <MyBookingInfoContainerMelon>
-        <MyBookingInfo></MyBookingInfo>
+        <MyBookingInfo />
         <PrevNextButton
           prevButtonOnClick={() => {
             nav("../step3/step4");
           }}
-          nextButtonOnClick={() => {
-            nav("../step5-2");
-          }}
+          nextButtonOnClick={handleButtonClick}
         />
       </MyBookingInfoContainerMelon>
     </TicketMethodMelonContainer>

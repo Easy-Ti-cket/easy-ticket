@@ -1,9 +1,9 @@
 import styled from "styled-components";
-import { useState } from "react";
 
 const Container = styled.div`
   padding-top: 20px;
-  font-family: PretendardR;
+  font-family: pretendardR;
+  color: ${(props) => props.$hasError && "var(--point-color)"};
 `;
 const LineContainer = styled.div`
   display: flex;
@@ -24,11 +24,13 @@ const TextBox = styled.div`
   margin-right: 270px;
   font-family: PretendardB;
 `;
-const AgreeMentMelon = () => {
-  //useState를 사용하여 체크박스의 상태를 관리한다.
-  //배열로 관리하며, 각각의 체크박스에 대한 상태를 저장한다.
-  const [isAgreeAll, setIsAgreeAll] = useState(false);
-  const [isAgree, setIsAgree] = useState([false, false, false, false, false]);
+const AgreeMentMelon = ({
+  isAgree,
+  isAgreeAll,
+  setIsAgree,
+  setIsAgreeAll,
+  errorArray
+}) => {
   //전체 동의를 클릭하면 한번에 동의되는 함수
   const handleAgreeAll = () => {
     if (!isAgreeAll) {
@@ -46,8 +48,11 @@ const AgreeMentMelon = () => {
       )
     );
   };
+  // 전체 동의를 하지 않은 상태에서 다음 단계 버튼을 클릭했을 경우
+  const $hasError = errorArray.includes("checkbox");
+
   return (
-    <Container>
+    <Container $hasError={$hasError}>
       <LineContainer>
         <TextBox>예매자 동의</TextBox>
         <CheckboxContainer>
