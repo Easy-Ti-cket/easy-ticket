@@ -13,7 +13,6 @@ import { progressAtom } from "../../../../store/atom";
 import TicketMethod from "../../../../components/forms/ticket/TicketMethod";
 import { useBookingValidate } from "../../../../hooks/useBookingValidate";
 import { useForm } from "../../../../hooks/useForm";
-import { usePaymentValidate } from "../../../../hooks/usePaymentValidate";
 import { PayMethodInfo } from "../../components/payMethod/payMethodStyle";
 
 const TicketMethodMelonContainer = styled.div`
