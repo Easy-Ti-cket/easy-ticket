@@ -29,6 +29,9 @@ const PayContainer = styled.div`
 const TextBox = styled.div`
   font-family: pretendardB;
 `;
+const PayMethodContainer = styled.div`
+  color: ${(props) => props.$hasError && "var(--point-color)"};
+`;
 const MyBookingInfoContainerMelon = styled(MyBookingInfoContainer)`
   height: 500px;
 `;
@@ -55,11 +58,15 @@ const SelectPayMethodMelon = () => {
   // 폼 검사 로직용
   const [isValidate, setIsValidate] = useState([]);
   const [errorArray, setErrorArray] = useState([]); //css 변경용
-  const [step3Stage, setStep3Stage] = useState(1);
+  const [step3Stage, setStep3Stage] = useState(2);
   const addStage = (num) => setStep3Stage(num);
   //검사후 이동할 위치
   const nav = useNavigate();
   const location = "../step5-2";
+  // 결제 수단 검사로직
+  const { correctList, handleChange } = useForm(1);
+  // 실전모드는 '신용카드' 선택만 가능
+  const isPayMethodCorrect = correctList["PayMethodForm"];
   // 버튼에 넘겨줄 검사로직 (티켓가격 + 예매자 정보 확인용)
   const { handleButtonClick } = useBookingValidate(
     addStage,
@@ -67,15 +74,8 @@ const SelectPayMethodMelon = () => {
     isValidate,
     setErrorArray,
     location,
-    isAgreeAll
+    { isAgreeAll: isAgreeAll, isPayMethodCorrect: isPayMethodCorrect }
   );
-  // 결제 수단 검사로직
-  const { correctList, handleChange, isAnswer } = useForm(1);
-  const { handlePayment, hasPayFormError } = usePaymentValidate({
-    correctList
-  });
-  // 실전모드는 '신용카드' 선택만 가능
-  const isPayMethodCorrect = correctList["PayMethodForm"];
 
   return (
     <TicketMethodMelonContainer>
@@ -91,7 +91,7 @@ const SelectPayMethodMelon = () => {
         <PayContainer>
           {/*결제 수단 선택*/}
           <ErrorTooltipContainer>
-            {!correctList["PayMethodForm"] && (
+            {!isPayMethodCorrect && (
               <ErrorTooltip
                 contents={
                   <PayMethodInfo>
@@ -103,12 +103,15 @@ const SelectPayMethodMelon = () => {
               </ErrorTooltip>
             )}
           </ErrorTooltipContainer>
-          <TextBox>결제수단을 선택하세요</TextBox>
-          <GrayLine />
-          <PayMethodForm
-            isSelected={isPayMethodCorrect}
-            handleChange={handleChange}
-          />
+          <PayMethodContainer $hasError={errorArray.includes("payMethod")}>
+            <TextBox>결제수단을 선택하세요</TextBox>
+            <GrayLine />
+            <PayMethodForm
+              isSelected={isPayMethodCorrect}
+              handleChange={handleChange}
+            />
+          </PayMethodContainer>
+
           <DetailPayFormMelon />
           {/*동의 박스*/}
           <AgreeMentMelon
