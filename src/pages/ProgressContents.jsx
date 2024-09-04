@@ -24,6 +24,9 @@ const ProgressContentsContainer = styled.div`
 `;
 
 const ProgressBarBox = styled.div`
+  display: flex;
+  justify-content: center;
+  width: 100%;
   min-height: 145px;
 `;
 

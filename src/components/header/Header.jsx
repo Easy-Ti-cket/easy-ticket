@@ -4,9 +4,9 @@ import Logo from "../../assests/logo.svg?react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Modal from "../modal/Modal";
-import GoToMainModalCont from "../modal/GoToMainModalCont";
 import { useAtomValue, useSetAtom } from "jotai";
 import { timerControlAtom, themeSiteAtom } from "../../store/atom";
+import GoToLocationModalCont from "../modal/GoToMainModalCont";
 
 /*헤더 Container*/
 const HeaderContainer = styled.div`
@@ -56,7 +56,7 @@ const Header = () => {
         <Modal
           width="300px"
           height="300px"
-          contents={<GoToMainModalCont setIsConfirm={setIsConfirm} />}
+          contents={<GoToLocationModalCont setIsConfirm={setIsConfirm} />}
           buttonShow={false}
         />
       )}

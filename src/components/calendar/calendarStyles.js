@@ -101,7 +101,7 @@ export const StyledCalendarWrapper = styled.div`
     color: var(--key-color);
   }
   .react-calendar__tile:enabled:focus,
-  .react-calender__tile:enabled:active {
+  .react-calendar__tile:enabled:active {
     background-color: var(--key-color);
     color: var(--sub-color);
   }

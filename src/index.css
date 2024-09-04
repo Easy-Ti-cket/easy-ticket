@@ -35,7 +35,8 @@
   --key-color-interpark: #d40000;
   --hover-color-interpark: #b50000;
   --sub-color-interpark: #ffdada;
-  --progress-color-interpark: #d47373;
+  --progress-color-interpark: #d40000;
+  /* --progress-color-interpark: #d47373; */
   --gray-color-interpark: #2c2c2c;
 
   --key-color-melonticket: #00cd3c;
@@ -113,4 +114,11 @@ input {
   &:focus::placeholder {
     color: transparent;
   }
+}
+
+/*input type = number 의 화살표 제거*/
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
