@@ -60,7 +60,7 @@ const Record = () => {
       .catch((error) =>
         console.error(`데이터를 가져오는 도중 에러 발생 : ${error}`)
       );
-  }, [filteredRecords, myRecord, myName]);
+  }, []);
   //시간 format 변경
   const formatTime = (time) => {
     return `${Math.floor(time / 60)}:${(time % 60).toString().padStart(2, "0")}`;
@@ -91,6 +91,11 @@ const Record = () => {
   //사용자가 진행한 themeSite와 기록 순위에서 css 변경
   const [clickThemeSite, setClickThemeSite] = useState(myThemeSite);
   const isUserRecord = (record) => {
+    // myRecord가 존재하는지, db의 필수 필드가 존재하는지 확인
+    if (!myRecord || !myRecordIndex || !myRecord.userName) {
+      return false;
+    }
+
     const indexTrue =
       myRecordIndex === filteredRecords.findIndex((item) => item === record);
     const themeTrue = myThemeSite === clickThemeSite;
