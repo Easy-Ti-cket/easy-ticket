@@ -9,7 +9,8 @@ import {
   themeSiteAtom,
   userNameAtom,
   stepTextNumberAtom,
-  helpTextNumberAtom
+  helpTextNumberAtom,
+  progressAtom
 } from "../../../store/atom";
 import { Step4Container } from "./SelectPayMethod";
 import { useNavigate } from "react-router-dom";
@@ -33,6 +34,7 @@ const Highlight = styled.span`
 `;
 
 const CardPay = () => {
+  const setProgress = useSetAtom(progressAtom);
   //useForm 훅에 정답 개수 전달, correctList가 정답 개수에 다다를 경우 isAnswer true
   const { handleChange, correctList, isAnswer } = useForm(6);
   const cardAnswer = useAtomValue(cardAnswerAtom);
@@ -60,6 +62,7 @@ const CardPay = () => {
   useEffect(() => {
     setStepTextNumber(2);
     setHelpTextNumber(2);
+    setProgress(4);
   }, []);
   //검사로직
   const handleClick = () => {
