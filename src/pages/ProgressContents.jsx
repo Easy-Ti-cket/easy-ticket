@@ -4,7 +4,7 @@ import { useNavigate, useLocation, Outlet } from "react-router-dom";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import Button from "../components/button/Button";
 import Modal from "../components/modal/Modal";
-import ProgressBar from "../components/ProgressBar";
+import ProgressBar from "../components/progressBar/ProgressBar";
 import Timer from "../components/timer/Timer";
 import EscModalContents from "../components/modal/EscModalContents";
 import TimeoutModal from "../components/modal/TimeoutModal";
