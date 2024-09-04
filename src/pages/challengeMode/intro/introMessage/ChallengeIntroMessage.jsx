@@ -8,7 +8,7 @@ import {
   Yes24Text
 } from "../introMessage/introText/IntroText";
 
-const ChallangeIntroMessage = () => {
+const ChallengeIntroMessage = () => {
   const themeSite = useAtomValue(themeSiteAtom);
 
   const renderMessage = () => {
@@ -29,4 +29,4 @@ const ChallangeIntroMessage = () => {
   return <>{renderMessage()}</>;
 };
 
-export default ChallangeIntroMessage;
+export default ChallengeIntroMessage;

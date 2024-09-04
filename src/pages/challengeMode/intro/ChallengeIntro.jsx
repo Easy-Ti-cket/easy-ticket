@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { levelAtom, progressAtom, themeSiteAtom } from "../../../store/atom";
 import Button from "../../../components/button/Button";
 import AnimationArea from "../../../components/Animation";
-import ChallangeIntroMessage from "./introMessage/ChallangeIntroMessage";
+import ChallengeIntroMessage from "./introMessage/ChallengeIntroMessage";
 
 const IntroContainer = styled.div`
   display: flex;
@@ -15,7 +15,7 @@ const IntroContainer = styled.div`
   height: 100%;
 `;
 
-const ChallangeIntro = () => {
+const ChallengeIntro = () => {
   const navigate = useNavigate();
   const [progress, setProgress] = useAtom(progressAtom);
   const themeSite = useAtomValue(themeSiteAtom);
@@ -49,7 +49,7 @@ const ChallangeIntro = () => {
 
   return (
     <IntroContainer>
-      <ChallangeIntroMessage />
+      <ChallengeIntroMessage />
       <AnimationArea>
         <Button text="시작하기" onClick={handleClick} />
       </AnimationArea>
@@ -57,4 +57,4 @@ const ChallangeIntro = () => {
   );
 };
 
-export default ChallangeIntro;
+export default ChallengeIntro;

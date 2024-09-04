@@ -9,7 +9,7 @@ import SelectLevel from "./pages/practiceMode/selectLevel/SelectLevel";
 import SelectSite from "./pages/challengeMode/selectSite/SelectSite";
 // step 0
 import Intro from "./pages/practiceMode/step0/Intro";
-import ChallangeIntro from "./pages/challengeMode/intro/ChallangeIntro";
+import ChallengeIntro from "./pages/challengeMode/intro/ChallengeIntro";
 // step 1
 import SelectPerformance from "./pages/practiceMode/step1/SelectPerformance";
 import SelectPerformanceChallengeMode from "./pages/challengeMode/SelectPerformance/SelectPerformanceChallengeMode";
@@ -111,7 +111,7 @@ const router = createBrowserRouter([
             children: [
               {
                 path: "step0",
-                element: <PrivateRoute element={<ChallangeIntro />} />,
+                element: <PrivateRoute element={<ChallengeIntro />} />,
                 label: "인트로"
               },
               {
@@ -162,7 +162,7 @@ const router = createBrowserRouter([
             children: [
               {
                 path: "step0",
-                element: <PrivateRoute element={<ChallangeIntro />} />,
+                element: <PrivateRoute element={<ChallengeIntro />} />,
                 lable: "인트로"
               },
               {
@@ -211,7 +211,7 @@ const router = createBrowserRouter([
             children: [
               {
                 path: "step0",
-                element: <PrivateRoute element={<ChallangeIntro />} />,
+                element: <PrivateRoute element={<ChallengeIntro />} />,
                 lable: "인트로"
               },
               {
@@ -260,7 +260,7 @@ const router = createBrowserRouter([
             children: [
               {
                 path: "step0",
-                element: <PrivateRoute element={<ChallangeIntro />} />,
+                element: <PrivateRoute element={<ChallengeIntro />} />,
                 lable: "인트로"
               },
               {
@@ -293,6 +293,11 @@ const router = createBrowserRouter([
                 path: "step5-2",
                 element: <PrivateRoute element={<CardPay />} />,
                 label: "카드 결제창"
+              },
+              {
+                path: "outro",
+                element: <PrivateRoute element={<Outro />} />,
+                label: "예매 성공"
               }
             ]
           }
