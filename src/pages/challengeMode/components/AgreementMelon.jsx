@@ -8,9 +8,12 @@ const Container = styled.div`
 const LineContainer = styled.div`
   display: flex;
   border-bottom: 1px solid var(--fill-color);
+  align-items: center;
 `;
 const CheckboxContainer = styled.div`
   margin: 10px 0;
+  display: flex;
+  align-items: center;
 `;
 
 const CheckboxLabel = styled.label`
@@ -22,7 +25,13 @@ const TermsContainer = styled.div`
 `;
 const TextBox = styled.div`
   margin-right: 270px;
-  font-family: PretendardB;
+  font-family: "pretendardB";
+`;
+const Info = styled.span`
+  margin-left: 10px;
+  font-size: 14px;
+  font-family: "pretendardM";
+  color: var(--point-color);
 `;
 const AgreeMentMelon = ({
   isAgree,
@@ -58,6 +67,7 @@ const AgreeMentMelon = ({
         <CheckboxContainer>
           <input type="checkbox" id="agreeAll" onClick={handleAgreeAll} />
           <CheckboxLabel htmlFor="agreeAll">전체동의</CheckboxLabel>
+          <Info>전체 동의를 누르면 한 번에 동의처리됩니다.</Info>
         </CheckboxContainer>
       </LineContainer>
 

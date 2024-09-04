@@ -12,6 +12,9 @@ import { useNavigate } from "react-router-dom";
 import { progressAtom } from "../../../../store/atom";
 import TicketMethod from "../../../../components/forms/ticket/TicketMethod";
 import { useBookingValidate } from "../../../../hooks/useBookingValidate";
+import { useForm } from "../../../../hooks/useForm";
+import { usePaymentValidate } from "../../../../hooks/usePaymentValidate";
+import { PayMethodInfo } from "../../components/payMethod/payMethodStyle";
 
 const TicketMethodMelonContainer = styled.div`
   display: flex;
@@ -21,14 +24,10 @@ const PayContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding-top: 50px;
+  margin-top: 50px;
 `;
 const TextBox = styled.div`
   font-family: pretendardB;
-`;
-const TooltipContents = styled.div`
-  color: var(--text-color);
-  font-size: 16px;
 `;
 const MyBookingInfoContainerMelon = styled(MyBookingInfoContainer)`
   height: 500px;
@@ -41,11 +40,13 @@ const GrayLine = styled.div`
   margin-top: 5px;
 `;
 const Container = styled.div``;
+const ErrorTooltipContainer = styled.div`
+  margin: 20px;
+`;
 
 const SelectPayMethodMelon = () => {
   const setProgress = useSetAtom(progressAtom);
   useEffect(() => setProgress(3), [setProgress]);
-
   //현장수령 or 배송
   const [option, setOption] = useState("현장수령");
   // 체크박스 상태 관리
@@ -68,6 +69,13 @@ const SelectPayMethodMelon = () => {
     location,
     isAgreeAll
   );
+  // 결제 수단 검사로직
+  const { correctList, handleChange, isAnswer } = useForm(1);
+  const { handlePayment, hasPayFormError } = usePaymentValidate({
+    correctList
+  });
+  // 실전모드는 '신용카드' 선택만 가능
+  const isPayMethodCorrect = correctList["PayMethodForm"];
 
   return (
     <TicketMethodMelonContainer>
@@ -79,19 +87,29 @@ const SelectPayMethodMelon = () => {
           setIsValidate={setIsValidate}
           errorArray={errorArray}
         />
+
         <PayContainer>
           {/*결제 수단 선택*/}
+          <ErrorTooltipContainer>
+            {!correctList["PayMethodForm"] && (
+              <ErrorTooltip
+                contents={
+                  <PayMethodInfo>
+                    실전모드에선 "일반 신용카드" 결제만 가능합니다.
+                  </PayMethodInfo>
+                }
+              >
+                <br />
+              </ErrorTooltip>
+            )}
+          </ErrorTooltipContainer>
           <TextBox>결제수단을 선택하세요</TextBox>
           <GrayLine />
-          <PayMethodForm />
+          <PayMethodForm
+            isSelected={isPayMethodCorrect}
+            handleChange={handleChange}
+          />
           <DetailPayFormMelon />
-          <ErrorTooltip
-            contents={
-              <TooltipContents>
-                전체 동의를 누르면 한번에 동의 됩니다!
-              </TooltipContents>
-            }
-          ></ErrorTooltip>
           {/*동의 박스*/}
           <AgreeMentMelon
             isAgree={isAgree}

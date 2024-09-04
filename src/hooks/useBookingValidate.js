@@ -40,6 +40,10 @@ export const useBookingValidate = (
         setErrorArray(() => ["checkbox"]);
         alert("체크박스를 모두 선택해 주세요");
         return;
+      }
+      if (themeSite === "melonticket") {
+        //결제 수단 검사
+        return;
       } else {
         setErrorArray(() => []);
         //라우팅
