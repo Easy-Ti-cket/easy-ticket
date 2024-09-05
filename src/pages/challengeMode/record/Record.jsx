@@ -60,7 +60,7 @@ const Record = () => {
       .catch((error) =>
         console.error(`데이터를 가져오는 도중 에러 발생 : ${error}`)
       );
-  }, [filteredRecords, myRecord, myName]);
+  }, []);
   //시간 format 변경
   const formatTime = (time) => {
     return `${Math.floor(time / 60)}:${(time % 60).toString().padStart(2, "0")}`;
