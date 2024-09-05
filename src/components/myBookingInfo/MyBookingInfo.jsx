@@ -85,7 +85,7 @@ const MyBookingInfo = ({ option }) => {
 
   return (
     <Container>
-      <Title>My 예매 정보</Title>
+      <Title>내 예매 정보</Title>
       <InfoContainer>
         {Info.map((item, index) => (
           <InfoItem key={index}>

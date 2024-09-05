@@ -9,7 +9,7 @@ import PrevNextButton from "../../../../components/myBookingInfo/PrevNextButton"
 import { MyBookingInfoContainer } from "../../../../components/myBookingInfo/MyBookingInfoContainer";
 import { useNavigate } from "react-router-dom";
 import { useBookingValidate } from "../../../../hooks/useBookingValidate";
-import MyBookingInfoTicketlink from "./MyBookingInfoTicketlink";
+import MyBookingInfo from "../../../../components/myBookingInfo/MyBookingInfo";
 
 const Container = styled.div`
   display: flex;
@@ -114,7 +114,7 @@ const SelectPriceTicketlink = () => {
           </LeftSection>
           <RightSection>
             <MyBookingInfoContainer>
-              <MyBookingInfoTicketlink option={option} />
+              <MyBookingInfo option={option} />
               <PrevNextButton
                 prevButtonOnClick={() => addStage(1)}
                 nextButtonOnClick={handleButtonClick}

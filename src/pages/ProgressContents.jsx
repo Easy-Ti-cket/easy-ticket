@@ -33,15 +33,15 @@ const TextBox = styled.div`
 `;
 //화면 높이에 따라 줄어드는 contentsBox, min-height: 500px
 const ContentsBox = styled.div`
-  width: 1320px;
   flex-grow: 1;
   margin-bottom: 30px;
   min-height: 500px;
+  min-width: 1320px;
   border: var(--fill-color) 1px solid;
   border-radius: 8px;
   display: inline-flex;
   justify-content: center;
-  padding: 30px 0;
+  padding: 30px;
   //도움말 버튼 부모 position
   position: relative;
 `;
