@@ -62,7 +62,6 @@ const MyBookingInfo = ({ option }) => {
   const allowedSeat = useAtomValue(allowedSeatAtom);
   const seatCount = useAtomValue(seatCountAtom);
   const seatInfo = useAtomValue(seatInfoAtom);
-  console.log(seatInfo);
 
   const Info = [
     // 공연 날짜 및 시간
@@ -72,7 +71,7 @@ const MyBookingInfo = ({ option }) => {
       content: `${allowedSeat.row + 1}열-${allowedSeat.col + 1}`
     },
     { title: "티켓금액", price: `${seatCount ? seatInfo.price : 0}` },
-    { title: "수수료", price: `${seatCount ? 2000 : 0}` },
+    { title: "수수료", price: `${seatCount ? seatInfo.fee : 0}` },
     { title: "배송비", price: `${option === "배송" ? 3000 : 0}` },
     { title: "쿠폰할인", price: 0 }
   ];

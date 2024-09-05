@@ -43,7 +43,6 @@ const SeatInfo = () => {
   useEffect(() => {
     if (isSeatSelected) {
       const newSeatInfo = getRandomSeat(selectedPoster);
-      console.log(newSeatInfo);
       setSeatInfo({
         ...seatInfo,
         grade: newSeatInfo.grade,
