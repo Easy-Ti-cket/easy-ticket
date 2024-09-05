@@ -39,6 +39,7 @@ const TicketMethod = ({ option, setOption, setIsValidate, errorArray }) => {
   };
   // css 설정
   const hasError = errorArray.includes("method");
+
   return (
     <TicketMethodWrap>
       {/*티켓수령방법 */}

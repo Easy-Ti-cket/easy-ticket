@@ -9,6 +9,7 @@ import { progressAtom } from "../../../../store/atom";
 import PrevNextButton from "../../../../components/myBookingInfo/PrevNextButton";
 import { MyBookingInfoContainer } from "../../../../components/myBookingInfo/MyBookingInfoContainer";
 import { useNavigate } from "react-router-dom";
+import { useBookingValidate } from "../../../../hooks/useBookingValidate";
 
 const Container = styled.div`
   display: flex;
@@ -37,11 +38,26 @@ const RightSection = styled.div`
 // step3/step4 메인 페이지
 const SelectPriceTicketlink = () => {
   const [option, setOption] = useState("현장수령");
-  const [step3Stage, setStep3Stage] = useState(1);
+
+  //체크박스 체크 여부
+  const [checkedboxes, setCheckedBoxes] = useState({
+    item1: false,
+    item2: false
+  });
   const [isChecked1, setIsChecked1] = useState(false);
   const [isChecked2, setIsChecked2] = useState(false);
-  const [isCancelChecked, setIsCancelChecked] = useState(false);
+  const [isAgreeAll, setIsAgreeAll] = useState(false);
+
+  //검사 로직
+  // 폼 검사 로직용
+  const [isValidate, setIsValidate] = useState([]);
+  const [errorArray, setErrorArray] = useState([]); //css 변경용
+  const [step3Stage, setStep3Stage] = useState(1);
   const addStage = (num) => setStep3Stage(num);
+  //검사후 이동할 위치
+  const nav = useNavigate();
+
+  const [isCancelChecked, setIsCancelChecked] = useState(false);
   const setProgress = useSetAtom(progressAtom);
   const navigate = useNavigate();
 
@@ -56,27 +72,37 @@ const SelectPriceTicketlink = () => {
     setIsCancelChecked(e.target.checked);
   };
 
-  const handleButtonClick = () => {
-    if (step3Stage === 1) {
-      addStage(2);
-    } else {
-      if (isChecked1 && !isChecked2) {
-        alert("주문자 확인 및 휴대폰번호 수집을 확인하셔야 결제가 가능합니다.");
-      } else if (!isChecked1 && isChecked2) {
-        alert(
-          "취소수수료 및 취소기한 내용에 동의하셔야만 결제가 가능합니다. 내용을 확인하신 후, 동의하기를 체크해주세요."
-        );
-      } else if (!isChecked1 && !isChecked2) {
-        alert("주문자 확인 및 휴대폰번호 수집을 확인하셔야 결제가 가능합니다.");
-      } else if (!isCancelChecked) {
-        alert(
-          "취소수수료 및 취소기한 내용에 동의하셔야만 결제가 가능합니다. 내용을 확인하신 후, 동의하기를 체크해주세요."
-        );
-      } else {
-        navigate("../step5-1");
-      }
-    }
-  };
+  // const handleButtonClicktemp = () => {
+  //   if (step3Stage === 1) {
+  //     addStage(2);
+  //   } else {
+  //     if (isChecked1 && !isChecked2) {
+  //       alert("주문자 확인 및 휴대폰번호 수집을 확인하셔야 결제가 가능합니다.");
+  //     } else if (!isChecked1 && isChecked2) {
+  //       alert(
+  //         "취소수수료 및 취소기한 내용에 동의하셔야만 결제가 가능합니다. 내용을 확인하신 후, 동의하기를 체크해주세요."
+  //       );
+  //     } else if (!isChecked1 && !isChecked2) {
+  //       alert("주문자 확인 및 휴대폰번호 수집을 확인하셔야 결제가 가능합니다.");
+  //     } else if (!isCancelChecked) {
+  //       alert(
+  //         "취소수수료 및 취소기한 내용에 동의하셔야만 결제가 가능합니다. 내용을 확인하신 후, 동의하기를 체크해주세요."
+  //       );
+  //     } else {
+  //       navigate("../step5-1");
+  //     }
+  //   }
+  // };
+
+  // 버튼에 넘겨줄 검사로직 (예매자 정보 확인용)
+  const { handleButtonClick } = useBookingValidate(
+    addStage,
+    step3Stage,
+    isValidate,
+    setErrorArray,
+    location,
+    { isAgreeAll: isAgreeAll }
+  );
 
   return (
     <>
@@ -89,7 +115,6 @@ const SelectPriceTicketlink = () => {
           <RightSection>
             <MyBookingInfoContainer>
               <MyBookingInfo option={option} />
-
               <PrevNextButton
                 prevButtonOnClick={() => addStage(1)}
                 nextButtonOnClick={handleButtonClick}
@@ -103,6 +128,8 @@ const SelectPriceTicketlink = () => {
             <TicketMethod
               option={option}
               setOption={setOption}
+              setIsValidate={setIsValidate}
+              errorArray={errorArray}
               handleChecked={handleChecked}
             />
           </LeftSection>
