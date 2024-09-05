@@ -70,7 +70,7 @@ const Record = () => {
         )
       );
     }
-  }, [myRecord, filteredRecords, myName]);
+  }, [myRecord, records, myThemeSite, myName]);
 
   //페이지네이션
   const [activePage, setActivePage] = useState(1);
