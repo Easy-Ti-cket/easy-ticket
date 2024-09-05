@@ -62,7 +62,13 @@ const CardPay = () => {
   useEffect(() => {
     setStepTextNumber(2);
     setHelpTextNumber(2);
-    setProgress(4);
+    if (themeSite === "practice") {
+      setProgress(4);
+    } else if (themeSite === "melon") {
+      setProgress(3);
+    } else {
+      setProgress(5);
+    }
   }, []);
   //검사로직
   const handleClick = () => {
