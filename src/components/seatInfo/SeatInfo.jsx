@@ -43,12 +43,14 @@ const SeatInfo = () => {
   useEffect(() => {
     if (isSeatSelected) {
       const newSeatInfo = getRandomSeat(selectedPoster);
+      console.log(newSeatInfo);
       setSeatInfo({
         ...seatInfo,
         grade: newSeatInfo.grade,
         price: newSeatInfo.price,
         date: newSeatInfo.date,
-        seat: `${allowedSeat.row + 1}열 ${allowedSeat.col + 1}`
+        seat: `${allowedSeat.row + 1}열 ${allowedSeat.col + 1}`,
+        fee: newSeatInfo.fee
       });
     }
   }, [isSeatSelected, allowedSeat, selectedPoster]);

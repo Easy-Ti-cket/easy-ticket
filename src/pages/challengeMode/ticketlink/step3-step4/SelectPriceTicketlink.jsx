@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import MyBookingInfo from "./MyBookingInfo";
 import SeatCount from "./SeatCount";
 import TicketMethod from "./ticket/TicketMethod";
 import SelectPriceCheckBox from "./SelectPriceCheckBox";
@@ -10,6 +9,7 @@ import PrevNextButton from "../../../../components/myBookingInfo/PrevNextButton"
 import { MyBookingInfoContainer } from "../../../../components/myBookingInfo/MyBookingInfoContainer";
 import { useNavigate } from "react-router-dom";
 import { useBookingValidate } from "../../../../hooks/useBookingValidate";
+import MyBookingInfoTicketlink from "./MyBookingInfoTicketlink";
 
 const Container = styled.div`
   display: flex;
@@ -114,7 +114,7 @@ const SelectPriceTicketlink = () => {
           </LeftSection>
           <RightSection>
             <MyBookingInfoContainer>
-              <MyBookingInfo option={option} />
+              <MyBookingInfoTicketlink option={option} />
               <PrevNextButton
                 prevButtonOnClick={() => addStage(1)}
                 nextButtonOnClick={handleButtonClick}

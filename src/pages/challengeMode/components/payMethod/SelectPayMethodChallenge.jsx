@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import DetailPayForm from "../../../../components/forms/pay/DetailPayForm";
 import { FormWrap } from "../../../../components/forms/FormStyle";
-import MyBookingInfo from "../../ticketlink/step3-step4/MyBookingInfo";
+import MyBookingInfoTicketlink from "../../ticketlink/step3-step4/MyBookingInfoTicketlink";
 import { MyBookingInfoContainer } from "../../../../components/myBookingInfo/MyBookingInfoContainer";
 import PrevNextButton from "../../../../components/myBookingInfo/PrevNextButton";
 import { useNavigate } from "react-router-dom";
@@ -123,7 +123,7 @@ const SelectPayMethodChallenge = ({ isAllChecked = null }) => {
       {/*내 예매 정보 */}
       <div>
         <MyBookingInfoContainer>
-          <MyBookingInfo />
+          <MyBookingInfoTicketlink />
           <PrevNextButton
             prevButtonOnClick={() => {
               nav("../step3/step4");

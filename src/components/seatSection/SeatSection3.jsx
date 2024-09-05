@@ -36,12 +36,15 @@ const SeatSection3 = () => {
 
   const storeSeatInfo = (sectionIndex) => {
     const sectionPrice = priceArr[Math.floor(sectionIndex / 2) % lengthOfprice];
+    //수수료
+    const fee = poster.fee;
     setSeatInfo({
       ...seatInfo,
       grade: sectionPrice.grade,
       price: sectionPrice.price,
       date: date,
-      color: colorMapping[sectionIndex]
+      color: colorMapping[sectionIndex],
+      fee: fee
     });
     setAllowedSeat({ ...allowedSeat, gridIndex: 1 });
   };

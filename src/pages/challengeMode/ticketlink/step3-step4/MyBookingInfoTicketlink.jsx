@@ -56,7 +56,7 @@ const AmountContent = styled.div`
   font-size: 28px;
 `;
 
-const MyBookingInfo = ({ option }) => {
+const MyBookingInfoTicketlink = ({ option }) => {
   const allowedSeat = useAtomValue(allowedSeatAtom);
   const seatCount = useAtomValue(seatCountAtom);
   const seatInfo = useAtomValue(seatInfoAtom);
@@ -101,4 +101,4 @@ const MyBookingInfo = ({ option }) => {
   );
 };
 
-export default MyBookingInfo;
+export default MyBookingInfoTicketlink;

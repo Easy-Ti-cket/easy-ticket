@@ -1,6 +1,12 @@
 import styled from "styled-components";
-import { allowedSeatAtom, seatCountAtom, seatInfoAtom } from "../../store/atom";
-import { useAtomValue } from "jotai";
+import {
+  allowedSeatAtom,
+  postersAtom,
+  seatCountAtom,
+  seatInfoAtom,
+  selectedPosterAtom
+} from "../../store/atom";
+import { useAtom, useAtomValue } from "jotai";
 
 const Container = styled.div`
   border-radius: 8px;
@@ -56,6 +62,7 @@ const MyBookingInfo = ({ option }) => {
   const allowedSeat = useAtomValue(allowedSeatAtom);
   const seatCount = useAtomValue(seatCountAtom);
   const seatInfo = useAtomValue(seatInfoAtom);
+  console.log(seatInfo);
 
   const Info = [
     // 공연 날짜 및 시간
