@@ -81,7 +81,6 @@ const SelectPayMethodMelon = () => {
       <Container>
         {/*티켓 수령 방법 / 예매자 확인*/}
         <TicketMethod setIsValidate={setIsValidate} errorArray={errorArray} />
-
         <PayContainer>
           {/*결제 수단 선택*/}
           <ErrorTooltipContainer>
