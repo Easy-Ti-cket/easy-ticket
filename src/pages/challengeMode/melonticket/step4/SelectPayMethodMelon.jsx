@@ -80,11 +80,7 @@ const SelectPayMethodMelon = () => {
     <TicketMethodMelonContainer>
       <Container>
         {/*티켓 수령 방법 / 예매자 확인*/}
-        <TicketMethod
-          setOption={setOption}
-          setIsValidate={setIsValidate}
-          errorArray={errorArray}
-        />
+        <TicketMethod setIsValidate={setIsValidate} errorArray={errorArray} />
 
         <PayContainer>
           {/*결제 수단 선택*/}
@@ -123,7 +119,7 @@ const SelectPayMethodMelon = () => {
       </Container>
       {/*내 예매 정보*/}
       <MyBookingInfoContainerMelon>
-        <MyBookingInfo option={option} />
+        <MyBookingInfo />
         <PrevNextButton
           prevButtonOnClick={() => {
             nav("../step3/step4");
