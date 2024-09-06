@@ -1,3 +1,4 @@
+import { useAtom, useSetAtom } from "jotai";
 import Input from "../../input/Input";
 import TicketBuyer from "./TicketBuyer";
 import {
@@ -5,8 +6,11 @@ import {
   TicketMethodCont,
   TicketMethodWrap
 } from "./TicketMethodStyle";
+import { optionAtom } from "../../../store/atom";
 
-const TicketMethod = ({ option, setOption, setIsValidate, errorArray }) => {
+const TicketMethod = ({ setIsValidate, errorArray }) => {
+  const [option, setOption] = useAtom(optionAtom);
+
   const handleOptionChange = (e) => {
     setOption(e.target.value);
     //검사 로직

@@ -93,6 +93,9 @@ export const seatInfoAtom = atomWithStorage(
   },
   storage
 );
+//현장, 배송 여부
+export const optionAtom = atomWithStorage("isDelivered", "현장수령", storage);
+
 //실전모드 theme
 export const themeSiteAtom = atomWithStorage("themeSite", "practice", storage);
 

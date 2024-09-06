@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import SelectPriceCheckBox from "../../components/selectPrice/SelectPriceCheckBox";
-import { useSetAtom } from "jotai";
-import { progressAtom } from "../../../../store/atom";
+import { useAtomValue, useSetAtom } from "jotai";
+import { optionAtom, progressAtom } from "../../../../store/atom";
 import PrevNextButton from "../../../../components/myBookingInfo/PrevNextButton";
 import { MyBookingInfoContainer } from "../../../../components/myBookingInfo/MyBookingInfoContainer";
 import { useNavigate } from "react-router-dom";
@@ -50,7 +50,7 @@ const CancelLabel = styled.label`
 `;
 
 const SelectPriceTicketlink = () => {
-  const [option, setOption] = useState("현장수령");
+  const option = useAtomValue(optionAtom);
 
   //검사 로직
   // 폼 검사 로직용
@@ -136,8 +136,6 @@ const SelectPriceTicketlink = () => {
         <Container>
           <LeftSection>
             <TicketMethodTicketlink
-              option={option}
-              setOption={setOption}
               setIsValidate={setIsValidate}
               errorArray={errorArray}
               handleChecked={handleChecked}

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import {
   allowedSeatAtom,
+  optionAtom,
   postersAtom,
   seatCountAtom,
   seatInfoAtom,
@@ -58,10 +59,11 @@ const AmountContent = styled.div`
   font-size: 28px;
 `;
 
-const MyBookingInfo = ({ option }) => {
+const MyBookingInfo = () => {
   const allowedSeat = useAtomValue(allowedSeatAtom);
   const seatCount = useAtomValue(seatCountAtom);
   const seatInfo = useAtomValue(seatInfoAtom);
+  const option = useAtomValue(optionAtom);
 
   const Info = [
     // 공연 날짜 및 시간

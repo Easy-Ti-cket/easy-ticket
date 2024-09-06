@@ -5,24 +5,20 @@ import {
   TicketMethodCont,
   TicketMethodWrap
 } from "../../../../components/forms/ticket/TicketMethodStyle";
+import { useAtom } from "jotai";
+import { optionAtom } from "../../../../store/atom";
 
 const TicketMethodTicketlink = ({
-  option,
-  setOption,
   setIsValidate,
   errorArray,
   handleChecked
 }) => {
   //예매자 확인 체크 안되있을 시 오류 css
   const hasError = errorArray.includes("checkbox");
+
   return (
     <TicketMethodWrap>
-      <TicketMethod
-        option={option}
-        setOption={setOption}
-        setIsValidate={setIsValidate}
-        errorArray={errorArray}
-      />
+      <TicketMethod setIsValidate={setIsValidate} errorArray={errorArray} />
       <TicketMethodCont $hasError={hasError}>
         {/* 체크 박스 */}
         <SectionTitle>예매자 확인</SectionTitle>

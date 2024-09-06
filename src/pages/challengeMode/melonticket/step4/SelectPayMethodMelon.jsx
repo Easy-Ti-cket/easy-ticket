@@ -4,12 +4,12 @@ import AgreeMentMelon from "../../components/AgreementMelon";
 import ErrorTooltip from "../../../../components/tooltip/ErrorTooltip";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-import { useSetAtom } from "jotai";
+import { useAtom, useSetAtom } from "jotai";
 import MyBookingInfo from "../../../../components/myBookingInfo/MyBookingInfo";
 import { MyBookingInfoContainer } from "../../../../components/myBookingInfo/MyBookingInfoContainer";
 import PrevNextButton from "../../../../components/myBookingInfo/PrevNextButton";
 import { useNavigate } from "react-router-dom";
-import { progressAtom } from "../../../../store/atom";
+import { optionAtom, progressAtom } from "../../../../store/atom";
 import TicketMethod from "../../../../components/forms/ticket/TicketMethod";
 import { useBookingValidate } from "../../../../hooks/useBookingValidate";
 import { useForm } from "../../../../hooks/useForm";
@@ -50,7 +50,7 @@ const SelectPayMethodMelon = () => {
   const setProgress = useSetAtom(progressAtom);
   useEffect(() => setProgress(3), [setProgress]);
   //현장수령 or 배송
-  const [option, setOption] = useState("현장수령");
+  const [option, setOption] = useAtom(optionAtom);
   // 체크박스 상태 관리
   const [isAgreeAll, setIsAgreeAll] = useState(false);
   const [isAgree, setIsAgree] = useState([false, false, false, false, false]);
@@ -81,7 +81,6 @@ const SelectPayMethodMelon = () => {
       <Container>
         {/*티켓 수령 방법 / 예매자 확인*/}
         <TicketMethod
-          option={option}
           setOption={setOption}
           setIsValidate={setIsValidate}
           errorArray={errorArray}
@@ -124,7 +123,7 @@ const SelectPayMethodMelon = () => {
       </Container>
       {/*내 예매 정보*/}
       <MyBookingInfoContainerMelon>
-        <MyBookingInfo />
+        <MyBookingInfo option={option} />
         <PrevNextButton
           prevButtonOnClick={() => {
             nav("../step3/step4");
