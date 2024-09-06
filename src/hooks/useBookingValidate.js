@@ -32,24 +32,39 @@ export const useBookingValidate = (
         alert("티켓 수령 방법을 선택해 주세요");
         return;
       }
-      if (level === "high" && !isValidate.includes("birth")) {
+      if (
+        level === "high" &&
+        themeSite !== "ticketlink" &&
+        !isValidate.includes("birth")
+      ) {
         setErrorArray(() => ["birth"]);
         alert("생년월일을 정확하게 작성해 주세요");
         return;
       }
 
-      // 멜론티켓 결제수단
+      // 멜론티켓 - 결제수단, 체크박스
       if (themeSite === "melonticket" && !extra.isPayMethodCorrect) {
         setErrorArray(() => ["payMethod"]);
         alert("실전모드에서는 '일반신용카드' 결제만 가능합니다");
         return;
       }
-      //체크박스 검사 로직
       if (themeSite === "melonticket" && !extra.isAgreeAll) {
         setErrorArray(() => ["checkbox"]);
         alert("체크박스를 모두 선택해 주세요");
         return;
+      }
+      //티켓링크
+      if (themeSite === "ticketlink" && !extra.isAgreeAll) {
+        setErrorArray(() => ["checkbox"]);
+        alert("개인정보 수집 및 3자 제공에 동의해야 결제가 가능합니다.");
+        return;
+      }
+      if (themeSite === "ticketlink" && !extra.isCancelChecked) {
+        setErrorArray(() => ["cancel"]);
+        alert("취소기한 및 수수료 동의에 체크해 주세요");
+        return;
       } else {
+        console.log("동작");
         setErrorArray(() => []);
         //라우팅
         nav(location);

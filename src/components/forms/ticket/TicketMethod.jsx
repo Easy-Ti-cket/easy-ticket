@@ -1,29 +1,10 @@
-import styled from "styled-components";
 import Input from "../../input/Input";
-import { FormWrap } from "../FormStyle";
 import TicketBuyer from "./TicketBuyer";
-
-const SectionTitle = styled.div`
-  width: 550px;
-  font-size: 20px;
-  font-family: "pretendardB";
-  margin-bottom: 20px;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--fill-color);
-`;
-const TicketMethodCont = styled.div`
-  display: flex;
-  flex-direction: column;
-  color: ${(props) => props.$hasError && "var(--point-color)"};
-`;
-const TicketMethodWrap = styled(FormWrap)`
-  border-radius: 8px;
-  display: inline-flex;
-  flex-direction: column;
-  gap: 25px;
-  justify-content: center;
-  align-items: start;
-`;
+import {
+  SectionTitle,
+  TicketMethodCont,
+  TicketMethodWrap
+} from "./TicketMethodStyle";
 
 const TicketMethod = ({ option, setOption, setIsValidate, errorArray }) => {
   const handleOptionChange = (e) => {
