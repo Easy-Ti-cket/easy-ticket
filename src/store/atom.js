@@ -9,7 +9,6 @@ export const secondCountAtom = atomWithStorage("second", 0, storage);
 
 // 분 단위 타이머 상태
 export const minuteCountAtom = atomWithStorage("minute", 0, storage);
-// const someAtom = atomWithStorage('some-key', someInitialValue, storage)
 
 //난이도 상태 (low, middle, high)
 export const levelAtom = atomWithStorage("level", "low", storage);

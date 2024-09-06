@@ -4,7 +4,7 @@ import { FormWrap } from "../FormStyle";
 import TicketBuyer from "./TicketBuyer";
 
 const SectionTitle = styled.div`
-  width: ${(props) => (props.$option === "현장수령" ? "500px" : "800px")};
+  width: 550px;
   font-size: 20px;
   font-family: "pretendardB";
   margin-bottom: 20px;
@@ -20,11 +20,11 @@ const TicketMethodWrap = styled(FormWrap)`
   border-radius: 8px;
   display: inline-flex;
   flex-direction: column;
-  gap: 50px;
+  gap: 25px;
   justify-content: center;
   align-items: start;
-  height: 417px;
 `;
+
 const TicketMethod = ({ option, setOption, setIsValidate, errorArray }) => {
   const handleOptionChange = (e) => {
     setOption(e.target.value);
@@ -42,7 +42,7 @@ const TicketMethod = ({ option, setOption, setIsValidate, errorArray }) => {
 
   return (
     <TicketMethodWrap>
-      {/*티켓수령방법 */}
+      {/* 티켓수령방법 */}
       <TicketMethodCont $hasError={hasError}>
         <SectionTitle $option={option}>티켓수령방법</SectionTitle>
         <Input
@@ -54,20 +54,32 @@ const TicketMethod = ({ option, setOption, setIsValidate, errorArray }) => {
         />
         <Input
           type="radio"
-          value="배송"
-          text="배송(+3000)"
+          value="배송(+3200)"
+          text="배송(+3200)"
           name="TicketMethod"
           onChange={handleOptionChange}
         />
       </TicketMethodCont>
+      {/* 주문자 정보 및 배송지 정보 렌더링 조건 변경 */}
       <TicketMethodCont>
-        {/*예매자 확인 */}
-        <SectionTitle $option={option}>예매자 확인</SectionTitle>
+        <SectionTitle>주문자 정보</SectionTitle>
         <TicketBuyer
-          option={option}
-          setIsValidate={setIsValidate}
+          option={"현장수령"}
           errorArray={errorArray}
+          setIsValidate={setIsValidate}
         />
+      </TicketMethodCont>
+      <TicketMethodCont>
+        {option.includes("배송") && (
+          <>
+            <SectionTitle>배송지 정보</SectionTitle>
+            <TicketBuyer
+              option={"배송(+3200)"}
+              setIsValidate={setIsValidate}
+              errorArray={errorArray}
+            />
+          </>
+        )}
       </TicketMethodCont>
     </TicketMethodWrap>
   );

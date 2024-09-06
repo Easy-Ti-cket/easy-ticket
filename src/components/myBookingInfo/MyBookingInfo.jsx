@@ -72,7 +72,7 @@ const MyBookingInfo = ({ option }) => {
     },
     { title: "티켓금액", price: `${seatCount ? seatInfo.price : 0}` },
     { title: "수수료", price: `${seatCount ? seatInfo.fee : 0}` },
-    { title: "배송비", price: `${option === "배송" ? 3000 : 0}` },
+    { title: "배송비", price: `${option.includes("배송") ? 3200 : 0}` },
     { title: "쿠폰할인", price: 0 }
   ];
 
@@ -98,7 +98,7 @@ const MyBookingInfo = ({ option }) => {
       </InfoContainer>
       <TotalAmount>
         <AmountTitle>총 결제금액</AmountTitle>
-        <AmountContent>{totalAmount}원</AmountContent>
+        <AmountContent>{totalAmount.toLocaleString()}원</AmountContent>
       </TotalAmount>
     </Container>
   );

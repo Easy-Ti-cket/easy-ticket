@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import SeatCount from "./SeatCount";
-import TicketMethod from "./ticket/TicketMethod";
+import TicketMethod from "../../../../components/forms/ticket/TicketMethod";
 import SelectPriceCheckBox from "./SelectPriceCheckBox";
 import { useSetAtom } from "jotai";
 import { progressAtom } from "../../../../store/atom";
@@ -10,6 +9,7 @@ import { MyBookingInfoContainer } from "../../../../components/myBookingInfo/MyB
 import { useNavigate } from "react-router-dom";
 import { useBookingValidate } from "../../../../hooks/useBookingValidate";
 import MyBookingInfo from "../../../../components/myBookingInfo/MyBookingInfo";
+import SeatCountTicketlink from "../../components/seatCount/SeatCountTicketlink";
 
 const Container = styled.div`
   display: flex;
@@ -110,7 +110,7 @@ const SelectPriceTicketlink = () => {
         <Container>
           <LeftSection>
             <SelectPriceCheckBox handleChecked={handleChecked} />
-            <SeatCount />
+            <SeatCountTicketlink />
           </LeftSection>
           <RightSection>
             <MyBookingInfoContainer>
