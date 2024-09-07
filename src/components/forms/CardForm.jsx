@@ -18,7 +18,6 @@ const InputWrap = styled.div`
 const CardForm = ({ focusNum, handleChange, hasErrorArray }) => {
   const level = useAtomValue(levelAtom);
   const cardInputField = ["cardNum1", "cardNum2", "cardNum3", "cardNum4"];
-  console.log(hasErrorArray);
 
   return (
     <FormWrap>
