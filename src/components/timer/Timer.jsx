@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useAtom, useAtomValue } from "jotai";
 import styled from "styled-components";
 import timerIcon from "../../assests/images/icons/timer.svg";
@@ -38,8 +38,6 @@ const StyledCountdownText = styled.div`
 const Timer = ({ type, second }) => {
   const [secondCount, writeSecond] = useAtom(secondCountAtom);
   const [minuteCount, writeMinute] = useAtom(minuteCountAtom);
-  console.log(minuteCount);
-  console.log(second);
   // 타이머 ID (타이머 제어 호출 값)
   const countdownRef = useRef(null);
   //타이머 제어를 위한 현재 위치 출력
@@ -47,6 +45,8 @@ const Timer = ({ type, second }) => {
   const path = location.pathname;
   //타이머 정지 재개
   const timerControl = useAtomValue(timerControlAtom);
+  //로딩
+  const [isTimerLoading, setIsTimerLoading] = useState(false);
 
   useEffect(() => {
     // 타이머 초기화 및 제어
@@ -57,14 +57,17 @@ const Timer = ({ type, second }) => {
       }
       return;
     }
+
     // 경로에 따라 타이머 멈춤 또는 재개
     if (path.endsWith("step5") || path.endsWith("outro")) {
       //step5 -> 예매 성공일 경우 타이머 멈춤
       clearInterval(countdownRef.current);
     } else if (path.includes("step0")) {
       //고급/실전 시작화면에서는 타이머 멈추고 리셋
+      setIsTimerLoading(true);
       clearInterval(countdownRef.current);
       writeMinute(second);
+      setIsTimerLoading(false);
     } else {
       // 타이머 시작
       if (type === "second") {
@@ -78,18 +81,16 @@ const Timer = ({ type, second }) => {
           });
         }, 1000);
       } else if (type === "minute") {
-        console.log("minuteCount", minuteCount);
-        if (minuteCount === second) {
-          countdownRef.current = setInterval(() => {
-            writeMinute((prevCount) => {
-              if (prevCount <= 1) {
-                clearInterval(countdownRef.current);
-                return 0;
-              }
-              return prevCount - 1;
-            });
-          }, 1000);
-        }
+        // console.log("minuteCount", minuteCount);
+        countdownRef.current = setInterval(() => {
+          writeMinute((prevCount) => {
+            if (prevCount <= 1) {
+              clearInterval(countdownRef.current);
+              return 0;
+            }
+            return prevCount - 1;
+          });
+        }, 1000);
       }
     }
     // 컴포넌트 언마운트 시 타이머 클리어
@@ -106,6 +107,10 @@ const Timer = ({ type, second }) => {
   ]);
   const minutes = Math.floor(minuteCount / 60); // 분으로 분리
   const seconds = minuteCount % 60; // 초로 분리
+
+  if (isTimerLoading) {
+    return <h1>로딩 중</h1>;
+  }
 
   return (
     <TimerContainer>
