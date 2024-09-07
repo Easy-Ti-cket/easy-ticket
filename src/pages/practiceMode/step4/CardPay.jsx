@@ -4,14 +4,11 @@ import CardForm from "../../../components/forms/CardForm";
 import { useForm } from "../../../hooks/useForm";
 import Button from "../../../components/button/Button";
 import { useAtomValue } from "jotai";
-import {
-  cardAnswerAtom,
-  themeSiteAtom,
-  userNameAtom
-} from "../../../store/atom";
+import { cardAnswerAtom, themeSiteAtom } from "../../../store/atom";
 import { Step4Container } from "./SelectPayMethod";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import ErrorText from "../../../components/ErrorText";
 
 const CardPayWrap = styled(Step4Container)`
   align-items: center;
@@ -56,7 +53,6 @@ const CardPay = () => {
   //검사로직
   const handleClick = () => {
     if (!isAnswer) {
-      alert("카드 정보를 정확하게 입력해 주세요");
       //정답리스트에 없는 경우 에러리스트에 삽입
       setHasErrorArray(allInputNames.filter((key) => !correctList[key]));
     } else {
@@ -73,6 +69,10 @@ const CardPay = () => {
       <span>
         카드 비밀번호는 <Highlight>{cardAnswer[4]}</Highlight> 입니다
       </span>
+      {/*카드번호가 오답일 시*/}
+      {hasErrorArray.length !== 0 && (
+        <ErrorText text="입력한 카드 정보를 다시 확인해 주세요" />
+      )}
       <CardFormContainer>
         <CardForm
           focusNum={focusNum}
