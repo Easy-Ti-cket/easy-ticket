@@ -9,7 +9,7 @@ import { useNavigate } from "react-router-dom";
 import { useBookingValidate } from "../../../../hooks/useBookingValidate";
 import MyBookingInfo from "../../../../components/myBookingInfo/MyBookingInfo";
 import SeatCountTicketlink from "../../components/seatCount/SeatCountTicketlink";
-import TicketMethodTicketlink from "../../components/TiketMethod/TicketMethodTicketlink";
+import TicketMethodTicketlink from "../../components/ticketMethod/TicketMethodTicketlink";
 
 const Container = styled.div`
   display: flex;
