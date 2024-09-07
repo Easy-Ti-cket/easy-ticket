@@ -20,14 +20,11 @@ const CheckBox = styled.input.attrs({ type: "checkbox" })`
 
 // 체크박스 텍스트 라벨
 const Label = styled.label`
-  cursor: pointer;
+  // cursor: pointer;
   display: flex;
   gap: 10px;
   color: ${(props) =>
     props.$hasError ? "var(--point-color)" : "var(--text-color)"};
-  &:hover {
-    color: var(--text-color2);
-  }
 `;
 
 // 예매자 확인용 체크박스
