@@ -37,9 +37,9 @@ const StyledCountdownText = styled.div`
 // props로 type과 second 받기
 const Timer = ({ type, second }) => {
   const [secondCount, writeSecond] = useAtom(secondCountAtom);
-  // const [, writeSecond] = useAtom(writeSecondCount);
   const [minuteCount, writeMinute] = useAtom(minuteCountAtom);
-  // const [, writeMinute] = useAtom(writeMinuteCount);
+  console.log(minuteCount);
+  console.log(second);
   // 타이머 ID (타이머 제어 호출 값)
   const countdownRef = useRef(null);
   //타이머 제어를 위한 현재 위치 출력
@@ -57,7 +57,6 @@ const Timer = ({ type, second }) => {
       }
       return;
     }
-
     // 경로에 따라 타이머 멈춤 또는 재개
     if (path.endsWith("step5") || path.endsWith("outro")) {
       //step5 -> 예매 성공일 경우 타이머 멈춤
@@ -79,16 +78,18 @@ const Timer = ({ type, second }) => {
           });
         }, 1000);
       } else if (type === "minute") {
-        // console.log("minuteCount", minuteCount);
-        countdownRef.current = setInterval(() => {
-          writeMinute((prevCount) => {
-            if (prevCount <= 1) {
-              clearInterval(countdownRef.current);
-              return 0;
-            }
-            return prevCount - 1;
-          });
-        }, 1000);
+        console.log("minuteCount", minuteCount);
+        if (minuteCount === second) {
+          countdownRef.current = setInterval(() => {
+            writeMinute((prevCount) => {
+              if (prevCount <= 1) {
+                clearInterval(countdownRef.current);
+                return 0;
+              }
+              return prevCount - 1;
+            });
+          }, 1000);
+        }
       }
     }
     // 컴포넌트 언마운트 시 타이머 클리어
