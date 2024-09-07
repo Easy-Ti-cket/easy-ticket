@@ -2,10 +2,14 @@ import styled from "styled-components";
 import InfoIcon from "../assests/images/icons/errorInfo.svg?react";
 
 const ErrorTextContainer = styled.div`
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
   height: 20px;
+  padding: 10px;
+  background-color: var(--sub-color);
+  justify-content: center;
+  border-radius: 8px;
 `;
 
 const ErrorTextMessage = styled.span`

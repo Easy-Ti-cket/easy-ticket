@@ -15,7 +15,7 @@ const Background = styled.div`
   position: fixed;
   top: 0;
   right: 0;
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
   width: 100%;

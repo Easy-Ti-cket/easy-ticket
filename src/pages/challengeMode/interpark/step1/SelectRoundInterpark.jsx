@@ -11,6 +11,8 @@ import {
 } from "../../../../store/atom";
 import { useNavigate } from "react-router-dom";
 import formatTime from "../../../../util/time";
+import ErrorText from "../../../../components/ErrorText";
+import Modal from "../../../../components/modal/Modal";
 
 const Container = styled.div`
   display: flex;
@@ -68,44 +70,86 @@ const SelectRoundInterpark = () => {
   const posterDates = poster ? poster.date : [];
   const posterTimes = poster ? poster.time : {};
 
+  //에러 텍스트
+  const [showErrorText, setShowErrorText] = useState({
+    dateError: false,
+    roundSelectError: false,
+    dateOrderError: false,
+    roundOrderError: false
+  });
+  const handleError = (errorItem) => {
+    setShowErrorText(() => ({
+      dateError: false,
+      roundSelectError: false,
+      dateOrderError: false,
+      roundOrderError: false,
+      [errorItem]: true
+    }));
+  };
+  const resetError = () => {
+    setShowErrorText(() => ({
+      dateError: false,
+      roundSelectError: false,
+      dateOrderError: false,
+      roundOrderError: false
+    }));
+  };
+  const errorText = {
+    dateError: "날짜를 다시 선택해 주세요",
+    roundSelectError: "회차를 다시 선택해 주세요",
+    dateOrderError: "공연을 관람할 날짜를 선택해 주세요",
+    roundOrderError: "회차를 선택해 주세요"
+  };
+  //알림 모달
+  const [alertModal, setAlertModal] = useState(false);
+  const [concertTime, setConcertTime] = useState("");
+
   const handleDateSelect = (formattedDate) => {
     const correctDate = posterDates[0];
     if (formattedDate === correctDate) {
       setDateSelected(true);
+      resetError();
       const timesArray = formatTime(posterTimes, formattedDate);
       setTimesButtons(timesArray);
-
       if (timesArray.length > 0) {
         setCorrectRound(timesArray[0]);
       }
     } else {
-      alert("날짜를 다시 선택해주세요.");
+      handleError("dateError");
     }
   };
 
   const handleRoundClick = (time) => {
     if (dateSelected) {
       if (time === correctRound) {
-        alert(`${time}으로 공연을 예매합니다.`);
+        setConcertTime(time);
+        setAlertModal(true);
+        resetError();
         setRoundSelected(true);
       } else {
-        alert("회차를 다시 선택해주세요.");
+        handleError("roundSelectError");
       }
     } else {
-      alert("먼저 올바른 날짜를 선택해주세요.");
+      handleError("dateOrderError");
     }
   };
 
   const handleReserveClick = () => {
     if (!roundSelected) {
-      alert("먼저 회차를 선택해주세요.");
+      handleError("roundOrderError");
       return;
     }
     navigate("/challenge/interpark/step2");
   };
-
   return (
     <Container>
+      {alertModal && (
+        <Modal
+          height="250px"
+          onClick={() => setAlertModal(false)}
+          contents={`${concertTime} 공연을 예매합니다.`}
+        />
+      )}
       <LeftSection>
         <PosterInterpark id={selectedPoster} />
       </LeftSection>
@@ -118,7 +162,21 @@ const SelectRoundInterpark = () => {
               posterDates.length > 0 ? new Date(posterDates[0]) : new Date()
             }
           />
+          {/*날짜 선택 에러 텍스트 */}
+          {showErrorText.dateError && <ErrorText text={errorText.dateError} />}
+          {/*날짜 선택 순서 에러 텍스트 */}
+          {showErrorText.dateOrderError && (
+            <ErrorText text={errorText.dateOrderError} />
+          )}
           <p style={{ paddingLeft: "20px" }}>회차</p>
+          {/*회차 선택 에러 텍스트 */}
+          {showErrorText.roundSelectError && (
+            <ErrorText text={errorText.roundSelectError} />
+          )}
+          {/*회차 선택 순서 에러 텍스트 */}
+          {showErrorText.roundOrderError && (
+            <ErrorText text={errorText.roundOrderError} />
+          )}
           <RoundWrapper>
             {timesButtons.length > 0 ? (
               timesButtons.map((time, index) => (
