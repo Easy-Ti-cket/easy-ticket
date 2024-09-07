@@ -46,7 +46,7 @@ const Timer = ({ type, second }) => {
   //타이머 정지 재개
   const timerControl = useAtomValue(timerControlAtom);
   //로딩
-  const [isTimerLoading, setIsTimerLoading] = useState(true);
+  const [isTimerLoading, setIsTimerLoading] = useState(false);
 
   useEffect(() => {
     // 타이머 초기화 및 제어
@@ -57,7 +57,6 @@ const Timer = ({ type, second }) => {
       }
       return;
     }
-
     // 경로에 따라 타이머 멈춤 또는 재개
     if (path.endsWith("step5") || path.endsWith("outro")) {
       //step5 -> 예매 성공일 경우 타이머 멈춤
