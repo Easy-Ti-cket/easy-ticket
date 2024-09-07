@@ -46,7 +46,7 @@ const Timer = ({ type, second }) => {
   //타이머 정지 재개
   const timerControl = useAtomValue(timerControlAtom);
   //로딩
-  const [isTimerLoading, setIsTimerLoading] = useState(false);
+  const [isTimerLoading, setIsTimerLoading] = useState(true);
 
   useEffect(() => {
     // 타이머 초기화 및 제어
@@ -95,16 +95,7 @@ const Timer = ({ type, second }) => {
     }
     // 컴포넌트 언마운트 시 타이머 클리어
     return () => clearInterval(countdownRef.current);
-  }, [
-    timerControl,
-    path,
-    type,
-    second,
-    secondCount,
-    minuteCount,
-    writeSecond,
-    writeMinute
-  ]);
+  }, [timerControl, path, type, second, writeSecond, writeMinute]);
   const minutes = Math.floor(minuteCount / 60); // 분으로 분리
   const seconds = minuteCount % 60; // 초로 분리
 
