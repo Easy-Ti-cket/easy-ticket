@@ -38,42 +38,47 @@ const Record = () => {
         //정렬 후 저장
         const sortedRecords = res.sort((a, b) => b.timeSpent - a.timeSpent);
         setRecords(sortedRecords);
-        //기록 초기화면
-        const filter = (site) =>
-          sortedRecords.filter((item) => item.themeSite === site);
-        setFilteredRecords(filter(myThemeSite));
-        //내 기록 순위 (세션스토리지 / db 비교)
-        if (myRecord && filteredRecords) {
-          const myRecordNanoSec = myRecord.timeStamp.nanoseconds;
-          const myRecordSec = myRecord.timeStamp.seconds;
-          setMyRecordIndex(
-            filteredRecords.findIndex(
-              (item) =>
-                item.timeStamp.nanoseconds === myRecordNanoSec &&
-                item.timeStamp.seconds === myRecordSec &&
-                item.userName === myName
-            )
-          );
-        }
-        setLoading(false);
+        // console.log("데이터가 fetching 됨")
       })
       .catch((error) =>
         console.error(`데이터를 가져오는 도중 에러 발생 : ${error}`)
       );
   }, []);
+
   //시간 format 변경
   const formatTime = (time) => {
     return `${Math.floor(time / 60)}:${(time % 60).toString().padStart(2, "0")}`;
   };
 
-  //페이지네이션
-  //현재 렌더링된 페이지
-  const [activePage, setActivePage] = useState(1);
+  //기록 초기화면 - 필터링된 기록
   useEffect(() => {
-    if (myRecordIndex) {
-      setActivePage(myRecordIndex ? Math.floor(myRecordIndex / 10) + 1 : 1);
+    if (records.length > 0) {
+      // console.log("데이터 필터링 함")
+      const filter = (site) =>
+        records.filter((item) => item.themeSite === site);
+      setFilteredRecords(filter(myThemeSite));
     }
-  }, [myRecordIndex]);
+  }, [records, myThemeSite]);
+
+  //내 기록 index (순위x, 세션스토리지 / db 비교)
+  useEffect(() => {
+    if (myRecord && filteredRecords.length > 0) {
+      // console.log("데이터 비교함")
+      const myRecordNanoSec = myRecord.timeStamp.nanoseconds;
+      const myRecordSec = myRecord.timeStamp.seconds;
+      setMyRecordIndex(
+        filteredRecords.findIndex(
+          (item) =>
+            item.timeStamp.nanoseconds === myRecordNanoSec &&
+            item.timeStamp.seconds === myRecordSec &&
+            item.userName === myName
+        )
+      );
+    }
+  }, [myRecord, records, myThemeSite, myName]);
+
+  //페이지네이션
+  const [activePage, setActivePage] = useState(1);
   //한 페이지 당 보여줄 아이템 개수
   const itemsCountPerPage = 10;
   //페이지네이션 네비게이터 개수
@@ -88,9 +93,23 @@ const Record = () => {
     activePage * itemsCountPerPage
   );
 
+  //activePage(활성화될 페이지) 설정
+  useEffect(() => {
+    if (myRecordIndex !== -1) {
+      setActivePage(
+        myRecordIndex ? Math.floor((myRecordIndex + 1) / 10) + 1 : 1
+      );
+    }
+    setLoading(false);
+  }, [myRecordIndex]);
+
   //사용자가 진행한 themeSite와 기록 순위에서 css 변경
   const [clickThemeSite, setClickThemeSite] = useState(myThemeSite);
+  //사용자의 기록인지에 대한 여부
   const isUserRecord = (record) => {
+    if (!myRecord || !myRecordIndex || !myRecord.userName) {
+      return false;
+    }
     const indexTrue =
       myRecordIndex === filteredRecords.findIndex((item) => item === record);
     const themeTrue = myThemeSite === clickThemeSite;
@@ -99,10 +118,16 @@ const Record = () => {
   };
 
   const nav = useNavigate();
+  //시간 format 변경
+  const formatTime = (time) => {
+    return `${Math.floor(time / 60)}:${(time % 60).toString().padStart(2, "0")}`;
+  };
 
+  //로딩창
   if (loading) {
     return <h1>로딩 중</h1>;
   }
+
   return (
     <RecordContainer>
       <RecordTitle>클리어 기록 보기</RecordTitle>
@@ -137,7 +162,11 @@ const Record = () => {
                 >
                   {filteredRecords.findIndex((item) => item === record) + 1}
                 </RecordItem>
-                <RecordItem $bold={true}>{record.userName}</RecordItem>
+                <RecordItem $bold={true}>
+                  {record.userName.length > 6
+                    ? record.userName.slice(0, 6) + "..."
+                    : record.userName}
+                </RecordItem>
                 <RecordItem $isUserRecord={isUserRecord(record)}>
                   {formatTime(record.timeSpent)}
                 </RecordItem>

@@ -1,4 +1,4 @@
-import { collection, doc, getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../firebase-config";
 
 // 저장된 데이터 불러오기
@@ -9,10 +9,12 @@ const loadUserData = async () => {
       userName: doc.id,
       ...doc.data()
     }));
-    // console.log(`fetching data : ${JSON.strigfy(recordsArray,null,2)}`);
+
+    // console.log(`fetching data : ${JSON.stringify(recordsArray, null, 2)}`);
     return recordsArray;
   } catch (error) {
-    // console.log("No such document!")
+    console.error("Error fetching documents: ", error);
+    return [];
   }
 };
 
