@@ -45,11 +45,6 @@ const Record = () => {
       );
   }, []);
 
-  //시간 format 변경
-  const formatTime = (time) => {
-    return `${Math.floor(time / 60)}:${(time % 60).toString().padStart(2, "0")}`;
-  };
-
   //기록 초기화면 - 필터링된 기록
   useEffect(() => {
     if (records.length > 0) {
