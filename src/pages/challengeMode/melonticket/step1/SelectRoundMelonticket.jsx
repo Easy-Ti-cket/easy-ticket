@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PosterSection from "../../components/PosterSection";
-import SelectCalender from "../../../../components/calender/SelectCalender";
+import SelectCalendar from "../../../../components/calendar/SelectCalendar";
 import Button from "../../../../components/button/Button";
 import styled from "styled-components";
 import { useAtomValue, useSetAtom } from "jotai";
@@ -45,7 +45,7 @@ const BoxWrapper = styled.div`
   border-radius: 8px;
   gap: 10px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 `;
 
 const TitleText = styled.p`
@@ -64,6 +64,7 @@ const ButtonSection = styled.div`
 const SelectRoundMelonticket = () => {
   const selectedPoster = useAtomValue(selectedPosterAtom);
   const posters = useAtomValue(postersAtom);
+  const id = useAtomValue(selectedPosterAtom);
   const [dateSelected, setDateSelected] = useState(false);
   const [roundSelected, setRoundSelected] = useState(false);
   const [timesButtons, setTimesButtons] = useState([]);
@@ -117,12 +118,12 @@ const SelectRoundMelonticket = () => {
   return (
     <Container>
       <UpperSection>
-        <PosterSection id={SelectCalender} />
+        <PosterSection id={id} />
       </UpperSection>
       <LowerSection>
         <BoxWrapper>
           <TitleText>날짜 선택</TitleText>
-          <SelectCalender
+          <SelectCalendar
             onDateSelect={handleDateSelect}
             initialDate={
               posterDates.length > 0 ? new Date(posterDates[0]) : new Date()

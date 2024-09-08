@@ -9,8 +9,16 @@ import { levelAtom } from "../../store/atom";
 const CardInputFied = styled(InputField)`
   width: 40px;
 `;
-const CardForm = ({ focusNum, handleChange }) => {
+
+const InputWrap = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+const CardForm = ({ focusNum, handleChange, hasErrorArray }) => {
   const level = useAtomValue(levelAtom);
+  const cardInputField = ["cardNum1", "cardNum2", "cardNum3", "cardNum4"];
+  console.log(hasErrorArray);
 
   return (
     <FormWrap>
@@ -18,10 +26,17 @@ const CardForm = ({ focusNum, handleChange }) => {
       <AnimationArea $focus={level === "low" && focusNum == 0}>
         <InputContainer>
           <Label>카드 번호</Label>
-          <CardInputFied name="cardNum1" onChange={handleChange} />-
-          <CardInputFied name="cardNum2" onChange={handleChange} />-
-          <CardInputFied name="cardNum3" onChange={handleChange} />-
-          <CardInputFied name="cardNum4" onChange={handleChange} />
+          {cardInputField.map((field, index) => (
+            <InputWrap key={index}>
+              <CardInputFied
+                name={field}
+                type="number"
+                onChange={handleChange}
+                $hasError={hasErrorArray.includes(field)}
+              />
+              {index !== 3 && <div>-</div>}
+            </InputWrap>
+          ))}
         </InputContainer>
       </AnimationArea>
       <Input
@@ -29,12 +44,16 @@ const CardForm = ({ focusNum, handleChange }) => {
         text="카드 비밀번호"
         name="cardPassword"
         onChange={handleChange}
+        isNumber={true}
+        $hasError={hasErrorArray.includes("cardPassword")}
       />
       <Input
         $focus={level === "low" && focusNum == 2}
         text="cvc 번호"
         name="cvc"
         onChange={handleChange}
+        isNumber={true}
+        $hasError={hasErrorArray.includes("cvc")}
       />
     </FormWrap>
   );

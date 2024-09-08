@@ -15,7 +15,8 @@ const saveUserData = async (userName, themeSite, timeSpent) => {
   if (userName && themeSite) {
     try {
       await addDoc(collection(db, "users"), data);
-      sessionStorage.setItem("record", data);
+      //세션스토리지 데이터 저장
+      sessionStorage.setItem("record", JSON.stringify(data));
       console.log(`저장된 데이터 : ${JSON.stringify(data, null, 2)}`);
     } catch (e) {
       if (e instanceof FirebaseError) {

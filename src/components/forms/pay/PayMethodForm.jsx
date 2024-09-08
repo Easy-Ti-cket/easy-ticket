@@ -1,4 +1,4 @@
-import { FormWrap } from "../FormStyle";
+import { FormWrap, FormWrapRow } from "../FormStyle";
 import Input from "../../input/Input";
 import { useAtomValue } from "jotai";
 import { levelAtom, themeSiteAtom } from "../../../store/atom";
@@ -27,10 +27,16 @@ const challengeTextArr = [
 const PayMethodForm = ({ handleChange, isSelected }) => {
   //레벨 및 연습모드 여부
   const level = useAtomValue(levelAtom);
-  const isPractice = useAtomValue(themeSiteAtom) === "practice";
+  const isPractice =
+    useAtomValue(themeSiteAtom) === "practice" || "melonticket";
   const radioText = isPractice ? textArr : challengeTextArr;
+
+  //melonTicket일 경우 row로 변경
+  const isFormWrapRow = useAtomValue(themeSiteAtom) === "melonticket";
+
+  const PayMethodFormWrap = isFormWrapRow ? FormWrapRow : FormWrap;
   return (
-    <FormWrap>
+    <PayMethodFormWrap>
       {radioText.map((methodItem, index) => (
         <Input
           name="PayMethodForm"
@@ -42,7 +48,7 @@ const PayMethodForm = ({ handleChange, isSelected }) => {
           $focus={level === "low" && isPractice && index === 0 && !isSelected}
         />
       ))}
-    </FormWrap>
+    </PayMethodFormWrap>
   );
 };
 

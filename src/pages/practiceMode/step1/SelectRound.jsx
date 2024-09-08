@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PosterInfo from "../../../components/poster/PosterInfo";
-import SelectCalender from "../../../components/calender/SelectCalender";
+import SelectCalendar from "../../../components/calendar/SelectCalendar";
 import Button from "../../../components/button/Button";
 import styled from "styled-components";
 import { useAtom, useSetAtom } from "jotai";
@@ -9,7 +9,8 @@ import {
   levelAtom,
   progressAtom,
   postersAtom,
-  stepTextNumberAtom
+  stepTextNumberAtom,
+  helpTextNumberAtom
 } from "../../../store/atom";
 import AnimationArea from "../../../components/Animation";
 import { useNavigate } from "react-router-dom";
@@ -52,6 +53,7 @@ const SelectRound = () => {
   const [currentLevel] = useAtom(levelAtom);
 
   const setStepTextNumber = useSetAtom(stepTextNumberAtom);
+  const setHelpTextNumber = useSetAtom(helpTextNumberAtom);
 
   const [posters] = useAtom(postersAtom); // 포스터 데이터 가져오기
   const [posterId, setPosterId] = useState(0);
@@ -61,6 +63,15 @@ const SelectRound = () => {
   const [timesButtons, setTimesButtons] = useState([]);
   const [correctRound, setCorrectRound] = useState(null); // 정답 회차 저장
   const navigate = useNavigate();
+  useEffect(() => {
+    if (currentLevel !== "high") {
+      setStepTextNumber(0);
+      setHelpTextNumber(0);
+    } else if (currentLevel === "high") {
+      setStepTextNumber(1);
+      setHelpTextNumber(1);
+    }
+  }, [currentLevel]);
 
   useEffect(() => {
     setProgress(1);
@@ -125,14 +136,27 @@ const SelectRound = () => {
         <PosterInfo id={posterId} />
       </LeftSection>
       <RightSection>
-        <SelectCalender
-          onDateSelect={handleDateSelect}
-          initialDate={
-            posterDates.length > 0 ? new Date(posterDates[0]) : new Date()
-          }
-        />
+        {/* 초급 난이도에만 캘린더 애니메이션 적용 */}
+        {currentLevel === "low" ? (
+          <AnimationArea $focus={animationStep === 0}>
+            <SelectCalendar
+              onDateSelect={handleDateSelect}
+              initialDate={
+                posterDates.length > 0 ? new Date(posterDates[0]) : new Date()
+              }
+            />
+          </AnimationArea>
+        ) : (
+          <SelectCalendar
+            onDateSelect={handleDateSelect}
+            initialDate={
+              posterDates.length > 0 ? new Date(posterDates[0]) : new Date()
+            }
+          />
+        )}
         <RoundWrapper>
           <p>회차</p>
+          {/* 초급 난이도에만 회차 버튼 애니메이션 적용 */}
           {currentLevel === "low" ? (
             <>
               <AnimationArea $focus={animationStep === 1}>
@@ -153,6 +177,7 @@ const SelectRound = () => {
                   />
                 )}
               </AnimationArea>
+              {/* 초급 난이도에만 얘매 버튼 애니메이션 적용 */}
               <AnimationArea $focus={animationStep === 2}>
                 <Button text="예매하기" onClick={handleReserveClick} />
               </AnimationArea>

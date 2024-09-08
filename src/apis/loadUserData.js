@@ -1,15 +1,21 @@
-import { doc, getDoc } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../firebase-config";
 
 // 저장된 데이터 불러오기
-const loadUserData = async (userName) => {
-  const docRef = doc(db, "users", userName);
-  const docSnap = await getDoc(docRef);
+const loadUserData = async () => {
+  try {
+    const querySnapshot = await getDocs(collection(db, "users"));
+    const recordsArray = querySnapshot.docs.map((doc) => ({
+      userName: doc.id,
+      ...doc.data()
+    }));
 
-  if (docSnap.exists()) {
-    // console.log("Document data:", docSnap.data());
-    return docSnap.data();
-  } else {
-    // console.log("No such document!");
-    return null;
+    // console.log(`fetching data : ${JSON.stringify(recordsArray, null, 2)}`);
+    return recordsArray;
+  } catch (error) {
+    console.error("Error fetching documents: ", error);
+    return [];
   }
 };
+
+export default loadUserData;

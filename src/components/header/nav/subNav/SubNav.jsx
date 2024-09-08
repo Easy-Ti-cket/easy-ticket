@@ -22,6 +22,7 @@ const SubNavBgc = styled.div`
   align-items: center;
   position: absolute;
   left: 0;
+  z-index: 2;
 `;
 const SubNavWrap = styled.div`
   width: 1320px;

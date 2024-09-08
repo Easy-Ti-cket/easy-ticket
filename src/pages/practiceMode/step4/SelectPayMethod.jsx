@@ -51,7 +51,6 @@ const SelectPayMethod = () => {
   const { handlePayment, hasPayFormError, cardTypesError } = usePaymentValidate(
     { correctList }
   );
-  console.log(correctList);
   const setStepTextNumber = useSetAtom(stepTextNumberAtom);
   const setHelpTextNumber = useSetAtom(helpTextNumberAtom);
 

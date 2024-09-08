@@ -12,6 +12,7 @@ const moveUpDown = keyframes`
 `;
 const ErrorTooltipContainer = styled.div`
   display: inline-flex;
+  width: 300px;
   padding: 15px 50px;
   justify-content: center;
   align-items: center;

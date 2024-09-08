@@ -3,14 +3,18 @@ import Card from "../../../components/card/Card";
 import CardForm from "../../../components/forms/CardForm";
 import { useForm } from "../../../hooks/useForm";
 import Button from "../../../components/button/Button";
-import { useAtomValue } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import {
   cardAnswerAtom,
   themeSiteAtom,
-  userNameAtom
+  userNameAtom,
+  stepTextNumberAtom,
+  helpTextNumberAtom,
+  progressAtom
 } from "../../../store/atom";
 import { Step4Container } from "./SelectPayMethod";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 const CardPayWrap = styled(Step4Container)`
   align-items: center;
@@ -30,6 +34,7 @@ const Highlight = styled.span`
 `;
 
 const CardPay = () => {
+  const setProgress = useSetAtom(progressAtom);
   //useForm 훅에 정답 개수 전달, correctList가 정답 개수에 다다를 경우 isAnswer true
   const { handleChange, correctList, isAnswer } = useForm(6);
   const cardAnswer = useAtomValue(cardAnswerAtom);
@@ -48,14 +53,29 @@ const CardPay = () => {
   const nav = useNavigate();
   // 실전 모드 여부를 판단하기 위한 테마 정보
   const themeSite = useAtomValue(themeSiteAtom);
-
-  //타임스탬프
-  const userName = useAtomValue(userNameAtom);
-
+  //에러 발생 시 css 변경
+  const allInputNames = [...cardKeys, "cardPassword", "cvc"];
+  const [hasErrorArray, setHasErrorArray] = useState([]);
+  //단계별 텍스트
+  const setStepTextNumber = useSetAtom(stepTextNumberAtom);
+  const setHelpTextNumber = useSetAtom(helpTextNumberAtom);
+  useEffect(() => {
+    setStepTextNumber(2);
+    setHelpTextNumber(2);
+    if (themeSite === "practice") {
+      setProgress(4);
+    } else if (themeSite === "melon") {
+      setProgress(3);
+    } else {
+      setProgress(5);
+    }
+  }, []);
   //검사로직
   const handleClick = () => {
     if (!isAnswer) {
       alert("카드 정보를 정확하게 입력해 주세요");
+      //정답리스트에 없는 경우 에러리스트에 삽입
+      setHasErrorArray(allInputNames.filter((key) => !correctList[key]));
     } else {
       if (themeSite === "practice") {
         nav("../step5");
@@ -64,6 +84,7 @@ const CardPay = () => {
       }
     }
   };
+
   return (
     <CardPayWrap>
       <Card />
@@ -71,7 +92,11 @@ const CardPay = () => {
         카드 비밀번호는 <Highlight>{cardAnswer[4]}</Highlight> 입니다
       </span>
       <CardFormContainer>
-        <CardForm focusNum={focusNum} handleChange={handleChange} />
+        <CardForm
+          focusNum={focusNum}
+          hasErrorArray={hasErrorArray}
+          handleChange={handleChange}
+        />
       </CardFormContainer>
       {/*다음단계 버튼을 누르면 step5로 이동 */}
       <Button text="결제 완료" onClick={handleClick} />

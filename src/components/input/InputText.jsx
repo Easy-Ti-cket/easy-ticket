@@ -1,7 +1,14 @@
 import { InputContainer, InputField, Label } from "./InputStyle";
 
 /*props별 기본값 설정*/
-const InputText = ({ name, value, text = "add text", onChange }) => {
+const InputText = ({
+  name,
+  value,
+  $hasError,
+  type,
+  text = "add text",
+  onChange
+}) => {
   return (
     <InputContainer>
       <Label htmlFor="textInput">{text}</Label>
@@ -10,6 +17,8 @@ const InputText = ({ name, value, text = "add text", onChange }) => {
         value={value}
         id="textInput"
         onChange={onChange}
+        type={type}
+        $hasError={$hasError}
       />
     </InputContainer>
   );
