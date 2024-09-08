@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { Outlet, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { useAtom } from "jotai";
-import resetAtom from "../util/resetAtom";
 import { themeSiteAtom } from "../store/atom";
 
 const LayoutPage = styled.div`
@@ -18,16 +17,11 @@ const Layout = () => {
   const path = useLocation().pathname;
 
   useEffect(() => {
-    // if (path === "/" || path.endsWith("step5") || path.endsWith("record")) {
-    //   resetAtom();
-    // }
     if (!path.includes("challenge")) {
       if (themeSite !== "practice") {
         setThemeSite("practice");
       }
     }
-    // if (path === path.endsWith("outro")) {
-    // }
   }, [path]);
 
   return (

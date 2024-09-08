@@ -107,9 +107,7 @@ const ProgressContents = ({ text }) => {
       </ProgressBarBox>
       {/*고급 level일 경우에만 Timer 설정 */}
       {/*모달이 열렸을 경우 Timer 정지 - isModalOpen, isPaused*/}
-      {level === "high" && themeSite === "practice" && (
-        <Timer type={"minute"} second={1800} />
-      )}
+      {level === "high" && themeSite === "practice" && <Timer second={1800} />}
       {themeSite !== "practice" && <Timer type={"minute"} second={900} />}
       {!path.includes("challenge") && <TextBox>{stepText}</TextBox>}
       <ContentsBox>
