@@ -3,7 +3,7 @@ import SeatInfo from "../../../components/seatInfo/SeatInfo";
 import SeatChart from "../../../components/seatChart/SeatChart";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
-import { useAtomValue, useSetAtom } from "jotai";
+import { useAtomValue, useSetAtom, useAtom } from "jotai";
 import {
   isSectionSelectedAtom,
   isSeatSelectedAtom,
@@ -22,8 +22,10 @@ const SelectSeat = () => {
   const setHelpTextNumber = useSetAtom(helpTextNumberAtom);
   const stepTextNumber = useAtomValue(stepTextNumberAtom);
   const helpTextNumber = useAtomValue(helpTextNumberAtom);
-  const isSectionSelected = useAtomValue(isSectionSelectedAtom);
-  const isSeatSelected = useAtomValue(isSeatSelectedAtom);
+  const [isSectionSelected, setIsSectionSelected] = useAtom(
+    isSectionSelectedAtom
+  );
+  const [isSeatSelected, setIsSeatSelected] = useAtom(isSeatSelectedAtom);
   const setProgress = useSetAtom(progressAtom);
   const [initialized, setInitialized] = useState(false);
 
@@ -31,6 +33,8 @@ const SelectSeat = () => {
     setProgress(2);
     setStepTextNumber(0);
     setHelpTextNumber(0);
+    setIsSectionSelected(false);
+    setIsSeatSelected(false);
     setInitialized(true); // 초기화 후 상태 변경
   }, []);
 

@@ -30,7 +30,7 @@ const SelectSeatInterpark = () => {
     <>
       {isModalOpen && <SecureModal onClick={closeModal} />}
       <SelectSeatcontainer>
-        {isSectionSelected ? <SeatChart /> : <SeatSection num={0} />}
+        {isSectionSelected ? <SeatChart /> : <SeatSection />}
         <SeatInfo />
       </SelectSeatcontainer>
     </>
