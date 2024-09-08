@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
-import Button from "../button/Button";
+import Button from "../../button/Button";
 import { useAtom, useSetAtom } from "jotai";
 import {
   minuteCountAtom,
   timerControlAtom,
   themeSiteAtom,
   levelAtom
-} from "../../store/atom";
-import resetAtom from "../../util/resetAtom";
+} from "../../../store/atom";
+import resetAtom from "../../../util/resetAtom";
 
 const Wrap = styled.div`
   display: flex;
@@ -33,35 +33,20 @@ const ButtonWrap = styled.div`
   gap: 5px;
 `;
 
-const TimeoutModal = ({ setIsModalOpen }) => {
+const TimeoutModalContents = ({ setIsModalContentsOpen }) => {
   const navigate = useNavigate();
-  const location = useLocation();
   const [timeSpent] = useAtom(minuteCountAtom);
   const setTimerControl = useSetAtom(timerControlAtom);
   // themeSite
   const [themeSite] = useAtom(themeSiteAtom);
   // level
   const [level] = useAtom(levelAtom);
-  // 현재 경로가 step0인지 확인하기 위한 변수 정의
-  const isStep0Path = location.pathname.includes("step0");
-
-  useEffect(() => {
-    // minute이 0보다 작아지면 모달 자동 열림
-    if (timeSpent <= 0) {
-      setIsModalOpen(true);
-    }
-    // 단, 인트로 페이지에서는 모달이 열리지 않도록 설정
-    // (초기 타이머가 0으로 설정되어 있기 때문.)
-    if (isStep0Path) {
-      setIsModalOpen(false);
-    }
-  }, [timeSpent, isStep0Path, setIsModalOpen]);
 
   // 다시 시작하기
   const handleRestart = () => {
     const confirmNavigate = true;
     if (confirmNavigate) {
-      setIsModalOpen(false); // 모달 닫기
+      setIsModalContentsOpen(false); // 모달 닫기
       setTimerControl(false); // 타이머 정지
 
       // 경로 설정
@@ -77,7 +62,7 @@ const TimeoutModal = ({ setIsModalOpen }) => {
 
   // 처음으로 돌아가기
   const handleReturnToMain = () => {
-    setIsModalOpen(false); // 모달 닫기
+    setIsModalContentsOpen(false); // 모달 닫기
     setTimerControl(false); // 타이머 정지
     // 메인 페이지로 이동
     navigate("/");
@@ -100,4 +85,4 @@ const TimeoutModal = ({ setIsModalOpen }) => {
   );
 };
 
-export default TimeoutModal;
+export default TimeoutModalContents;
