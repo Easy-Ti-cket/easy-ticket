@@ -1,22 +1,22 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import MyBookingInfo from "./MyBookingInfo";
-import SeatCount from "./SeatCount";
-import TicketMethod from "./ticket/TicketMethod";
-import SelectPriceCheckBox from "./SelectPriceCheckBox";
-import { useSetAtom } from "jotai";
-import { progressAtom } from "../../../../store/atom";
+import SelectPriceCheckBox from "../../components/selectPrice/SelectPriceCheckBox";
+import { useAtomValue, useSetAtom } from "jotai";
+import { optionAtom, progressAtom } from "../../../../store/atom";
 import PrevNextButton from "../../../../components/myBookingInfo/PrevNextButton";
 import { MyBookingInfoContainer } from "../../../../components/myBookingInfo/MyBookingInfoContainer";
 import { useNavigate } from "react-router-dom";
+import { useBookingValidate } from "../../../../hooks/useBookingValidate";
+import MyBookingInfo from "../../../../components/myBookingInfo/MyBookingInfo";
+import SeatCountTicketlink from "../../components/seatCount/SeatCountTicketlink";
+import TicketMethodTicketlink from "../../components/ticketMethod/TicketMethodTicketlink";
 
 const Container = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: flex-start;
   flex-direction: row;
-  gap: 30px;
   padding: 0 20px;
+  gap: 20px;
 `;
 
 const LeftSection = styled.div`
@@ -34,49 +34,85 @@ const RightSection = styled.div`
   align-items: flex-start;
 `;
 
-// step3/step4 메인 페이지
-const SelectPriceTicketlink = () => {
-  const [option, setOption] = useState("현장수령");
-  const [step3Stage, setStep3Stage] = useState(1);
-  const [isChecked1, setIsChecked1] = useState(false);
-  const [isChecked2, setIsChecked2] = useState(false);
-  const [isCancelChecked, setIsCancelChecked] = useState(false);
-  const addStage = (num) => setStep3Stage(num);
-  const setProgress = useSetAtom(progressAtom);
-  const navigate = useNavigate();
+//취소 기한 및 수수료 동의
+const CancelCheckbox = styled.input.attrs({
+  type: "checkbox"
+})``;
 
+const CancelLabel = styled.label`
+  font-size: 24px;
+  color: ${(props) =>
+    props.$hasError ? "var(--point-color)" : "var(--text-color)"};
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+`;
+
+const SelectPriceTicketlink = () => {
+  const option = useAtomValue(optionAtom);
+
+  //검사 로직
+  // 폼 검사 로직용
+  const [isValidate, setIsValidate] = useState([]);
+  const [errorArray, setErrorArray] = useState([]); //css 변경용
+  const [step3Stage, setStep3Stage] = useState(1);
+  const addStage = (num) => setStep3Stage(num);
+
+  //프로그래스 바
+  const setProgress = useSetAtom(progressAtom);
   useEffect(() => setProgress(3), [setProgress]);
 
+  //체크박스 체크 여부
+  const [isChecked1, setIsChecked1] = useState(false);
+  const [isChecked2, setIsChecked2] = useState(false);
+  const [isAgreeAll, setIsAgreeAll] = useState(false);
   const handleChecked = (checked, checkboxId) => {
-    if (checkboxId === 1) setIsChecked1(checked);
-    if (checkboxId === 2) setIsChecked2(checked);
+    let newChecked1 = isChecked1;
+    let newChecked2 = isChecked2;
+    if (checkboxId === 1) newChecked1 = checked;
+    if (checkboxId === 2) newChecked2 = checked;
+    // 두 체크박스가 모두 체크되었는지 확인
+    setIsChecked1(newChecked1);
+    setIsChecked2(newChecked2);
+    setIsAgreeAll(newChecked1 && newChecked2);
   };
+  useEffect(() => {
+    if (isAgreeAll) {
+      setIsValidate((prev) =>
+        prev.includes("checkbox") ? prev : [...prev, "checkbox"]
+      );
+    } else {
+      setIsValidate((prev) => prev.filter((item) => item !== "checkbox"));
+    }
+  }, [isAgreeAll]);
 
+  //취소기한 및 수수료 동의
+  const [isCancelChecked, setIsCancelChecked] = useState(false);
   const handleCancelChecked = (e) => {
     setIsCancelChecked(e.target.checked);
-  };
-
-  const handleButtonClick = () => {
-    if (step3Stage === 1) {
-      addStage(2);
+    if (e.target.checked) {
+      setIsValidate((prev) =>
+        prev.includes("cancel") ? prev : [...prev, "cancel"]
+      );
     } else {
-      if (isChecked1 && !isChecked2) {
-        alert("주문자 확인 및 휴대폰번호 수집을 확인하셔야 결제가 가능합니다.");
-      } else if (!isChecked1 && isChecked2) {
-        alert(
-          "취소수수료 및 취소기한 내용에 동의하셔야만 결제가 가능합니다. 내용을 확인하신 후, 동의하기를 체크해주세요."
-        );
-      } else if (!isChecked1 && !isChecked2) {
-        alert("주문자 확인 및 휴대폰번호 수집을 확인하셔야 결제가 가능합니다.");
-      } else if (!isCancelChecked) {
-        alert(
-          "취소수수료 및 취소기한 내용에 동의하셔야만 결제가 가능합니다. 내용을 확인하신 후, 동의하기를 체크해주세요."
-        );
-      } else {
-        navigate("../step5-1");
-      }
+      setIsValidate((prev) => prev.filter((item) => item !== "cancel"));
     }
   };
+
+  //검사 후 이동할 위치
+  const location = "../step5-1";
+  // 버튼에 넘겨줄 검사로직 (티켓가격 + 예매자 정보 확인용)
+  const { handleButtonClick } = useBookingValidate(
+    addStage,
+    step3Stage,
+    isValidate,
+    setErrorArray,
+    location,
+    { isAgreeAll: isAgreeAll, isCancelChecked: isCancelChecked }
+  );
+
+  const hasError = errorArray.includes("cancel");
 
   return (
     <>
@@ -84,12 +120,11 @@ const SelectPriceTicketlink = () => {
         <Container>
           <LeftSection>
             <SelectPriceCheckBox handleChecked={handleChecked} />
-            <SeatCount />
+            <SeatCountTicketlink />
           </LeftSection>
           <RightSection>
             <MyBookingInfoContainer>
               <MyBookingInfo option={option} />
-
               <PrevNextButton
                 prevButtonOnClick={() => addStage(1)}
                 nextButtonOnClick={handleButtonClick}
@@ -100,9 +135,9 @@ const SelectPriceTicketlink = () => {
       ) : (
         <Container>
           <LeftSection>
-            <TicketMethod
-              option={option}
-              setOption={setOption}
+            <TicketMethodTicketlink
+              setIsValidate={setIsValidate}
+              errorArray={errorArray}
               handleChecked={handleChecked}
             />
           </LeftSection>
@@ -111,14 +146,14 @@ const SelectPriceTicketlink = () => {
               <MyBookingInfo option={option} />
 
               {/* 취소기한 확인용 체크박스 */}
-              <label>
-                <input
-                  type="checkbox"
-                  checked={isCancelChecked}
-                  onChange={handleCancelChecked}
-                />
+              <CancelLabel
+                $hasError={hasError}
+                checked={isCancelChecked}
+                onChange={handleCancelChecked}
+              >
+                <CancelCheckbox />
                 취소기한 및 수수료 동의
-              </label>
+              </CancelLabel>
               <PrevNextButton
                 prevButtonOnClick={() => addStage(1)}
                 nextButtonOnClick={handleButtonClick}

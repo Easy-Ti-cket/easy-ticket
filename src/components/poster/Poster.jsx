@@ -13,7 +13,6 @@ const PosterImage = styled.img`
 // json 파일에서 저장해둔 포스터 사진 src을 불러옴.
 const Poster = ({ id }) => {
   const [posters] = useAtom(postersAtom);
-  const [level] = useAtom(levelAtom);
   const poster = posters[id]; // 배열 인덱스로 접근 (id = array index)
   // console.log(poster.src);
   return <PosterImage src={poster.src} alt={poster.title_ko} />;

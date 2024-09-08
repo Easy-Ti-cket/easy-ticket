@@ -33,15 +33,15 @@ const TextBox = styled.div`
 `;
 //화면 높이에 따라 줄어드는 contentsBox, min-height: 500px
 const ContentsBox = styled.div`
-  width: 1320px;
   flex-grow: 1;
   margin-bottom: 30px;
   min-height: 500px;
+  min-width: 1320px;
   border: var(--fill-color) 1px solid;
   border-radius: 8px;
   display: inline-flex;
   justify-content: center;
-  padding: 30px 0;
+  padding: 30px;
   //도움말 버튼 부모 position
   position: relative;
 `;
@@ -107,9 +107,7 @@ const ProgressContents = ({ text }) => {
       </ProgressBarBox>
       {/*고급 level일 경우에만 Timer 설정 */}
       {/*모달이 열렸을 경우 Timer 정지 - isModalOpen, isPaused*/}
-      {level === "high" && themeSite === "practice" && (
-        <Timer type={"minute"} second={1800} />
-      )}
+      {level === "high" && themeSite === "practice" && <Timer second={1800} />}
       {themeSite !== "practice" && <Timer type={"minute"} second={900} />}
       {!path.includes("challenge") && <TextBox>{stepText}</TextBox>}
       <ContentsBox>

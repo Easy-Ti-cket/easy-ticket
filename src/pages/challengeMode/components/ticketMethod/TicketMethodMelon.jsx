@@ -2,6 +2,7 @@ import styled from "styled-components";
 import Input from "../../../../components/input/Input";
 import { FormWrap } from "../../../../components/forms/FormStyle";
 import TicketBuyer from "../../../../components/forms/ticket/TicketBuyer";
+import { optionAtom } from "../../../../store/atom";
 
 const SectionTitle = styled.div`
   width: ${(props) => (props.$option === "현장수령" ? "500px" : "800px")};
@@ -25,12 +26,8 @@ const TicketMethodWrap = styled(FormWrap)`
   align-items: start;
   height: 417px;
 `;
-const TicketMethodMelon = ({
-  option,
-  setOption,
-  setIsValidate,
-  errorArray
-}) => {
+const TicketMethodMelon = ({ setIsValidate, errorArray }) => {
+  const [option, setOption] = useAtom(optionAtom);
   const handleOptionChange = (e) => {
     setOption(e.target.value);
     //검사 로직

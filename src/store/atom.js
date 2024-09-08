@@ -4,12 +4,9 @@ import posters from "../components/poster/poster.json";
 import getRandomInt from "../util/getRandomInt";
 
 const storage = createJSONStorage(() => sessionStorage);
-// 초 단위 타이머 상태
-export const secondCountAtom = atomWithStorage("second", 0, storage);
 
 // 분 단위 타이머 상태
 export const minuteCountAtom = atomWithStorage("minute", 0, storage);
-// const someAtom = atomWithStorage('some-key', someInitialValue, storage)
 
 //난이도 상태 (low, middle, high)
 export const levelAtom = atomWithStorage("level", "low", storage);
@@ -94,6 +91,9 @@ export const seatInfoAtom = atomWithStorage(
   },
   storage
 );
+//현장, 배송 여부
+export const optionAtom = atomWithStorage("isDelivered", "현장수령", storage);
+
 //실전모드 theme
 export const themeSiteAtom = atomWithStorage("themeSite", "practice", storage);
 

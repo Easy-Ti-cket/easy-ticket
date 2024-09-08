@@ -13,7 +13,6 @@ import { useEffect } from "react";
 
 const SelectPerformance = () => {
   const [, setSelectedPoster] = useAtom(selectedPosterAtom); // 선택된 포스터의 id 상태 관리
-  const [, setLevel] = useAtom(levelAtom);
   const [, setProgress] = useAtom(progressAtom);
 
   const setStepTextNumber = useSetAtom(stepTextNumberAtom);
