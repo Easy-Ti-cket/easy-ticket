@@ -75,17 +75,18 @@ const ProgressContents = ({ text, practiceMode, challengeMode }) => {
   // 일시정지 모달창 제어
   const [isPaused, setIsPaused] = useState(false);
 
-  const navigate = useNavigate();
   const path = useLocation().pathname;
+  // 현재 경로가 step0인지 확인하기 위한 변수 정의
+  const isStep0Path = location.pathname.includes("step0");
 
   // 시간이 초과되었을 때 타임아웃 모달 열리도록 설정
   useEffect(() => {
     // 남은 시간 0 이하일 때만 모달이 열리도록 설정
-    if (timeSpent <= 0 && !isTimeoutModalOpen) {
+    if (timeSpent <= 0 && !isStep0Path) {
       setIsTimeoutModalOpen(true);
       setTimerControl(false); // 타이머 정지
     }
-  }, [timeSpent, isTimeoutModalOpen, setTimerControl]);
+  }, [timeSpent, setTimerControl]);
 
   const handleModalOpen = () => {
     setIsModalOpen(true);
