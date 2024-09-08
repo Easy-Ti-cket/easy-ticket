@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import CardBBack from "../../../../assests/images/cards/CardBBack.svg?react";
+import CardBBack from "../../../../../public/assets/images/cards/CardBBack.svg?react";
 import { CardWrap, Number } from "../CardStyles";
 
 /*카드 번호 감싸는 컴포넌트 */

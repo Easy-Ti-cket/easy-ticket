@@ -1,9 +1,9 @@
 import styled from "styled-components";
 import Button from "../../../../components/button/Button";
-import interparkIcon from "../../../../assests/images/icons/site/interpark.svg";
-import melonticketIcon from "../../../../assests/images/icons/site/melonticket.svg";
-import tickelinkIcon from "../../../../assests/images/icons/site/tickelink.svg";
-import yes24Icon from "../../../../assests/images/icons/site/yes24.svg";
+import interparkIcon from "../../../../../public/assets/images/icons/site/interpark.svg";
+import melonticketIcon from "../../../../../public/assets/images/icons/site/melonticket.svg";
+import tickelinkIcon from "../../../../../public/assets/images/icons/site/tickelink.svg";
+import yes24Icon from "../../../../../public/assets/images/icons/site/yes24.svg";
 import { useState } from "react";
 
 const NavContainer = styled.div`

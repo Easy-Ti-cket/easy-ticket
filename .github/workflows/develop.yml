@@ -1,4 +1,4 @@
-name: development CI/CD
+name: development production CI/CD
 
 on:
   push:
@@ -14,13 +14,12 @@ jobs:
       - name: Build
         run: yarn && yarn build
       - name: Deploy to Firebase Hosting preview channel
-        id: firebase_hosting_preview
+        id: firebase_hosting_production
         uses: FirebaseExtended/action-hosting-deploy@v0 # firebase 배포를 위한 action
         with:
           repoToken: "${{ secrets.EASY_TICKET }}" # github token
           firebaseServiceAccount: "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" # 레포지토리 환경변수로 등록한 firebase service account
-          channelId: develop # firebase preview channel의 ID, channelId 필드를 넣어주면 preview 채널로 배포되게 된다.
-          expires: 30d # preview 만료기간
+          channelId: live # 프로덕션 배포
           projectId: easy-ticket-e7da7 # FireBase 프로젝트 ID
       - name: Check outputs
         run: |

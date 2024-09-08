@@ -1,7 +1,7 @@
 [
   {
     "id": 0,
-    "src": "../../src/assests/images/posters/poster-noel.svg",
+    "src": "../../../public/assets/images/posters/poster-noel.svg",
     "title_ko": "노엘 갤러거 하이 플라잉 버즈",
     "title_en": "Noel Gallagher's High Flying Birds",
     "venue": "일산 킨텍스 제 1전시장 1, 2홀",
@@ -21,7 +21,7 @@
   },
   {
     "id": 1,
-    "src": "../../src/assests/images/posters/poster-benjamin.svg",
+    "src": "../../../public/assets/images/posters/poster-benjamin.svg",
     "title_ko": "뮤지컬 벤자민 버튼",
     "title_en": "Benjamin Button",
     "venue": "세종문화회관 M씨어터",
@@ -45,7 +45,7 @@
   },
   {
     "id": 2,
-    "src": "../../src/assests/images/posters/poster-trot.svg",
+    "src": "../../../public/assets/images/posters/poster-trot.svg",
     "title_ko": "트롯 3파전 콘서트 - 창원",
     "title_en": "Trot 3-Way Concert - Changwon",
     "venue": "창원컨벤션센터 2,3홀",
@@ -62,7 +62,7 @@
   },
   {
     "id": 3,
-    "src": "../../src/assests/images/posters/poster-leechanwon.svg",
+    "src": "../../../public/assets/images/posters/poster-leechanwon.svg",
     "title_ko": "[수원] 2024 이찬원 콘서트 '찬가(燦歌)'",
     "title_en": "2024 Lee Chan Won Concert 'Changa'",
     "venue": "수원 실내 체육관",
