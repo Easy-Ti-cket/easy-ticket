@@ -1,8 +1,14 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Button from "../../../components/button/Button";
 import { useAtom, useSetAtom } from "jotai";
-import { levelAtom, progressAtom, themeSiteAtom } from "../../../store/atom";
+import {
+  levelAtom,
+  progressAtom,
+  themeSiteAtom,
+  practiceCountAtom,
+  isPracticeCountIncreasedAtom
+} from "../../../store/atom";
 import { useNavigate } from "react-router-dom";
 import resetAtom from "../../../util/resetAtom";
 const Step5Container = styled.div`
@@ -48,9 +54,23 @@ const Step5 = () => {
 
   const setThemeSite = useSetAtom(themeSiteAtom);
 
+  //연습 횟수 증가 로직
+  const [practiceCount, setPracticeCount] = useAtom(practiceCountAtom);
+  const [isPracticeCountIncreased, setIsPracticeCountIncreased] = useAtom(
+    isPracticeCountIncreasedAtom
+  );
+  const [isLoaded, setIsLoaded] = useState(false);
   useEffect(() => {
     setProgress(5);
-  }, [setProgress]);
+    if (!isLoaded) {
+      setIsLoaded(true);
+    }
+    // 연습 횟수 증가 여부 확인후 증가
+    if (!isPracticeCountIncreased && isLoaded) {
+      setPracticeCount((prev) => prev + 1);
+      setIsPracticeCountIncreased(true);
+    }
+  }, [isLoaded]);
 
   // 난이도 선택 창으로
   const handlePracticeModeClick = () => {
