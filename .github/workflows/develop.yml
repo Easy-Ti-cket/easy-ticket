@@ -15,7 +15,7 @@ jobs:
         run: yarn && yarn build
       - name: Deploy to Firebase Hosting preview channel
         id: firebase_hosting_preview
-        uses: FirebaseExtended/action-hosting-deploy@v0.7 # firebase 배포를 위한 action
+        uses: FirebaseExtended/action-hosting-deploy@v0 # firebase 배포를 위한 action
         with:
           repoToken: "${{ secrets.EASY_TICKET }}" # github token
           firebaseServiceAccount: "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" # 레포지토리 환경변수로 등록한 firebase service account
