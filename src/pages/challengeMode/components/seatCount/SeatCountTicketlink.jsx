@@ -48,7 +48,7 @@ const CountSelector = styled.select`
   margin-left: 10px;
 `;
 
-const SeatCount = () => {
+const SeatCountTicketlink = () => {
   const [seatCount, setSeatCount] = useAtom(seatCountAtom);
   const seatInfo = useAtomValue(seatInfoAtom);
 
@@ -83,4 +83,4 @@ const SeatCount = () => {
   );
 };
 
-export default SeatCount;
+export default SeatCountTicketlink;

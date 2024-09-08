@@ -3,8 +3,8 @@ import styled from "styled-components";
 import MyBookingInfo from "../../../../components/myBookingInfo/MyBookingInfo";
 import SeatCount from "../../../../components/SeatCount";
 import TicketMethod from "../../../../components/forms/ticket/TicketMethod";
-import { useSetAtom } from "jotai";
-import { progressAtom } from "../../../../store/atom";
+import { useAtomValue, useSetAtom } from "jotai";
+import { optionAtom, progressAtom } from "../../../../store/atom";
 import { useBookingValidate } from "../../../../hooks/useBookingValidate";
 import PrevNextButton from "../../../../components/myBookingInfo/PrevNextButton";
 import { MyBookingInfoContainer } from "../../../../components/myBookingInfo/MyBookingInfoContainer";
@@ -16,7 +16,7 @@ const Wrap = styled.div`
 
 const SelectPriceInterpark = () => {
   //현장수령 or 배송
-  const [option, setOption] = useState("현장수령");
+  const option = useAtomValue(optionAtom);
   //step4 단계에 대한 정보
   const [step3Stage, setStep3Stage] = useState(1);
   const addStage = (num) => setStep3Stage(num);
@@ -41,12 +41,7 @@ const SelectPriceInterpark = () => {
       {step3Stage == 1 ? (
         <SeatCount />
       ) : (
-        <TicketMethod
-          option={option}
-          setOption={setOption}
-          setIsValidate={setIsValidate}
-          errorArray={errorArray}
-        />
+        <TicketMethod setIsValidate={setIsValidate} errorArray={errorArray} />
       )}
       {/*내 예매정보 + 버튼 */}
       <MyBookingInfoContainer>

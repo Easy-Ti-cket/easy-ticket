@@ -10,7 +10,8 @@ function getRandomSeat(poster) {
     grade: randomSeat,
     price: randomPrice,
     date: poster.date[0],
-    seat: poster.seat
+    seat: poster.seat,
+    fee: Number(poster.fee)
   };
 }
 

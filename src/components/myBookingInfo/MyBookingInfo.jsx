@@ -1,6 +1,13 @@
 import styled from "styled-components";
-import { allowedSeatAtom, seatCountAtom, seatInfoAtom } from "../../store/atom";
-import { useAtomValue } from "jotai";
+import {
+  allowedSeatAtom,
+  optionAtom,
+  postersAtom,
+  seatCountAtom,
+  seatInfoAtom,
+  selectedPosterAtom
+} from "../../store/atom";
+import { useAtom, useAtomValue } from "jotai";
 
 const Container = styled.div`
   border-radius: 8px;
@@ -52,10 +59,11 @@ const AmountContent = styled.div`
   font-size: 28px;
 `;
 
-const MyBookingInfo = ({ option }) => {
+const MyBookingInfo = () => {
   const allowedSeat = useAtomValue(allowedSeatAtom);
   const seatCount = useAtomValue(seatCountAtom);
   const seatInfo = useAtomValue(seatInfoAtom);
+  const option = useAtomValue(optionAtom);
 
   const Info = [
     // 공연 날짜 및 시간
@@ -65,8 +73,8 @@ const MyBookingInfo = ({ option }) => {
       content: `${allowedSeat.row + 1}열-${allowedSeat.col + 1}`
     },
     { title: "티켓금액", price: `${seatCount ? seatInfo.price : 0}` },
-    { title: "수수료", price: `${seatCount ? 2000 : 0}` },
-    { title: "배송비", price: `${option === "배송" ? 3000 : 0}` },
+    { title: "수수료", price: `${seatCount ? seatInfo.fee : 0}` },
+    { title: "배송비", price: `${option.includes("배송") ? 3200 : 0}` },
     { title: "쿠폰할인", price: 0 }
   ];
 
@@ -79,7 +87,7 @@ const MyBookingInfo = ({ option }) => {
 
   return (
     <Container>
-      <Title>My 예매 정보</Title>
+      <Title>내 예매 정보</Title>
       <InfoContainer>
         {Info.map((item, index) => (
           <InfoItem key={index}>
@@ -92,7 +100,7 @@ const MyBookingInfo = ({ option }) => {
       </InfoContainer>
       <TotalAmount>
         <AmountTitle>총 결제금액</AmountTitle>
-        <AmountContent>{totalAmount}원</AmountContent>
+        <AmountContent>{totalAmount.toLocaleString()}원</AmountContent>
       </TotalAmount>
     </Container>
   );

@@ -23,7 +23,7 @@ const Container = styled.div`
 `;
 const TextBox = styled.div`
   padding: 15px 0 10px 0;
-  font-family: PretendardB;
+  font-family: pretendardB;
   font-size: 24px;
 `;
 const SelectPriceMelon = () => {

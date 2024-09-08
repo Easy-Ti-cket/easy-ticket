@@ -29,7 +29,7 @@ export const usePaymentValidate = ({ correctList, isAllChecked = null }) => {
       alert("올바른 카드를 선택해 주세요");
       return;
     }
-    //체크박스가 필요한 모든 실전모드
+    //yes24 체크박스
     if (themeSite === "yes24" && !isAllChecked) {
       alert("개인정보 수집 및 취소 수수료 관련 항목에 모두 동의해 주세요");
       return;

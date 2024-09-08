@@ -33,6 +33,8 @@ const SeatSection1 = () => {
   const date = poster.date[0];
   const lengthOfprice = priceArr.length;
   const cycle = Math.ceil(6 / lengthOfprice);
+  //수수료
+  const fee = poster.fee;
 
   const storeSeatInfo = (sectionIndex) => {
     const sectionPrice = priceArr[Math.floor(sectionIndex / 2) % lengthOfprice];
@@ -41,7 +43,8 @@ const SeatSection1 = () => {
       grade: sectionPrice.grade,
       price: sectionPrice.price,
       date: date,
-      color: colorMapping[sectionIndex]
+      color: colorMapping[sectionIndex],
+      fee: fee
     });
     setAllowedSeat({ ...allowedSeat, gridIndex: 1 });
   };

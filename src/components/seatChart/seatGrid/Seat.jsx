@@ -23,6 +23,8 @@ const SeatDiv = styled.div`
         : "var(--key-color)"
       : "var(--fill-color)"};
   cursor: ${(props) => (props.$isallowed || props.$fakeallowed) && "pointer"};
+  border: ${(props) =>
+    props.$isSelected && props.$isallowed && "3px solid #000000"};
 `;
 const SeatAnimationArea = styled(AnimationArea)`
   padding: 3px;
@@ -30,12 +32,15 @@ const SeatAnimationArea = styled(AnimationArea)`
 const Seat = ({ isallowed, isfakeallowed, deleteFakeAllowed }) => {
   const level = useAtomValue(levelAtom);
   const [isSeatSelected, setIsSeatSelected] = useAtom(isSeatSelectedAtom);
-  const [fakeAllowedSeat, setFakeAllowedSeat] = useAtom(fakeAllowedSeatAtom);
-  const allowedSeat = useAtomValue(allowedSeatAtom);
+  // const [fakeAllowedSeat, setFakeAllowedSeat] = useAtom(fakeAllowedSeatAtom);
+  // const allowedSeat = useAtomValue(allowedSeatAtom);
   const seatInfo = useAtomValue(seatInfoAtom);
   // const isFakeAllowed = useState(false);
   const color = seatInfo.color;
-
+  useEffect(() => {
+    // atom 초기화
+    setIsSeatSelected(false);
+  }, []);
   const handleClick = () => {
     if (isallowed && !isSeatSelected) {
       setIsSeatSelected(true);
@@ -54,6 +59,7 @@ const Seat = ({ isallowed, isfakeallowed, deleteFakeAllowed }) => {
     <SeatAnimationArea $focus={focus}>
       <SeatDiv
         $isallowed={isallowed}
+        $isSelected={isSeatSelected}
         $color={color}
         onClick={handleClick}
         $fakeallowed={isfakeallowed}
