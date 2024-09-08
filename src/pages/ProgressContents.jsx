@@ -166,9 +166,7 @@ const ProgressContents = ({ text, practiceMode, challengeMode }) => {
           <Modal
             contents={
               <TimeoutModalContents
-                practiceMode={practiceMode}
-                challengeMode={challengeMode}
-                setIsModalOpen={setIsTimeoutModalContentsOpen}
+                setIsModalContentsOpen={setIsTimeoutModalContentsOpen}
               />
             }
             buttonShow={false}
