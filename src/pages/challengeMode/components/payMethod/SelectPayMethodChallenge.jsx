@@ -1,7 +1,5 @@
 import styled from "styled-components";
 import DetailPayForm from "../../../../components/forms/pay/DetailPayForm";
-import { FormWrap } from "../../../../components/forms/FormStyle";
-import MyBookingInfo from "../../ticketlink/step3-step4/MyBookingInfo";
 import { MyBookingInfoContainer } from "../../../../components/myBookingInfo/MyBookingInfoContainer";
 import PrevNextButton from "../../../../components/myBookingInfo/PrevNextButton";
 import { useNavigate } from "react-router-dom";
@@ -10,6 +8,8 @@ import { useForm } from "../../../../hooks/useForm";
 import PayMethodForm from "../../../../components/forms/pay/PayMethodForm";
 import { SubTtitle } from "../../../practiceMode/step4/SelectPayMethod";
 import ErrorTooltip from "../../../../components/tooltip/ErrorTooltip";
+import MyBookingInfo from "../../../../components/myBookingInfo/MyBookingInfo";
+import { FormWrap } from "../../../../components/forms/FormStyle";
 
 //결제 수단 + 결제 방식 + 내 예매 정보
 const PayMethodWrap = styled.div`

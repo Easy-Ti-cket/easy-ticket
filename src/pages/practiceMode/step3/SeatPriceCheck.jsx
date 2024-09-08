@@ -3,11 +3,12 @@ import MyBookingInfo from "../../../components/myBookingInfo/MyBookingInfo";
 import SeatCount from "../../../components/SeatCount";
 import { useEffect, useState } from "react";
 import TicketMethod from "../../../components/forms/ticket/TicketMethod";
-import { useSetAtom } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import {
   progressAtom,
   stepTextNumberAtom,
-  helpTextNumberAtom
+  helpTextNumberAtom,
+  optionAtom
 } from "../../../store/atom";
 import { MyBookingInfoContainer } from "../../../components/myBookingInfo/MyBookingInfoContainer";
 import PrevNextButton from "../../../components/myBookingInfo/PrevNextButton";
@@ -20,7 +21,7 @@ const Wrap = styled.div`
 
 const SeatPriceCheck = () => {
   //현장수령 or 배송
-  const [option, setOption] = useState("현장수령");
+  const option = useAtomValue(optionAtom);
   //step4 단계에 대한 정보
   const [step3Stage, setStep3Stage] = useState(1);
   const addStage = () => setStep3Stage(2);
@@ -61,12 +62,7 @@ const SeatPriceCheck = () => {
       {step3Stage == 1 ? (
         <SeatCount />
       ) : (
-        <TicketMethod
-          option={option}
-          setOption={setOption}
-          setIsValidate={setIsValidate}
-          errorArray={errorArray}
-        />
+        <TicketMethod setIsValidate={setIsValidate} errorArray={errorArray} />
       )}
       <MyBookingInfoContainer>
         <MyBookingInfo

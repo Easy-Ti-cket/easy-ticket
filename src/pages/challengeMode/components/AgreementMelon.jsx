@@ -1,16 +1,19 @@
 import styled from "styled-components";
-import { useState } from "react";
 
 const Container = styled.div`
   padding-top: 20px;
-  font-family: PretendardR;
+  font-family: pretendardR;
+  color: ${(props) => props.$hasError && "var(--point-color)"};
 `;
 const LineContainer = styled.div`
   display: flex;
   border-bottom: 1px solid var(--fill-color);
+  align-items: center;
 `;
 const CheckboxContainer = styled.div`
   margin: 10px 0;
+  display: flex;
+  align-items: center;
 `;
 
 const CheckboxLabel = styled.label`
@@ -22,13 +25,21 @@ const TermsContainer = styled.div`
 `;
 const TextBox = styled.div`
   margin-right: 270px;
-  font-family: PretendardB;
+  font-family: "pretendardB";
 `;
-const AgreeMentMelon = () => {
-  //useState를 사용하여 체크박스의 상태를 관리한다.
-  //배열로 관리하며, 각각의 체크박스에 대한 상태를 저장한다.
-  const [isAgreeAll, setIsAgreeAll] = useState(false);
-  const [isAgree, setIsAgree] = useState([false, false, false, false, false]);
+const Info = styled.span`
+  margin-left: 10px;
+  font-size: 14px;
+  font-family: "pretendardM";
+  color: var(--point-color);
+`;
+const AgreeMentMelon = ({
+  isAgree,
+  isAgreeAll,
+  setIsAgree,
+  setIsAgreeAll,
+  errorArray
+}) => {
   //전체 동의를 클릭하면 한번에 동의되는 함수
   const handleAgreeAll = () => {
     if (!isAgreeAll) {
@@ -46,13 +57,17 @@ const AgreeMentMelon = () => {
       )
     );
   };
+  // 전체 동의를 하지 않은 상태에서 다음 단계 버튼을 클릭했을 경우
+  const $hasError = errorArray.includes("checkbox");
+
   return (
-    <Container>
+    <Container $hasError={$hasError}>
       <LineContainer>
         <TextBox>예매자 동의</TextBox>
         <CheckboxContainer>
           <input type="checkbox" id="agreeAll" onClick={handleAgreeAll} />
           <CheckboxLabel htmlFor="agreeAll">전체동의</CheckboxLabel>
+          <Info>전체 동의를 누르면 한 번에 동의처리됩니다.</Info>
         </CheckboxContainer>
       </LineContainer>
 

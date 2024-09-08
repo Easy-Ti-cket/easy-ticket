@@ -14,6 +14,7 @@ import { useForm } from "../../../../hooks/useForm";
 import PayMethodForm from "../../../../components/forms/pay/PayMethodForm";
 import { SubTtitle } from "../../../practiceMode/step4/SelectPayMethod";
 import ErrorTooltip from "../../../../components/tooltip/ErrorTooltip";
+import { PayMethodInfo } from "../../components/payMethod/payMethodStyle";
 
 //결제 수단 + 결제 방식 + 내 예매 정보
 const PayMethodWrap = styled.div`
@@ -65,13 +66,6 @@ const Info = styled.span`
   color: var(--text-color2);
 `;
 
-//결제방식관련 안내 문구
-const PayMethodInfo = styled.span`
-  font-family: "pretendardB";
-  font-size: 12px;
-  color: var(--text-color);
-`;
-
 const SelectPayMethodInterPark = ({ isAllChecked }) => {
   //포스터 정보
   const posterId = useAtomValue(selectedPosterAtom);
@@ -82,23 +76,12 @@ const SelectPayMethodInterPark = ({ isAllChecked }) => {
   const { handlePayment, hasPayFormError, cardTypesError } = usePaymentValidate(
     { correctList, isAllChecked }
   );
-  //'신용카드'를 정확히 골랐을 경우 '결제 수단 입력' 창 생성
+  //'신용카드'만 선택 가능함
   const isPayMethodCorrect = correctList["PayMethodForm"];
 
   return (
     <PayMethodWrap>
       <PayMethodContainer>
-        {!isPayMethodCorrect && (
-          <ErrorTooltip
-            contents={
-              <PayMethodInfo>
-                실전모드에선 '신용카드' 결제만 가능합니다.
-              </PayMethodInfo>
-            }
-          >
-            <br />
-          </ErrorTooltip>
-        )}
         {/*결제 수단 */}
         <SubTtitle>결제 수단</SubTtitle>
         <PayMethodForm
