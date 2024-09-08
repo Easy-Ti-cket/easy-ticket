@@ -12,7 +12,7 @@ import Intro from "./pages/practiceMode/step0/Intro";
 import ChallengeIntro from "./pages/challengeMode/intro/ChallengeIntro";
 // step 1
 import SelectPerformance from "./pages/practiceMode/step1/SelectPerformance";
-import SelectPerformanceChallengeMode from "./pages/challengeMode/SelectPerformance/SelectPerformanceChallengeMode";
+import SelectPerformanceChallengeMode from "./pages/challengeMode/selectPerformance/SelectPerformanceChallengeMode";
 import SelectRound from "./pages/practiceMode/step1/SelectRound";
 import SelectRoundInterpark from "./pages/challengeMode/interpark/step1/SelectRoundInterpark";
 import SelectRoundMelonticket from "./pages/challengeMode/melonticket/step1/SelectRoundMelonticket";
@@ -20,10 +20,7 @@ import SelectRoundTicketlink from "./pages/challengeMode/ticketlink/step1/Select
 import SelectRoundYes24 from "./pages/challengeMode/yes24/step1/SelectRoundYes24";
 // step 2
 import SelectSeat from "./pages/practiceMode/step2/SelectSeat";
-import SelectSeatInterpark from "./pages/challengeMode/interpark/step2/SelectSeatInterpark";
-import SelectSeatMelon from "./pages/challengeMode/melonticket/step2/SelectSeatMelon";
-import SelectSeatTicketlink from "./pages/challengeMode/ticketlink/step2/SelectSeatTicketlink";
-import SelectSeatYes24 from "./pages/challengeMode/yes24/step2/SelectSeatYes24";
+import SelectSeatChallangeMode from "./pages/challengeMode/selectSeat/SelectSeatChallangeMode";
 // step 3
 import SeatPriceCheck from "./pages/practiceMode/step3/SeatPriceCheck";
 import SelectPriceInterpark from "./pages/challengeMode/interpark/step3-step4/SelectPriceInterpark";
@@ -128,7 +125,7 @@ const router = createBrowserRouter([
               },
               {
                 path: "step2",
-                element: <PrivateRoute element={<SelectSeatInterpark />} />,
+                element: <PrivateRoute element={<SelectSeatChallangeMode />} />,
                 label: "좌석 선택"
               },
               {
@@ -180,7 +177,7 @@ const router = createBrowserRouter([
               {
                 path: "step2",
 
-                element: <PrivateRoute element={<SelectSeatMelon />} />,
+                element: <PrivateRoute element={<SelectSeatChallangeMode />} />,
                 label: "좌석 선택"
               },
               {
@@ -228,7 +225,7 @@ const router = createBrowserRouter([
               },
               {
                 path: "step2",
-                element: <PrivateRoute element={<SelectSeatTicketlink />} />,
+                element: <PrivateRoute element={<SelectSeatChallangeMode />} />,
                 label: "좌석 선택"
               },
               {
@@ -277,7 +274,7 @@ const router = createBrowserRouter([
               },
               {
                 path: "step2",
-                element: <PrivateRoute element={<SelectSeatYes24 />} />,
+                element: <PrivateRoute element={<SelectSeatChallangeMode />} />,
                 label: "좌석 선택"
               },
               {
