@@ -4,10 +4,6 @@ import { useNavigate } from "react-router-dom";
 import Button from "../../../components/button/Button";
 import { themeSiteAtom, levelAtom } from "../../../store/atom";
 import { useAtomValue, useSetAtom } from "jotai";
-import interparkIcon from "../../../../public/assets/images/icons/site/interpark.svg";
-import melonticketIcon from "../../../../public/assets/images/icons/site/melonticket.svg";
-import tickelinkIcon from "../../../../public/assets/images/icons/site/tickelink.svg";
-import yes24Icon from "../../../../public/assets/images/icons/site/yes24.svg";
 
 const SelectSiteContainer = styled.div`
   display: flex;
@@ -45,29 +41,35 @@ const SelectSite = () => {
     setLevel("high"); // 고급 난이도로 변경
     navigate(path);
   };
+  const iconSrc = {
+    interpark: "/assets/images/icons/site/interpark.svg?react",
+    melonticket: "/assets/images/icons/site/melonticket.svg?react",
+    ticketlink: "/assets/images/icons/site/tickelink.svg?react",
+    yes24: "/assets/images/icons/site/yes24.svg?react"
+  };
 
   const sites = [
     {
       name: "인터파크 티켓",
-      icon: interparkIcon,
+      icon: iconSrc.interpark,
       path: "/challenge/interpark/step0",
       theme: "interpark"
     },
     {
       name: "멜론티켓",
-      icon: melonticketIcon,
+      icon: iconSrc.melonticket,
       path: "/challenge/melonticket/step0",
       theme: "melonticket"
     },
     {
       name: "티켓링크",
-      icon: tickelinkIcon,
+      icon: iconSrc.ticketlink,
       path: "/challenge/ticketlink/step0",
       theme: "ticketlink"
     },
     {
       name: "예스24(YES24)",
-      icon: yes24Icon,
+      icon: iconSrc.yes24,
       path: "/challenge/yes24/step0",
       theme: "yes24"
     }

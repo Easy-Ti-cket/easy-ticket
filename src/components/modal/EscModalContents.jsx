@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import Button from "../button/Button";
 import { useNavigate } from "react-router-dom";
-import PauseIcon from "../../../public/assets/images/icons/playPause/pause.svg?react";
+import PauseIcon from "/public/assets/images/icons/playPause/pause.svg?react";
 import { useSetAtom } from "jotai";
 import { timerControlAtom } from "../../store/atom";
 
