@@ -10,7 +10,7 @@ import {
   userNameErrorAtom
 } from "../../store/atom";
 import { useNavigate } from "react-router-dom";
-import MainImage from "../../assests/images/main.png";
+import MainImage from "../../../public/assets/images/main.png";
 import { InputField } from "../../components/input/InputStyle";
 import ErrorTooltip from "../../components/tooltip/ErrorTooltip";
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useAtom, useAtomValue } from "jotai";
 import styled from "styled-components";
-import timerIcon from "../../assests/images/icons/timer.svg";
+import timerIcon from "../../../public/assets/images/icons/timer.svg";
 import { minuteCountAtom, timerControlAtom } from "../../store/atom";
 import { useLocation } from "react-router-dom";
 

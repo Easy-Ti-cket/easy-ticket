@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import Nav from "./nav/Nav";
-import Logo from "../../assests/logo.svg?react";
+import Logo from "../../../public/assets/logo.svg?react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Modal from "../modal/Modal";

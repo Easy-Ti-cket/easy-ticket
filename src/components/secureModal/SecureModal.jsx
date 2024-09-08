@@ -3,8 +3,8 @@ import styled from "styled-components";
 import Modal from "../modal/Modal";
 import { createCaptchaImage } from "../../util/captcha";
 import { getRandomString } from "../../util/getRandomString";
-import RefreshIcon from "../../assests/images/icons/refresh.svg";
-import VoiceIcon from "../../assests/images/icons/voice.svg";
+import RefreshIcon from "../../../public/assets/images/icons/refresh.svg";
+import VoiceIcon from "../../../public/assets/images/icons/voice.svg";
 import { speakCharacterByCharacter } from "../../util/speechVoice";
 
 const TitleWrapper = styled.div`
