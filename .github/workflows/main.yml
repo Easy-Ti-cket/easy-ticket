@@ -1,12 +1,12 @@
-name: development production CI/CD
+name: production CI/CD
 
 on:
   push:
     branches:
-      - develop # develop 브랜치에 "push"될 때 본 workflow를 실행
+      - main # main 브랜치에 push 시 workflow 실행
 
 jobs:
-  preview:
+  production:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout branch # 레포지토리 소스를 runner로 가져오기
@@ -29,12 +29,13 @@ jobs:
 
       - name: Build
         run: yarn && yarn build
+
       - name: Deploy to Firebase Hosting production channel
         id: firebase_hosting_production
         uses: FirebaseExtended/action-hosting-deploy@v0 # firebase 배포를 위한 action
         with:
           repoToken: "${{ secrets.EASY_TICKET }}" # github token
-          firebaseServiceAccount: "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" # 레포지토리 환경변수로 등록한 firebase service account
+          firebaseServiceAccount: "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" # firebase service account
           channelId: live # 프로덕션 배포
           projectId: easy-ticket-e7da7 # FireBase 프로젝트 ID
 
