@@ -1,9 +1,13 @@
 import styled from "styled-components";
-import Button from "../button/Button";
+import Button from "../../button/Button";
 import { useNavigate } from "react-router-dom";
 import { useSetAtom } from "jotai";
-import { levelAtom, themeSiteAtom, timerControlAtom } from "../../store/atom";
-import resetAtom from "../../util/resetAtom";
+import {
+  levelAtom,
+  themeSiteAtom,
+  timerControlAtom
+} from "../../../store/atom";
+import resetAtom from "../../../util/resetAtom";
 
 const Container = styled.div`
   display: flex;
@@ -26,7 +30,7 @@ const ButtonWrap = styled.div`
   display: flex;
 `;
 
-const GoToLocationModalCont = ({ setIsConfirm, levelTheme = "/" }) => {
+const GoToLocationModalContents = ({ setIsConfirm, levelTheme = "/" }) => {
   const navigate = useNavigate();
   //타이머 제어
   const setTimerControl = useSetAtom(timerControlAtom);
@@ -80,4 +84,4 @@ const GoToLocationModalCont = ({ setIsConfirm, levelTheme = "/" }) => {
   );
 };
 
-export default GoToLocationModalCont;
+export default GoToLocationModalContents;

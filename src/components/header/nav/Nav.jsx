@@ -3,7 +3,7 @@ import styled, { css } from "styled-components"; // css 함수 import 추가
 import SubNav from "./subNav/SubNav";
 import useHover from "../../../hooks/useHover";
 import { useLocation, useNavigate } from "react-router-dom";
-import GoToLocationModalCont from "../../modal/GoToMainModalCont";
+import GoToLocationModalContents from "../../modal/modalContents/GoToMainModalContents";
 import Modal from "../../modal/Modal";
 import { useSetAtom } from "jotai";
 import { timerControlAtom } from "../../../store/atom";
@@ -113,7 +113,7 @@ const Nav = () => {
         <Modal
           buttonShow={false}
           contents={
-            <GoToLocationModalCont
+            <GoToLocationModalContents
               levelTheme="/record"
               setIsConfirm={setIsConfirm}
             />

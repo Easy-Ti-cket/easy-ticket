@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import SecureModal from "../../../components/modal/SecureModal";
+import SecureModalContents from "../../../components/modal/modalContents/SecureModalContents";
 import SeatChart from "../../../components/seatChart/SeatChart1";
 import SeatSection from "../../../components/seatSection/SeatSection";
 import { useAtomValue, useSetAtom } from "jotai";
@@ -30,7 +30,7 @@ const TooltipText = styled.div`
   font-family: PretendardM;
 `;
 
-const SelectSeatChallangeMode = () => {
+const SelectSeatChallengeMode = () => {
   const [isModalOpen, setIsModalOpen] = useState(true);
   const isSectionSelected = useAtomValue(isSectionSelectedAtom);
   const setProgress = useSetAtom(progressAtom);
@@ -46,7 +46,7 @@ const SelectSeatChallangeMode = () => {
 
   return (
     <SelectSeatContainer>
-      {isModalOpen && <SecureModal onClick={closeModal} />}
+      {isModalOpen && <SecureModalContents onClick={closeModal} />}
       {isSectionSelected ? (
         <SeatChart></SeatChart>
       ) : (
@@ -70,4 +70,4 @@ const SelectSeatChallangeMode = () => {
     </SelectSeatContainer>
   );
 };
-export default SelectSeatChallangeMode;
+export default SelectSeatChallengeMode;

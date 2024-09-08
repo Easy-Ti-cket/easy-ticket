@@ -1,15 +1,15 @@
 import React from "react";
 import styled from "styled-components";
 import { useNavigate, useLocation } from "react-router-dom";
-import Button from "../button/Button";
+import Button from "../../button/Button";
 import { useAtom, useSetAtom } from "jotai";
 import {
   minuteCountAtom,
   timerControlAtom,
   themeSiteAtom,
   levelAtom
-} from "../../store/atom";
-import resetAtom from "../../util/resetAtom";
+} from "../../../store/atom";
+import resetAtom from "../../../util/resetAtom";
 
 const Wrap = styled.div`
   display: flex;
@@ -33,7 +33,7 @@ const ButtonWrap = styled.div`
   gap: 5px;
 `;
 
-const TimeoutModal = ({ setIsModalOpen }) => {
+const TimeoutModalContents = ({ setIsModalContentsOpen }) => {
   const navigate = useNavigate();
   const [timeSpent] = useAtom(minuteCountAtom);
   const setTimerControl = useSetAtom(timerControlAtom);
@@ -46,7 +46,7 @@ const TimeoutModal = ({ setIsModalOpen }) => {
   const handleRestart = () => {
     const confirmNavigate = true;
     if (confirmNavigate) {
-      setIsModalOpen(false); // 모달 닫기
+      setIsModalContentsOpen(false); // 모달 닫기
       setTimerControl(false); // 타이머 정지
 
       // 경로 설정
@@ -62,7 +62,7 @@ const TimeoutModal = ({ setIsModalOpen }) => {
 
   // 처음으로 돌아가기
   const handleReturnToMain = () => {
-    setIsModalOpen(false); // 모달 닫기
+    setIsModalContentsOpen(false); // 모달 닫기
     setTimerControl(false); // 타이머 정지
     // 메인 페이지로 이동
     navigate("/");
@@ -85,4 +85,4 @@ const TimeoutModal = ({ setIsModalOpen }) => {
   );
 };
 
-export default TimeoutModal;
+export default TimeoutModalContents;

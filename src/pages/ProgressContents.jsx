@@ -6,8 +6,8 @@ import Button from "../components/button/Button";
 import Modal from "../components/modal/Modal";
 import ProgressBar from "../components/progressBar/ProgressBar";
 import Timer from "../components/timer/Timer";
-import EscModalContents from "../components/modal/EscModalContents";
-import TimeoutModal from "../components/modal/TimeoutModal";
+import EscModalContents from "../components/modal/modalContents/EscModalContents";
+import TimeoutModalContents from "../components/modal/modalContents/TimeoutModalContents";
 import {
   themeSiteAtom,
   levelAtom,
@@ -71,7 +71,8 @@ const ProgressContents = ({ text, practiceMode, challengeMode }) => {
   //theme
   const themeSite = useAtomValue(themeSiteAtom);
   // 타임아웃 모달창 제어
-  const [isTimeoutModalOpen, setIsTimeoutModalOpen] = useState(false);
+  const [isTimeoutModalContentsOpen, setIsTimeoutModalContentsOpen] =
+    useState(false);
   // 일시정지 모달창 제어
   const [isPaused, setIsPaused] = useState(false);
 
@@ -83,7 +84,7 @@ const ProgressContents = ({ text, practiceMode, challengeMode }) => {
   useEffect(() => {
     // 남은 시간 0 이하일 때만 모달이 열리도록 설정
     if (timeSpent <= 0 && !isStep0Path) {
-      setIsTimeoutModalOpen(true);
+      setIsTimeoutModalContentsOpen(true);
       setTimerControl(false); // 타이머 정지
     }
   }, [timeSpent, setTimerControl]);
@@ -161,13 +162,13 @@ const ProgressContents = ({ text, practiceMode, challengeMode }) => {
           <Modal onClick={handleModalClose} contents={helpText} />
         )}
         {/*타임아웃 모달창*/}
-        {isTimeoutModalOpen && (
+        {isTimeoutModalContentsOpen && (
           <Modal
             contents={
-              <TimeoutModal
+              <TimeoutModalContents
                 practiceMode={practiceMode}
                 challengeMode={challengeMode}
-                setIsModalOpen={setIsTimeoutModalOpen}
+                setIsModalOpen={setIsTimeoutModalContentsOpen}
               />
             }
             buttonShow={false}
