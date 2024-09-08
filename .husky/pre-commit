@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# 스테이징된 파일에 대해 린팅 및 포맷팅
+npx lint-staged

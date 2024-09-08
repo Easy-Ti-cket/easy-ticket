@@ -1,7 +1,124 @@
+/*font face*/
+@font-face {
+  font-family: "pretendardR";
+  src: url("/assets/fonts/Pretendard-Regular.woff");
+}
+
+@font-face {
+  font-family: "pretendardM";
+  src: url("/assets/fonts/Pretendard-Medium.woff");
+}
+
+@font-face {
+  font-family: "pretendardB";
+  src: url("/assets/fonts/Pretendard-SemiBold.woff");
+}
+
 :root {
-  font-family: Inter, system-ui, Arial, sans-serif;
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  /*key color*/
+  --sub-color: #edeaf9;
+  --key-color: #472fd2;
+  --hover-color: #1d00c8;
+  --progress-color: #9a8ce5;
+
+  /*point color*/
+  --point-color: #ff6347;
+  --point-color2: #ffbe17;
+  --point-hover-color2: #efb316;
+
+  /*gray scale*/
+  --dimmed-color: #f2f2f2;
+  --fill-color: #cccccc;
+  --text-color: #666666;
+  --text-color2: #333333;
+
+  --key-color-interpark: #d40000;
+  --hover-color-interpark: #b50000;
+  --sub-color-interpark: #ffdada;
+  --progress-color-interpark: #d40000;
+  /* --progress-color-interpark: #d47373; */
+  --gray-color-interpark: #2c2c2c;
+
+  --key-color-melonticket: #00cd3c;
+  --hover-color-melonticket: #00b500;
+  --sub-color-melonticket: #d1ffd1;
+  --progress-color-melonticket: #3d8553;
+  --gray-color-melonticket: #2c2c2c;
+
+  --key-color-ticketlink: #ff1c1c;
+  --hover-color-ticketlink: #b50000;
+  --sub-color-ticketlink: #ffcfcf;
+  --progress-color-ticketlink: #c7bd4f;
+  --gray-color-ticketlink: #2c2c2c;
+
+  --key-color-yes24: #00a2ff;
+  --hover-color-yes24: #005bb5;
+  --sub-color-yes24: #def3ff;
+  --progress-color-yes24: #241e94;
+  --gray-color-yes24: #2c2c2c;
+}
+/* Interpark 테마 */
+.interpark-theme {
+  --key-color: var(--key-color-interpark);
+  --hover-color: var(--hover-color-interpark);
+  --sub-color: var(--sub-color-interpark);
+  --gray-color: var(--gray-color-interpark);
+  --progress-color: var(--progress-color-interpark);
+}
+
+/* Melonticket 테마 */
+.melonticket-theme {
+  --key-color: var(--key-color-melonticket);
+  --hover-color: var(--hover-color-melonticket);
+  --sub-color: var(--sub-color-melonticket);
+  --gray-color: var(--gray-color-melonticket);
+  --progress-color: var(--progress-color-melonticket);
+}
+
+/* Ticketlink 테마 */
+.ticketlink-theme {
+  --key-color: var(--key-color-ticketlink);
+  --hover-color: var(--hover-color-ticketlink);
+  --sub-color: var(--sub-color-ticketlink);
+  --gray-color: var(--gray-color-ticketlink);
+  --progress-color: var(--progress-color-ticketlink);
+}
+
+/* Yes24 테마 */
+.yes24-theme {
+  --key-color: var(--key-color-yes24);
+  --hover-color: var(--hover-color-yes24);
+  --sub-color: var(--sub-color-yes24);
+  --gray-color: var(--gray-color-yes24);
+  --progress-color: var(--progress-color-yes24);
+}
+/*default setting*/
+body {
+  font-size: 20px;
+  font-family: "pretendardB";
+  color: var(--text-color2);
+}
+input {
+  /*border 초기 설정*/
+  border: 1px solid var(--fill-color);
+  border-radius: 8px;
+
+  /*padding - placeholder 위치 설정*/
+  padding: 0 20px;
+
+  /*focus 시 테두리 안보이게*/
+  &:focus {
+    outline: none;
+  }
+  /*focus시 placeholder 사라지게*/
+  &:focus::placeholder {
+    color: transparent;
+  }
+}
+
+/*input type = number 의 화살표 제거*/
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

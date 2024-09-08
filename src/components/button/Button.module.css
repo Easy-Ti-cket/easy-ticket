@@ -1,0 +1,140 @@
+/* 디폴트(다음 단계) */
+.button {
+  display: flex;
+  width: 180px;
+  height: 45px;
+  padding: 10px 10px;
+  margin: 5px;
+  border: none;
+  border-radius: 4px;
+  justify-content: center;
+  align-items: center;
+  font-family: "pretendardB";
+  font-size: 16px;
+  font-style: normal;
+  background-color: var(--key-color);
+  color: #fff;
+  cursor: pointer;
+}
+.button:hover {
+  background-color: var(--hover-color);
+  transition: 0.2s ease;
+}
+
+/*이전 단계*/
+.button--prev {
+  background-color: #fff;
+  border: 2px solid var(--key-color);
+  color: var(--key-color);
+}
+.button--prev:hover {
+  background-color: var(--sub-color);
+  border: 2px solid var(--key-color);
+  color: var(--key-color);
+}
+/* 좌석 선택 */
+.button--select-seat {
+  width: 285px;
+  height: 53px;
+}
+
+/* 아웃라인 */
+.button--outline {
+  border: 2px solid var(--key-color);
+  background-color: transparent;
+  color: var(--key-color);
+}
+.button--outline:hover {
+  background-color: var(--sub-color);
+}
+
+/* 도움말 */
+.button--help {
+  background-color: var(--point-color2);
+  font-family: "pretendardB";
+  color: var(--text-color2, #333333);
+}
+.button--help:hover {
+  background-color: var(--point-hover-color2);
+}
+
+/* 모드 선택 */
+.button--mode {
+  flex-direction: column;
+  width: 201px;
+  height: 268px;
+  font-size: 20px;
+  background-color: var(--sub-color);
+  color: var(--key-color);
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+}
+.button--mode:hover {
+  background-color: var(--key-color);
+  color: #fff;
+}
+.icon {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+}
+
+/*모달용 작은 버튼*/
+.button--modal {
+  width: 100px;
+}
+.button--modal-outline {
+  width: 100px;
+  background-color: var(--fill-color);
+  &:hover {
+    background-color: var(--text-color2);
+  }
+}
+/*record 화면의 navigate 버튼 */
+.button--record {
+  width: 100px;
+  height: 90px;
+  gap: 5px;
+  flex-direction: column;
+  color: var(--text-color);
+  background-color: #fff;
+  border: 1px solid var(--fill-color);
+  border-radius: 8px;
+  font-size: 14px;
+  &:hover {
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+    background-color: #fff;
+  }
+}
+/*클릭했을 경우*/
+.button--record-onclick {
+  gap: 5px;
+  border: none;
+  width: 100px;
+  height: 90px;
+  flex-direction: column;
+  background-color: var(--key-color);
+  position: relative;
+  border: none;
+  font-size: 14px;
+
+  &:hover {
+    background-color: var(--key-color);
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 10px solid var(--key-color);
+  }
+}
+.icon--record {
+  width: 50px;
+  height: 50px;
+  margin: 0;
+}

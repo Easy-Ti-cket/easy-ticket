@@ -8,12 +8,20 @@
     "build": "vite build",
     "lint": "eslint --cache .",
     "preview": "vite preview",
-    "format": "prettier  --write .",
+    "format": "prettier --write .",
     "postinstall": "husky install"
   },
   "dependencies": {
+    "firebase": "^10.13.0",
+    "firebase-tools": "^13.16.0",
+    "jotai": "^2.9.0",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-calendar": "^5.0.0",
+    "react-dom": "^18.3.1",
+    "react-js-pagination": "^3.0.3",
+    "react-router-dom": "^6.25.1",
+    "react-tooltip": "^5.27.1",
+    "styled-components": "^6.1.11"
   },
   "devDependencies": {
     "@eslint/js": "^9.6.0",
@@ -28,7 +36,24 @@
     "eslint-plugin-react-refresh": "^0.4.7",
     "globals": "^15.8.0",
     "husky": "^9.0.11",
+    "lint-staged": "^14.0.1",
     "prettier": "3.3.2",
-    "vite": "^5.3.1"
+    "vite": "^5.3.1",
+    "vite-plugin-svgr": "^4.2.0"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "**/*.{json,css,scss,md}": [
+      "prettier --write"
+    ]
+  },
+  "prettier": {
+    "printWidth": 80,
+    "tabWidth": 2,
+    "singleQuote": false,
+    "trailingComma": "none"
   }
 }

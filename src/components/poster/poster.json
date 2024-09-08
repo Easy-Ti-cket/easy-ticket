@@ -1,0 +1,82 @@
+[
+  {
+    "id": 0,
+    "src": "/assets/images/posters/poster-noel.svg",
+    "title_ko": "노엘 갤러거 하이 플라잉 버즈",
+    "title_en": "Noel Gallagher's High Flying Birds",
+    "venue": "일산 킨텍스 제 1전시장 1, 2홀",
+    "date": ["2024-07-26"],
+    "time": {
+      "default": "20:00"
+    },
+    "age": "만 12세 이상",
+    "price": {
+      "스탠딩 P석": "132,000원",
+      "스탠딩 R석": "110,000원",
+      "지정석 P석": "154,000원",
+      "지정석 R석": "132,000원",
+      "지정석 S석": "99,000원"
+    },
+    "fee": "1000"
+  },
+  {
+    "id": 1,
+    "src": "/assets/images/posters/poster-benjamin.svg",
+    "title_ko": "뮤지컬 벤자민 버튼",
+    "title_en": "Benjamin Button",
+    "venue": "세종문화회관 M씨어터",
+    "date": ["2024-05-11", "2024-06-30"],
+    "time": {
+      "Tue": ["19:30"],
+      "Thu": ["19:30"],
+      "Wed": ["15:00", "19:30"],
+      "Fri": ["15:00", "19:30"],
+      "Sat": ["15:00", "19:30"],
+      "Sun": ["15:00"]
+    },
+    "age": "14세 이상",
+    "price": {
+      "VIP석": "120,000원",
+      "R석": "100,000원",
+      "S석": "70,000원",
+      "시야제한R석": "90,000원"
+    },
+    "fee": "1200"
+  },
+  {
+    "id": 2,
+    "src": "/assets/images/posters/poster-trot.svg",
+    "title_ko": "트롯 3파전 콘서트 - 창원",
+    "title_en": "Trot 3-Way Concert - Changwon",
+    "venue": "창원컨벤션센터 2,3홀",
+    "date": ["2024-08-11"],
+    "time": {
+      "default": "17:00"
+    },
+    "age": "만 8세 이상",
+    "price": {
+      "VIP석": "132,000원",
+      "R석": "110,000원"
+    },
+    "fee": "1800"
+  },
+  {
+    "id": 3,
+    "src": "/assets/images/posters/poster-leechanwon.svg",
+    "title_ko": "[수원] 2024 이찬원 콘서트 '찬가(燦歌)'",
+    "title_en": "2024 Lee Chan Won Concert 'Changa'",
+    "venue": "수원 실내 체육관",
+    "date": ["2024-07-27", "2024-07-28"],
+    "time": {
+      "default": "17:00"
+    },
+    "age": "만 7세 이상(미취학아동 이상)",
+    "price": {
+      "VIP석": "154,000원",
+      "R석": "143,000원",
+      "S석": "132,000원",
+      "A석": "121,000원"
+    },
+    "fee": "2000"
+  }
+]

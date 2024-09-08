@@ -7,38 +7,38 @@ import pluginReactRefresh from "eslint-plugin-react-refresh";
 
 export default [
   {
-    files: ["**/*.{js,mjs,cjs,jsx}"],
+    files: ["**/*.{js,mjs,cjs,jsx,ts,tsx}"],
     ignores: ["dist/**", ".eslintrc.cjs"],
     languageOptions: {
       parserOptions: {
         ecmaVersion: "latest",
         sourceType: "module",
         ecmaFeatures: {
-          jsx: true,
-        },
+          jsx: true
+        }
       },
-      globals: globals.browser,
+      globals: globals.browser
     },
     plugins: {
       react: pluginReact,
       "react-hooks": pluginReactHooks,
       prettier: pluginPrettier,
-      "react-refresh": pluginReactRefresh,
+      "react-refresh": pluginReactRefresh
     },
     settings: {
       react: {
-        version: "18.2",
-      },
+        version: "18.2"
+      }
     },
     rules: {
       "react/jsx-no-target-blank": "off",
       "react-refresh/only-export-components": [
         "warn",
-        { allowConstantExport: true },
+        { allowConstantExport: true }
       ],
       quotes: ["error", "double"],
       "no-console": ["warn", { allow: ["warn", "error", "info"] }],
-      "prettier/prettier": ["error", prettierConfig],
-    },
-  },
+      "prettier/prettier": ["error", prettierConfig]
+    }
+  }
 ];
