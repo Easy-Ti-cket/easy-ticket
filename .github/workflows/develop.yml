@@ -21,7 +21,7 @@ jobs:
           firebaseServiceAccount: "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}" # 레포지토리 환경변수로 등록한 firebase service account
           channelId: develop # firebase preview channel의 ID, channelId 필드를 넣어주면 preview 채널로 배포되게 된다.
           expires: 30d # preview 만료기간
-          projectId: easy-ticket # FireBase 프로젝트 ID
+          projectId: easy-ticket-e7da7 # FireBase 프로젝트 ID
       - name: Check outputs
         run: |
           echo urls ${{steps.firebase_hosting_preview.outputs.url}}
