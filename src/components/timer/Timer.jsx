@@ -61,7 +61,10 @@ const Timer = ({ second }) => {
       setIsTimerLoading(true);
       clearInterval(countdownRef.current);
       writeMinute(second);
-      setIsTimerLoading(false);
+      //setTimeout 0 값을 사용하여 앞 순서가 모두 시행될 경우 false로 변경
+      setTimeout(() => {
+        setIsTimerLoading(false);
+      }, 0);
     } else {
       // 타이머 시작
       // console.log("minuteCount", minuteCount);
