@@ -7,7 +7,7 @@ import { useAtomValue, useSetAtom } from "jotai";
 import { isSectionSelectedAtom, progressAtom } from "../../../../store/atom";
 import SeatInfo from "../../../../components/seatInfo/SeatInfo";
 import ErrorTooltip from "../../../../components/tooltip/ErrorTooltip";
-import { SeatInfoCont } from "../../../../components/seatInfo/SeatInfoStyles";
+
 const SelectSeatContainer = styled.div`
   display: flex;
   justify-content: space-evenly;

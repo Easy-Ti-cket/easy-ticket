@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import ErrorText from "../../../components/ErrorText";
 
 const Container = styled.div`
   padding-top: 20px;
@@ -26,6 +27,9 @@ const TermsContainer = styled.div`
 const TextBox = styled.div`
   margin-right: 270px;
   font-family: "pretendardB";
+  display: flex;
+  align-items: center;
+  gap: 20px;
 `;
 const Info = styled.span`
   margin-left: 10px;
@@ -63,7 +67,10 @@ const AgreeMentMelon = ({
   return (
     <Container $hasError={$hasError}>
       <LineContainer>
-        <TextBox>예매자 동의</TextBox>
+        <TextBox>
+          예매자 동의
+          {$hasError && <ErrorText text="체크박스를 모두 동의해 주세요" />}
+        </TextBox>
         <CheckboxContainer>
           <input type="checkbox" id="agreeAll" onClick={handleAgreeAll} />
           <CheckboxLabel htmlFor="agreeAll">전체동의</CheckboxLabel>

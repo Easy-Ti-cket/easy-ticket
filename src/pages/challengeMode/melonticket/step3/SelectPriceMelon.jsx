@@ -7,8 +7,9 @@ import { MyBookingInfoContainer } from "../../../../components/myBookingInfo/MyB
 import { useNavigate } from "react-router-dom";
 import { useAtomValue, useSetAtom } from "jotai";
 import { seatCountAtom } from "../../../../store/atom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { progressAtom } from "../../../../store/atom";
+import ErrorText from "../../../../components/ErrorText";
 const MyBookingInfoContainerMelon = styled(MyBookingInfoContainer)`
   height: 500px;
 `;
@@ -33,11 +34,13 @@ const SelectPriceMelon = () => {
 
   useEffect(() => setProgress(2), []);
 
+  const [showError, setShowError] = useState(false);
+
   return (
     <SelectPriceMelonContainer>
       <Container>
         <TextBox>티켓가격을 선택하세요</TextBox>
-        <SeatCount />
+        <SeatCount hasError={showError} />
         <TextBox>할인수단을 선택하세요</TextBox>
         <SelectDiscountMelon
           name={"쿠폰"}
@@ -58,6 +61,7 @@ const SelectPriceMelon = () => {
           nextButtonOnClick={() => {
             if (seatCount === 0) {
               alert("좌석 매수를 선택해주세요");
+              setShowError(true);
               return;
             }
             nav("../step5-1");

@@ -45,12 +45,10 @@ export const useBookingValidate = (
       // 멜론티켓 - 결제수단, 체크박스
       if (themeSite === "melonticket" && !extra.isPayMethodCorrect) {
         setErrorArray(() => ["payMethod"]);
-        alert("실전모드에서는 '일반신용카드' 결제만 가능합니다");
         return;
       }
       if (themeSite === "melonticket" && !extra.isAgreeAll) {
         setErrorArray(() => ["checkbox"]);
-        alert("체크박스를 모두 선택해 주세요");
         return;
       }
       //티켓링크
