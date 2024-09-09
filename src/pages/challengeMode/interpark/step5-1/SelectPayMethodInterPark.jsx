@@ -15,6 +15,7 @@ import PayMethodForm from "../../../../components/forms/pay/PayMethodForm";
 import { SubTtitle } from "../../../practiceMode/step4/SelectPayMethod";
 import ErrorTooltip from "../../../../components/tooltip/ErrorTooltip";
 import { PayMethodInfo } from "../../components/payMethod/payMethodStyle";
+import ErrorText from "../../../../components/ErrorText";
 
 //결제 수단 + 결제 방식 + 내 예매 정보
 const PayMethodWrap = styled.div`
@@ -73,9 +74,8 @@ const SelectPayMethodInterPark = ({ isAllChecked }) => {
   const nav = useNavigate();
   //검사로직
   const { correctList, handleChange, isAnswer } = useForm(3);
-  const { handlePayment, hasPayFormError, cardTypesError } = usePaymentValidate(
-    { correctList, isAllChecked }
-  );
+  const { handlePayment, hasPayFormError, cardTypesError, errorShow } =
+    usePaymentValidate({ correctList, isAllChecked });
   //'신용카드'만 선택 가능함
   const isPayMethodCorrect = correctList["PayMethodForm"];
 
@@ -83,7 +83,19 @@ const SelectPayMethodInterPark = ({ isAllChecked }) => {
     <PayMethodWrap>
       <PayMethodContainer>
         {/*결제 수단 */}
+        {!correctList["PayMethodForm"] && (
+          <ErrorTooltip
+            contents={
+              <PayMethodInfo>
+                실전모드에선 "일반 신용카드" 결제만 가능합니다.
+              </PayMethodInfo>
+            }
+          >
+            <br />
+          </ErrorTooltip>
+        )}
         <SubTtitle>결제 수단</SubTtitle>
+        {errorShow && <ErrorText text="신용카드 결제를 선택해 주세요." />}
         <PayMethodForm
           isSelected={isPayMethodCorrect}
           handleChange={handleChange}
@@ -105,6 +117,7 @@ const SelectPayMethodInterPark = ({ isAllChecked }) => {
           </ErrorTooltip>
         )}
         <SubTtitle>결제 방식</SubTtitle>
+        {errorShow && <ErrorText text="일반신용카드 결제를 선택해 주세요." />}
         {isPayMethodCorrect && (
           <>
             <CardInfo>

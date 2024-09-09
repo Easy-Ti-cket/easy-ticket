@@ -7,6 +7,7 @@ export const usePaymentValidate = ({ correctList, isAllChecked = null }) => {
   //step4 - 결제 수단 및 방식 선택 검사로직
   const [hasPayFormError, setHasPayFormError] = useState();
   const [cardTypesError, setCardTypesError] = useState();
+  const [errorShow, setErrorShow] = useState();
   //nav
   const nav = useNavigate();
   const themeSite = useAtomValue(themeSiteAtom);
@@ -18,7 +19,7 @@ export const usePaymentValidate = ({ correctList, isAllChecked = null }) => {
       if (themeSite === "practice") {
         alert("올바른 결제 수단을 선택해 주세요");
       } else {
-        alert("실전모드에선 '일반신용카드' 결제만 가능합니다.");
+        setErrorShow(true);
       }
       return;
     }
@@ -41,5 +42,11 @@ export const usePaymentValidate = ({ correctList, isAllChecked = null }) => {
     }
     nav("../step5-2");
   };
-  return { handlePayment, hasPayFormError, cardTypesError };
+  return {
+    handlePayment,
+    hasPayFormError,
+    cardTypesError,
+    errorShow,
+    setErrorShow
+  };
 };

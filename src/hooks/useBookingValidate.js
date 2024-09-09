@@ -1,6 +1,7 @@
 import { useAtomValue } from "jotai";
 import { useNavigate } from "react-router-dom";
 import { levelAtom, seatCountAtom, themeSiteAtom } from "../store/atom";
+import { useState } from "react";
 
 export const useBookingValidate = (
   addStage,
@@ -14,13 +15,14 @@ export const useBookingValidate = (
   const seatCount = useAtomValue(seatCountAtom);
   const level = useAtomValue(levelAtom);
   const themeSite = useAtomValue(themeSiteAtom);
+  const [hasError, setHasError] = useState(false);
 
   const nav = useNavigate();
   const handleButtonClick = () => {
     // 연습모드
     // 좌석 매수가 0일 경우 경고창 출력
     if (seatCount === 0) {
-      alert("좌석을 선택해주세요.");
+      setHasError(true);
       return;
     }
     addStage(2);
@@ -29,7 +31,6 @@ export const useBookingValidate = (
       //티켓수령방법 + 생년월일을 작성 검사 로직
       if (!isValidate.includes("method")) {
         setErrorArray(() => ["method"]);
-        alert("티켓 수령 방법을 선택해 주세요");
         return;
       }
       if (
@@ -38,7 +39,6 @@ export const useBookingValidate = (
         !isValidate.includes("birth")
       ) {
         setErrorArray(() => ["birth"]);
-        alert("생년월일을 정확하게 작성해 주세요");
         return;
       }
 
@@ -64,7 +64,6 @@ export const useBookingValidate = (
         alert("취소기한 및 수수료 동의에 체크해 주세요");
         return;
       } else {
-        console.log("동작");
         setErrorArray(() => []);
         //라우팅
         nav(location);
@@ -72,5 +71,5 @@ export const useBookingValidate = (
     }
   };
 
-  return { handleButtonClick };
+  return { handleButtonClick, hasError };
 };

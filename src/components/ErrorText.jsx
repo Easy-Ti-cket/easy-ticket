@@ -7,7 +7,7 @@ const ErrorTextContainer = styled.div`
   gap: 8px;
   height: 20px;
   padding: 10px;
-  background-color: var(--sub-color);
+  background-color: var(--sub-color-interpark);
   justify-content: center;
   border-radius: 8px;
 `;
