@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import InfoIcon from "../assests/images/icons/errorInfo.svg?react";
+import InfoIcon from "/public/assets/images/icons/errorInfo.svg?react";
 
 const ErrorTextContainer = styled.div`
   display: inline-flex;
