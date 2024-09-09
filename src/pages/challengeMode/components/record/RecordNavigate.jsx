@@ -1,9 +1,5 @@
 import styled from "styled-components";
 import Button from "../../../../components/button/Button";
-import interparkIcon from "../../../../assests/images/icons/site/interpark.svg";
-import melonticketIcon from "../../../../assests/images/icons/site/melonticket.svg";
-import tickelinkIcon from "../../../../assests/images/icons/site/tickelink.svg";
-import yes24Icon from "../../../../assests/images/icons/site/yes24.svg";
 import { useState } from "react";
 
 const NavContainer = styled.div`
@@ -46,33 +42,38 @@ const RecordNavigate = ({
   const typeName = (name) => {
     return isClick[name] ? "record-onclick" : "record";
   };
-
+  const iconSrc = {
+    interpark: "/assets/images/icons/site/interpark.svg?react",
+    melonticket: "/assets/images/icons/site/melonticket.svg?react",
+    ticketlink: "/assets/images/icons/site/tickelink.svg?react",
+    yes24: "/assets/images/icons/site/yes24.svg?react"
+  };
   return (
     <NavContainer>
       <Button
         type={typeName("interpark")}
-        icon={interparkIcon}
+        icon={iconSrc.interpark}
         icontype="record"
         text="인터파크 티켓"
         onClick={() => handleClick("interpark")}
       />
       <Button
         type={typeName("melonticket")}
-        icon={melonticketIcon}
+        icon={iconSrc.melonticket}
         icontype="record"
         text="멜론 티켓"
         onClick={() => handleClick("melonticket")}
       />
       <Button
         type={typeName("ticketlink")}
-        icon={tickelinkIcon}
+        icon={iconSrc.ticketlink}
         icontype="record"
         text="티켓 링크"
         onClick={() => handleClick("ticketlink")}
       />
       <Button
         type={typeName("yes24")}
-        icon={yes24Icon}
+        icon={iconSrc.yes24}
         icontype="record"
         text="yes24"
         onClick={() => handleClick("yes24")}

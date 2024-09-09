@@ -4,8 +4,6 @@ import posters from "../components/poster/poster.json";
 import getRandomInt from "../util/getRandomInt";
 
 const storage = createJSONStorage(() => sessionStorage);
-// 초 단위 타이머 상태
-export const secondCountAtom = atomWithStorage("second", 0, storage);
 
 // 분 단위 타이머 상태
 export const minuteCountAtom = atomWithStorage("minute", 0, storage);

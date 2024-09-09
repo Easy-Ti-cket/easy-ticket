@@ -2,8 +2,8 @@ import SeatSection from "../../../components/seatSection/SeatSection";
 import SeatInfo from "../../../components/seatInfo/SeatInfo";
 import SeatChart from "../../../components/seatChart/SeatChart";
 import styled from "styled-components";
-import { useEffect } from "react";
-import { useAtomValue, useSetAtom } from "jotai";
+import { useEffect, useState } from "react";
+import { useAtomValue, useSetAtom, useAtom } from "jotai";
 import {
   isSectionSelectedAtom,
   isSeatSelectedAtom,
@@ -20,28 +20,36 @@ const SelectSeatcontainer = styled.div`
 const SelectSeat = () => {
   const setStepTextNumber = useSetAtom(stepTextNumberAtom);
   const setHelpTextNumber = useSetAtom(helpTextNumberAtom);
-  const isSectionSelected = useAtomValue(isSectionSelectedAtom);
-  const isSeatSelected = useAtomValue(isSeatSelectedAtom);
+  const stepTextNumber = useAtomValue(stepTextNumberAtom);
+  const helpTextNumber = useAtomValue(helpTextNumberAtom);
+  const [isSectionSelected, setIsSectionSelected] = useAtom(
+    isSectionSelectedAtom
+  );
+  const [isSeatSelected, setIsSeatSelected] = useAtom(isSeatSelectedAtom);
   const setProgress = useSetAtom(progressAtom);
+  const [initialized, setInitialized] = useState(false);
 
   useEffect(() => {
     setProgress(2);
     setStepTextNumber(0);
     setHelpTextNumber(0);
+    setIsSectionSelected(false);
+    setIsSeatSelected(false);
+    setInitialized(true); // 초기화 후 상태 변경
   }, []);
 
   useEffect(() => {
-    if (isSectionSelected || isSeatSelected) {
-      setStepTextNumber((prev) => prev + 1);
-      setHelpTextNumber((prev) => prev + 1);
+    if (initialized) {
+      // 초기화된 이후에만 실행
+      if (isSectionSelected && !isSeatSelected) {
+        setStepTextNumber((prev) => prev + 1);
+        setHelpTextNumber((prev) => prev + 1);
+      } else if (isSeatSelected) {
+        setStepTextNumber((prev) => prev + 1);
+      }
     }
-  }, [isSectionSelected]);
+  }, [isSectionSelected, isSeatSelected, initialized]);
 
-  useEffect(() => {
-    if (isSeatSelected) {
-      setStepTextNumber((prev) => prev + 1);
-    }
-  }, [isSeatSelected]);
   return (
     <SelectSeatcontainer>
       {isSectionSelected ? (

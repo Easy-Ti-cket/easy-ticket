@@ -7,7 +7,7 @@ import { useAtomValue } from "jotai";
 import { cardAnswerAtom, themeSiteAtom } from "../../../store/atom";
 import { Step4Container } from "./SelectPayMethod";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ErrorText from "../../../components/ErrorText";
 
 const CardPayWrap = styled(Step4Container)`
@@ -28,6 +28,7 @@ const Highlight = styled.span`
 `;
 
 const CardPay = () => {
+  const setProgress = useSetAtom(progressAtom);
   //useForm 훅에 정답 개수 전달, correctList가 정답 개수에 다다를 경우 isAnswer true
   const { handleChange, correctList, isAnswer } = useForm(6);
   const cardAnswer = useAtomValue(cardAnswerAtom);
@@ -49,7 +50,20 @@ const CardPay = () => {
   //에러 발생 시 css 변경
   const allInputNames = [...cardKeys, "cardPassword", "cvc"];
   const [hasErrorArray, setHasErrorArray] = useState([]);
-
+  //단계별 텍스트
+  const setStepTextNumber = useSetAtom(stepTextNumberAtom);
+  const setHelpTextNumber = useSetAtom(helpTextNumberAtom);
+  useEffect(() => {
+    setStepTextNumber(2);
+    setHelpTextNumber(2);
+    if (themeSite === "practice") {
+      setProgress(4);
+    } else if (themeSite === "melon") {
+      setProgress(3);
+    } else {
+      setProgress(5);
+    }
+  }, []);
   //검사로직
   const handleClick = () => {
     if (!isAnswer) {
@@ -63,6 +77,7 @@ const CardPay = () => {
       }
     }
   };
+
   return (
     <CardPayWrap>
       <Card />

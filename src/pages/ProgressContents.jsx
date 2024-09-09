@@ -1,13 +1,19 @@
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useNavigate, useLocation, Outlet } from "react-router-dom";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import Button from "../components/button/Button";
+import Modal from "../components/modal/Modal";
 import ProgressBar from "../components/progressBar/ProgressBar";
 import Timer from "../components/timer/Timer";
-import { Outlet, useLocation } from "react-router-dom";
-import Button from "../components/button/Button";
-import { useEffect, useState } from "react";
-import Modal from "../components/modal/Modal";
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { themeSiteAtom, levelAtom, timerControlAtom } from "../store/atom";
-import EscModalContents from "../components/modal/EscModalContents";
+import EscModalContents from "../components/modal/modalContents/EscModalContents";
+import TimeoutModalContents from "../components/modal/modalContents/TimeoutModalContents";
+import {
+  themeSiteAtom,
+  levelAtom,
+  timerControlAtom,
+  minuteCountAtom
+} from "../store/atom";
 import useText from "../hooks/useText";
 
 //ProgressBar+ContentsBox Container
@@ -53,15 +59,36 @@ const ButtonContainer = styled.div`
 `;
 
 /*난이도별 contents를 children으로 받아서 ProgressBar와 함께 렌더링*/
-const ProgressContents = ({ text }) => {
+const ProgressContents = ({ text, practiceMode, challengeMode }) => {
   //타이머 컨트롤 state
   const setTimerControl = useSetAtom(timerControlAtom);
   //레벨 별 타이머 출력 설정
   const level = useAtomValue(levelAtom);
+  // 남은 시간 state
+  const [timeSpent] = useAtom(minuteCountAtom);
   //도움말 모달창 제어
   const [isModalOpen, setIsModalOpen] = useState(false);
   //theme
   const themeSite = useAtomValue(themeSiteAtom);
+  // 타임아웃 모달창 제어
+  const [isTimeoutModalContentsOpen, setIsTimeoutModalContentsOpen] =
+    useState(false);
+  // 일시정지 모달창 제어
+  const [isPaused, setIsPaused] = useState(false);
+
+  const path = useLocation().pathname;
+  // 현재 경로가 step0인지 확인하기 위한 변수 정의
+  const isStep0Path = location.pathname.includes("step0");
+
+  // 시간이 초과되었을 때 타임아웃 모달 열리도록 설정
+  useEffect(() => {
+    // 남은 시간 0 이하일 때만 모달이 열리도록 설정
+    if (timeSpent <= 0 && !isStep0Path) {
+      setIsTimeoutModalContentsOpen(true);
+      setTimerControl(false); // 타이머 정지
+    }
+  }, [timeSpent, setTimerControl]);
+
   const handleModalOpen = () => {
     setIsModalOpen(true);
     setTimerControl(true);
@@ -72,8 +99,7 @@ const ProgressContents = ({ text }) => {
   };
   //esc 일시정지 제어
   //step0 화면에서는 일시정지 렌더링되지 않도록 설정
-  const path = useLocation().pathname;
-  const [isPaused, setIsPaused] = useState(false);
+
   const handlePaused = (e) => {
     if (
       //연습모드 step0 또는 실전모드 step0에서 렌더링되지 않도록 설정
@@ -86,6 +112,7 @@ const ProgressContents = ({ text }) => {
     }
     return;
   };
+
   useEffect(() => {
     window.addEventListener("keydown", handlePaused);
     //컴포넌트 언마운트 or 경로 변경될 때 이벤트 리스너 제거
@@ -107,9 +134,7 @@ const ProgressContents = ({ text }) => {
       </ProgressBarBox>
       {/*고급 level일 경우에만 Timer 설정 */}
       {/*모달이 열렸을 경우 Timer 정지 - isModalOpen, isPaused*/}
-      {level === "high" && themeSite === "practice" && (
-        <Timer type={"minute"} second={1800} />
-      )}
+      {level === "high" && themeSite === "practice" && <Timer second={1800} />}
       {themeSite !== "practice" && <Timer type={"minute"} second={900} />}
       {!path.includes("challenge") && <TextBox>{stepText}</TextBox>}
       <ContentsBox>
@@ -135,6 +160,19 @@ const ProgressContents = ({ text }) => {
         {/*도움말 모달창*/}
         {isModalOpen && (
           <Modal onClick={handleModalClose} contents={helpText} />
+        )}
+        {/*타임아웃 모달창*/}
+        {isTimeoutModalContentsOpen && (
+          <Modal
+            contents={
+              <TimeoutModalContents
+                setIsModalContentsOpen={setIsTimeoutModalContentsOpen}
+              />
+            }
+            buttonShow={false}
+            width="400px"
+            height="450px"
+          />
         )}
         <Outlet />
       </ContentsBox>

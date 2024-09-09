@@ -28,7 +28,6 @@ const TicketMethodWrap = styled(FormWrap)`
 `;
 const TicketMethodMelon = ({ setIsValidate, errorArray }) => {
   const [option, setOption] = useAtom(optionAtom);
-
   const handleOptionChange = (e) => {
     setOption(e.target.value);
     //검사 로직

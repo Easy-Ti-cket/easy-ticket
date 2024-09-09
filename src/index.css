@@ -1,17 +1,17 @@
 /*font face*/
 @font-face {
   font-family: "pretendardR";
-  src: url("./assests/fonts/Pretendard-Regular.woff");
+  src: url("/assets/fonts/Pretendard-Regular.woff");
 }
 
 @font-face {
   font-family: "pretendardM";
-  src: url("./assests/fonts/Pretendard-Medium.woff");
+  src: url("/assets/fonts/Pretendard-Medium.woff");
 }
 
 @font-face {
   font-family: "pretendardB";
-  src: url("./assests/fonts/Pretendard-SemiBold.woff");
+  src: url("/assets/fonts/Pretendard-SemiBold.woff");
 }
 
 :root {
