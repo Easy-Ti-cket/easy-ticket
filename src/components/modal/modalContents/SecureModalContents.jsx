@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Modal from "../Modal";
-import { createCaptchaImage } from "../../../util/captcha";
-import { getRandomString } from "../../../util/getRandomString";
-import RefreshIcon from "/public/assets/images/icons/refresh.svg";
-import VoiceIcon from "/public/assets/images/icons/voice.svg";
-import { speakCharacterByCharacter } from "../../../util/speechVoice";
+import Modal from "../modal/Modal";
+import { createCaptchaImage } from "../../util/captcha";
+import { getRandomString } from "../../util/getRandomString";
+import RefreshIcon from "../../assests/images/icons/refresh.svg";
+import VoiceIcon from "../../assests/images/icons/voice.svg";
+import { speakCharacterByCharacter } from "../../util/speechVoice";
+import ErrorText from "../ErrorText";
 
 const TitleWrapper = styled.div`
   font-family: "pretendardB";
@@ -50,9 +51,12 @@ const Icon = styled.img`
 
 const InputBox = styled.input`
   width: 224px;
-  padding: 10px;
-  margin-bottom: 20px;
-  border: 1px solid var(--sub-color);
+  padding: 13px 20px;
+  margin-bottom: 50px;
+  border: ${(props) =>
+    props.$hasError
+      ? "2px solid var(--point-color)"
+      : "1px solid var(--fill-color)"};
   border-radius: 4px;
   text-align: center;
   text-transform: uppercase;
@@ -62,6 +66,8 @@ const SecureModalContents = ({ onClick }) => {
   const [randomString, setRandomString] = useState(getRandomString());
   const [inputValue, setInputValue] = useState("");
   const [captchaImage, setCaptchaImage] = useState("");
+  //에러 css 용
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     setCaptchaImage(createCaptchaImage(randomString));
@@ -87,15 +93,15 @@ const SecureModalContents = ({ onClick }) => {
     if (inputValue === randomString) {
       onClick(); // 정답 입력 시 모달창 닫기
     } else {
-      alert("보안문자가 올바르지 않습니다. 다시 시도해주세요.");
+      setHasError(true);
       handleRefresh(); // 자동 새로고침
     }
   };
 
   return (
     <Modal
-      width={"350px"}
-      height={"400px"}
+      width={"420px"}
+      height={"420px"}
       contents={
         <>
           <TitleWrapper>인증예매</TitleWrapper>
@@ -110,11 +116,15 @@ const SecureModalContents = ({ onClick }) => {
               <Icon src={VoiceIcon} alt="음성 읽어주기" onClick={handleSpeak} />
             </IconWrapper>
           </CaptchaWrapper>
+          {hasError && (
+            <ErrorText text="보안문자가 올바르지 않습니다. 다시 시도해 주세요." />
+          )}
           <InputBox
             type="text"
             placeholder="대소문자 구분 없이 문자 입력"
             value={inputValue}
             onChange={handleInputChange}
+            $hasError={hasError}
           />
         </>
       }

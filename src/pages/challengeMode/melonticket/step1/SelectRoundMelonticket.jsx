@@ -11,6 +11,7 @@ import {
 } from "../../../../store/atom";
 import { useNavigate } from "react-router-dom";
 import formatTime from "../../../../util/time";
+import ErrorText from "../../../../components/ErrorText";
 
 const Container = styled.div`
   display: flex;
@@ -70,46 +71,78 @@ const SelectRoundMelonticket = () => {
   const [timesButtons, setTimesButtons] = useState([]);
   const [correctRound, setCorrectRound] = useState(null);
   const navigate = useNavigate();
-  const setThemeSite = useSetAtom(themeSiteAtom);
 
-  useEffect(() => {
-    setThemeSite("melonticket");
-  }, [setThemeSite]);
+  //에러 텍스트
+  const [showErrorText, setShowErrorText] = useState({
+    dateError: false,
+    roundSelectError: false,
+    dateOrderError: false,
+    roundOrderError: false
+  });
+  const handleError = (errorItem) => {
+    setShowErrorText(() => ({
+      dateError: false,
+      roundSelectError: false,
+      dateOrderError: false,
+      roundOrderError: false,
+      [errorItem]: true
+    }));
+  };
+  const resetError = () => {
+    setShowErrorText(() => ({
+      dateError: false,
+      roundSelectError: false,
+      dateOrderError: false,
+      roundOrderError: false
+    }));
+  };
+  const errorText = {
+    dateError: "날짜를 다시 선택해 주세요",
+    roundSelectError: "회차를 다시 선택해 주세요",
+    dateOrderError: "공연을 관람할 날짜를 선택해 주세요",
+    roundOrderError: "회차를 선택해 주세요"
+  };
 
   const poster = posters[selectedPoster];
   const posterDates = poster?.date || [];
   const posterTimes = poster?.time || {};
 
+  //알림 모달
+  const [concertTime, setConcertTime] = useState("");
+
   const handleDateSelect = (formattedDate) => {
     const correctDate = posterDates[0];
     if (formattedDate === correctDate) {
       setDateSelected(true);
+      resetError();
       const timesArray = formatTime(posterTimes, formattedDate);
       setTimesButtons(timesArray);
       if (timesArray.length > 0) {
         setCorrectRound(timesArray[0]);
       }
     } else {
-      alert("날짜를 다시 선택해주세요.");
+      handleError("dateError");
     }
   };
 
   const handleRoundClick = (time) => {
-    if (!dateSelected) {
-      alert("먼저 올바른 날짜를 선택해주세요.");
-      return;
-    }
-    if (time === correctRound) {
-      alert(`${time}으로 공연을 예매합니다.`);
-      setRoundSelected(true);
+    if (dateSelected) {
+      if (time === correctRound) {
+        setConcertTime(time);
+        alert(`${time} 공연을 예매합니다.`);
+        resetError();
+        setRoundSelected(true);
+      } else {
+        handleError("roundSelectError");
+      }
     } else {
-      alert("회차를 다시 선택해주세요.");
+      handleError("dateOrderError");
     }
   };
 
   const handleReserveClick = () => {
     if (!roundSelected) {
-      alert("먼저 회차를 선택해주세요.");
+      handleError("roundOrderError");
       return;
     }
     navigate("/challenge/melonticket/step2");
@@ -129,6 +162,12 @@ const SelectRoundMelonticket = () => {
               posterDates.length > 0 ? new Date(posterDates[0]) : new Date()
             }
           />
+          {/*날짜 선택 에러 텍스트 */}
+          {showErrorText.dateError && <ErrorText text={errorText.dateError} />}
+          {/*날짜 선택 순서 에러 텍스트 */}
+          {showErrorText.dateOrderError && (
+            <ErrorText text={errorText.dateOrderError} />
+          )}
         </BoxWrapper>
         <BoxWrapper>
           <TitleText>회차 선택</TitleText>
@@ -145,8 +184,18 @@ const SelectRoundMelonticket = () => {
             <Button
               text="날짜 선택 후 확인"
               type="outline"
-              onClick={() => alert("날짜를 먼저 선택해주세요.")}
+              onClick={() =>
+                setShowErrorText((prev) => ({ ...prev, dateOrderError: true }))
+              }
             />
+          )}
+          {/*회차 선택 에러 텍스트 */}
+          {showErrorText.roundSelectError && (
+            <ErrorText text={errorText.roundSelectError} />
+          )}
+          {/*회차 선택 순서 에러 텍스트 */}
+          {showErrorText.roundOrderError && (
+            <ErrorText text={errorText.roundOrderError} />
           )}
         </BoxWrapper>
       </LowerSection>

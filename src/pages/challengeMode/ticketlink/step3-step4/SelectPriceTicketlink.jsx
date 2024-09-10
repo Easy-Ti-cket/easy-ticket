@@ -5,11 +5,11 @@ import { useAtomValue, useSetAtom } from "jotai";
 import { optionAtom, progressAtom } from "../../../../store/atom";
 import PrevNextButton from "../../../../components/myBookingInfo/PrevNextButton";
 import { MyBookingInfoContainer } from "../../../../components/myBookingInfo/MyBookingInfoContainer";
-import { useNavigate } from "react-router-dom";
 import { useBookingValidate } from "../../../../hooks/useBookingValidate";
 import MyBookingInfo from "../../../../components/myBookingInfo/MyBookingInfo";
 import SeatCountTicketlink from "../../components/seatCount/SeatCountTicketlink";
-import TicketMethodTicketlink from "../../components/ticketMethod/TicketMethodTicketlink";
+import TicketMethodTicketlink from "../../components/TiketMethod/TicketMethodTicketlink";
+import ErrorText from "../../../../components/ErrorText";
 
 const Container = styled.div`
   display: flex;
@@ -103,7 +103,7 @@ const SelectPriceTicketlink = () => {
   //검사 후 이동할 위치
   const location = "../step5-1";
   // 버튼에 넘겨줄 검사로직 (티켓가격 + 예매자 정보 확인용)
-  const { handleButtonClick } = useBookingValidate(
+  const { handleButtonClick, hasError } = useBookingValidate(
     addStage,
     step3Stage,
     isValidate,
@@ -112,7 +112,7 @@ const SelectPriceTicketlink = () => {
     { isAgreeAll: isAgreeAll, isCancelChecked: isCancelChecked }
   );
 
-  const hasError = errorArray.includes("cancel");
+  const cancelError = errorArray.includes("cancel");
 
   return (
     <>
@@ -120,7 +120,8 @@ const SelectPriceTicketlink = () => {
         <Container>
           <LeftSection>
             <SelectPriceCheckBox handleChecked={handleChecked} />
-            <SeatCountTicketlink />
+            {/*티켓 종류, 할인, 매수 선택 */}
+            <SeatCountTicketlink hasError={hasError} />
           </LeftSection>
           <RightSection>
             <MyBookingInfoContainer>
@@ -144,10 +145,13 @@ const SelectPriceTicketlink = () => {
           <RightSection>
             <MyBookingInfoContainer>
               <MyBookingInfo option={option} />
+              {cancelError && (
+                <ErrorText text="취소 기한 및 수수료 동의에 체크해 주세요" />
+              )}
 
               {/* 취소기한 확인용 체크박스 */}
               <CancelLabel
-                $hasError={hasError}
+                $hasError={cancelError}
                 checked={isCancelChecked}
                 onChange={handleCancelChecked}
               >

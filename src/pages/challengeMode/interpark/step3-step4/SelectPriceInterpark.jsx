@@ -4,7 +4,11 @@ import MyBookingInfo from "../../../../components/myBookingInfo/MyBookingInfo";
 import SeatCount from "../../../../components/SeatCount";
 import TicketMethod from "../../../../components/forms/ticket/TicketMethod";
 import { useAtomValue, useSetAtom } from "jotai";
-import { optionAtom, progressAtom } from "../../../../store/atom";
+import {
+  optionAtom,
+  progressAtom,
+  seatCountAtom
+} from "../../../../store/atom";
 import { useBookingValidate } from "../../../../hooks/useBookingValidate";
 import PrevNextButton from "../../../../components/myBookingInfo/PrevNextButton";
 import { MyBookingInfoContainer } from "../../../../components/myBookingInfo/MyBookingInfoContainer";
@@ -28,7 +32,7 @@ const SelectPriceInterpark = () => {
   //검사후 이동할 위치
   const location = "../step5-1";
   // 버튼에 넘겨줄 검사로직 (티켓가격 + 예매자 정보 확인용)
-  const { handleButtonClick } = useBookingValidate(
+  const { handleButtonClick, hasError } = useBookingValidate(
     addStage,
     step3Stage,
     isValidate,
@@ -39,7 +43,7 @@ const SelectPriceInterpark = () => {
   return (
     <Wrap>
       {step3Stage == 1 ? (
-        <SeatCount />
+        <SeatCount hasError={hasError} />
       ) : (
         <TicketMethod setIsValidate={setIsValidate} errorArray={errorArray} />
       )}

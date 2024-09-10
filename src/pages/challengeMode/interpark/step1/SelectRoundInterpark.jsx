@@ -101,7 +101,6 @@ const SelectRoundInterpark = () => {
     roundOrderError: "회차를 선택해 주세요"
   };
   //알림 모달
-  const [alertModal, setAlertModal] = useState(false);
   const [concertTime, setConcertTime] = useState("");
 
   const handleDateSelect = (formattedDate) => {
@@ -123,7 +122,7 @@ const SelectRoundInterpark = () => {
     if (dateSelected) {
       if (time === correctRound) {
         setConcertTime(time);
-        setAlertModal(true);
+        alert(`${time} 공연을 예매합니다.`);
         resetError();
         setRoundSelected(true);
       } else {
@@ -143,13 +142,6 @@ const SelectRoundInterpark = () => {
   };
   return (
     <Container>
-      {alertModal && (
-        <Modal
-          height="250px"
-          onClick={() => setAlertModal(false)}
-          contents={`${concertTime} 공연을 예매합니다.`}
-        />
-      )}
       <LeftSection>
         <PosterInterpark id={selectedPoster} />
       </LeftSection>
