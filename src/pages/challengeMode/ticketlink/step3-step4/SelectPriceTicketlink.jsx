@@ -119,6 +119,7 @@ const SelectPriceTicketlink = () => {
         <Container>
           <LeftSection>
             <SelectPriceCheckBox handleChecked={handleChecked} />
+            {/*티켓 종류, 할인, 매수 선택 */}
             <SeatCountTicketlink />
           </LeftSection>
           <RightSection>
