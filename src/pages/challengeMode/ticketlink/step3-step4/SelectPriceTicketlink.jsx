@@ -5,7 +5,6 @@ import { useAtomValue, useSetAtom } from "jotai";
 import { optionAtom, progressAtom } from "../../../../store/atom";
 import PrevNextButton from "../../../../components/myBookingInfo/PrevNextButton";
 import { MyBookingInfoContainer } from "../../../../components/myBookingInfo/MyBookingInfoContainer";
-import { useNavigate } from "react-router-dom";
 import { useBookingValidate } from "../../../../hooks/useBookingValidate";
 import MyBookingInfo from "../../../../components/myBookingInfo/MyBookingInfo";
 import SeatCountTicketlink from "../../components/seatCount/SeatCountTicketlink";

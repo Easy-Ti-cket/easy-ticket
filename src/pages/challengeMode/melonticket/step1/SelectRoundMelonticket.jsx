@@ -71,11 +71,6 @@ const SelectRoundMelonticket = () => {
   const [timesButtons, setTimesButtons] = useState([]);
   const [correctRound, setCorrectRound] = useState(null);
   const navigate = useNavigate();
-  const setThemeSite = useSetAtom(themeSiteAtom);
-
-  useEffect(() => {
-    setThemeSite("melonticket");
-  }, [setThemeSite]);
 
   //에러 텍스트
   const [showErrorText, setShowErrorText] = useState({

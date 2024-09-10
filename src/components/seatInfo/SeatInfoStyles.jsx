@@ -1,6 +1,11 @@
 import styled from "styled-components";
 import AnimationArea from "../Animation";
 
+export const SeatInfoWrap = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 export const SeatInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
