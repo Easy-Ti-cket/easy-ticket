@@ -7,7 +7,7 @@ export const usePaymentValidate = ({ correctList, isAllChecked = null }) => {
   //step4 - 결제 수단 및 방식 선택 검사로직
   const [hasPayFormError, setHasPayFormError] = useState();
   const [cardTypesError, setCardTypesError] = useState();
-  const [errorShow, setErrorShow] = useState();
+  const [checkboxError, setCheckboxError] = useState();
   //nav
   const nav = useNavigate();
   const themeSite = useAtomValue(themeSiteAtom);
@@ -18,8 +18,6 @@ export const usePaymentValidate = ({ correctList, isAllChecked = null }) => {
       setHasPayFormError(true);
       if (themeSite === "practice") {
         alert("올바른 결제 수단을 선택해 주세요");
-      } else {
-        setErrorShow(true);
       }
       return;
     }
@@ -32,7 +30,8 @@ export const usePaymentValidate = ({ correctList, isAllChecked = null }) => {
     }
     //yes24 체크박스
     if (themeSite === "yes24" && !isAllChecked) {
-      alert("개인정보 수집 및 취소 수수료 관련 항목에 모두 동의해 주세요");
+      setHasPayFormError(false);
+      setCheckboxError(true);
       return;
     }
     //이동
@@ -40,13 +39,14 @@ export const usePaymentValidate = ({ correctList, isAllChecked = null }) => {
       nav("../step4-2");
       return;
     }
+    setCheckboxError(false);
     nav("../step5-2");
   };
+
   return {
     handlePayment,
     hasPayFormError,
     cardTypesError,
-    errorShow,
-    setErrorShow
+    checkboxError
   };
 };

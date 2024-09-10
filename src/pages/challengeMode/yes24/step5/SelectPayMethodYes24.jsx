@@ -1,13 +1,18 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import PayMethodCheckBox from "../../components/payMethod/PayMethodCheckBox";
 import PayMethodWarning from "../../components/payMethod/PayMethodWarning";
 import SelectPayMethodChallenge from "../../components/payMethod/SelectPayMethodChallenge";
+import ErrorText from "../../../../components/ErrorText";
 
 const Wrap = styled.div`
   display: flex;
   flex-direction: column;
   gap: 30px;
+`;
+
+const ErrorTextContainer = styled.div`
+  display: inline-flex;
 `;
 
 const SelectPayMethodYes24 = () => {
@@ -42,10 +47,22 @@ const SelectPayMethodYes24 = () => {
       return updated;
     });
   };
+  const correctList = { DetailPayForm: true };
+
+  //ErrorText 및 error css 제어용
+  const [showError, setShowError] = useState(false);
 
   return (
     <Wrap>
-      <SelectPayMethodChallenge isAllChecked={isAllChecked} />
+      <SelectPayMethodChallenge
+        isAllChecked={isAllChecked}
+        setShowError={setShowError}
+      />
+      {showError && (
+        <ErrorTextContainer>
+          <ErrorText text="개인정보 수집 및 제공 동의 항목에 체크해 주세요" />
+        </ErrorTextContainer>
+      )}
       {/* 경고 문구 */}
       <PayMethodWarning />
       {/* 체크 박스 */}
@@ -54,6 +71,7 @@ const SelectPayMethodYes24 = () => {
         item2Checked={checkedboxes.item2}
         item3Checked={checkedboxes.item3}
         handleChecked={handleChecked}
+        hasError={showError}
       />
     </Wrap>
   );
