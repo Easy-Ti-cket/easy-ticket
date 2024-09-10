@@ -70,7 +70,7 @@ const PayMethodInfo = styled.span`
 
 const SelectPayMethodChallenge = ({
   isAllChecked = null,
-  setShowError = null
+  setShowError = () => {}
 }) => {
   //nav
   const nav = useNavigate();
