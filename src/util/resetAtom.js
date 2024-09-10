@@ -13,6 +13,7 @@ const resetAtom = () => {
   sessionStorage.removeItem("minute");
   sessionStorage.removeItem("helpTextNumber");
   sessionStorage.removeItem("fakeAllowedSeat");
+  sessionStorage.removeItem("isDelivered");
 };
 
 export default resetAtom;

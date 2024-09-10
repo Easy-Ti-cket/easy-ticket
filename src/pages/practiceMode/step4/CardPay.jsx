@@ -3,8 +3,14 @@ import Card from "../../../components/card/Card";
 import CardForm from "../../../components/forms/CardForm";
 import { useForm } from "../../../hooks/useForm";
 import Button from "../../../components/button/Button";
-import { useAtomValue } from "jotai";
-import { cardAnswerAtom, themeSiteAtom } from "../../../store/atom";
+import { useAtomValue, useSetAtom } from "jotai";
+import {
+  cardAnswerAtom,
+  themeSiteAtom,
+  progressAtom,
+  stepTextNumberAtom,
+  helpTextNumberAtom
+} from "../../../store/atom";
 import { Step4Container } from "./SelectPayMethod";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
