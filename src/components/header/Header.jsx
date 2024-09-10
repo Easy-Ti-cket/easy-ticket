@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import Nav from "./nav/Nav";
-import Logo from "../../assests/logo.svg?react";
+import Logo from "/public/assets/logo.svg?react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Modal from "../modal/Modal";
 import { useAtomValue, useSetAtom } from "jotai";
 import { timerControlAtom, themeSiteAtom } from "../../store/atom";
-import GoToLocationModalCont from "../modal/GoToMainModalCont";
+import GoToLocationModalContents from "../modal/modalContents/GoToMainModalContents";
 
 /*헤더 Container*/
 const HeaderContainer = styled.div`
@@ -56,7 +56,7 @@ const Header = () => {
         <Modal
           width="300px"
           height="300px"
-          contents={<GoToLocationModalCont setIsConfirm={setIsConfirm} />}
+          contents={<GoToLocationModalContents setIsConfirm={setIsConfirm} />}
           buttonShow={false}
         />
       )}

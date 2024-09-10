@@ -9,7 +9,8 @@ import {
   levelAtom,
   progressAtom,
   postersAtom,
-  stepTextNumberAtom
+  stepTextNumberAtom,
+  helpTextNumberAtom
 } from "../../../store/atom";
 import AnimationArea from "../../../components/Animation";
 import { useNavigate } from "react-router-dom";
@@ -52,6 +53,7 @@ const SelectRound = () => {
   const [currentLevel] = useAtom(levelAtom);
 
   const setStepTextNumber = useSetAtom(stepTextNumberAtom);
+  const setHelpTextNumber = useSetAtom(helpTextNumberAtom);
 
   const [posters] = useAtom(postersAtom); // 포스터 데이터 가져오기
   const [posterId, setPosterId] = useState(0);
@@ -61,6 +63,15 @@ const SelectRound = () => {
   const [timesButtons, setTimesButtons] = useState([]);
   const [correctRound, setCorrectRound] = useState(null); // 정답 회차 저장
   const navigate = useNavigate();
+  useEffect(() => {
+    if (currentLevel !== "high") {
+      setStepTextNumber(0);
+      setHelpTextNumber(0);
+    } else if (currentLevel === "high") {
+      setStepTextNumber(1);
+      setHelpTextNumber(1);
+    }
+  }, [currentLevel]);
 
   useEffect(() => {
     setProgress(1);

@@ -1,4 +1,4 @@
-import CardAFront from "../../../../assests/images/cards/CardAFront.svg?react";
+import CardAFront from "/public/assets/images/cards/CardAFront.svg?react";
 import styled from "styled-components";
 import { CardWrap, Number } from "../CardStyles";
 /*카드 번호 감싸는 컴포넌트 */

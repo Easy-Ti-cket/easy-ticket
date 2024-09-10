@@ -8,7 +8,7 @@ import { MyBookingInfoContainer } from "../../../../components/myBookingInfo/MyB
 import { useBookingValidate } from "../../../../hooks/useBookingValidate";
 import MyBookingInfo from "../../../../components/myBookingInfo/MyBookingInfo";
 import SeatCountTicketlink from "../../components/seatCount/SeatCountTicketlink";
-import TicketMethodTicketlink from "../../components/TiketMethod/TicketMethodTicketlink";
+import TicketMethodTicketlink from "../../components/ticketMethod/TicketMethodTicketlink";
 import ErrorText from "../../../../components/ErrorText";
 
 const Container = styled.div`

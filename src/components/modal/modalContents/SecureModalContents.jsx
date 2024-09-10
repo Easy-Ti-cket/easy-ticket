@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Modal from "../modal/Modal";
-import { createCaptchaImage } from "../../util/captcha";
-import { getRandomString } from "../../util/getRandomString";
-import RefreshIcon from "../../assests/images/icons/refresh.svg";
-import VoiceIcon from "../../assests/images/icons/voice.svg";
-import { speakCharacterByCharacter } from "../../util/speechVoice";
-import ErrorText from "../ErrorText";
+import Modal from "../Modal";
+import { createCaptchaImage } from "../../../util/captcha";
+import { getRandomString } from "../../../util/getRandomString";
+import RefreshIcon from "/public/assets/images/icons/refresh.svg";
+import VoiceIcon from "/public/assets/images/icons/voice.svg";
+import { speakCharacterByCharacter } from "../../../util/speechVoice";
+import ErrorText from "../../ErrorText";
 
 const TitleWrapper = styled.div`
   font-family: "pretendardB";
@@ -62,7 +62,7 @@ const InputBox = styled.input`
   text-transform: uppercase;
 `;
 
-const SecureModal = ({ onClick }) => {
+const SecureModalContents = ({ onClick }) => {
   const [randomString, setRandomString] = useState(getRandomString());
   const [inputValue, setInputValue] = useState("");
   const [captchaImage, setCaptchaImage] = useState("");
@@ -134,4 +134,4 @@ const SecureModal = ({ onClick }) => {
   );
 };
 
-export default SecureModal;
+export default SecureModalContents;

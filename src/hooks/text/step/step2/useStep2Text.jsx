@@ -43,9 +43,8 @@ const useStep2Text = () => {
       content: (
         <TextBox>
           <span style={{ color: "var(--key-color)" }}>예매 가능한 좌석</span>을
-          클릭하고 다음 단계로 넘어가세요. 제한시간{" "}
-          <span style={{ color: "var(--key-color)" }}>30초</span>
-          이내에 완료해야 합니다.
+          클릭하고 다음 단계로 넘어가세요. <br />
+          예매 가능한 좌석이 아닐 경우 좌석이 사라집니다
         </TextBox>
       )
     },

@@ -11,7 +11,7 @@ import { useAtomValue, useSetAtom } from "jotai";
 import resetAtom from "../../../../util/resetAtom";
 import { useState } from "react";
 import Modal from "../../../modal/Modal";
-import GoToLocationModalCont from "../../../modal/GoToMainModalCont";
+import GoToLocationModalContents from "../../../modal/modalContents/GoToMainModalContents";
 
 const SubNavBgc = styled.div`
   width: 100vw;
@@ -105,7 +105,7 @@ const SubNav = ({ hovereditem }) => {
         <Modal
           buttonShow={false}
           contents={
-            <GoToLocationModalCont
+            <GoToLocationModalContents
               setIsConfirm={setIsConfirm}
               levelTheme={levelTheme}
             />
