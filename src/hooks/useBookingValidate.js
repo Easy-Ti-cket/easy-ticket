@@ -54,12 +54,10 @@ export const useBookingValidate = (
       //티켓링크
       if (themeSite === "ticketlink" && !extra.isAgreeAll) {
         setErrorArray(() => ["checkbox"]);
-        alert("개인정보 수집 및 3자 제공에 동의해야 결제가 가능합니다.");
         return;
       }
       if (themeSite === "ticketlink" && !extra.isCancelChecked) {
         setErrorArray(() => ["cancel"]);
-        alert("취소기한 및 수수료 동의에 체크해 주세요");
         return;
       } else {
         setErrorArray(() => []);

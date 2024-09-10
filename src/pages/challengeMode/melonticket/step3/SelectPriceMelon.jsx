@@ -60,7 +60,6 @@ const SelectPriceMelon = () => {
           }}
           nextButtonOnClick={() => {
             if (seatCount === 0) {
-              alert("좌석 매수를 선택해주세요");
               setShowError(true);
               return;
             }

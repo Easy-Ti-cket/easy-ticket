@@ -74,8 +74,9 @@ const SelectPayMethodInterPark = ({ isAllChecked }) => {
   const nav = useNavigate();
   //검사로직
   const { correctList, handleChange, isAnswer } = useForm(3);
-  const { handlePayment, hasPayFormError, cardTypesError, errorShow } =
-    usePaymentValidate({ correctList, isAllChecked });
+  const { handlePayment, hasPayFormError, cardTypesError } = usePaymentValidate(
+    { correctList, isAllChecked }
+  );
   //'신용카드'만 선택 가능함
   const isPayMethodCorrect = correctList["PayMethodForm"];
 
@@ -95,7 +96,7 @@ const SelectPayMethodInterPark = ({ isAllChecked }) => {
           </ErrorTooltip>
         )}
         <SubTtitle>결제 수단</SubTtitle>
-        {errorShow && <ErrorText text="신용카드 결제를 선택해 주세요." />}
+        {hasPayFormError && <ErrorText text="신용카드 결제를 선택해 주세요." />}
         <PayMethodForm
           isSelected={isPayMethodCorrect}
           handleChange={handleChange}
@@ -117,7 +118,9 @@ const SelectPayMethodInterPark = ({ isAllChecked }) => {
           </ErrorTooltip>
         )}
         <SubTtitle>결제 방식</SubTtitle>
-        {errorShow && <ErrorText text="일반신용카드 결제를 선택해 주세요." />}
+        {hasPayFormError && (
+          <ErrorText text="일반신용카드 결제를 선택해 주세요." />
+        )}
         {isPayMethodCorrect && (
           <>
             <CardInfo>

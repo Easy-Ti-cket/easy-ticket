@@ -2,7 +2,6 @@ import styled from "styled-components";
 import { FormWrap } from "../FormStyle";
 
 export const SectionTitle = styled.div`
-  width: 550px;
   font-size: 20px;
   font-family: "pretendardB";
   margin-bottom: 20px;
