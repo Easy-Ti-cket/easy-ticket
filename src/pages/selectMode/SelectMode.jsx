@@ -37,7 +37,7 @@ const SelectMode = () => {
   const PracticeCount = useAtomValue(practiceCountAtom);
   const nav = useNavigate();
 
-  const recommendedMode = PracticeCount < 10 ? "연습모드" : "실전모드";
+  const recommendedMode = PracticeCount < 15 ? "연습모드" : "실전모드";
   const modes = ["연습모드", "실전모드"];
 
   const handleClick = (mode) => {
