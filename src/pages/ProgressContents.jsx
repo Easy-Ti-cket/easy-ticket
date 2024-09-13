@@ -75,7 +75,6 @@ const ProgressContents = ({ text, practiceMode, challengeMode }) => {
     useState(false);
   // 일시정지 모달창 제어
   const [isPaused, setIsPaused] = useState(false);
-
   const [isLoading, setIsLoading] = useState(true);
   const location = useLocation();
   const path = location.pathname;
@@ -98,7 +97,7 @@ const ProgressContents = ({ text, practiceMode, challengeMode }) => {
 
     if (isStep0Path) {
       setIsTimeoutModalContentsOpen(false);
-    } else if (timeSpent <= 0) {
+    } else if (timeSpent <= 0 && level == "high") {
       setIsTimeoutModalContentsOpen(true);
       setTimerControl(false); // 타이머 정지
     }
