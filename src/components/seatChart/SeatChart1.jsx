@@ -9,6 +9,12 @@ const SectionName = styled.div`
   font-family: "pretendardB";
   margin: 20px;
 `;
+const SeatChartContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`;
 
 const SeatChart = () => {
   const allowedSection = useAtomValue(allowedSectionAtom);
@@ -26,10 +32,10 @@ const SeatChart = () => {
   useFakeAllowedSeat(0, 9, 9);
 
   return (
-    <>
+    <SeatChartContainer>
       <SectionName>{allowedSection}구역</SectionName>
       <SeatGrid rows={10} columns={10} gridIndex={0} />
-    </>
+    </SeatChartContainer>
   );
 };
 

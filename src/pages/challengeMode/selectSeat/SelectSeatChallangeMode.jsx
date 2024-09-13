@@ -3,9 +3,10 @@ import styled from "styled-components";
 import SecureModalContents from "../../../components/modal/modalContents/SecureModalContents";
 import SeatChart from "../../../components/seatChart/SeatChart1";
 import SeatSection from "../../../components/seatSection/SeatSection";
-import { useAtomValue, useSetAtom } from "jotai";
+import { useAtomValue, useSetAtom, useAtom } from "jotai";
 import {
   isSectionSelectedAtom,
+  isSeatSelectedAtom,
   progressAtom,
   themeSiteAtom
 } from "../../../store/atom";
@@ -27,17 +28,23 @@ const SeatInfoContainer = styled.div`
 
 const TooltipText = styled.div`
   width: 380px;
+  font-size: 16px;
   font-family: PretendardM;
 `;
 
 const SelectSeatChallengeMode = () => {
   const [isModalOpen, setIsModalOpen] = useState(true);
-  const isSectionSelected = useAtomValue(isSectionSelectedAtom);
+  const [isSectionSelected, setIsSectionSelected] = useAtom(
+    isSectionSelectedAtom
+  );
+  const [isSeatSelected, setIsSeatSelected] = useAtom(isSeatSelectedAtom);
   const setProgress = useSetAtom(progressAtom);
   const themeSite = useAtomValue(themeSiteAtom);
 
   useEffect(() => {
     setProgress(2);
+    setIsSectionSelected(false);
+    setIsSeatSelected(false);
   }, []);
 
   const closeModal = () => {
