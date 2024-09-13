@@ -2,6 +2,7 @@ import Button from "../button/Button";
 import { useAtomValue, useAtom } from "jotai";
 import {
   isSeatSelectedAtom,
+  isSectionSelectedAtom,
   allowedSeatAtom,
   levelAtom,
   postersAtom,
@@ -30,6 +31,7 @@ import { useLocation } from "react-router-dom";
 
 const SeatInfo = () => {
   const isSeatSelected = useAtomValue(isSeatSelectedAtom);
+  const isSectionSelected = useAtomValue(isSectionSelectedAtom);
   const allowedSeat = useAtomValue(allowedSeatAtom);
   const level = useAtomValue(levelAtom);
   const posters = useAtomValue(postersAtom);
@@ -61,18 +63,21 @@ const SeatInfo = () => {
   const nav = useNavigate();
 
   const handleButtonClick = () => {
-    if (themeSite === "practice") {
-      nav("../step3-1");
-      return;
-    }
     if (isSeatSelected) {
       if (path.includes("challenge")) {
         nav("../step3/step4");
-      } else {
-        nav("../step3-1");
+        return;
       }
-    } else {
+      nav("../step3-1");
+    }
+
+    if (!isSectionSelected) {
+      alert("구역을 선택해주세요.");
+      return;
+    }
+    if (!isSeatSelected) {
       alert("좌석을 선택해주세요.");
+      return;
     }
   };
 
