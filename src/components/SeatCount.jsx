@@ -59,7 +59,9 @@ const SeatCount = () => {
   const handleSeatCountChange = (event) => {
     setSeatCount(Number(event.target.value));
   };
-
+  useEffect(() => {
+    setSeatCount(0);
+  }, []);
   useEffect(() => {
     if (seatCount === 0 && level === "low") {
       setFocus(true);
