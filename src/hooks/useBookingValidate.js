@@ -20,7 +20,7 @@ export const useBookingValidate = (
     // 연습모드
     // 좌석 매수가 0일 경우 경고창 출력
     if (seatCount === 0) {
-      alert("좌석을 선택해주세요.");
+      alert("좌석매수를 선택해주세요.");
       return;
     }
     addStage(2);
