@@ -6,7 +6,7 @@ const ErrorTextContainer = styled.div`
   align-items: center;
   justify-content: center;
   gap: 8px;
-  max-width: 300px;
+  max-width: 400px;
   max-height: 30px;
   background-color: var(--sub-color-interpark);
   padding: 8px;
