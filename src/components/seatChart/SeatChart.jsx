@@ -42,6 +42,8 @@ const SeatChart = ({ showError = false }) => {
     }
   }, []);
   const SelectedSeatChart = getSeatChartNum(type);
+  console.log(showError);
+
   return (
     <Wrap>
       {showError && <ErrorText text="좌석을 선택해 주세요" />}

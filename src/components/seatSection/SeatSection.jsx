@@ -16,6 +16,7 @@ const Wrap = styled.div`
   flex-direction: column;
   gap: 8px;
   align-items: center;
+  padding: 20px;
   border: ${(props) =>
     props.$showError ? "2px dashed var(--point-color)" : "none"};
   border-radius: 8px;
