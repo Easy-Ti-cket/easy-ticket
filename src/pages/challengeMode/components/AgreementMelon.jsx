@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import ErrorText from "../../../components/errorText/ErrorText";
 
 const Container = styled.div`
   padding-top: 20px;
@@ -26,6 +27,9 @@ const TermsContainer = styled.div`
 const TextBox = styled.div`
   margin-right: 270px;
   font-family: "pretendardB";
+  display: flex;
+  align-items: center;
+  gap: 8px;
 `;
 const Info = styled.span`
   margin-left: 10px;
@@ -58,12 +62,15 @@ const AgreeMentMelon = ({
     );
   };
   // 전체 동의를 하지 않은 상태에서 다음 단계 버튼을 클릭했을 경우
-  const $hasError = errorArray.includes("checkbox");
+  const hasError = errorArray.includes("checkbox");
 
   return (
-    <Container $hasError={$hasError}>
+    <Container $hasError={hasError}>
       <LineContainer>
-        <TextBox>예매자 동의</TextBox>
+        <TextBox>
+          예매자 동의
+          {hasError && <ErrorText text="체크박스에 모두 동의해 주세요" />}
+        </TextBox>
         <CheckboxContainer>
           <input type="checkbox" id="agreeAll" onClick={handleAgreeAll} />
           <CheckboxLabel htmlFor="agreeAll">전체동의</CheckboxLabel>
