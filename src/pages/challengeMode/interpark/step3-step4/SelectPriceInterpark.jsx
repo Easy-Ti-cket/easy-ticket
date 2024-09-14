@@ -8,6 +8,7 @@ import { optionAtom, progressAtom } from "../../../../store/atom";
 import { useBookingValidate } from "../../../../hooks/useBookingValidate";
 import PrevNextButton from "../../../../components/myBookingInfo/PrevNextButton";
 import { MyBookingInfoContainer } from "../../../../components/myBookingInfo/MyBookingInfoContainer";
+import { useNavigate } from "react-router-dom";
 
 const Wrap = styled.div`
   display: flex;
@@ -21,25 +22,26 @@ const SelectPriceInterpark = () => {
   const [step3Stage, setStep3Stage] = useState(1);
   const addStage = (num) => setStep3Stage(num);
   const setProgress = useSetAtom(progressAtom);
-  useEffect(() => setProgress(3));
+  useEffect(() => setProgress(3), []);
   // 폼 검사 로직용
   const [isValidate, setIsValidate] = useState([]);
   const [errorArray, setErrorArray] = useState([]); //css 변경용
   //검사후 이동할 위치
   const location = "../step5-1";
   // 버튼에 넘겨줄 검사로직 (티켓가격 + 예매자 정보 확인용)
-  const { handleButtonClick } = useBookingValidate(
+  const { handleButtonClick, showError } = useBookingValidate(
     addStage,
     step3Stage,
     isValidate,
     setErrorArray,
     location
   );
+  const nav = useNavigate();
 
   return (
     <Wrap>
       {step3Stage == 1 ? (
-        <SeatCount />
+        <SeatCount showError={showError} />
       ) : (
         <TicketMethod setIsValidate={setIsValidate} errorArray={errorArray} />
       )}
@@ -48,7 +50,9 @@ const SelectPriceInterpark = () => {
         <MyBookingInfo option={option} />
         {/*이전 버튼, 다음 버튼 클릭 시 작동할 것*/}
         <PrevNextButton
-          prevButtonOnClick={() => addStage(1)}
+          prevButtonOnClick={
+            step3Stage == 1 ? () => nav("../step2") : () => addStage(1)
+          }
           nextButtonOnClick={handleButtonClick}
         />
       </MyBookingInfoContainer>

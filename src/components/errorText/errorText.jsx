@@ -15,6 +15,7 @@ const ErrorTextContainer = styled.div`
 
 const ErrorTextMessage = styled.span`
   color: var(--point-color);
+  font-family: "pretendardB";
   font-size: 18px;
 `;
 

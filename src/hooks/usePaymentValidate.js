@@ -17,8 +17,6 @@ export const usePaymentValidate = ({ correctList, isAllChecked = null }) => {
       setHasPayFormError(true);
       if (themeSite === "practice") {
         alert("올바른 결제 수단을 선택해 주세요");
-      } else {
-        alert("실전모드에선 '일반신용카드' 결제만 가능합니다.");
       }
       return;
     }

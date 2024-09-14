@@ -23,7 +23,7 @@ const challengeTextArr = [
   "I-Point 사용 (사용가능 : 0p)",
   "청년문화예술패스 포인트 사용 (사용가능 : 0p)"
 ];
-//선택되었다면 애니메이션 끄기
+
 const PayMethodForm = ({ handleChange, isSelected }) => {
   //레벨 및 연습모드 여부
   const level = useAtomValue(levelAtom);

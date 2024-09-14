@@ -3,6 +3,7 @@ import { FormWrap } from "../FormStyle";
 import { InputContainer, Label } from "../../input/InputStyle";
 import { useAtomValue } from "jotai";
 import { levelAtom, themeSiteAtom, userNameAtom } from "../../../store/atom";
+import ErrorText from "../../errorText/ErrorText";
 
 const BuyerWrap = styled.div`
   display: flex;
@@ -31,7 +32,7 @@ const InfoBox = styled.div`
   border: ${(props) => props.$hasError && "2px solid var(--point-color)"};
 `;
 
-// mock buyer data 연습모드
+// mock buyer data
 const data_essential = {
   practice: [
     { label: "이름", value: "" },
@@ -100,29 +101,32 @@ const TicketBuyer = ({ option, setIsValidate, errorArray }) => {
   };
 
   return (
-    <BuyerWrap>
-      {option === "현장수령" && (
-        <BuyerContainer>
-          {formFormat.map((item, index) => (
-            <InputContainer key={index}>
-              <BuyerLabel>{item.label}</BuyerLabel>
-              {InfoContents(item)}
-            </InputContainer>
-          ))}
-        </BuyerContainer>
-      )}
+    <>
+      <BuyerWrap>
+        {option === "현장수령" && (
+          <BuyerContainer>
+            {hasError && <ErrorText text="생년월일을 정확히 작성해 주세요" />}
+            {formFormat.map((item, index) => (
+              <InputContainer key={index}>
+                <BuyerLabel>{item.label}</BuyerLabel>
+                {InfoContents(item)}
+              </InputContainer>
+            ))}
+          </BuyerContainer>
+        )}
 
-      {option.includes("배송") && (
-        <BuyerContainer>
-          {data_delivery.map((item, index) => (
-            <InputContainer key={index}>
-              <BuyerLabel>{item.label}</BuyerLabel>
-              <InfoBox>{item.value}</InfoBox>
-            </InputContainer>
-          ))}
-        </BuyerContainer>
-      )}
-    </BuyerWrap>
+        {option.includes("배송") && (
+          <BuyerContainer>
+            {data_delivery.map((item, index) => (
+              <InputContainer key={index}>
+                <BuyerLabel>{item.label}</BuyerLabel>
+                <InfoBox>{item.value}</InfoBox>
+              </InputContainer>
+            ))}
+          </BuyerContainer>
+        )}
+      </BuyerWrap>
+    </>
   );
 };
 

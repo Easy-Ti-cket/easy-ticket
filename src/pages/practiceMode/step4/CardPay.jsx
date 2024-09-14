@@ -70,10 +70,10 @@ const CardPay = () => {
       setProgress(5);
     }
   }, []);
+
   //검사로직
   const handleClick = () => {
     if (!isAnswer) {
-      alert("카드 정보를 정확하게 입력해 주세요");
       //정답리스트에 없는 경우 에러리스트에 삽입
       setHasErrorArray(allInputNames.filter((key) => !correctList[key]));
     } else {

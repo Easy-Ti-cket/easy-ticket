@@ -7,6 +7,7 @@ import {
   TicketMethodWrap
 } from "./TicketMethodStyle";
 import { optionAtom } from "../../../store/atom";
+import ErrorText from "../../errorText/ErrorText";
 
 const TicketMethod = ({ setIsValidate, errorArray }) => {
   const [option, setOption] = useAtom(optionAtom);
@@ -29,7 +30,10 @@ const TicketMethod = ({ setIsValidate, errorArray }) => {
     <TicketMethodWrap>
       {/* 티켓수령방법 */}
       <TicketMethodCont $hasError={hasError}>
-        <SectionTitle $option={option}>티켓수령방법</SectionTitle>
+        <SectionTitle $option={option}>
+          티켓수령방법
+          {hasError && <ErrorText text="티켓 수령 방법을 선택해 주세요" />}
+        </SectionTitle>
         <Input
           type="radio"
           value="현장수령"

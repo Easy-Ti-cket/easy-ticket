@@ -8,6 +8,9 @@ export const SectionTitle = styled.div`
   margin-bottom: 20px;
   padding: 10px 0;
   border-bottom: 1px solid var(--fill-color);
+  display: flex;
+  align-items: center;
+  gap: 8px;
 `;
 export const TicketMethodCont = styled.div`
   display: flex;

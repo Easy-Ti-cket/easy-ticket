@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { seatCountAtom, levelAtom, seatInfoAtom } from "../store/atom";
 import { useAtom, useAtomValue } from "jotai";
 import Animation from "./Animation";
+import ErrorText from "./errorText/ErrorText";
 
 const SeatCountContainer = styled.div`
   border: 2px solid var(--fill-color);
@@ -44,13 +45,20 @@ const CountSelector = styled.select`
   text-align: center;
   font-size: 16px;
   margin: ${(props) => (props.$focus ? "0px" : "3px")};
+  border: ${(props) => props.$showError && "2px solid var(--point-color)"};
 `;
 
 const HighlightText = styled.span`
   color: var(--point-color);
 `;
 
-const SeatCount = () => {
+//에러 텍스트 + 컨텐츠
+const ErrorContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const SeatCount = ({ showError = false }) => {
   const [seatCount, setSeatCount] = useAtom(seatCountAtom);
   const level = useAtomValue(levelAtom);
   const seatInfo = useAtomValue(seatInfoAtom);
@@ -81,16 +89,20 @@ const SeatCount = () => {
         <InfoText>기본가</InfoText>
         <InfoText>일반</InfoText>
         <Price>{seatInfo.price}원</Price>
-        <Animation $focus={focus}>
-          <CountSelector
-            $focus={focus}
-            name={"seatCount"}
-            onChange={handleSeatCountChange}
-          >
-            <option value={0}>0매</option>
-            <option value={1}>1매</option>
-          </CountSelector>
-        </Animation>
+        <ErrorContainer>
+          {showError && <ErrorText text="좌석 매수를 선택해 주세요" />}
+          <Animation $focus={focus}>
+            <CountSelector
+              $focus={focus}
+              name={"seatCount"}
+              onChange={handleSeatCountChange}
+              $showError={showError}
+            >
+              <option value={0}>0매</option>
+              <option value={1}>1매</option>
+            </CountSelector>
+          </Animation>
+        </ErrorContainer>
       </InfoRow>
     </SeatCountContainer>
   );
