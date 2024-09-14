@@ -16,6 +16,7 @@ import AnimationArea from "../../../components/Animation";
 import { useNavigate } from "react-router-dom";
 import formatTime from "../../../util/time";
 import ErrorText from "../../../components/errorText/errorText";
+import ErrorTooltip from "../../../components/tooltip/ErrorTooltip";
 
 const Container = styled.div`
   display: flex;
@@ -45,6 +46,11 @@ const RoundWrapper = styled.div`
   margin-left: 20px;
   align-items: left;
   padding: 5px;
+`;
+
+const ErrorContents = styled.span`
+  font-size: 20px;
+  color: var(--text-color);
 `;
 
 const SelectRound = () => {

@@ -51,6 +51,12 @@ const RoundWrapper = styled.div`
   padding-left: 20px;
 `;
 
+const ErrorContents = styled.div`
+  display: flex;
+  font-size: 14px;
+  color: var(--point-color);
+`;
+
 const SelectRoundInterpark = () => {
   const selectedPoster = useAtomValue(selectedPosterAtom);
   const posters = useAtomValue(postersAtom);
@@ -159,7 +165,10 @@ const SelectRoundInterpark = () => {
           {showErrorText.dateOrderError && (
             <ErrorText text={errorText.dateOrderError} />
           )}
-          <p style={{ paddingLeft: "20px" }}>회차</p>
+          <span style={{ paddingLeft: "20px", display: "flex", gap: "8px" }}>
+            회차
+            <ErrorContents>(첫 번째 회차를 선택해 주세요)</ErrorContents>{" "}
+          </span>
           {/*회차 선택 에러 텍스트 */}
           {showErrorText.roundSelectError && (
             <ErrorText text={errorText.roundSelectError} />

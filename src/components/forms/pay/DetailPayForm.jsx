@@ -58,9 +58,12 @@ const DetailPayForm = ({
   //레벨 및 연습모드 여부
   const level = useAtomValue(levelAtom);
   const isPractice = useAtomValue(themeSiteAtom) === "practice";
+
   return (
     <>
-      {hasPayFormError && <ErrorText text="올바른 결제 수단을 선택해 주세요" />}
+      {hasPayFormError && isPractice && (
+        <ErrorText text="올바른 결제 수단을 선택해 주세요" />
+      )}
       {cardTypesError && <ErrorText text="올바른 카드를 선택해 주세요" />}
       <DetailPayFormWrap $hasPayFormError={hasPayFormError}>
         <FormWrap>
