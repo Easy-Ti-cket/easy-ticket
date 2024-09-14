@@ -12,6 +12,7 @@ import {
 import { useNavigate } from "react-router-dom";
 import formatTime from "../../../../util/time";
 import ErrorText from "../../../../components/errorText/ErrorText";
+import ErrorTooltip from "../../../../components/tooltip/ErrorTooltip";
 
 const Container = styled.div`
   display: flex;
@@ -62,7 +63,19 @@ const ButtonSection = styled.div`
   justify-content: flex-end;
 `;
 
-const SelectRoundMelonticket = () => {
+const ErrorTooltipCont = styled.div`
+  font-size: 18px;
+  color: var(--text-color);
+`;
+
+//에러 툴팁 + 컨텐츠
+const ErrorContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+`;
+
+const SelectRoundMelonTicket = () => {
   const selectedPoster = useAtomValue(selectedPosterAtom);
   const posters = useAtomValue(postersAtom);
   const id = useAtomValue(selectedPosterAtom);
@@ -169,35 +182,46 @@ const SelectRoundMelonticket = () => {
             <ErrorText text={errorText.dateOrderError} />
           )}
         </BoxWrapper>
-        <BoxWrapper>
-          <TitleText>회차 선택</TitleText>
-          {timesButtons.length > 0 ? (
-            timesButtons.map((time, index) => (
+
+        <ErrorContainer>
+          <ErrorTooltip
+            contents={
+              <ErrorTooltipCont>첫 번째 회차를 선택해 주세요</ErrorTooltipCont>
+            }
+          />
+          <BoxWrapper>
+            <TitleText>회차 선택</TitleText>
+            {timesButtons.length > 0 ? (
+              timesButtons.map((time, index) => (
+                <Button
+                  key={index}
+                  text={`${index + 1}회 - ${time}`}
+                  type="outline"
+                  onClick={() => handleRoundClick(time)}
+                />
+              ))
+            ) : (
               <Button
-                key={index}
-                text={`${index + 1}회 - ${time}`}
+                text="날짜 선택 후 확인"
                 type="outline"
-                onClick={() => handleRoundClick(time)}
+                onClick={() =>
+                  setShowErrorText((prev) => ({
+                    ...prev,
+                    dateOrderError: true
+                  }))
+                }
               />
-            ))
-          ) : (
-            <Button
-              text="날짜 선택 후 확인"
-              type="outline"
-              onClick={() =>
-                setShowErrorText((prev) => ({ ...prev, dateOrderError: true }))
-              }
-            />
-          )}
-          {/*회차 선택 에러 텍스트 */}
-          {showErrorText.roundSelectError && (
-            <ErrorText text={errorText.roundSelectError} />
-          )}
-          {/*회차 선택 순서 에러 텍스트 */}
-          {showErrorText.roundOrderError && (
-            <ErrorText text={errorText.roundOrderError} />
-          )}
-        </BoxWrapper>
+            )}
+            {/*회차 선택 에러 텍스트 */}
+            {showErrorText.roundSelectError && (
+              <ErrorText text={errorText.roundSelectError} />
+            )}
+            {/*회차 선택 순서 에러 텍스트 */}
+            {showErrorText.roundOrderError && (
+              <ErrorText text={errorText.roundOrderError} />
+            )}
+          </BoxWrapper>
+        </ErrorContainer>
       </LowerSection>
       <ButtonSection>
         <Button text="인증 후 예매하기" onClick={handleReserveClick} />
@@ -206,4 +230,4 @@ const SelectRoundMelonticket = () => {
   );
 };
 
-export default SelectRoundMelonticket;
+export default SelectRoundMelonTicket;

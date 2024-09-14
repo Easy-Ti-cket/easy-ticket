@@ -10,6 +10,7 @@ import { SubTtitle } from "../../../practiceMode/step4/SelectPayMethod";
 import ErrorTooltip from "../../../../components/tooltip/ErrorTooltip";
 import MyBookingInfo from "../../../../components/myBookingInfo/MyBookingInfo";
 import { FormWrap } from "../../../../components/forms/FormStyle";
+import ErrorText from "../../../../components/errorText/ErrorText";
 
 //결제 수단 + 결제 방식 + 내 예매 정보
 const PayMethodWrap = styled.div`
@@ -85,6 +86,7 @@ const SelectPayMethodChallenge = ({ isAllChecked = null }) => {
         )}
         {/*결제 수단 */}
         <SubTtitle>결제 수단</SubTtitle>
+        {hasPayFormError && <ErrorText text="신용카드를 선택해 주세요" />}
         <PayMethodForm
           isSelected={isPayMethodCorrect}
           handleChange={handleChange}
@@ -104,6 +106,7 @@ const SelectPayMethodChallenge = ({ isAllChecked = null }) => {
           </ErrorTooltip>
         )}
         <SubTtitle>결제 방식</SubTtitle>
+        {hasPayFormError && <ErrorText text="일반 신용카드를 선택해 주세요" />}
         {isPayMethodCorrect && (
           <>
             <CardInfo>

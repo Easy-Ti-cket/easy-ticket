@@ -7,6 +7,7 @@ import {
 } from "../../../../components/forms/ticket/TicketMethodStyle";
 import { useAtom } from "jotai";
 import { optionAtom } from "../../../../store/atom";
+import ErrorText from "../../../../components/errorText/ErrorText";
 
 const TicketMethodTicketlink = ({
   setIsValidate,
@@ -21,7 +22,12 @@ const TicketMethodTicketlink = ({
       <TicketMethod setIsValidate={setIsValidate} errorArray={errorArray} />
       <TicketMethodCont $hasError={hasError}>
         {/* 체크 박스 */}
-        <SectionTitle>예매자 확인</SectionTitle>
+        <SectionTitle>
+          예매자 확인
+          {hasError && (
+            <ErrorText text="개인정보 수집 및 제 3자 제공에 동의해 주세요" />
+          )}
+        </SectionTitle>
         <BookingPersonCheckBox
           handleChecked={handleChecked}
           hasError={hasError}

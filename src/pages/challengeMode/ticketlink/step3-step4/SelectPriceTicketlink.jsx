@@ -10,6 +10,7 @@ import { useBookingValidate } from "../../../../hooks/useBookingValidate";
 import MyBookingInfo from "../../../../components/myBookingInfo/MyBookingInfo";
 import SeatCountTicketlink from "../../components/seatCount/SeatCountTicketlink";
 import TicketMethodTicketlink from "../../components/ticketMethod/TicketMethodTicketlink";
+import ErrorText from "../../../../components/errorText/ErrorText";
 
 const Container = styled.div`
   display: flex;
@@ -34,6 +35,9 @@ const RightSection = styled.div`
   align-items: flex-start;
 `;
 
+const CheckboxContainer = styled.div`
+  display: flex;
+`;
 //취소 기한 및 수수료 동의
 const CancelCheckbox = styled.input.attrs({
   type: "checkbox"
@@ -47,6 +51,12 @@ const CancelLabel = styled.label`
   align-items: center;
   gap: 8px;
   margin-bottom: 20px;
+`;
+
+const ErrorContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 `;
 
 const SelectPriceTicketlink = () => {
@@ -103,7 +113,7 @@ const SelectPriceTicketlink = () => {
   //검사 후 이동할 위치
   const location = "../step5-1";
   // 버튼에 넘겨줄 검사로직 (티켓가격 + 예매자 정보 확인용)
-  const { handleButtonClick } = useBookingValidate(
+  const { handleButtonClick, showError } = useBookingValidate(
     addStage,
     step3Stage,
     isValidate,
@@ -112,7 +122,9 @@ const SelectPriceTicketlink = () => {
     { isAgreeAll: isAgreeAll, isCancelChecked: isCancelChecked }
   );
 
-  const hasError = errorArray.includes("cancel");
+  //error css
+  const cancelError = errorArray.includes("cancel");
+  const nav = useNavigate();
 
   return (
     <>
@@ -120,7 +132,7 @@ const SelectPriceTicketlink = () => {
         <Container>
           <LeftSection>
             <SelectPriceCheckBox handleChecked={handleChecked} />
-            <SeatCountTicketlink />
+            <SeatCountTicketlink hasError={showError} />
           </LeftSection>
           <RightSection>
             <MyBookingInfoContainer>
@@ -147,15 +159,24 @@ const SelectPriceTicketlink = () => {
 
               {/* 취소기한 확인용 체크박스 */}
               <CancelLabel
-                $hasError={hasError}
+                $hasError={cancelError}
                 checked={isCancelChecked}
                 onChange={handleCancelChecked}
               >
-                <CancelCheckbox />
-                취소기한 및 수수료 동의
+                <ErrorContainer>
+                  {cancelError && (
+                    <ErrorText text="아래 체크박스에 동의해 주세요" />
+                  )}
+                  <CheckboxContainer>
+                    <CancelCheckbox />
+                    취소기한 및 수수료 동의
+                  </CheckboxContainer>
+                </ErrorContainer>
               </CancelLabel>
               <PrevNextButton
-                prevButtonOnClick={() => addStage(1)}
+                prevButtonOnClick={
+                  step3Stage === 1 ? () => nav("../step2") : () => addStage(1)
+                }
                 nextButtonOnClick={handleButtonClick}
               />
             </MyBookingInfoContainer>

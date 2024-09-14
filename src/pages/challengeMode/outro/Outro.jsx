@@ -36,7 +36,7 @@ const SuccessMessage = styled.h1`
   margin-bottom: 8px;
 `;
 
-const PracticeMessage = styled.p`
+const PracticeMessage = styled.span`
   color: var(--text-color);
   font-family: "pretendardM";
   font-size: 30px;
