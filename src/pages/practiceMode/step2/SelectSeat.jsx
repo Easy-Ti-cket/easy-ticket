@@ -20,8 +20,7 @@ const SelectSeatcontainer = styled.div`
 const SelectSeat = () => {
   const setStepTextNumber = useSetAtom(stepTextNumberAtom);
   const setHelpTextNumber = useSetAtom(helpTextNumberAtom);
-  const stepTextNumber = useAtomValue(stepTextNumberAtom);
-  const helpTextNumber = useAtomValue(helpTextNumberAtom);
+
   const [isSectionSelected, setIsSectionSelected] = useAtom(
     isSectionSelectedAtom
   );

@@ -42,7 +42,6 @@ const SeatChart = ({ showError = false }) => {
     }
   }, []);
   const SelectedSeatChart = getSeatChartNum(type);
-  console.log(showError);
 
   return (
     <Wrap>
