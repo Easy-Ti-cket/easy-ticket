@@ -4,6 +4,7 @@ import Input from "../../input/Input";
 import { useAtomValue } from "jotai";
 import { levelAtom, themeSiteAtom } from "../../../store/atom";
 import AnimationArea from "../../Animation";
+
 const DetailPayFormWrap = styled(FormWrap)`
   flex-direction: row;
   color: ${(props) => props.$hasPayFormError && "var(--point-color)"};

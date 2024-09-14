@@ -33,8 +33,8 @@ const PayMethodForm = ({ handleChange, isSelected }) => {
 
   //melonTicket일 경우 row로 변경
   const isFormWrapRow = useAtomValue(themeSiteAtom) === "melonticket";
-
   const PayMethodFormWrap = isFormWrapRow ? FormWrapRow : FormWrap;
+
   return (
     <PayMethodFormWrap>
       {radioText.map((methodItem, index) => (
