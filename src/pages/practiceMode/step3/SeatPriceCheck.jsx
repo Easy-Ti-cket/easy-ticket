@@ -49,7 +49,7 @@ const SeatPriceCheck = () => {
   //검사후 이동할 위치
   const location = "../step4-1";
   // 버튼에 넘겨줄 검사로직 (티켓가격 + 예매자 정보 확인용)
-  const { handleButtonClick } = useBookingValidate(
+  const { handleButtonClick, showError } = useBookingValidate(
     addStage,
     step3Stage,
     isValidate,
@@ -60,7 +60,7 @@ const SeatPriceCheck = () => {
   return (
     <Wrap>
       {step3Stage == 1 ? (
-        <SeatCount />
+        <SeatCount showError={showError} />
       ) : (
         <TicketMethod setIsValidate={setIsValidate} errorArray={errorArray} />
       )}

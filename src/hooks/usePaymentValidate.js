@@ -16,16 +16,12 @@ export const usePaymentValidate = ({ correctList, isAllChecked = null }) => {
     // 연습 + 실전모드 결제 수단 에러
     if (!correctList.DetailPayForm) {
       setHasPayFormError(true);
-      if (themeSite === "practice") {
-        alert("올바른 결제 수단을 선택해 주세요");
-      }
       return;
     }
     //연습모드 카드 타입
     if (!correctList.CardTypes && themeSite === "practice") {
       setHasPayFormError(false);
       setCardTypesError(true);
-      alert("올바른 카드를 선택해 주세요");
       return;
     }
     //yes24 체크박스

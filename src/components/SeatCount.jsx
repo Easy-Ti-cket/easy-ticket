@@ -5,6 +5,12 @@ import { useAtom, useAtomValue } from "jotai";
 import Animation from "./Animation";
 import ErrorText from "./errorText/ErrorText";
 
+const Wrap = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+`;
+
 const SeatCountContainer = styled.div`
   border: 2px solid var(--fill-color);
   border-radius: 8px;
@@ -79,32 +85,35 @@ const SeatCount = ({ showError = false }) => {
   }, [seatCount]);
 
   return (
-    <SeatCountContainer>
-      <Header>티켓 가격</Header>
-      <Header>
-        {seatInfo.grade} | <HighlightText>좌석 {seatCount}매</HighlightText>를
-        선택하셨습니다
-      </Header>
-      <InfoRow>
-        <InfoText>기본가</InfoText>
-        <InfoText>일반</InfoText>
-        <Price>{seatInfo.price}원</Price>
-        <ErrorContainer>
-          {showError && <ErrorText text="좌석 매수를 선택해 주세요" />}
-          <Animation $focus={focus}>
-            <CountSelector
-              $focus={focus}
-              name={"seatCount"}
-              onChange={handleSeatCountChange}
-              $showError={showError}
-            >
-              <option value={0}>0매</option>
-              <option value={1}>1매</option>
-            </CountSelector>
-          </Animation>
-        </ErrorContainer>
-      </InfoRow>
-    </SeatCountContainer>
+    <Wrap>
+      {showError && <ErrorText text="좌석 매수를 선택해 주세요" />}
+
+      <SeatCountContainer>
+        <Header>티켓 가격</Header>
+        <Header>
+          {seatInfo.grade} | <HighlightText>좌석 {seatCount}매</HighlightText>를
+          선택하셨습니다
+        </Header>
+        <InfoRow>
+          <InfoText>기본가</InfoText>
+          <InfoText>일반</InfoText>
+          <Price>{seatInfo.price}원</Price>
+          <ErrorContainer>
+            <Animation $focus={focus}>
+              <CountSelector
+                $focus={focus}
+                name={"seatCount"}
+                onChange={handleSeatCountChange}
+                $showError={showError}
+              >
+                <option value={0}>0매</option>
+                <option value={1}>1매</option>
+              </CountSelector>
+            </Animation>
+          </ErrorContainer>
+        </InfoRow>
+      </SeatCountContainer>
+    </Wrap>
   );
 };
 

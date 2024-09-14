@@ -50,14 +50,16 @@ const SelectSeat = () => {
     }
   }, [isSectionSelected, isSeatSelected, initialized]);
 
+  const [showError, setShowError] = useState(false);
+
   return (
     <SelectSeatcontainer>
       {isSectionSelected ? (
-        <SeatChart></SeatChart>
+        <SeatChart showError={showError} />
       ) : (
-        <SeatSection></SeatSection>
+        <SeatSection showError={showError} />
       )}
-      <SeatInfo></SeatInfo>
+      <SeatInfo setShowError={setShowError} />
     </SelectSeatcontainer>
   );
 };
