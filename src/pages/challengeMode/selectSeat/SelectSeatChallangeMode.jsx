@@ -37,7 +37,7 @@ const SelectSeatChallengeMode = () => {
   const [isSectionSelected, setIsSectionSelected] = useAtom(
     isSectionSelectedAtom
   );
-  const [isSeatSelected, setIsSeatSelected] = useAtom(isSeatSelectedAtom);
+  const setIsSeatSelected = useSetAtom(isSeatSelectedAtom);
   const setProgress = useSetAtom(progressAtom);
   const themeSite = useAtomValue(themeSiteAtom);
 
@@ -51,13 +51,17 @@ const SelectSeatChallengeMode = () => {
     setIsModalOpen(false);
   };
 
+  //error css
+  const [showChartError, setShowChartError] = useState(false);
+  const [showSectionError, setShowSectionError] = useState(false);
+
   return (
     <SelectSeatContainer>
       {isModalOpen && <SecureModalContents onClick={closeModal} />}
       {isSectionSelected ? (
-        <SeatChart></SeatChart>
+        <SeatChart showError={showChartError} />
       ) : (
-        <SeatSection></SeatSection>
+        <SeatSection showError={showSectionError} />
       )}
 
       <SeatInfoContainer>
@@ -72,7 +76,12 @@ const SelectSeatChallengeMode = () => {
             }
           ></ErrorTooltip>
         )}
-        <SeatInfo></SeatInfo>
+        {/*구역 선택 시엔 sectionError를,  좌석 선택 시엔 chartError 다룸*/}
+        <SeatInfo
+          setShowError={
+            isSectionSelected ? setShowChartError : setShowSectionError
+          }
+        />
       </SeatInfoContainer>
     </SelectSeatContainer>
   );

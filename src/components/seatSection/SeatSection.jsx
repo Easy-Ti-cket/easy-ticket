@@ -1,29 +1,33 @@
-import Section from "./section/Section";
 import styled from "styled-components";
 import SeatSection0 from "./SeatSection0";
 import SeatSection1 from "./SeatSection1";
 import SeatSection2 from "./SeatSection2";
 import SeatSection3 from "./SeatSection3";
 import DefaultSeatSection from "./DefaultSeatSection";
-import { useAtomValue, useSetAtom } from "jotai";
-import {
-  postersAtom,
-  selectedPosterAtom,
-  allowedSeatAtom
-} from "../../store/atom";
-import convertPriceObjectToArray from "../../util/convertPriceObjectToArray";
+import { useAtomValue } from "jotai";
+import { postersAtom, selectedPosterAtom } from "../../store/atom";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
+import ErrorText from "../errorText/ErrorText";
 
+//에러텍스트 + 컨텐츠
+const Wrap = styled.div`
+  display: inline-flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+  border: ${(props) =>
+    props.$showError ? "2px dashed var(--point-color)" : "none"};
+  border-radius: 8px;
+`;
 const SeatSectionContainer = styled.div`
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   gap: 20px;
   margin-top: 20px;
-  width: 500px;
-  height: 500px;
+  padding: 8px;
 `;
 const Stage = styled.div`
   width: 400px;
@@ -52,10 +56,8 @@ const getSectionNum = (num) => {
 };
 
 //구역 개수 배열
-const SeatSection = () => {
-  const Posters = useAtomValue(postersAtom);
+const SeatSection = ({ showError }) => {
   const posterId = useAtomValue(selectedPosterAtom);
-  const poster = Posters[posterId];
   const [seatSectionType, setSeatSectionType] = useState("default");
 
   const path = useLocation().pathname;
@@ -70,7 +72,10 @@ const SeatSection = () => {
   return (
     <SeatSectionContainer>
       <Stage>스테이지</Stage>
-      <SelectedSection></SelectedSection>
+      {showError && <ErrorText text="구역을 선택해 주세요" />}
+      <Wrap $showError={showError}>
+        <SelectedSection />
+      </Wrap>
     </SeatSectionContainer>
   );
 };
