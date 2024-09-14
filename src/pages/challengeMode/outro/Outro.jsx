@@ -14,9 +14,15 @@ const Step5Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 50vh;
   text-align: center;
+  padding: 50px;
+`;
+
+const RecordNavigate = styled.div`
+  display: flex;
+  align-items: start;
+  gap: 100px;
+  padding: 20px;
 `;
 
 const SuccessMessage = styled.h1`
@@ -27,22 +33,23 @@ const SuccessMessage = styled.h1`
   font-weight: 700;
   line-height: normal;
   letter-spacing: -3.5px;
-  margin-bottom: 20px;
+  margin-bottom: 8px;
 `;
 
 const PracticeMessage = styled.p`
   color: var(--text-color);
   font-family: "pretendardM";
-  font-size: 40px;
+  font-size: 30px;
   font-weight: 600;
   letter-spacing: -2px;
-  margin-bottom: 40px;
+  padding: 10px;
+  display: flex;
+  gap: 20px;
 `;
 
 const ButtonWrapper = styled.div`
   display: flex;
-  flex-direction: row;
-  gap: 20px;
+  gap: 10px;
 `;
 
 const Outro = () => {
@@ -70,20 +77,40 @@ const Outro = () => {
     alert("기록을 저장했습니다.");
   };
 
+  //사용자 기록
+  const minuteCount = useAtomValue(minuteCountAtom);
+  const minuteRecord = Math.floor(minuteCount / 60);
+  const secondRecord = minuteCount % 60;
+
   return (
     <Step5Container>
       <SuccessMessage>예매 성공!</SuccessMessage>
-      {/* 클리어 시간 추가 필요*/}
-      <Button text="기록 저장하기" onClick={handleSaveDataClick} />
-      <PracticeMessage>다시 도전하시겠습니까?</PracticeMessage>
-      <ButtonWrapper>
-        <Button text="다시 도전하기" onClick={handlePracticeModeClick} />
-        <Button
-          text="기록 보러가기"
-          type="outline"
-          onClick={handleChallengeModeClick}
-        />
-      </ButtonWrapper>
+      <PracticeMessage>
+        <div>내 기록 </div>
+        <div style={{ color: "var(--point-color)" }}>
+          {minuteRecord}분 {secondRecord} 초
+        </div>
+      </PracticeMessage>
+
+      <RecordNavigate>
+        <ButtonWrapper>
+          <Button
+            text="기록 저장하기"
+            type="outro"
+            onClick={handleSaveDataClick}
+          />
+          <Button
+            text="기록 보러가기"
+            type="outro"
+            onClick={handleChallengeModeClick}
+          />
+          <Button
+            text="다시 도전하기"
+            type="outro"
+            onClick={handlePracticeModeClick}
+          />
+        </ButtonWrapper>
+      </RecordNavigate>
     </Step5Container>
   );
 };

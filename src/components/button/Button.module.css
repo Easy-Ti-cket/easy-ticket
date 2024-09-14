@@ -138,3 +138,14 @@
   height: 50px;
   margin: 0;
 }
+.button--outro {
+  width: 180px;
+  height: 100px;
+  color: var(--text-color);
+  background-color: var(--sub-color);
+  border-radius: 8px;
+  font-size: 20px;
+  &:hover {
+    color: white;
+  }
+}
