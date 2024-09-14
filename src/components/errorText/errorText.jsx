@@ -18,7 +18,6 @@ const ErrorTextMessage = styled.span`
   font-family: "pretendardB";
   font-size: 18px;
 `;
-
 const ErrorText = ({ text }) => {
   return (
     <ErrorTextContainer>
