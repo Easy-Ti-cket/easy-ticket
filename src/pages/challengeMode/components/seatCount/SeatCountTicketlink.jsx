@@ -2,11 +2,15 @@ import styled from "styled-components";
 import { useAtom } from "jotai";
 import { seatCountAtom, seatInfoAtom } from "../../../../store/atom";
 import { useAtomValue } from "jotai";
+import ErrorText from "../../../../components/errorText/ErrorText";
 
 const Header = styled.div`
   font-family: "pretendardB";
   font-size: 20px;
   margin-top: 30px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
 `;
 
 const SeatCountContainer = styled.div`
@@ -46,9 +50,10 @@ const CountSelector = styled.select`
   text-align: center;
   font-size: 16px;
   margin-left: 10px;
+  border: ${(props) => props.$hasError && "2px solid var(--point-color)"};
 `;
 
-const SeatCountTicketlink = () => {
+const SeatCountTicketlink = ({ hasError }) => {
   const [seatCount, setSeatCount] = useAtom(seatCountAtom);
   const seatInfo = useAtomValue(seatInfoAtom);
 
@@ -58,7 +63,10 @@ const SeatCountTicketlink = () => {
 
   return (
     <>
-      <Header>티켓 종류, 할인, 매수 선택</Header>
+      <Header>
+        티켓 종류, 할인, 매수 선택
+        {hasError && <ErrorText text="티켓 매수를 선택해 주세요" />}
+      </Header>
       <SeatCountContainer>
         <InfoText>
           <HighlightText>{seatInfo.grade}</HighlightText>을 &nbsp;
@@ -73,6 +81,7 @@ const SeatCountTicketlink = () => {
             name={"seatCount"}
             value={seatCount}
             onChange={handleSeatCountChange}
+            $hasError={hasError}
           >
             <option value={0}>0매</option>
             <option value={1}>1매</option>

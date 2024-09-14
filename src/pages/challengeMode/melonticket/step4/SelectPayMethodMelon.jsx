@@ -14,6 +14,7 @@ import TicketMethod from "../../../../components/forms/ticket/TicketMethod";
 import { useBookingValidate } from "../../../../hooks/useBookingValidate";
 import { useForm } from "../../../../hooks/useForm";
 import { PayMethodInfo } from "../../components/payMethod/payMethodStyle";
+import ErrorText from "../../../../components/errorText/ErrorText";
 
 const TicketMethodMelonContainer = styled.div`
   display: flex;
@@ -26,6 +27,9 @@ const PayContainer = styled.div`
   margin-top: 50px;
 `;
 const TextBox = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 20px;
   font-family: pretendardB;
 `;
 const PayMethodContainer = styled.div`
@@ -75,6 +79,7 @@ const SelectPayMethodMelon = () => {
     location,
     { isAgreeAll: isAgreeAll, isPayMethodCorrect: isPayMethodCorrect }
   );
+  const hasError = errorArray.includes("payMethod");
 
   return (
     <TicketMethodMelonContainer>
@@ -96,8 +101,11 @@ const SelectPayMethodMelon = () => {
               </ErrorTooltip>
             )}
           </ErrorTooltipContainer>
-          <PayMethodContainer $hasError={errorArray.includes("payMethod")}>
-            <TextBox>결제수단을 선택하세요</TextBox>
+          <PayMethodContainer $hasError={hasError}>
+            <TextBox>
+              결제수단을 선택하세요
+              {hasError && <ErrorText text="신용카드를 선택해 주세요" />}
+            </TextBox>
             <GrayLine />
             <PayMethodForm
               isSelected={isPayMethodCorrect}

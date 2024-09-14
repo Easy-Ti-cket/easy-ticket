@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import RecordNavigate from "../components/record/RecordNavigate";
 import loadUserData from "../../../apis/loadUserData";
-import Paging from "../../../util/Paging";
+import Paging from "../../../components/Paging";
 //css
 import {
   RecordContainer,

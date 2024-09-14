@@ -4,6 +4,8 @@ import Input from "../../input/Input";
 import { useAtomValue } from "jotai";
 import { levelAtom, themeSiteAtom } from "../../../store/atom";
 import AnimationArea from "../../Animation";
+import ErrorText from "../../errorText/ErrorText";
+
 const DetailPayFormWrap = styled(FormWrap)`
   flex-direction: row;
   color: ${(props) => props.$hasPayFormError && "var(--point-color)"};
@@ -56,39 +58,48 @@ const DetailPayForm = ({
   //레벨 및 연습모드 여부
   const level = useAtomValue(levelAtom);
   const isPractice = useAtomValue(themeSiteAtom) === "practice";
+
   return (
-    <DetailPayFormWrap $hasPayFormError={hasPayFormError}>
-      <FormWrap>
-        {textArr.map((payItem, index) => (
-          <Input
-            name="DetailPayForm"
-            key={payItem}
-            type="radio"
-            value={payItem}
-            text={payItem}
-            onChange={handleChange}
-            $focus={level === "low" && isPractice && index == 0 && !isSelected}
-          />
-        ))}
-      </FormWrap>
-      <AnimationArea $focus={level === "low" && isSelected && !isAnswer}>
-        <DropDown
-          name="CardTypes"
-          onChange={handleChange}
-          $cardTypesError={cardTypesError}
-        >
-          {/*드롭다운의 placeholder역할 */}
-          <option value="" disabled>
-            카드 종류를 선택해 주세요
-          </option>
-          {optionArr.map((optionItem) => (
-            <option key={optionItem} value={optionItem}>
-              {optionItem}
-            </option>
+    <>
+      {hasPayFormError && isPractice && (
+        <ErrorText text="올바른 결제 수단을 선택해 주세요" />
+      )}
+      {cardTypesError && <ErrorText text="올바른 카드를 선택해 주세요" />}
+      <DetailPayFormWrap $hasPayFormError={hasPayFormError}>
+        <FormWrap>
+          {textArr.map((payItem, index) => (
+            <Input
+              name="DetailPayForm"
+              key={payItem}
+              type="radio"
+              value={payItem}
+              text={payItem}
+              onChange={handleChange}
+              $focus={
+                level === "low" && isPractice && index == 0 && !isSelected
+              }
+            />
           ))}
-        </DropDown>
-      </AnimationArea>
-    </DetailPayFormWrap>
+        </FormWrap>
+        <AnimationArea $focus={level === "low" && isSelected && !isAnswer}>
+          <DropDown
+            name="CardTypes"
+            onChange={handleChange}
+            $cardTypesError={cardTypesError}
+          >
+            {/*드롭다운의 placeholder역할 */}
+            <option value="" disabled>
+              카드 종류를 선택해 주세요
+            </option>
+            {optionArr.map((optionItem) => (
+              <option key={optionItem} value={optionItem}>
+                {optionItem}
+              </option>
+            ))}
+          </DropDown>
+        </AnimationArea>
+      </DetailPayFormWrap>
+    </>
   );
 };
 

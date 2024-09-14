@@ -10,6 +10,8 @@ import { SubTtitle } from "../../../practiceMode/step4/SelectPayMethod";
 import ErrorTooltip from "../../../../components/tooltip/ErrorTooltip";
 import MyBookingInfo from "../../../../components/myBookingInfo/MyBookingInfo";
 import { FormWrap } from "../../../../components/forms/FormStyle";
+import ErrorText from "../../../../components/errorText/ErrorText";
+import { useEffect } from "react";
 
 //결제 수단 + 결제 방식 + 내 예매 정보
 const PayMethodWrap = styled.div`
@@ -58,16 +60,22 @@ const PayMethodInfo = styled.span`
   color: var(--text-color);
 `;
 
-const SelectPayMethodChallenge = ({ isAllChecked = null }) => {
+const SelectPayMethodChallenge = ({
+  isAllChecked = null,
+  setShowError = () => {}
+}) => {
   //nav
   const nav = useNavigate();
   //검사로직
   const { correctList, handleChange, isAnswer } = useForm(3);
-  const { handlePayment, hasPayFormError, cardTypesError } = usePaymentValidate(
-    { correctList, isAllChecked }
-  );
+  const { handlePayment, hasPayFormError, cardTypesError, checkboxError } =
+    usePaymentValidate({ correctList, isAllChecked });
   //'신용카드'를 정확히 골랐을 경우 '결제 수단 입력' 창 생성
   const isPayMethodCorrect = correctList["PayMethodForm"];
+  // 체크박스를 체크하지 않았을 시, showError 설정
+  useEffect(() => {
+    setShowError(checkboxError);
+  }, [checkboxError]);
 
   return (
     <PayMethodWrap>
@@ -85,6 +93,7 @@ const SelectPayMethodChallenge = ({ isAllChecked = null }) => {
         )}
         {/*결제 수단 */}
         <SubTtitle>결제 수단</SubTtitle>
+        {hasPayFormError && <ErrorText text="신용카드를 선택해 주세요" />}
         <PayMethodForm
           isSelected={isPayMethodCorrect}
           handleChange={handleChange}
@@ -104,6 +113,7 @@ const SelectPayMethodChallenge = ({ isAllChecked = null }) => {
           </ErrorTooltip>
         )}
         <SubTtitle>결제 방식</SubTtitle>
+        {hasPayFormError && <ErrorText text="일반 신용카드를 선택해 주세요" />}
         {isPayMethodCorrect && (
           <>
             <CardInfo>

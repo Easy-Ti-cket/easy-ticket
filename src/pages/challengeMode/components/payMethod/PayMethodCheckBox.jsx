@@ -4,6 +4,7 @@ const Wrap = styled.div`
   display: flex;
   flex-direction: column;
   gap: 5px;
+  color: ${(props) => props.$hasError && "var(--point-color)"};
 `;
 //동의 버튼
 const CheckBoxContainer = styled.div`
@@ -21,10 +22,11 @@ const PayMethodCheckBox = ({
   handleChecked,
   item1Checked,
   item2Checked,
-  item3Checked
+  item3Checked,
+  hasError
 }) => {
   return (
-    <Wrap>
+    <Wrap $hasError={hasError}>
       <CheckBoxContainer>
         <CheckBox
           name="item1"

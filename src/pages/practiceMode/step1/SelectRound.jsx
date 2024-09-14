@@ -15,6 +15,7 @@ import {
 import AnimationArea from "../../../components/Animation";
 import { useNavigate } from "react-router-dom";
 import formatTime from "../../../util/time";
+import ErrorText from "../../../components/errorText/ErrorText";
 
 const Container = styled.div`
   display: flex;
@@ -44,6 +45,11 @@ const RoundWrapper = styled.div`
   margin-left: 20px;
   align-items: left;
   padding: 5px;
+`;
+
+const ErrorContents = styled.span`
+  font-size: 20px;
+  color: var(--text-color);
 `;
 
 const SelectRound = () => {
@@ -86,48 +92,75 @@ const SelectRound = () => {
   const posterDates = poster ? poster.date : [];
   const posterTimes = poster ? poster.time : {};
 
-  // 날짜 정답 지정
-  const handleDateSelect = (formattedDate) => {
-    const correctDate = posterDates[0]; // 날짜 배열의 첫 번째 날짜를 정답으로 설정
+  //에러 텍스트
+  const [showErrorText, setShowErrorText] = useState({
+    dateError: false,
+    roundSelectError: false,
+    dateOrderError: false,
+    roundOrderError: false
+  });
+  const handleError = (errorItem) => {
+    setShowErrorText(() => ({
+      dateError: false,
+      roundSelectError: false,
+      dateOrderError: false,
+      roundOrderError: false,
+      [errorItem]: true
+    }));
+  };
+  const resetError = () => {
+    setShowErrorText(() => ({
+      dateError: false,
+      roundSelectError: false,
+      dateOrderError: false,
+      roundOrderError: false
+    }));
+  };
+  const errorText = {
+    dateError: "날짜를 다시 선택해 주세요",
+    roundSelectError: "회차를 다시 선택해 주세요",
+    dateOrderError: "공연을 관람할 날짜를 선택해 주세요",
+    roundOrderError: "회차를 선택해 주세요"
+  };
 
+  //알림 모달
+  const [concertTime, setConcertTime] = useState("");
+  const handleDateSelect = (formattedDate) => {
+    const correctDate = posterDates[0];
     if (formattedDate === correctDate) {
       setDateSelected(true);
-      setAnimationStep(1);
+      resetError();
       const timesArray = formatTime(posterTimes, formattedDate);
       setTimesButtons(timesArray);
-
-      // 회차 데이터에서 첫 번째 회차를 정답으로 설정
       if (timesArray.length > 0) {
         setCorrectRound(timesArray[0]);
       }
     } else {
-      alert("날짜를 다시 선택해주세요.");
+      handleError("dateError");
     }
   };
 
-  // 회차 선택
   const handleRoundClick = (time) => {
     if (dateSelected) {
       if (time === correctRound) {
-        setStepTextNumber((prev) => prev + 1);
-        alert(`${time}으로 공연을 예매합니다.`);
+        setConcertTime(time);
+        alert(`${time} 공연을 예매합니다.`);
+        resetError();
         setRoundSelected(true);
-        setAnimationStep(2);
       } else {
-        alert("회차를 다시 선택해주세요.");
+        handleError("roundSelectError");
       }
     } else {
-      alert("먼저 올바른 날짜를 선택해주세요.");
+      handleError("dateOrderError");
     }
   };
 
   const handleReserveClick = () => {
     if (!roundSelected) {
-      alert("먼저 회차를 선택해주세요.");
+      handleError("roundOrderError");
       return;
     }
-
-    navigate("/progress/step2");
+    navigate("../step2");
   };
 
   return (
@@ -155,7 +188,21 @@ const SelectRound = () => {
           />
         )}
         <RoundWrapper>
+          {/*날짜 선택 에러 텍스트 */}
+          {showErrorText.dateError && <ErrorText text={errorText.dateError} />}
+          {/*날짜 선택 순서 에러 텍스트 */}
+          {showErrorText.dateOrderError && (
+            <ErrorText text={errorText.dateOrderError} />
+          )}
           <p>회차</p>
+          {/*회차 선택 에러 텍스트 */}
+          {showErrorText.roundSelectError && (
+            <ErrorText text={errorText.roundSelectError} />
+          )}
+          {/*회차 선택 순서 에러 텍스트 */}
+          {showErrorText.roundOrderError && (
+            <ErrorText text={errorText.roundOrderError} />
+          )}
           {/* 초급 난이도에만 회차 버튼 애니메이션 적용 */}
           {currentLevel === "low" ? (
             <>
@@ -173,7 +220,7 @@ const SelectRound = () => {
                   <Button
                     text="날짜 선택 후 확인"
                     type="outline"
-                    onClick={() => handleRoundClick("날짜 선택 후 확인")}
+                    onClick={(time) => handleRoundClick(time)}
                   />
                 )}
               </AnimationArea>

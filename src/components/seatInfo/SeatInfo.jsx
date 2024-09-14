@@ -7,8 +7,7 @@ import {
   levelAtom,
   postersAtom,
   selectedPosterAtom,
-  seatInfoAtom,
-  themeSiteAtom
+  seatInfoAtom
 } from "../../store/atom";
 import {
   SeatInfoContainer,
@@ -29,7 +28,7 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
 
-const SeatInfo = () => {
+const SeatInfo = ({ setShowError }) => {
   const isSeatSelected = useAtomValue(isSeatSelectedAtom);
   const isSectionSelected = useAtomValue(isSectionSelectedAtom);
   const allowedSeat = useAtomValue(allowedSeatAtom);
@@ -39,7 +38,6 @@ const SeatInfo = () => {
   const selectedPoster = posters[posterId];
   const seats = convertPriceObjectToArray(selectedPoster.price);
   const [seatInfo, setSeatInfo] = useAtom(seatInfoAtom);
-  const themeSite = useAtomValue(themeSiteAtom);
   const path = useLocation().pathname;
   //seatInfo가 저장되는 시점 , 고칠 필요 있음
   useEffect(() => {
@@ -72,11 +70,11 @@ const SeatInfo = () => {
     }
 
     if (!isSectionSelected) {
-      alert("구역을 선택해주세요.");
+      setShowError(true);
       return;
     }
     if (!isSeatSelected) {
-      alert("좌석을 선택해주세요.");
+      setShowError(true);
       return;
     }
   };

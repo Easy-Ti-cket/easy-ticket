@@ -1,6 +1,7 @@
 import { useAtomValue } from "jotai";
 import { useNavigate } from "react-router-dom";
 import { levelAtom, seatCountAtom, themeSiteAtom } from "../store/atom";
+import { useState } from "react";
 
 export const useBookingValidate = (
   addStage,
@@ -15,12 +16,15 @@ export const useBookingValidate = (
   const level = useAtomValue(levelAtom);
   const themeSite = useAtomValue(themeSiteAtom);
 
+  //error css
+  const [showError, setShowError] = useState(false);
+
   const nav = useNavigate();
   const handleButtonClick = () => {
     // 연습모드
     // 좌석 매수가 0일 경우 경고창 출력
     if (seatCount === 0) {
-      alert("좌석매수를 선택해주세요.");
+      setShowError(true);
       return;
     }
     addStage(2);
@@ -29,7 +33,7 @@ export const useBookingValidate = (
       //티켓수령방법 + 생년월일을 작성 검사 로직
       if (!isValidate.includes("method")) {
         setErrorArray(() => ["method"]);
-        alert("티켓 수령 방법을 선택해 주세요");
+        setShowError(true);
         return;
       }
       if (
@@ -38,33 +42,27 @@ export const useBookingValidate = (
         !isValidate.includes("birth")
       ) {
         setErrorArray(() => ["birth"]);
-        alert("생년월일을 정확하게 작성해 주세요");
         return;
       }
 
       // 멜론티켓 - 결제수단, 체크박스
       if (themeSite === "melonticket" && !extra.isPayMethodCorrect) {
         setErrorArray(() => ["payMethod"]);
-        alert("실전모드에서는 '일반신용카드' 결제만 가능합니다");
         return;
       }
       if (themeSite === "melonticket" && !extra.isAgreeAll) {
         setErrorArray(() => ["checkbox"]);
-        alert("체크박스를 모두 선택해 주세요");
         return;
       }
       //티켓링크
       if (themeSite === "ticketlink" && !extra.isAgreeAll) {
         setErrorArray(() => ["checkbox"]);
-        alert("개인정보 수집 및 3자 제공에 동의해야 결제가 가능합니다.");
         return;
       }
       if (themeSite === "ticketlink" && !extra.isCancelChecked) {
         setErrorArray(() => ["cancel"]);
-        alert("취소기한 및 수수료 동의에 체크해 주세요");
         return;
       } else {
-        console.log("동작");
         setErrorArray(() => []);
         //라우팅
         nav(location);
@@ -72,5 +70,5 @@ export const useBookingValidate = (
     }
   };
 
-  return { handleButtonClick };
+  return { handleButtonClick, showError };
 };
