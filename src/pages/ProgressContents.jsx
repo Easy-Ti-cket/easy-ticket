@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { useNavigate, useLocation, Outlet } from "react-router-dom";
+import { useLocation, Outlet } from "react-router-dom";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import Button from "../components/button/Button";
 import Modal from "../components/modal/Modal";
@@ -75,19 +75,33 @@ const ProgressContents = ({ text, practiceMode, challengeMode }) => {
     useState(false);
   // 일시정지 모달창 제어
   const [isPaused, setIsPaused] = useState(false);
-
-  const path = useLocation().pathname;
+  const [isLoading, setIsLoading] = useState(true);
+  const location = useLocation();
+  const path = location.pathname;
   // 현재 경로가 step0인지 확인하기 위한 변수 정의
-  const isStep0Path = location.pathname.includes("step0");
+  const isStep0Path = path.includes("step0");
 
-  // // 시간이 초과되었을 때 타임아웃 모달 열리도록 설정
-  // useEffect(() => {
-  //   // 남은 시간 0 이하일 때만 모달이 열리도록 설정
-  //   if (timeSpent <= 0 && !isStep0Path) {
-  //     setIsTimeoutModalContentsOpen(true);
-  //     setTimerControl(false); // 타이머 정지
-  //   }
-  // }, [timeSpent, setTimerControl]);
+  // 시간이 초과되었을 때 타임아웃 모달 열리도록 설정
+  useEffect(() => {
+    // 초기 로딩이 완료되면 로딩 상태를 false로 설정
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 100); // 0.1초 딜레이
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    // 남은 시간 0 이하일 때만 모달이 열리도록 설정
+    if (isLoading) return; // 로딩 중일 때는 useEffect 실행하지 않음
+
+    if (isStep0Path) {
+      setIsTimeoutModalContentsOpen(false);
+    } else if (timeSpent <= 0 && level == "high") {
+      setIsTimeoutModalContentsOpen(true);
+      setTimerControl(false); // 타이머 정지
+    }
+  }, [timeSpent, isStep0Path, isLoading, setTimerControl]);
 
   const handleModalOpen = () => {
     setIsModalOpen(true);
@@ -129,53 +143,61 @@ const ProgressContents = ({ text, practiceMode, challengeMode }) => {
   return (
     <ProgressContentsContainer>
       {/*프로그래스 바*/}
-      <ProgressBarBox>
-        <ProgressBar />
-      </ProgressBarBox>
-      {/*고급 level일 경우에만 Timer 설정 */}
-      {/*모달이 열렸을 경우 Timer 정지 - isModalOpen, isPaused*/}
-      {level === "high" && themeSite === "practice" && <Timer second={1800} />}
-      {themeSite !== "practice" && <Timer type={"minute"} second={900} />}
-      {!path.includes("challenge") && <TextBox>{stepText}</TextBox>}
-      <ContentsBox>
-        {/*도움말 버튼 */}
-        {showHelpButton && (
-          <ButtonContainer>
-            <Button
-              onClick={handleModalOpen}
-              text="도움이 필요하신가요?"
-              type="help"
-            />
-          </ButtonContainer>
-        )}
-        {/*일시정지 모달창 */}
-        {isPaused && (
-          <Modal
-            contents={<EscModalContents setIsPaused={setIsPaused} />}
-            buttonShow={false}
-            width="350px"
-            height="400px"
-          />
-        )}
-        {/*도움말 모달창*/}
-        {isModalOpen && (
-          <Modal onClick={handleModalClose} contents={helpText} />
-        )}
-        {/*타임아웃 모달창*/}
-        {isTimeoutModalContentsOpen && (
-          <Modal
-            contents={
-              <TimeoutModalContents
-                setIsModalContentsOpen={setIsTimeoutModalContentsOpen}
+      {isLoading ? (
+        <p></p>
+      ) : (
+        <>
+          <ProgressBarBox>
+            <ProgressBar />
+          </ProgressBarBox>
+          {/*고급 level일 경우에만 Timer 설정 */}
+          {/*모달이 열렸을 경우 Timer 정지 - isModalOpen, isPaused*/}
+          {level === "high" && themeSite === "practice" && (
+            <Timer second={1800} />
+          )}
+          {themeSite !== "practice" && <Timer type={"minute"} second={900} />}
+          {!path.includes("challenge") && <TextBox>{stepText}</TextBox>}
+          <ContentsBox>
+            {/*도움말 버튼 */}
+            {showHelpButton && (
+              <ButtonContainer>
+                <Button
+                  onClick={handleModalOpen}
+                  text="도움이 필요하신가요?"
+                  type="help"
+                />
+              </ButtonContainer>
+            )}
+            {/*일시정지 모달창 */}
+            {isPaused && (
+              <Modal
+                contents={<EscModalContents setIsPaused={setIsPaused} />}
+                buttonShow={false}
+                width="350px"
+                height="400px"
               />
-            }
-            buttonShow={false}
-            width="400px"
-            height="450px"
-          />
-        )}
-        <Outlet />
-      </ContentsBox>
+            )}
+            {/*도움말 모달창*/}
+            {isModalOpen && (
+              <Modal onClick={handleModalClose} contents={helpText} />
+            )}
+            {/*타임아웃 모달창*/}
+            {isTimeoutModalContentsOpen && (
+              <Modal
+                contents={
+                  <TimeoutModalContents
+                    setIsModalContentsOpen={setIsTimeoutModalContentsOpen}
+                  />
+                }
+                buttonShow={false}
+                width="400px"
+                height="450px"
+              />
+            )}
+            <Outlet />
+          </ContentsBox>
+        </>
+      )}
     </ProgressContentsContainer>
   );
 };

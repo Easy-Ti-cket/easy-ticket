@@ -5,7 +5,7 @@ import { CardWrap, Number } from "../CardStyles";
 const VerticalFront = () => {
   return (
     <CardWrap>
-      {/*카드 앞부분 */}s
+      {/*카드 앞부분 */}
       <CardBFront />
     </CardWrap>
   );
