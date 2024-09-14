@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import ErrorText from "../../../components/errorText/ErrorText";
 
@@ -61,6 +62,13 @@ const AgreeMentMelon = ({
       )
     );
   };
+
+  useEffect(() => {
+    // every 함수로 배열의 모든 요소가 조건을 충족하는지 확인
+    const allChecked = isAgree.every((item) => item === true);
+    setIsAgreeAll(allChecked);
+  }, [isAgree, setIsAgreeAll]);
+
   // 전체 동의를 하지 않은 상태에서 다음 단계 버튼을 클릭했을 경우
   const hasError = errorArray.includes("checkbox");
 
@@ -72,7 +80,12 @@ const AgreeMentMelon = ({
           {hasError && <ErrorText text="체크박스에 모두 동의해 주세요" />}
         </TextBox>
         <CheckboxContainer>
-          <input type="checkbox" id="agreeAll" onClick={handleAgreeAll} />
+          <input
+            type="checkbox"
+            id="agreeAll"
+            checked={isAgreeAll} // 모두 체크되면 전체 동의도 체크하기
+            onClick={handleAgreeAll}
+          />
           <CheckboxLabel htmlFor="agreeAll">전체동의</CheckboxLabel>
           <Info>전체 동의를 누르면 한 번에 동의처리됩니다.</Info>
         </CheckboxContainer>

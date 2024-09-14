@@ -5,8 +5,12 @@ import useHover from "../../../hooks/useHover";
 import { useLocation, useNavigate } from "react-router-dom";
 import GoToLocationModalContents from "../../modal/modalContents/GoToMainModalContents";
 import Modal from "../../modal/Modal";
-import { useSetAtom } from "jotai";
-import { timerControlAtom } from "../../../store/atom";
+import { useSetAtom, useAtomValue } from "jotai";
+import {
+  timerControlAtom,
+  userNameAtom,
+  userNameErrorAtom
+} from "../../../store/atom";
 
 /*네비게이터 전체 */
 const NavBorderBottom = styled.div`
@@ -97,8 +101,14 @@ const Nav = () => {
   const setTimerControl = useSetAtom(timerControlAtom);
   const path = useLocation().pathname;
   const nav = useNavigate();
+  const userName = useAtomValue(userNameAtom);
+  const setUserNameError = useSetAtom(userNameErrorAtom);
 
   const handleClick = () => {
+    if (userName === "") {
+      setUserNameError(true);
+      return;
+    }
     setTimerControl(false);
     if (path.includes("step") && !path.includes("step0")) {
       setIsConfirm(true);
