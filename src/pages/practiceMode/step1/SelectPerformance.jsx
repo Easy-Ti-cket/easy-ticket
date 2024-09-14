@@ -3,7 +3,6 @@ import PosterList from "../../../components/poster/PosterList";
 import { useAtom, useSetAtom } from "jotai";
 import {
   selectedPosterAtom,
-  levelAtom,
   progressAtom,
   stepTextNumberAtom,
   helpTextNumberAtom
@@ -19,11 +18,13 @@ const SelectPerformance = () => {
   const setHelpTextNumber = useSetAtom(helpTextNumberAtom);
 
   const navigate = useNavigate();
-  setProgress(1);
+
   useEffect(() => {
+    setProgress(1);
     setStepTextNumber(0);
     setHelpTextNumber(0);
   }, []);
+
   const handlePosterClick = (posterId) => {
     setSelectedPoster(posterId);
     navigate("/progress/step1-2");

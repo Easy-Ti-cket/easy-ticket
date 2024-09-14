@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Poster from "./Poster";
 import { useAtom } from "jotai";
@@ -10,6 +10,7 @@ import {
 } from "../../store/atom";
 import { formatDateRange } from "../../util/date";
 import AnimationArea from "../Animation";
+import ErrorText from "../errorText/errorText";
 
 // 공연 제목
 const PosterTitle = styled.h2`
@@ -52,6 +53,16 @@ const PosterListContainer = styled.div`
   gap: 50px;
   justify-content: center;
   align-items: center;
+  border: ${(props) => props.$showError && "2px dashed var(--point-color)"};
+  padding: 20px 0;
+  border-radius: 8px;
+`;
+
+const ErrorContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
 `;
 
 // 포스터 하나를 담는 컨테이너
@@ -90,72 +101,66 @@ const PosterList = ({ onPosterClick }) => {
   const [themeSite] = useAtom(themeSiteAtom);
   const [, setSelectedPoster] = useAtom(selectedPosterAtom);
 
-  const handlePosterClick = (posterId) => {
-    // 초급 및 중급 난이도
-    if (level === "low" || level === "middle") {
-      if (posterId !== 0) {
-        alert("첫 번째 포스터를 선택하세요.");
-        return;
-      }
-      // 첫 번째 포스터가 선택된 경우에만 포스터 클릭 동작
-      onPosterClick(posterId);
-      return;
-    }
+  //error css
+  const [showError, setShowError] = useState(false);
 
-    if (level === "high") {
+  const handlePosterClick = (posterId) => {
+    if (level === "high" && themeSite === "practice") {
       // 연습 모드에서 고급 난이도
-      if (themeSite === "practice") {
-        if (posterId !== 0) {
-          alert("선택하는 포스터가 맞는 지 다시 한 번 확인해주세요.");
-          return;
-        } else {
-          setSelectedPoster(0); // 정답 고정
-          onPosterClick(posterId); // 포스터 클릭 동작
-          return;
-        }
+      if (posterId !== 0) {
+        setShowError(true);
+        return;
       } else {
-        // 실전 모드에서 고급 난이도
-        setSelectedPoster(posterId);
+        setSelectedPoster(0); // 정답 고정
         onPosterClick(posterId); // 포스터 클릭 동작
         return;
       }
     }
+    if (themeSite !== "practice") {
+      setSelectedPoster(0); // 정답 고정
+      onPosterClick(posterId); // 포스터 클릭 동작
+    }
   };
 
   return (
-    <PosterListContainer>
-      {posters.map((poster, index) => {
-        // 초급 난이도에서 첫번째 포스터에만 애니메이션 적용
-        const showAnimate = index === 0 && level === "low";
+    <ErrorContainer>
+      {showError && <ErrorText text="올바른 포스터를 선택해 주세요" />}
+      <PosterListContainer $showError={showError}>
+        {posters.map((poster, index) => {
+          // 초급 난이도에서 첫번째 포스터에만 애니메이션 적용
+          const showAnimate = index === 0 && level === "low";
 
-        return (
-          <PosterContainer
-            key={poster.id}
-            onClick={() => handlePosterClick(poster.id)}
-          >
-            {showAnimate ? (
-              <AnimationArea $focus>
-                <Poster id={index} />
-                <PosterInfo>
-                  <PosterTitle>{poster.title_ko}</PosterTitle>
-                  <PosterVenue>장소: {poster.venue}</PosterVenue>
-                  <PosterTime>시간: {poster.date}</PosterTime>
-                </PosterInfo>
-              </AnimationArea>
-            ) : (
-              <>
-                <Poster id={index} />
-                <PosterInfo>
-                  <PosterTitle>{poster.title_ko}</PosterTitle>
-                  <PosterVenue>장소: {poster.venue}</PosterVenue>
-                  <PosterTime>시간: {formatDateRange(poster.date)}</PosterTime>
-                </PosterInfo>
-              </>
-            )}
-          </PosterContainer>
-        );
-      })}
-    </PosterListContainer>
+          return (
+            <PosterContainer
+              key={poster.id}
+              onClick={() => handlePosterClick(poster.id)}
+            >
+              {showAnimate ? (
+                <AnimationArea $focus>
+                  <Poster id={index} />
+                  <PosterInfo>
+                    <PosterTitle>{poster.title_ko}</PosterTitle>
+                    <PosterVenue>장소: {poster.venue}</PosterVenue>
+                    <PosterTime>시간: {poster.date}</PosterTime>
+                  </PosterInfo>
+                </AnimationArea>
+              ) : (
+                <>
+                  <Poster id={index} />
+                  <PosterInfo>
+                    <PosterTitle>{poster.title_ko}</PosterTitle>
+                    <PosterVenue>장소: {poster.venue}</PosterVenue>
+                    <PosterTime>
+                      시간: {formatDateRange(poster.date)}
+                    </PosterTime>
+                  </PosterInfo>
+                </>
+              )}
+            </PosterContainer>
+          );
+        })}
+      </PosterListContainer>
+    </ErrorContainer>
   );
 };
 
