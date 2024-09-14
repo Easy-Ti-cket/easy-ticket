@@ -15,7 +15,6 @@
     "firebase": "^10.13.0",
     "firebase-tools": "^13.16.0",
     "imagemin": "^9.0.0",
-    "imagemin-pngquant": "^10.0.0",
     "imagemin-svgo": "^11.0.1",
     "jotai": "^2.9.0",
     "react": "^18.3.1",

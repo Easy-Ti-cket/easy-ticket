@@ -1,5 +1,4 @@
 import imagemin from "imagemin";
-import imageminPngquant from "imagemin-pngquant";
 import imageminSvgo from "imagemin-svgo";
 import path from "path";
 import glob from "glob";
