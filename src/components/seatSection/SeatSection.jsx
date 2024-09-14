@@ -5,7 +5,7 @@ import SeatSection2 from "./SeatSection2";
 import SeatSection3 from "./SeatSection3";
 import DefaultSeatSection from "./DefaultSeatSection";
 import { useAtomValue } from "jotai";
-import { postersAtom, selectedPosterAtom } from "../../store/atom";
+import { selectedPosterAtom } from "../../store/atom";
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import ErrorText from "../errorText/ErrorText";
@@ -16,6 +16,7 @@ const Wrap = styled.div`
   flex-direction: column;
   gap: 8px;
   align-items: center;
+  padding: 20px;
   border: ${(props) =>
     props.$showError ? "2px dashed var(--point-color)" : "none"};
   border-radius: 8px;

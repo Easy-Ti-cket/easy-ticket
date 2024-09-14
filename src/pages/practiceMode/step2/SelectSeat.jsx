@@ -20,8 +20,7 @@ const SelectSeatcontainer = styled.div`
 const SelectSeat = () => {
   const setStepTextNumber = useSetAtom(stepTextNumberAtom);
   const setHelpTextNumber = useSetAtom(helpTextNumberAtom);
-  const stepTextNumber = useAtomValue(stepTextNumberAtom);
-  const helpTextNumber = useAtomValue(helpTextNumberAtom);
+
   const [isSectionSelected, setIsSectionSelected] = useAtom(
     isSectionSelectedAtom
   );
@@ -50,14 +49,22 @@ const SelectSeat = () => {
     }
   }, [isSectionSelected, isSeatSelected, initialized]);
 
+  //error css
+  const [showChartError, setShowChartError] = useState(false);
+  const [showSectionError, setShowSectionError] = useState(false);
+
   return (
     <SelectSeatcontainer>
       {isSectionSelected ? (
-        <SeatChart></SeatChart>
+        <SeatChart showError={showChartError} />
       ) : (
-        <SeatSection></SeatSection>
+        <SeatSection showError={showSectionError} />
       )}
-      <SeatInfo></SeatInfo>
+      <SeatInfo
+        setShowError={
+          isSectionSelected ? setShowChartError : setShowSectionError
+        }
+      />
     </SelectSeatcontainer>
   );
 };
