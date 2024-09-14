@@ -15,8 +15,7 @@ import {
 import AnimationArea from "../../../components/Animation";
 import { useNavigate } from "react-router-dom";
 import formatTime from "../../../util/time";
-import ErrorText from "../../../components/errorText/errorText";
-import ErrorTooltip from "../../../components/tooltip/ErrorTooltip";
+import ErrorText from "../../../components/errorText/ErrorText";
 
 const Container = styled.div`
   display: flex;

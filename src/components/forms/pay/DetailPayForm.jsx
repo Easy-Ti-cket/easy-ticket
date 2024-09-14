@@ -4,7 +4,7 @@ import Input from "../../input/Input";
 import { useAtomValue } from "jotai";
 import { levelAtom, themeSiteAtom } from "../../../store/atom";
 import AnimationArea from "../../Animation";
-import ErrorText from "../../errorText/errorText";
+import ErrorText from "../../errorText/ErrorText";
 
 const DetailPayFormWrap = styled(FormWrap)`
   flex-direction: row;

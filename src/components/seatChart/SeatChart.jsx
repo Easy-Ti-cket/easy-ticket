@@ -3,7 +3,7 @@ import DefaultSeatChart from "./DefaultSeatChart";
 import SeatChart1 from "./SeatChart1";
 import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import ErrorText from "../errorText/errorText";
+import ErrorText from "../errorText/ErrorText";
 
 const Wrap = styled.div`
   display: flex;

@@ -10,7 +10,7 @@ import {
 } from "../../store/atom";
 import { formatDateRange } from "../../util/date";
 import AnimationArea from "../Animation";
-import ErrorText from "../errorText/errorText";
+import ErrorText from "../errorText/ErrorText";
 
 // 공연 제목
 const PosterTitle = styled.h2`
