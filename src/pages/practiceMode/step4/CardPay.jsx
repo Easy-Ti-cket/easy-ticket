@@ -64,7 +64,7 @@ const CardPay = () => {
     setHelpTextNumber(2);
     if (themeSite === "practice") {
       setProgress(4);
-    } else if (themeSite === "melon") {
+    } else if (themeSite === "melonticket") {
       setProgress(3);
     } else {
       setProgress(5);

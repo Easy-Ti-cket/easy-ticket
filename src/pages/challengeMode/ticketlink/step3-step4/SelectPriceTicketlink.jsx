@@ -72,6 +72,11 @@ const SelectPriceTicketlink = () => {
   //프로그래스 바
   const setProgress = useSetAtom(progressAtom);
   useEffect(() => setProgress(3), [setProgress]);
+  useEffect(() => {
+    if (step3Stage === 2) {
+      setProgress(4);
+    }
+  }, [step3Stage]);
 
   //체크박스 체크 여부
   const [isChecked1, setIsChecked1] = useState(false);
