@@ -58,7 +58,7 @@ const Record = () => {
   //내 기록 index (순위x, 세션스토리지 / db 비교)
   useEffect(() => {
     if (myRecord && filteredRecords.length > 0) {
-      // console.log("데이터 비교함")
+      console.log("데이터 비교함");
       const myRecordNanoSec = myRecord.timeStamp.nanoseconds;
       const myRecordSec = myRecord.timeStamp.seconds;
       setMyRecordIndex(
@@ -90,7 +90,11 @@ const Record = () => {
 
   //activePage(활성화될 페이지) 설정
   useEffect(() => {
-    if (myRecordIndex !== -1) {
+    if (
+      myRecordIndex !== null &&
+      filteredRecords.length > 0 &&
+      records.length > 0
+    ) {
       setActivePage(
         myRecordIndex ? Math.floor((myRecordIndex + 1) / 10) + 1 : 1
       );
@@ -178,7 +182,7 @@ const Record = () => {
         />
       </RecordContents>
       <ButtonContainer>
-        <Button text="도전하기" onClick={() => nav("/select-site")} />
+        <Button text="다시 도전하기" onClick={() => nav("/select-site")} />
         <Button
           text="메인으로 돌아가기"
           onClick={() => nav("/")}
