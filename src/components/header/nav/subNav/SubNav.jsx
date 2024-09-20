@@ -140,11 +140,11 @@ const SubNav = ({ hovereditem }) => {
               <SubNavContent onClick={() => handleNavigate("melonticket")}>
                 멜론티켓
               </SubNavContent>
-              <SubNavContent onClick={() => handleNavigate("yes24")}>
-                예스24
-              </SubNavContent>
               <SubNavContent onClick={() => handleNavigate("ticketlink")}>
                 티켓링크
+              </SubNavContent>
+              <SubNavContent onClick={() => handleNavigate("yes24")}>
+                예스24
               </SubNavContent>
             </SubNavContainer>
           </SubNavWrap>

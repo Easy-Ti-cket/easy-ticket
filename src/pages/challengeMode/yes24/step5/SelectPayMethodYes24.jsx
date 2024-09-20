@@ -1,9 +1,11 @@
 import styled from "styled-components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PayMethodCheckBox from "../../components/payMethod/PayMethodCheckBox";
 import PayMethodWarning from "../../components/payMethod/PayMethodWarning";
 import SelectPayMethodChallenge from "../../components/payMethod/SelectPayMethodChallenge";
 import ErrorText from "../../../../components/errorText/ErrorText";
+import { progressAtom } from "../../../../store/atom";
+import { useSetAtom } from "jotai";
 
 const Wrap = styled.div`
   display: flex;
@@ -16,6 +18,9 @@ const ErrorTextContainer = styled.div`
 `;
 
 const SelectPayMethodYes24 = () => {
+  const setProgress = useSetAtom(progressAtom);
+  useEffect(() => setProgress(5), []);
+
   const [checkedboxes, setCheckedboxes] = useState({
     item1: false,
     item2: false,

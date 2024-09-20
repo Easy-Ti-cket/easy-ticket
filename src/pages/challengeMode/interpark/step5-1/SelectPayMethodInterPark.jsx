@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import DetailPayForm from "../../../../components/forms/pay/DetailPayForm";
-import { useAtomValue } from "jotai";
-import { selectedPosterAtom } from "../../../../store/atom";
+import { useAtomValue, useSetAtom } from "jotai";
+import { selectedPosterAtom, progressAtom } from "../../../../store/atom";
 import { FormWrap } from "../../../../components/forms/FormStyle";
 import UsablePoint from "../../components/payMethod/UsablePoint";
 import MyBookingInfo from "../../../../components/myBookingInfo/MyBookingInfo";
@@ -16,6 +16,7 @@ import { SubTtitle } from "../../../practiceMode/step4/SelectPayMethod";
 import ErrorTooltip from "../../../../components/tooltip/ErrorTooltip";
 import { PayMethodInfo } from "../../components/payMethod/payMethodStyle";
 import ErrorText from "../../../../components/errorText/ErrorText";
+import { useEffect } from "react";
 
 //결제 수단 + 결제 방식 + 내 예매 정보
 const PayMethodWrap = styled.div`
@@ -79,6 +80,9 @@ const SelectPayMethodInterPark = ({ isAllChecked }) => {
   );
   //'신용카드'만 선택 가능함
   const isPayMethodCorrect = correctList["PayMethodForm"];
+
+  const setProgress = useSetAtom(progressAtom);
+  useEffect(() => setProgress(5), [setProgress]);
 
   return (
     <PayMethodWrap>

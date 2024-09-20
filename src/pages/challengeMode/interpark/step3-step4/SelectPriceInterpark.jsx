@@ -23,6 +23,11 @@ const SelectPriceInterpark = () => {
   const addStage = (num) => setStep3Stage(num);
   const setProgress = useSetAtom(progressAtom);
   useEffect(() => setProgress(3), []);
+  useEffect(() => {
+    if (step3Stage == 2) {
+      setProgress(4);
+    }
+  }, [step3Stage]);
   // 폼 검사 로직용
   const [isValidate, setIsValidate] = useState([]);
   const [errorArray, setErrorArray] = useState([]); //css 변경용
